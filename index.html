@@ -407,6 +407,14 @@ a.secret { color: inherit; text-decoration: none; cursor: text; }
 .gr-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; margin-top: 20px; }
 .gr-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
 
+/* the hidden grid behind the whole site: click any empty white space to reveal it */
+#bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity .7s ease;
+  background-image: linear-gradient(to right, #dedede 1px, transparent 1px), linear-gradient(to bottom, #dedede 1px, transparent 1px);
+  background-size: calc(100vw / 5) 46px; background-position: -1px -1px; }
+body.grid-on #bg-grid { opacity: 1; }
+header, main, footer { position: relative; z-index: 1; }
+@media (max-width: 720px) { #bg-grid { background-size: calc(100vw / 2) 46px; } }
+
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
 footer a:hover { color: var(--accent); }
@@ -443,6 +451,8 @@ footer a:hover { color: var(--accent); }
 </style>
 </head>
 <body>
+
+<div id="bg-grid" aria-hidden="true"></div>
 
 <header id="top">
   <a class="logo" href="/" aria-label="project gallery"><span id="logo-text" aria-hidden="true">project gallery</span></a>
@@ -864,6 +874,19 @@ const AWARD_LIST = {
     "k.bbbwwbbb.k",
     "k.bbbbbbbb.k",
     "k..........k",
+    "kkkkkkkkkkkk"]) },
+  grid: { name: "behind the walls", text: "you found the grid that holds the whole gallery up.", art: pixelArt([
+    "kkkkkkkkkkkk",
+    "k...k...k..k",
+    "k...k...k..k",
+    "kkkkkkkkkkkk",
+    "k...k...k..k",
+    "k...kbbbk..k",
+    "kkkkkbbbkkkk",
+    "k...kbbbk..k",
+    "k...k...k..k",
+    "kkkkkkkkkkkk",
+    "k...k...k..k",
     "kkkkkkkkkkkk"]) },
   doors: { name: "opened every door", text: "you went into every exhibition in the archive, from 2020 to now.", art: pixelArt([
     "..kkkkkkkk..",
@@ -1688,6 +1711,17 @@ function renderPeople() {
     msg.textContent = "your email app should open with the message ready to send";
   });
 })();
+
+/* clicking empty white space shows (or hides) the grid behind the site */
+document.addEventListener("click", e => {
+  if (e.button !== 0 || e.defaultPrevented) return;
+  if (document.querySelector(".card-backdrop.open, .lightbox.open, .nl.open, .award.open")) return;
+  const busy = "a, button, input, textarea, select, label, img, svg, canvas, iframe, video, p, h1, h2, h3, li, figure, summary, details, .card, .gb-entry, .work-caption, .cloud-item, .arch-item, .aa-cell, .counter, .tag, .bubble, nav, form";
+  if (e.target.closest(busy)) return;
+  if (window.getSelection && String(window.getSelection())) return;
+  const on = document.body.classList.toggle("grid-on");
+  if (on) giveAward("grid");
+});
 
 /* routing */
 const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", "contact", "collection", "guestbook-review"];
