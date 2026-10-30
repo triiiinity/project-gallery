@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>project gallery</title>
+<style>
+/* layout: white page, black Helvetica at modest sizes, lowercase nav; home = text column left, artwork right */
+:root {
+  --bg: #ffffff;
+  --ink: #000000;
+  --muted: #6b6b6b;
+  --glow: 0 0 6px rgba(0, 0, 0, 0.45);
+  --glow-box: 0 0 14px 2px rgba(0, 0, 0, 0.4);
+  --faint: #f2f2f2;
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --gutter: clamp(16px, 4vw, 48px);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body { font-family: var(--font); font-size: 14px; line-height: 1.45; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+
+/* header */
+header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px var(--gutter); position: relative; }
+.logo { font-size: 23px; letter-spacing: -0.01em; white-space: nowrap; }
+.logo:hover { text-shadow: var(--glow); }
+nav { display: flex; align-items: center; gap: 24px; }
+nav a, .plus { font-size: 15px; line-height: 1; transition: text-shadow .2s; }
+nav a:hover, .plus:hover, nav a[aria-current="page"]:hover { text-shadow: var(--glow); }
+.more { position: relative; display: flex; align-items: center; }
+.plus { background: none; border: 0; padding: 0; font-family: var(--font); font-size: 19px; font-weight: 300; cursor: pointer; color: var(--ink); }
+.dropdown { position: absolute; right: -4px; top: calc(100% + 10px); background: var(--bg); display: none; flex-direction: column; gap: 8px; padding: 4px; z-index: 5; }
+.more.open .dropdown { display: flex; }
+.ig { display: inline-flex; align-items: center; }
+.ig img { width: 16px; height: 16px; display: block; }
+.ig:hover img { filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5)); }
+.ig .ig-text { font-size: 12px; }
+.burger { display: none; background: none; border: 0; padding: 4px 0; cursor: pointer; }
+.burger span { display: block; width: 24px; height: 1px; background: var(--ink); margin: 6px 0; }
+
+main { padding: 0 var(--gutter) 64px; flex: 1; }
+.view { display: none; }
+.view.active { display: block; }
+
+/* shared show block */
+.show-title { font-size: clamp(22px, 2.6vw, 32px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; margin: 0 0 8px; text-wrap: balance; }
+.dates { font-size: 13px; font-variant-numeric: tabular-nums; margin: 0 0 20px; color: var(--ink); }
+.enter { display: inline-block; background: var(--ink); color: var(--bg); text-align: center; padding: 5px 18px; font-size: 12px; letter-spacing: 0.02em; transition: box-shadow .2s; }
+.enter:hover { box-shadow: var(--glow-box); }
+
+/* home */
+.home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: end; margin-top: 48px; }
+.home-image img, .placeholder { width: 100%; display: block; }
+.placeholder { aspect-ratio: 4 / 5; background: var(--faint); display: grid; place-items: center; color: var(--muted); font-size: 12px; }
+
+/* exhibitions / artists / about / contact */
+.page-title { font-size: clamp(20px, 2.2vw, 26px); letter-spacing: -0.015em; font-weight: 400; margin: 48px 0 28px; }
+.current { margin-top: 48px; }
+h2 { font-size: 12px; font-weight: 400; letter-spacing: 0.02em; margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--ink); }
+.section { margin-top: 64px; max-width: 640px; }
+.construction { color: var(--muted); font-size: 13px; margin: 0; }
+.year { font-size: 13px; margin: 24px 0 6px; font-variant-numeric: tabular-nums; }
+.archive { list-style: none; padding: 0; margin: 0; display: grid; gap: 3px; }
+.archive a:hover { text-shadow: var(--glow); }
+.show-name { color: var(--muted); font-size: 12px; margin-top: 12px; }
+.prose { max-width: 520px; font-size: 15px; }
+.prose p { margin: 0 0 14px; }
+.prose a:hover { text-shadow: var(--glow); }
+
+
+/* exhibition page: intro row, then one row per work (image left, caption bottom-right) */
+.ex-intro { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "title title" "text buttons"; column-gap: 48px; align-items: start; margin-top: 48px; }
+.ex-intro .show-title { grid-area: title; margin-bottom: 10px; }
+.ex-intro .ex-text { grid-area: text; }
+.ex-intro .ex-buttons { grid-area: buttons; }
+.ex-intro .lede { font-style: italic; margin: 0 0 4px; font-size: 14px; max-width: 520px; }
+.ex-intro .lede { margin-bottom: 24px; }
+details { max-width: 560px; border: 0; margin: 0 0 6px; }
+summary { list-style: none; cursor: pointer; font-size: 13px; display: inline-flex; gap: 6px; transition: text-shadow .2s; }
+summary::-webkit-details-marker { display: none; }
+summary:hover { text-shadow: var(--glow); }
+summary::before { content: "+"; font-weight: 300; }
+details[open] summary::before { content: "−"; }
+details .detail-body { font-size: 13px; line-height: 1.55; padding: 10px 0 14px; }
+.ex-buttons { display: flex; flex-direction: column; gap: 6px; width: 180px; }
+.ex-buttons .enter { padding: 4px 12px; font-size: 11px; display: block; }
+.works { margin-top: 96px; display: grid; gap: 112px; }
+.work { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
+.work-image img { width: 100%; display: block; }
+.work-image .placeholder { width: 100%; }
+.work-caption { text-align: right; font-size: 13px; line-height: 1.5; }
+.work-caption p { margin: 0; }
+.work-caption .inquire { display: inline-block; margin-top: 10px; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.work-caption .inquire:hover { text-shadow: var(--glow); }
+
+/* image cloud landing */
+.cloud { position: relative; height: min(70vh, 660px); min-height: 420px; margin: clamp(32px, 6vh, 64px) auto 0; max-width: 1400px; touch-action: pan-y; z-index: 0; }
+.cloud-item { position: absolute; left: 50%; top: 50%; padding: 0; border: 0; background: none; cursor: pointer; will-change: transform, opacity, filter; transition: box-shadow .3s; }
+.cloud-item img { display: block; width: 100%; height: auto; pointer-events: none; }
+.cloud-item:hover, .cloud-item:focus-visible { box-shadow: 0 0 28px 4px rgba(0, 0, 0, 0.18); outline: none; }
+.cloud-hint { text-align: center; font-size: 12px; color: var(--muted); margin: 8px 0 0; transition: opacity .8s; }
+.cloud-hint.gone { opacity: 0; }
+.card-backdrop { position: fixed; inset: 0; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; place-items: center; z-index: 50; padding: var(--gutter); opacity: 0; transition: opacity .35s; }
+.card-backdrop.open { display: grid; }
+.card-backdrop.shown { opacity: 1; }
+.card { background: var(--bg); width: min(980px, 100%); max-height: calc(100vh - 48px); overflow: auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 3vw, 40px); padding: clamp(16px, 2.5vw, 32px); box-shadow: 0 0 60px rgba(0, 0, 0, 0.12); position: relative; transform: scale(.97); transition: transform .35s; }
+.card-backdrop.shown .card { transform: scale(1); }
+.card-img img { width: 100%; display: block; }
+.card-text { display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; font-size: 13px; }
+.card-label { color: var(--muted); font-size: 11px; letter-spacing: 0.04em; margin: 0; }
+.card-text .show-title { margin: 0; border: 0; padding: 0; font-size: clamp(22px, 2.6vw, 32px); letter-spacing: -0.02em; }
+.card-text .dates { margin: 0 0 8px; }
+.card-text .desc { margin: 0 0 16px; line-height: 1.55; max-width: 46ch; }
+.card-text .enter { align-self: flex-start; }
+.card-close { position: absolute; top: 10px; right: 14px; background: none; border: 0; font-family: var(--font); font-size: 20px; font-weight: 300; cursor: pointer; color: var(--ink); line-height: 1; transition: text-shadow .2s; }
+.card-close:hover { text-shadow: var(--glow); }
+
+/* typed logo on home */
+.caret { display: inline-block; width: 1px; height: 0.95em; background: var(--ink); margin-left: 2px; vertical-align: -0.1em; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* footer */
+footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
+footer a:hover { text-shadow: var(--glow); }
+
+@media (max-width: 720px) {
+  .burger { display: block; }
+  nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--bg); flex-direction: column; align-items: flex-start; gap: 14px; padding: 8px var(--gutter) 24px; z-index: 4; }
+  header.menu-open nav { display: flex; }
+  .more { flex-direction: column; align-items: flex-start; }
+  .dropdown { position: static; padding: 10px 0 0 12px; }
+  .home-grid { grid-template-columns: 1fr; margin-top: 24px; }
+  .card { grid-template-columns: 1fr; }
+  .cloud { height: 64vh; min-height: 360px; }
+  .home-image { order: -1; }
+  .ex-intro { grid-template-columns: 1fr; grid-template-areas: "title" "text" "buttons"; row-gap: 16px; }
+  .work { grid-template-columns: 1fr; gap: 20px; }
+  .ex-buttons { width: 100%; max-width: 260px; }
+  .work-caption { text-align: left; }
+  .works { gap: 64px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header id="top">
+  <a class="logo" href="#home" aria-label="project gallery"><span id="logo-text" aria-hidden="true">project gallery</span></a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  <nav id="nav">
+    <a href="#home" data-view="home">home</a>
+    <a href="#exhibitions" data-view="exhibitions">exhibitions</a>
+    <a href="#artists" data-view="artists">artists</a>
+    <div class="more" id="more">
+      <button class="plus" id="plus" aria-expanded="false" aria-controls="dropdown" aria-label="More pages">+</button>
+      <div class="dropdown" id="dropdown">
+        <a href="#about" data-view="about">about</a>
+        <a href="#contact" data-view="contact">contact</a>
+      </div>
+    </div>
+    <a class="ig" id="ig" href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener" aria-label="project gallery on Instagram"></a>
+  </nav>
+</header>
+
+<main>
+  <!-- HOME -->
+  <section class="view" id="view-home">
+    <div id="home-cloud" hidden>
+      <div class="cloud" id="cloud" aria-label="Works from past exhibitions"></div>
+      <p class="cloud-hint" id="cloud-hint">hover over an image · click to open</p>
+    </div>
+    <div class="home-grid" id="home-featured">
+      <div>
+        <h1 class="show-title" data-field="title"></h1>
+        <p class="dates" data-field="dates"></p>
+        <a class="enter" data-field="button"></a>
+      </div>
+      <div class="home-image" id="home-image"></div>
+    </div>
+  </section>
+
+  <!-- EXHIBITIONS -->
+  <section class="view" id="view-exhibitions">
+    <div class="current">
+      <h1 class="show-title" data-field="title"></h1>
+      <p class="dates" data-field="dates"></p>
+      <a class="enter" data-field="button"></a>
+    </div>
+    <div class="section">
+      <h2>exhibitions archive</h2>
+      <div id="ex-archive"></div>
+    </div>
+  </section>
+
+  <!-- EXHIBITION PAGE (not in the menu; reached from "enter exhibition") -->
+  <section class="view" id="view-show">
+    <div class="ex-intro">
+      <h1 class="show-title" id="show-title"></h1>
+      <div class="ex-text">
+        <p class="lede" id="show-lede"></p>
+        <details><summary>artist bio</summary><div class="detail-body" id="show-bio"></div></details>
+        <details><summary>artist statement</summary><div class="detail-body" id="show-statement"></div></details>
+      </div>
+      <div class="ex-buttons" id="show-buttons"></div>
+    </div>
+    <div class="works" id="show-works"></div>
+  </section>
+
+  <!-- ARTISTS -->
+  <section class="view" id="view-artists">
+    <h1 class="page-title">artist archive</h1>
+    <div id="artist-archive"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="view" id="view-about">
+    <h1 class="page-title">about</h1>
+    <div class="prose">
+      <p>project gallery is an online gallery established in 2020.</p>
+      <p>pg hosts curated exhibitions organized by Trinity Lester. pg is based in new york city but functions primarily online, with select infrequent in-person exhibitions in brooklyn, ny.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="view" id="view-contact">
+    <h1 class="page-title">contact</h1>
+    <div class="prose">
+      <p>email: <a href="mailto:trinity@project-gallery.com">trinity@project-gallery.com</a></p>
+      <p>ig: <a href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener">@projectgallery</a></p>
+    </div>
+  </section>
+</main>
+
+<div class="card-backdrop" id="card-backdrop" role="dialog" aria-modal="true" aria-labelledby="card-title">
+  <div class="card">
+    <button class="card-close" id="card-close" aria-label="Close">×</button>
+    <div class="card-img"><img id="card-img" alt=""></div>
+    <div class="card-text">
+      <p class="card-label">exhibition</p>
+      <h2 class="show-title" id="card-title"></h2>
+      <p class="dates" id="card-dates"></p>
+      <p class="desc" id="card-desc"></p>
+      <a class="enter" id="card-enter">enter exhibition</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="mailto:trinity@project-gallery.com" id="footer-email"></a>
+  <span>© project gallery</span>
+</footer>
+
+<script>
+/* ======================================================
+   CONTENT — edit the words between the quote marks.
+   ====================================================== */
+
+const SITE = {
+  email: "trinity@project-gallery.com",
+  instagramIcon: "images/instagram.png"   // put the icon file in the images folder with this name
+};
+
+// Which home page to use: "cloud" (floating images) or "featured" (current show + one image)
+const HOME_STYLE = "cloud";
+
+// The image cloud. One line per picture. "show" is the exhibition it opens (from SHOWS below).
+// Later, swap these for one image from each past show.
+const CLOUD = [
+  { image: "images/mike-nudelman/see-through.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/lonesome-and-empty.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/apparent.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/zipped.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/recess.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/goes-the-other-way.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/make-me-a-moon-23.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/understanding-the-laws-that-the-line-of-their-mysterious-orbits-obeyed-2.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/dusky-dolphin.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/untitled-7.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/anything-but-a-giraffe.jpg", show: "mike-nudelman" },
+  { image: "images/mike-nudelman/spit.jpg", show: "mike-nudelman" }
+];
+
+// The featured show on the home page (and top of exhibitions).
+const CURRENT = {
+  title: "Mike Nudelman: Moving",
+  dates: "06.12.2026 ● 07.19.2026",
+  buttonText: "enter exhibition",
+  link: "#mike-nudelman",                   // where the button goes
+  image: "images/mike-nudelman/see-through.jpg"  // the picture on the home page
+};
+
+
+// Exhibition pages. Each one opens at its own address, e.g. #mike-nudelman.
+const SHOWS = {
+  "mike-nudelman": {
+    title: "Mike Nudelman: Moving",
+    artist: "Mike Nudelman",
+    dates: "06.12.2026 ● 07.19.2026",
+    lede: "Moving is a solo exhibition featuring 12 works.",
+    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
+    bio: "Mike Nudelman (b. 1985, Smithtown, New York) currently lives and works in Santa Fe, New Mexico. He received a BFA in Printmaking from Cornell University and an MFA in Painting & Drawing from the School of the Art Institute of Chicago. His work has been shown in solo exhibitions at Fortnight Institute (New York, NY), 5. Gallery (Santa Fe, NM), and Thomas Robertello Gallery (Chicago, IL), and in group exhibitions at Geoffrey Young Gallery (Great Barrington, MA), SPRING/BREAK Art Show (New York, NY), Good Naked Gallery (New York, NY), Hyde Park Art Center (Chicago, IL), Devening Projects + Editions (Chicago, IL), The Valley (Taos, NM), and Smoke the Moon (Santa Fe, NM), among others. He recently editioned two lithographs with the Tamarind Institute (Albuquerque, NM).",
+    statement: "Working with familiar materials, Nudelman transforms the recognizable into the unexpected. Like the luminous pixels of a digital screen, his intricate ballpoint strokes simultaneously mask and reveal what enigmatic sights lie beyond the paper's surface. For more than a decade, Nudelman’s work has explored the interplay of illusion, time, scale, and mediation, using sublime landscapes as a lens through which to examine the ways we perceive and construct reality. Ultimately, his drawings resist immediate comprehension and invite closer inspection.",
+    buttons: [
+      { text: "press release", link: "https://project-gallery.com/s/Mike-Nudelman-PR.pdf" },
+      { text: "price list",    link: "https://project-gallery.com/s/Mike-Nudelman-Image-List.pdf" },
+      { text: "social media",  link: "https://www.instagram.com/mikenudelman/" }
+    ],
+    // One line per artwork: title, year, medium, size. "image" is the file in your images folder.
+    works: [
+      { title: "See Through", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+        image: "images/mike-nudelman/see-through.jpg", ratio: "1200/927" },
+      { title: "Lonesome and Empty", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+        image: "images/mike-nudelman/lonesome-and-empty.jpg", ratio: "1200/927" },
+      { title: "Apparent", year: "", medium: "Ballpoint pen on paper", size: "5.5 x 4.5 in (13.8 × 11.4 cm)",
+        image: "images/mike-nudelman/apparent.jpg", ratio: "1200/982" },
+      { title: "Zipped", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+        image: "images/mike-nudelman/zipped.jpg", ratio: "1200/927" },
+      { title: "Recess", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+        image: "images/mike-nudelman/recess.jpg", ratio: "1200/927" },
+      { title: "Goes the Other Way", year: "", medium: "Ballpoint pen on paper", size: "7 x 5 in (17.8 × 12.7 cm)",
+        image: "images/mike-nudelman/goes-the-other-way.jpg", ratio: "1200/857" },
+      { title: "Make Me a Moon 23", year: "", medium: "Ballpoint pen on paper", size: "3 x 2 in (7.6 × 5 cm)",
+        image: "images/mike-nudelman/make-me-a-moon-23.jpg", ratio: "1200/800" },
+      { title: "Understanding the Laws that the Line of their Mysterious Orbits Obeyed 2", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+        image: "images/mike-nudelman/understanding-the-laws-that-the-line-of-their-mysterious-orbits-obeyed-2.jpg", ratio: "1200/927" },
+      { title: "Dusky Dolphin", year: "", medium: "Ballpoint pen on paper", size: "5 x 4.25 in (12.7 × 10.8 cm)",
+        image: "images/mike-nudelman/dusky-dolphin.jpg", ratio: "1200/1020" },
+      { title: "Untitled 7", year: "", medium: "Ballpoint pen on paper", size: "5.5 x 4 in (13.9 × 10.2 cm)",
+        image: "images/mike-nudelman/untitled-7.jpg", ratio: "1200/871" },
+      { title: "Anything But a Giraffe", year: "", medium: "Ballpoint pen on paper", size: "4.1 x 3.9 in (10.5 × 9.9 cm)",
+        image: "images/mike-nudelman/anything-but-a-giraffe.jpg", ratio: "1200/1124" },
+      { title: "Spit", year: "", medium: "Ballpoint pen on paper", size: "5.5 x 5.5 in (13.9 × 13.9 cm)",
+        image: "images/mike-nudelman/spit.jpg", ratio: "1200/1200" }
+    ]
+  }
+};
+
+// Past shows. Newest year first.
+const PAST_EXHIBITIONS = [
+  // { year: 2025, title: "TD Reade: cancel my prayer", dates: "10.05.2025 – 11.05.2025" },
+];
+
+// Artist archive, like a spreadsheet: year | show | artist | instagram handle (no @)
+const ARTISTS = [
+  // { year: 2025, show: "TD Reade: cancel my prayer", artist: "TD Reade", instagram: "" },
+];
+
+/* ====================================================== */
+
+const UC = '<p class="construction">under construction</p>';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function renderCurrent() {
+  document.querySelectorAll('[data-field="title"]').forEach(el => el.textContent = CURRENT.title || "under construction");
+  document.querySelectorAll('[data-field="dates"]').forEach(el => el.textContent = CURRENT.dates || "");
+  document.querySelectorAll('[data-field="button"]').forEach(el => { el.textContent = CURRENT.buttonText; el.href = CURRENT.link || "#exhibitions"; });
+
+  const box = document.getElementById("home-image");
+  const ph = '<div class="placeholder">image</div>';
+  if (!CURRENT.image) { box.innerHTML = ph; return; }
+  const img = new Image();
+  img.alt = CURRENT.title;
+  img.onload = () => { box.innerHTML = ""; box.appendChild(img); };
+  box.innerHTML = ph;
+  loadImage(img, [CURRENT.image, CURRENT.backup], () => { box.innerHTML = ph; });
+}
+
+function renderSite() {
+  const fe = document.getElementById("footer-email");
+  fe.textContent = SITE.email; fe.href = "mailto:" + SITE.email;
+  const ig = document.getElementById("ig");
+  const img = new Image();
+  img.alt = "";
+  img.onload = () => { ig.innerHTML = ""; ig.appendChild(img); };
+  img.onerror = () => { ig.innerHTML = '<span class="ig-text">ig</span>'; };
+  ig.innerHTML = '<span class="ig-text">ig</span>';
+  img.src = SITE.instagramIcon;
+}
+
+function groupByYear(rows) {
+  const m = new Map();
+  [...rows].sort((a, b) => b.year - a.year).forEach(r => { if (!m.has(r.year)) m.set(r.year, []); m.get(r.year).push(r); });
+  return m;
+}
+
+function renderExArchive() {
+  const el = document.getElementById("ex-archive");
+  if (!PAST_EXHIBITIONS.length) { el.innerHTML = UC; return; }
+  let html = "";
+  for (const [year, shows] of groupByYear(PAST_EXHIBITIONS)) {
+    html += `<p class="year">${year}</p><ul class="archive">` +
+      shows.map(s => `<li>${esc(s.title)} <span class="construction" style="display:inline">${esc(s.dates || "")}</span></li>`).join("") + "</ul>";
+  }
+  el.innerHTML = html;
+}
+
+function renderArtists() {
+  const el = document.getElementById("artist-archive");
+  if (!ARTISTS.length) { el.innerHTML = UC; return; }
+  let html = "";
+  for (const [year, rows] of groupByYear(ARTISTS)) {
+    html += `<p class="year">${year}</p>`;
+    const shows = new Map();
+    rows.forEach(r => { if (!shows.has(r.show)) shows.set(r.show, []); shows.get(r.show).push(r); });
+    for (const [show, people] of shows) {
+      html += `<p class="show-name">${esc(show)}</p><ul class="archive">` + people.map(p => p.instagram
+        ? `<li><a href="https://www.instagram.com/${encodeURIComponent(p.instagram)}/" target="_blank" rel="noopener">${esc(p.artist)}</a></li>`
+        : `<li>${esc(p.artist)}</li>`).join("") + "</ul>";
+    }
+  }
+  el.innerHTML = html;
+}
+
+
+// try each image address in turn; fall back to a grey box
+function loadImage(img, srcs, fail) {
+  const list = srcs.filter(Boolean);
+  let i = 0;
+  img.onerror = () => { i++; if (i < list.length) img.src = list[i]; else fail(); };
+  if (list.length) img.src = list[0]; else fail();
+}
+
+function renderShow(key) {
+  const sh = SHOWS[key];
+  document.getElementById("show-title").textContent = sh.title;
+  document.getElementById("show-lede").textContent = sh.lede;
+  document.getElementById("show-bio").textContent = sh.bio || "artist bio coming soon";
+  document.getElementById("show-statement").textContent = sh.statement || "artist statement coming soon";
+  document.querySelectorAll("#view-show details").forEach(d => d.open = false);
+  document.getElementById("show-buttons").innerHTML = sh.buttons.map(b =>
+    `<a class="enter" href="${esc(b.link)}" target="_blank" rel="noopener">${esc(b.text)}</a>`).join("");
+  const wrap = document.getElementById("show-works");
+  wrap.innerHTML = "";
+  sh.works.forEach(w => {
+    const row = document.createElement("article");
+    row.className = "work";
+    const subject = `Purchase Inquiry for ${sh.artist}'s drawing ${w.title}`;
+    row.innerHTML = `<div class="work-image"><div class="placeholder" style="aspect-ratio:${w.ratio}">image</div></div>
+      <div class="work-caption">
+        <p>${esc(w.title)}${w.year ? ", " + esc(w.year) : ""}</p>
+        <p>${esc(w.medium)}</p>
+        <p>${esc(w.size)}</p>
+        <a class="inquire" href="mailto:${SITE.email}?subject=${encodeURIComponent(subject)}">inquire</a>
+      </div>`;
+    const box = row.querySelector(".work-image");
+    const img = new Image();
+    img.alt = `${sh.artist}, ${w.title}`;
+    img.onload = () => { box.innerHTML = ""; box.appendChild(img); };
+    loadImage(img, [w.image, w.backup], () => {});
+    wrap.appendChild(row);
+  });
+}
+
+/* image cloud */
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let cloudNodes = [], cloudRunning = false, spin = 0, speed = 1, target = 1, tiltX = 0.32, mouseX = 0, mouseY = 0;
+
+// repeatable "random" numbers so the cloud keeps the same shape each visit
+function seeded(n) { let t = n * 9301 + 49297; return () => { t = (t * 9301 + 49297) % 233280; return t / 233280; }; }
+
+function buildCloud() {
+  const wrap = document.getElementById("cloud");
+  wrap.innerHTML = "";
+  const n = CLOUD.length;
+  cloudNodes = CLOUD.map((c, i) => {
+    // spread points evenly over a sphere
+    const y = 1 - (i + 0.5) * 2 / n;
+    const r = Math.sqrt(1 - y * y);
+    const phi = i * Math.PI * (3 - Math.sqrt(5));
+    const b = document.createElement("button");
+    b.className = "cloud-item";
+    const sh = SHOWS[c.show] || {};
+    b.setAttribute("aria-label", sh.title || "exhibition");
+    const img = new Image(); img.src = c.image; img.alt = "";
+    b.appendChild(img);
+    b.addEventListener("mouseenter", () => { target = 0.15; hideHint(); });
+    b.addEventListener("mouseleave", () => { target = 1; });
+    b.addEventListener("click", () => openCard(c));
+    wrap.appendChild(b);
+    const rnd = seeded(i + 1);
+    const reach = 0.78 + rnd() * 0.4;                         // some sit further out than others
+    return { el: b, x: Math.cos(phi) * r * reach + (rnd() - 0.5) * 0.25,
+             y: y * (0.8 + rnd() * 0.35) + (rnd() - 0.5) * 0.2,
+             z: Math.sin(phi) * r * reach,
+             bob: rnd() * Math.PI * 2, drift: 0.6 + rnd() * 0.8, sway: rnd() * Math.PI * 2 };
+  });
+  wrap.onmousemove = e => {
+    const rct = wrap.getBoundingClientRect();
+    mouseX = (e.clientX - rct.left) / rct.width - 0.5;
+    mouseY = (e.clientY - rct.top) / rct.height - 0.5;
+  };
+  placeCloud(0);
+}
+
+function placeCloud(t) {
+  const wrap = document.getElementById("cloud");
+  const W = wrap.clientWidth, H = wrap.clientHeight;
+  const RX = Math.min(W * 0.4, 560), RY = Math.min(H * 0.34, 230);   // wide oval
+  const size = Math.max(90, Math.min(170, W * 0.15));
+  const ry = spin + mouseX * 0.6, rx = tiltX + mouseY * 0.3;
+  const cy = Math.cos(ry), sy = Math.sin(ry), cx = Math.cos(rx), sx = Math.sin(rx);
+  cloudNodes.forEach(nd => {
+    let x = nd.x * cy + nd.z * sy, z = -nd.x * sy + nd.z * cy;
+    let y = nd.y * cx - z * sx; z = nd.y * sx + z * cx;
+    y += Math.sin(t / 1600 + nd.bob) * 0.06;                    // slow float
+    x += Math.sin(t / 2700 * nd.drift + nd.sway) * 0.05;        // slight sideways wander
+    const depth = (z + 1) / 2;                                  // 0 far, 1 near
+    const scale = 0.55 + depth * 0.65;
+    nd.el.style.width = size + "px";
+    nd.el.style.transform = `translate(-50%, -50%) translate(${x * RX}px, ${y * RY}px) scale(${scale})`;
+    nd.el.style.opacity = (0.28 + depth * 0.72).toFixed(3);
+    nd.el.style.filter = depth < 0.45 ? `blur(${((0.45 - depth) * 4).toFixed(2)}px)` : "none";
+    nd.el.style.zIndex = Math.round(depth * 100);
+  });
+}
+
+function cloudLoop(now) {
+  if (!cloudRunning) return;
+  speed += (target - speed) * 0.04;
+  spin += 0.0016 * speed;
+  placeCloud(now);
+  requestAnimationFrame(cloudLoop);
+}
+function startCloud() {
+  if (cloudRunning) return;
+  if (reduceMotion) { placeCloud(0); return; }
+  cloudRunning = true; requestAnimationFrame(cloudLoop);
+}
+function stopCloud() { cloudRunning = false; }
+function hideHint() { document.getElementById("cloud-hint").classList.add("gone"); }
+
+const backdrop = document.getElementById("card-backdrop");
+function openCard(c) {
+  const sh = SHOWS[c.show] || {};
+  document.getElementById("card-img").src = c.image;
+  document.getElementById("card-img").alt = sh.title || "";
+  document.getElementById("card-title").textContent = sh.title || "";
+  document.getElementById("card-dates").textContent = sh.dates || "";
+  document.getElementById("card-desc").textContent = sh.description || sh.lede || "";
+  const enter = document.getElementById("card-enter");
+  enter.href = "#" + c.show;
+  hideHint(); target = 0;
+  backdrop.classList.add("open");
+  requestAnimationFrame(() => backdrop.classList.add("shown"));
+  document.getElementById("card-close").focus();
+}
+function closeCard() {
+  backdrop.classList.remove("shown"); target = 1;
+  setTimeout(() => backdrop.classList.remove("open"), 300);
+}
+document.getElementById("card-close").addEventListener("click", closeCard);
+backdrop.addEventListener("click", e => { if (e.target === backdrop) closeCard(); });
+document.getElementById("card-enter").addEventListener("click", () => { backdrop.classList.remove("shown", "open"); target = 1; });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && backdrop.classList.contains("open")) closeCard(); });
+window.addEventListener("resize", () => placeCloud(performance.now()));
+
+/* typed logo: plays when you arrive on the home page */
+const LOGO = "project gallery";
+let typing = null;
+function typeLogo() {
+  const el = document.getElementById("logo-text");
+  clearTimeout(typing);
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = LOGO; return; }
+  const caret = '<span class="caret"></span>';
+  const show = t => { el.innerHTML = esc(t) + caret; };
+  // the script: type "project", slip an extra "t", pause, backspace it, finish
+  const steps = [];
+  const typeWord = (from, to) => { for (let i = from; i <= to.length; i++) steps.push([to.slice(0, i), 150 + Math.random() * 110]); };
+  steps.push(["", 1100]);                       // empty, cursor blinking before typing starts
+  typeWord(1, "project");
+  steps.push(["projectt", 160]);                // the typo
+  steps.push(["projectt", 650]);                // notices it
+  steps.push(["project", 260]);                 // backspace
+  steps.push(["project", 350]);
+  typeWord(8, LOGO);
+  steps.push([LOGO, 2200]);                     // cursor keeps blinking at the end
+  let k = 0;
+  const run = () => {
+    if (k >= steps.length) { el.textContent = LOGO; return; }
+    const [text, wait] = steps[k++];
+    show(text);
+    typing = setTimeout(run, wait);
+  };
+  run();
+}
+let lastView = null;
+
+/* routing */
+const VIEWS = ["home", "exhibitions", "artists", "about", "contact"];
+const header = document.getElementById("top");
+const more = document.getElementById("more");
+const plus = document.getElementById("plus");
+const burger = document.getElementById("burger");
+
+function show() {
+  const h = location.hash.slice(1);
+  let name = VIEWS.includes(h) ? h : "home";
+  if (SHOWS[h]) { name = "show"; renderShow(h); }
+  if (name === "home" && lastView !== "home") typeLogo();
+  if (name === "home" && HOME_STYLE === "cloud") startCloud(); else stopCloud();
+  lastView = name;
+  [...VIEWS, "show"].forEach(v => document.getElementById("view-" + v).classList.toggle("active", v === name));
+  document.querySelectorAll("nav [data-view]").forEach(a => a.dataset.view === name ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  closeMenus();
+  window.scrollTo(0, 0);
+}
+function closeMenus() {
+  more.classList.remove("open"); plus.setAttribute("aria-expanded", "false");
+  header.classList.remove("menu-open"); burger.setAttribute("aria-expanded", "false");
+}
+plus.addEventListener("click", e => { e.stopPropagation(); plus.setAttribute("aria-expanded", String(more.classList.toggle("open"))); });
+burger.addEventListener("click", e => { e.stopPropagation(); burger.setAttribute("aria-expanded", String(header.classList.toggle("menu-open"))); });
+document.addEventListener("click", e => { if (!header.contains(e.target)) closeMenus(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenus(); });
+window.addEventListener("hashchange", show);
+
+document.getElementById("home-cloud").hidden = HOME_STYLE !== "cloud";
+document.getElementById("home-featured").hidden = HOME_STYLE === "cloud";
+renderSite(); renderCurrent(); renderExArchive(); renderArtists(); buildCloud(); show();
+</script>
+</body>
+</html>
