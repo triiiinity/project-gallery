@@ -36,7 +36,11 @@ nav { display: flex; align-items: center; gap: 22px; }
 nav a { font-size: 15px; line-height: 1; transition: text-shadow .2s; }
 nav a.plus:hover { text-shadow: var(--glow); }
 nav > a.typed-link { display: inline-block; text-align: left; white-space: nowrap; }
-nav a.plus { font-size: 19px; font-weight: 300; }
+nav a.plus { font-size: 19px; font-weight: 300; display: inline-grid; }
+nav a.plus span { grid-area: 1 / 1; text-align: center; transition: opacity .15s; }
+nav a.plus .px-x { opacity: 0; }
+nav a.plus:hover .px-plus, nav a.plus:focus-visible .px-plus { opacity: 0; }
+nav a.plus:hover .px-x, nav a.plus:focus-visible .px-x { opacity: 1; }
 .ig { display: inline-flex; align-items: center; }
 .ig img { width: 16px; height: 16px; display: block; }
 .ig:hover img { filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5)); }
@@ -253,16 +257,21 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 @media (prefers-reduced-motion: reduce) { .ticker { overflow-x: auto; } .ticker-track { animation: none; } }
 .archive-wrap { margin-top: clamp(72px, 10vh, 120px); }
 .archive-head { font-size: 13px; }
-.arch-year { display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid #e6e6e6; }
+.arch-year { display: grid; grid-template-columns: 90px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid #e6e6e6; }
 .arch-year > span { font-size: 13px; font-variant-numeric: tabular-nums; }
-.arch-items { display: grid; gap: 14px; }
-.arch-item { background: none; border: 0; padding: 0; text-align: left; font-family: var(--font); color: var(--ink); cursor: pointer; display: grid; gap: 2px; }
-.arch-item span:first-child { font-size: 15px; transition: text-shadow .2s; }
+.arch-items { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px 24px; align-items: start; }
+.arch-item { background: none; border: 0; padding: 0; text-align: left; min-width: 0; overflow-wrap: anywhere; font-family: var(--font); color: var(--ink); cursor: pointer; display: grid; gap: 2px; }
+.arch-item span:first-child { font-size: 14px; line-height: 1.3; transition: text-shadow .2s; }
 .arch-item span:last-child { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .arch-item:hover span:first-child { text-shadow: var(--glow); }
 /* show cards: spotlight image takes most of the card */
 .card.wide { grid-template-columns: 1.45fr 1fr; width: min(1100px, 100%); }
 .card.wide .card-img img { max-height: calc(100vh - 140px); object-fit: contain; object-position: left center; }
+.card-note { margin: -4px 0 10px; font-size: 12px; color: var(--muted); }
+.card-note:empty { display: none; }
+.card.noimg { grid-template-columns: 1fr; width: min(620px, 100%); }
+.card.noimg .card-img { display: none; }
+.card.noimg .card-text { padding-top: 12px; }
 .card-icons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .card-icons:empty { display: none; }
 .card-icons img { width: 28px; height: 28px; object-fit: cover; display: block; }
@@ -302,7 +311,8 @@ footer a:hover { text-shadow: var(--glow); }
   .gb-form, .gb-fields { grid-template-columns: 1fr; }
   .gb-top { flex-direction: column; align-items: flex-start; }
   .ex-feature, .card.wide { grid-template-columns: 1fr; }
-  .arch-year { grid-template-columns: 70px 1fr; }
+  .arch-year { grid-template-columns: 1fr; gap: 12px; }
+  .arch-items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pair { grid-template-columns: 1fr; padding: 0; gap: 64px; }
   .work.right .work-image, .work.right .work-caption { grid-column: auto; grid-row: auto; }
   .works { gap: 96px; }
@@ -323,7 +333,7 @@ footer a:hover { text-shadow: var(--glow); }
     <a href="#about" data-view="about">about</a>
     <a href="#guestbook" data-view="guestbook">guest book</a>
     <a href="#contact" data-view="contact">contact</a>
-    <a href="#collection" class="plus" data-view="collection" aria-label="my collection" title="my collection">+</a>
+    <a href="#collection" class="plus" data-view="collection" aria-label="my collection" title="my collection"><span class="px-plus">+</span><span class="px-x" aria-hidden="true">×</span></a>
     <a class="ig" id="ig" href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener" aria-label="project gallery on Instagram"></a>
   </nav>
 </header>
@@ -454,6 +464,7 @@ footer a:hover { text-shadow: var(--glow); }
       <p class="card-label" id="card-label">solo exhibition</p>
       <h2 class="show-title" id="card-title"></h2>
       <p class="dates" id="card-dates"></p>
+      <p class="card-note" id="card-note"></p>
       <p class="desc" id="card-desc"></p>
       <a class="enter" id="card-enter">enter exhibition</a>
       <div class="card-icons" id="card-icons"></div>
@@ -556,6 +567,8 @@ function renderExhibitionsPage() {
   // archive list by year
   const byYear = new Map();
   ARCHIVE_LIST.forEach(k => { const c = SHOW_CARDS[k]; if (!c) return; if (!byYear.has(c.year)) byYear.set(c.year, []); byYear.get(c.year).push(k); });
+  const start = k => { const m = /(\d{2})\.(\d{2})\.(\d{4})/.exec(SHOW_CARDS[k].dates || ""); return m ? m[3] + m[1] + m[2] : ""; };
+  byYear.forEach(keys => keys.sort((a, b) => start(b).localeCompare(start(a))));
   document.getElementById("ex-archive").innerHTML = [...byYear].sort((a, b) => b[0] - a[0]).map(([y, keys]) =>
     `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${keys.map(k =>
       `<button class="arch-item" data-card="${esc(k)}"><span>${esc(SHOW_CARDS[k].title)}</span><span>${esc(SHOW_CARDS[k].dates)}</span></button>`).join("")}</div></div>`).join("");
@@ -565,7 +578,7 @@ function openShowCard(key) {
   const c = SHOW_CARDS[key]; if (!c) return;
   const sh = SHOWS[c.show];
   openCard({
-    label: c.kind, image: c.image, title: c.title, dates: c.dates, description: c.description, link: c.link,
+    label: c.kind, image: c.image, title: c.title, dates: c.dates, note: c.note, description: c.description, link: c.link,
     wide: true,
     icons: sh ? sh.works.map(w => w.image) : [],
     artists: c.artists || []
@@ -699,35 +712,34 @@ function workInfo(saved) {
   const w = SHOWS[key] && SHOWS[key].works[Number(idx)];
   return w ? { ...saved, ...w, artist: SHOWS[key].artist, showTitle: SHOWS[key].title, status: SHOWS[key].status || "past show" } : saved;
 }
-// pick a colour from each saved picture, kept dark enough to read
-const colourCache = {};
-function pickColour(src) {
-  if (colourCache[src]) return Promise.resolve(colourCache[src]);
+// pick several colours from each saved picture (kept dark enough to read)
+const paletteCache = {};
+function pickColours(src) {
+  if (paletteCache[src]) return Promise.resolve(paletteCache[src]);
   return new Promise(res => {
     const im = new Image();
     im.onload = () => {
       try {
-        const cv = document.createElement("canvas"); cv.width = cv.height = 32;
-        const cx = cv.getContext("2d"); cx.drawImage(im, 0, 0, 32, 32);
-        const d = cx.getImageData(0, 0, 32, 32).data;
-        let best = null, bestScore = -1;
+        const cv = document.createElement("canvas"); cv.width = cv.height = 40;
+        const cx = cv.getContext("2d"); cx.drawImage(im, 0, 0, 40, 40);
+        const d = cx.getImageData(0, 0, 40, 40).data, bins = {};
         for (let i = 0; i < d.length; i += 4) {
           const r = d[i] / 255, g = d[i + 1] / 255, b = d[i + 2] / 255;
-          const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2;
-          const sat = mx === mn ? 0 : (mx - mn) / (1 - Math.abs(2 * l - 1));
-          const score = sat * (1 - Math.abs(l - 0.5));
-          if (score > bestScore) { bestScore = score; best = [r, g, b]; }
+          const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, dd = mx - mn;
+          if (!dd) continue;
+          const sat = dd / (1 - Math.abs(2 * l - 1));
+          if (sat < 0.25 || l < 0.12 || l > 0.9) continue;
+          let h = mx === r ? ((g - b) / dd) % 6 : mx === g ? (b - r) / dd + 2 : (r - g) / dd + 4; h = (h * 60 + 360) % 360;
+          const bin = Math.round(h / 24);                     // 15 hue families
+          bins[bin] = bins[bin] || { n: 0, h: 0, s: 0 };
+          bins[bin].n += sat; bins[bin].h += h * sat; bins[bin].s += sat * sat;
         }
-        // convert to hsl and hold lightness in a readable range
-        const [r, g, b] = best, mx = Math.max(r, g, b), mn = Math.min(r, g, b);
-        let h = 0; const l = (mx + mn) / 2, dd = mx - mn;
-        if (dd) { h = mx === r ? ((g - b) / dd) % 6 : mx === g ? (b - r) / dd + 2 : (r - g) / dd + 4; h *= 60; if (h < 0) h += 360; }
-        const sat = dd ? Math.min(0.85, Math.max(0.45, dd / (1 - Math.abs(2 * l - 1)))) : 0;
-        colourCache[src] = sat ? `hsl(${Math.round(h)}, ${Math.round(sat * 100)}%, ${Math.round(Math.min(0.42, Math.max(0.3, l)) * 100)}%)` : "var(--accent)";
-      } catch (e) { colourCache[src] = "var(--accent)"; }
-      res(colourCache[src]);
+        paletteCache[src] = Object.values(bins).sort((x, y) => y.n - x.n).slice(0, 4)
+          .map(v => `hsl(${Math.round(v.h / v.n)}, ${Math.round(Math.min(.85, Math.max(.45, v.s / v.n)) * 100)}%, 38%)`);
+      } catch (e) { paletteCache[src] = []; }
+      res(paletteCache[src]);
     };
-    im.onerror = () => res("var(--accent)");
+    im.onerror = () => res([]);
     im.src = src;
   });
 }
@@ -749,8 +761,12 @@ function renderCollection() {
   const tags = ["all", ...types.map(t => t + "s"), ...years, ...statuses, ...(all.some(w => w.forSale) ? ["for sale"] : [])];
   if (!tags.includes(collectionFilter)) collectionFilter = "all";
   tagsEl.innerHTML = tags.map(t => `<button class="tag${t === collectionFilter ? " on" : ""}" data-tag="${esc(t)}">${esc(t)}</button>`).join("");
-  Promise.all(all.map(w => pickColour(w.image))).then(cols => {
-    tagsEl.querySelectorAll(".tag").forEach((b, i) => b.style.setProperty("--tag", cols[i % cols.length] || "var(--accent)"));
+  Promise.all(all.map(w => pickColours(w.image))).then(lists => {
+    // take colours in turn from each saved work so every tag gets its own
+    const pool = [], hues = [];
+    const far = h => hues.every(x => Math.min(Math.abs(x - h), 360 - Math.abs(x - h)) >= 28);
+    for (let r = 0; r < 4; r++) lists.forEach(l => { const c = l[r]; if (!c) return; const h = Number(c.slice(4, c.indexOf(","))); if (far(h)) { hues.push(h); pool.push(c); } });
+    tagsEl.querySelectorAll(".tag").forEach((b, i) => b.style.setProperty("--tag", pool.length ? pool[i % pool.length] : "var(--accent)"));
   });
   tagsEl.querySelectorAll(".tag").forEach(b => b.addEventListener("click", () => { collectionFilter = b.dataset.tag; renderCollection(); }));
 
@@ -910,9 +926,12 @@ function openCard(c) {
   document.getElementById("card-title").textContent = c.title || "";
   document.getElementById("card-dates").textContent = c.dates || "";
   document.getElementById("card-desc").textContent = c.description || "";
-  document.querySelector("#card-backdrop .card").classList.toggle("wide", !!c.wide);
+  document.querySelector("#card-backdrop .card").classList.toggle("wide", !!c.wide && !!c.image);
+  document.querySelector("#card-backdrop .card").classList.toggle("noimg", !c.image);
+  document.getElementById("card-note").textContent = c.note || "";
   document.getElementById("card-icons").innerHTML = (c.icons || []).slice(0, 16).map(src => `<img src="${esc(src)}" alt="" loading="lazy">`).join("");
   document.getElementById("card-artists").textContent = (c.artists && c.artists.length) ? "including artists " + c.artists.join(", ") : "";
+  document.getElementById("card-enter").textContent = /^https?:/.test(c.link || "") ? "enter exhibition ↗" : "enter exhibition";
   const enter = document.getElementById("card-enter");
   enter.hidden = !c.link;
   enter.href = c.link || "#";

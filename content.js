@@ -196,12 +196,14 @@ const EXHIBITIONS_FEATURE = {
 //   kind:  "solo exhibition", "two-person exhibition" or "group exhibition"
 //   show:  the show's key in SHOWS if it has a page on this site (gives the little icons)
 //   link:  where "enter exhibition" goes ("#tdreade" for this site, or the old Squarespace address)
+//   note:  "curated by ..." / "juried by ..." (shown under the dates)
+//   image: the spotlight picture; leave "" for a text-only card until you add one
 //   artists: names for group shows, shown as "including artists ..."
 const SHOW_CARDS = {
   "tdreade": {
     kind: "solo exhibition",
     title: "TD Reade: cancel my prayer",
-    year: "2025",
+    year: "2025", note: "",
     dates: "10.05.2025 – 11.05.2025",
     image: "images/td-reade/heavy-misfortunes.jpg",
     description: "cancel my prayer features 12 original artworks from Melbourne based artist TD Reade. His paintings foreground figures caught within the choreography of social performance, where ordinary moments become sites of latent tension.",
@@ -219,6 +221,204 @@ const SHOW_CARDS = {
     link: "#mike-nudelman",
     show: "mike-nudelman",
     artists: []
+  },
+  "ryker-woodward": {
+    kind: "solo exhibition", title: "Ryker Woodward: Nostalgic Signifiers From Digital Realms", year: "2024", dates: "08.01.2024 – 09.15.2024", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/ryker-woodward", show: "",
+    artists: []
+  },
+  "gitte-maria-moller": {
+    kind: "solo exhibition", title: "Gitte Maria Möller: Running away forever", year: "2024", dates: "05.23.2024 – 06.30.2024", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/gitte-maria-moller", show: "",
+    artists: []
+  },
+  "lumierebelge": {
+    kind: "solo exhibition", title: "lumierebelge, lineage mayhem.", year: "2024", dates: "04.17.2024 – 05.22.2024", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/lumierebelge", show: "",
+    artists: []
+  },
+  "tao-lin": {
+    kind: "solo exhibition", title: "Mandalas: Tao Lin", year: "2024", dates: "03.16.2024 – 04.16.2024", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/tao-lin", show: "",
+    artists: []
+  },
+  "person-place-thing": {
+    kind: "group exhibition", title: "Person, Place, or Thing", year: "2024", dates: "02.01.2024 – 03.15.2024", note: "juried by Cynthia Cruz",
+    image: "", description: "",
+    link: "https://project-gallery.com/person-place-thing", show: "",
+    artists: ["Jennifer Amadeo-Holl", "Wai Yi Chung", "Megan Du", "Dimitra Gkoutzou", "Jiacun Li", "Keshawna Logan", "Andrew James McKay", "James Niwat Moore", "Sheila Rennick", "Christine Schmitt", "Olivia Springberg", "Reilly Stasienko", "Norah Stone", "Parker Lily Tuson-Morse", "Melissa Wallen", "minzhi zheng", "DW Zinsser"]
+  },
+  "chaeri-kim": {
+    kind: "solo exhibition", title: "Love, Light, Gravity: Chaeri Kim", year: "2023", dates: "12.19.2023 – 01.19.2024", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/chaeri-kim", show: "",
+    artists: []
+  },
+  "grace-nkem": {
+    kind: "solo exhibition", title: "Grace Nkem: CLOWN WORLD", year: "2023", dates: "11.18.2023 – 12.18.2023", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/grace-nkem", show: "",
+    artists: []
+  },
+  "nutsa-gogaladze": {
+    kind: "solo exhibition", title: "I walked a lot to arrive in this garden: Nutsa Gogaladze", year: "2023", dates: "10.17.2023 – 11.17.2023", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/nutsa-gogaladze", show: "",
+    artists: []
+  },
+  "artist-curator": {
+    kind: "group exhibition", title: "Artist/Curator", year: "2023", dates: "09.08.2023 – 10.16.2023", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/artist-curator", show: "",
+    artists: ["Karen Fitzgerald", "Cary Hulbert", "Casey Jex Smith", "Adam Liam Rose", "Cara Lynch", "Farah Mohammad", "Kellyann Monaghan", "Trinity Lester", "Libbi Ponce"]
+  },
+  "ara-hao": {
+    kind: "solo exhibition", title: "Nourish Life Anonymously: Ara Hao", year: "2023", dates: "08.07.2023 – 09.07.2023", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/ara-hao", show: "",
+    artists: []
+  },
+  "inimitable": {
+    kind: "group exhibition", title: "Inimitable", year: "2023", dates: "06.30.2023 – 07.30.2023", note: "juried by Casey Jex Smith",
+    image: "", description: "",
+    link: "https://project-gallery.com/inimitable", show: "",
+    artists: ["Hanimal-Mario Alvarez", "Amelie Barnathan", "Jeffrey Beebe", "Darien Bird", "Caroline Blum", "Shea Chang", "Katya Labowe-Stoll", "Jiacun Li", "Emily Loughlin", "Anwar Mahdi", "carrie R", "Jenna Ransom", "Teh-Hsuan (Momo) Chen", "Jen Dwyer", "Jared Freschman", "Tim Furey", "Austin Joseph Gregory", "Marilyn Holsing", "Henry Rosenberg", "Alfred Rosenbluth", "Todd Stong", "Brian Uhl", "Mo Vleeshouwers", "Claire Downes Whitehurst", "DW Zinsser"]
+  },
+  "filip-lav": {
+    kind: "solo exhibition", title: "Gentle Doom: Filip Lav", year: "2023", dates: "06.01.2023 – 06.29.2023", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/filip-lav", show: "",
+    artists: []
+  },
+  "hearts-of-palm": {
+    kind: "group exhibition", title: "Hearts of Palm", year: "2023", dates: "05.15.2023 – 06.15.2023", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/hearts-of-palm", show: "",
+    artists: ["Ben Browne", "Keira Curwen", "Gabriella Grill", "Erik Hougen", "Cary Hulbert", "TianTian Lou", "Jeremy Ruiz", "Saloni Shah", "Tom Smith", "Sarika Sugla", "Orli Swergold"]
+  },
+  "neurosis": {
+    kind: "group exhibition", title: "Neurosis", year: "2023", dates: "01.15.2023 – 03.15.2023", note: "curated by Bethelihem Gebresilasie",
+    image: "", description: "",
+    link: "https://project-gallery.com/neurosis", show: "",
+    artists: ["Yerrie Choo", "Cecelia Condit", "Seth Cosford", "Erica Eyres", "Starkey Fossgreen", "Simon Floris", "Joana Azevedo Rodrigues", "Liev Sibilla", "Léa Tissot-Laura", "Anna Sougy", "Amber Tutwiler", "Klara Vertes"]
+  },
+  "first-note": {
+    kind: "group exhibition", title: "First Note", year: "2023", dates: "01.15.2023 – 03.15.2023", note: "juried by Faust Luo",
+    image: "", description: "",
+    link: "https://project-gallery.com/first-note", show: "",
+    artists: ["Hyoju Cheon", "Matt Coombs", "Misha Davydov", "Maria Haag", "Andy N Li", "Crystal Marshall", "Steven Pennett", "Sarah Sipling"]
+  },
+  "betwixt-and-between": {
+    kind: "group exhibition", title: "betwixt and between", year: "2022", dates: "11.01.2022 – 12.15.2022", note: "juried by Trinity Lester and Cary Hulbert",
+    image: "", description: "",
+    link: "https://project-gallery.com/betwixt-and-between", show: "",
+    artists: ["Jordin Alanis", "Santina Amato", "Katina Bitsicas", "Shelby Corso", "Vanezza Cruz", "Marilla Cubberley", "Julia Curran", "Daisy Diamond", "Jan Dickey", "John Brendan Guinan", "Zach Hill", "Peishan Huang", "Doi Kim", "Cydney M Lewis", "Michael Saunders", "Ayshia Taskin", "Andy Van Dinh", "Til Will", "Hayley Youngs", "Daniela Lucato", "Farrell Mason-Brown", "Casey Neumann", "Michelle Paterok", "Ophélie Paris", "Katrina Slavik", "Assunta Saulle"]
+  },
+  "unfolding-pattern": {
+    kind: "two-person exhibition", title: "Unfolding Pattern: Saloni Shah and Tiantian Lou", year: "2022", dates: "10.01.2022 – 11.30.2022", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/unfolding-pattern", show: "",
+    artists: []
+  },
+  "new-light": {
+    kind: "group exhibition", title: "New Light", year: "2022", dates: "07.07.2022 – 08.31.2022", note: "curated by Mills Brown",
+    image: "", description: "",
+    link: "https://project-gallery.com/new-light", show: "",
+    artists: ["Andrea Bagdon", "MK Bailey", "Sarah Baldwin", "Asha Elana Casey", "Mandy Cooper", "Khadija Jahmila", "Katrina Jurjans", "Isabel Manalo", "Sarah Norman", "Jessica Rubin", "Julie-Ann Simpson", "Salomé Wu"]
+  },
+  "wet-dream": {
+    kind: "group exhibition", title: "wet dream", year: "2022", dates: "06.15.2022 – 07.15.2022", note: "curated by Libbi Ponce",
+    image: "", description: "",
+    link: "https://project-gallery.com/wet-dream", show: "",
+    artists: ["Rebecca Arp", "Basak Kilicbeyli", "Haley Darya Parsa", "Srishti Dass", "Yuquan Duan", "JB Fry", "Eriko Hattori", "Tiffany Heng Hui Lee", "Chris Horner", "Chris LaGow", "Marianne L Walker", "Moss YLOC"]
+  },
+  "syncretic": {
+    kind: "group exhibition", title: "Syncretic: Religion and Ritual in Diaspora", year: "2022", dates: "05.02.2022 – 06.30.2022", note: "curated by Dante Migone-Ojeda",
+    image: "", description: "",
+    link: "https://project-gallery.com/syncretic", show: "",
+    artists: ["Priscilla Aleman", "Ruhee Maknojia", "Dante Migone-Ojeda", "Shani Strand", "A young Yu"]
+  },
+  "splinters": {
+    kind: "group exhibition", title: "Splinters in the ongoing normal", year: "2022", dates: "03.15.2022 – 04.15.2022", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/splinters-in-the-ongoing-normal", show: "",
+    artists: ["Aurora Abzug", "Louisa Armbrust", "Julia Baroni", "Emily Bartolone", "Katina Bitsicas", "Sunny Moxin Chen", "Annie Chen Ziyao", "Kelly Chuning", "Larkin Cook", "Ana Maria Farina", "Robyn A. Frank", "Pauline Galiana", "Kristi Gallup", "Sara Hess", "Megan Adams Irving", "Bonam Kim", "Christine Lee", "Em Miller", "Di Miranda", "Judith Mullen", "Aaron Nemec", "Megan Nugroho", "Ami Park", "Lily Prince", "PlantBotGenetics", "Abby Robinson", "Hulievych Serhii", "Malu Tan", "Siyuan Tan", "Theo Trotter", "Curtis Widem", "William Glaser Wilson", "Lizzie Zelter"]
+  },
+  "erika-shiba": {
+    kind: "solo exhibition", title: "Mentalscapes: Erika Shiba", year: "2022", dates: "03.03.2022 – 04.29.2022", note: "",
+    image: "", description: "",
+    link: "https://project-gallery.com/erika-shiba", show: "",
+    artists: []
+  },
+  "we-are-still-in-eden": {
+    kind: "group exhibition", title: "We Are Still in Eden", year: "2022", dates: "01.07.2022 – 02.28.2022", note: "curated by KellyAnn Monaghan",
+    image: "", description: "",
+    link: "https://project-gallery.com/we-are-still-in-eden", show: "",
+    artists: ["Morgan Adler", "Anne Canfield", "Laura Colomb", "Yun-Fei Ji", "Nicola López", "Laini Nemett", "Sarah Roche", "Hiro Sakaguchi", "Laura Von Rosk", "Virginia Wagner"]
+  },
+  "if-fluid-was-a-song": {
+    kind: "group exhibition", title: "If fluid was a song…", year: "2022", dates: "12.15.2021 – 01.15.2022", note: "curated by Adama Delphine Fawundu",
+    image: "", description: "",
+    link: "https://project-gallery.com/if-fluid-was-a-song", show: "",
+    artists: ["Nouran Husain Alhazmi", "Leslie Anne", "Paul Ayihawu", "Frank Boyce", "Kyle Choy", "Lisa A Fanning", "Jessica Parker Foley", "Katerina Ganchak", "Vinay Hira", "Ruth Jeyaveeran", "Fei Ji", "Saskia Kahn", "Lena Krashevka", "C. Pazia Mannella", "Ashley Mclean", "Aliyah Mickens", "James Morton", "Chantal Powell", "Phoenix Robles", "Cyle Warner"]
+  },
+  "time-wont-tell": {
+    kind: "group exhibition", title: "Time Won’t Tell", year: "2021", dates: "11.01.2021 – 12.30.2021", note: "curated by Farah Mohammad",
+    image: "", description: "",
+    link: "https://project-gallery.com/time-wont-tell", show: "",
+    artists: ["Jovita Alvares", "Ivana Carman", "Kevin Claiborne", "Noga Cohen", "Takuji Hamanaka", "Melissa Joseph", "Lucy Kim", "Ruhee Maknojia", "Cheryl Mukherji", "Luján Perez", "Hafsa Riaz", "Keli Safia Maksud", "Shahzia Sikander (LNCPS)"]
+  },
+  "spliced-energy": {
+    kind: "group exhibition", title: "Spliced Energy", year: "2021", dates: "09.01.2021 – 10.30.2021", note: "curated by Karen Fitzgerald",
+    image: "", description: "",
+    link: "https://project-gallery.com/spliced-energy", show: "",
+    artists: ["Deborah Barlow", "Daniel Berlin (Van Deb Editions)", "Ken Buhler (Van Deb Editions)", "Michael Dal Cerro", "Nancy Cohen (Van Deb Editions)", "Patricia Dahlman", "Caroline Golden", "Rachel Goldsmith", "Larry Rushing", "Kandi Spindler", "Priscilla Stadler", "Kathleen Velo", "Natalie Woodson", "Dudley Zopp", "Orestes Gonzalez", "Hannah Kerin", "Susan Knight", "Mahnoor Nasir Khan", "Saroj Kumar", "Mary Pinto", "Eleanor Rahim", "Winn Rea"]
+  },
+  "transcendental-states": {
+    kind: "group exhibition", title: "Transcendental States", year: "2021", dates: "09.15.2021 – 10.15.2021", note: "juried by Adam Liam Rose",
+    image: "", description: "",
+    link: "https://project-gallery.com/transcendental-states", show: "",
+    artists: ["Elliot Avis", "Loren Eiferman", "Jeong Hur", "Kieren Jeane", "Sidney Mullis", "Nola Parker", "Kelsey Skordal", "Chelsea Wrightson"]
+  },
+  "illuminated": {
+    kind: "group exhibition", title: "Illuminated", year: "2021", dates: "07.09.2021 – 08.30.2021", note: "curated by Trinity Lester and Cary Hulbert",
+    image: "", description: "",
+    link: "https://project-gallery.com/illuminated", show: "",
+    artists: ["Alina Birkner", "Isabel Cavenecia", "Jeffrey Dell", "Megan Foster", "Gyun Hur", "Seo Kim", "Lucy Lord Campana", "Jasmine Murrell", "Robert Rauschenberg (ULAE)", "Elizabeth Shull", "Sarah Sze (LNCPS)", "Catalina Viejo Lopez de Roda", "Paula Wilson"]
+  },
+  "people-places-things": {
+    kind: "group exhibition", title: "People Places Things", year: "2021", dates: "06.15.2021 – 07.15.2021", note: "juried by Samantha Rippner",
+    image: "", description: "",
+    link: "https://project-gallery.com/people-places-things", show: "",
+    artists: ["Adina Andrus", "Aharon B. Cohen", "Alex Hutton", "Alexandra Chiou", "Alexis Hill", "Anna Sorokina", "Ashley Houghton", "Bridey McGlynn", "Dalila Sanabria", "Danqi Cai", "Dante Migone-Ojeda", "David Murgio", "Deborah Druick", "Diane Pribojan", "Elizabeth Riley", "Ellen Weider", "Fábián Emőke", "Gary Cruz", "Morgan Rose Free", "Naho Taruishi", "Omar Reyna", "Rayden Lawrence", "Roberto Jackson Harrington", "Vy Trịnh", "William Glaser Wilson", "Hannah Duggan", "Heather Drayzen", "Heeseung Nam", "Hui Tian", "J Myszka Lewis", "Jennifer Joanou", "Julia Forrest", "Lee Miller", "Mike Dowley"]
+  },
+  "the-alternative-states": {
+    kind: "group exhibition", title: "The Alternative States", year: "2021", dates: "05.03.2021 – 06.30.2021", note: "curated by Arina Novak",
+    image: "", description: "",
+    link: "https://project-gallery.com/the-alternative-states", show: "",
+    artists: ["Amy Bravo", "Cecily Brown (LNCPS)", "Kirill Burygin", "Daria Denisova", "Alisa Gvozdeva", "Luis Gutierrez", "Eric Kogan", "Erica Mao", "Brittany Miller", "Lucía Rodríguez", "Alina Vinogradova", "Alexey Yakovlev", "Sofia Yalalova", "Marsel Yalalov", "Yuri Yuan"]
+  },
+  "multitudes": {
+    kind: "group exhibition", title: "Multitudes", year: "2021", dates: "03.01.2021 – 04.30.2021", note: "curated by Jade Hoyer",
+    image: "", description: "",
+    link: "https://project-gallery.com/multitudes", show: "",
+    artists: ["Paloma Barhaugh-Bordas", "Julie Buffalohead (Highpoint Editions)", "Andrea Carlson (Highpoint Editions)", "Aaron Coleman", "Zachary Carlisle Davidson", "Ellen Gallagher (Two Palms)", "Toba Khedoori (Gemini G.E.L.)", "Alison Saar (Tandem Press)", "Haley Takahashi"]
+  },
+  "eternal-flame": {
+    kind: "group exhibition", title: "Eternal Flame", year: "2021", dates: "01.01.2021 – 02.28.2021", note: "curated by Cara Lynch",
+    image: "", description: "",
+    link: "https://project-gallery.com/eternal-flame", show: "",
+    artists: ["Lauren Skelly Bailey", "Rachel M Barron", "Valeria Divinorum & Flavia Bertorello", "William Cordova (LNCPS)", "Joanna Cortez", "Rosemarie Fiore", "Carson Fox", "Josephine Halvorson", "Juan Hinojosa", "Sandy Williams IV", "Susanna Koetter", "Dante Migone-Ojeda", "Kellyann Monaghan", "Steve Reinke", "Rachel Stern"]
+  },
+  "in-the-cool-of-the-evening": {
+    kind: "group exhibition", title: "In the Cool of the Evening", year: "2020", dates: "10.30.2020 – 12.30.2020", note: "curated by Cary Hulbert and Trinity Lester",
+    image: "", description: "",
+    link: "https://project-gallery.com/in-the-cool-of-the-evening", show: "",
+    artists: ["Nathan Catlin", "Trenton Doyle Hancock", "Cara Lynch", "Erica Mao", "Lina Puerta", "Jennifer Schmidt", "Kiki Smith", "Craig Zammiello"]
   }
 };
 
@@ -242,7 +442,7 @@ const TICKER = [
 ];
 
 // THE ARCHIVE LIST under "exhibitions": card keys, newest first.
-const ARCHIVE_LIST = ["tdreade"];
+const ARCHIVE_LIST = ["tdreade", "ryker-woodward", "gitte-maria-moller", "lumierebelge", "tao-lin", "person-place-thing", "chaeri-kim", "grace-nkem", "nutsa-gogaladze", "artist-curator", "ara-hao", "inimitable", "filip-lav", "hearts-of-palm", "neurosis", "first-note", "betwixt-and-between", "unfolding-pattern", "new-light", "wet-dream", "syncretic", "splinters", "erika-shiba", "we-are-still-in-eden", "if-fluid-was-a-song", "time-wont-tell", "spliced-energy", "transcendental-states", "illuminated", "people-places-things", "the-alternative-states", "multitudes", "eternal-flame", "in-the-cool-of-the-evening"];
 
 // NEWSLETTER: offered after someone signs the guest book.
 // Paste the sign-up form address from your newsletter service here when you have one.
