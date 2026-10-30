@@ -124,6 +124,10 @@ details .detail-body { font-size: 13px; line-height: 1.55; padding: 10px 0 14px;
 .caret { display: inline-block; width: 1px; height: 0.95em; background: var(--ink); margin-left: 2px; vertical-align: -0.1em; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* grant */
+.grant-form { max-width: 680px; margin-top: 24px; }
+.grant-form iframe { width: 100%; border: 0; min-height: 600px; }
+
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
 footer a:hover { text-shadow: var(--glow); }
@@ -220,8 +224,9 @@ footer a:hover { text-shadow: var(--glow); }
 
   <!-- GRANT -->
   <section class="view" id="view-grant">
-    <h1 class="page-title">artist grant</h1>
-    <p class="construction">under construction</p>
+    <h1 class="page-title" id="grant-title">artist grant</h1>
+    <div class="prose" id="grant-intro"></div>
+    <div id="grant-form" class="grant-form"></div>
   </section>
 
   <!-- ABOUT -->
@@ -262,102 +267,8 @@ footer a:hover { text-shadow: var(--glow); }
   <span>© project gallery</span>
 </footer>
 
+<script src="content.js"></script>
 <script>
-/* ======================================================
-   CONTENT — edit the words between the quote marks.
-   ====================================================== */
-
-const SITE = {
-  email: "trinity@project-gallery.com",
-  instagramIcon: "images/instagram.png"   // put the icon file in the images folder with this name
-};
-
-// Which home page to use: "cloud" (floating images) or "featured" (current show + one image)
-const HOME_STYLE = "cloud";
-
-// The image cloud. One line per picture. "show" is the exhibition it opens (from SHOWS below).
-// Later, swap these for one image from each past show.
-const CLOUD = [
-  { image: "images/mike-nudelman/see-through.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/lonesome-and-empty.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/apparent.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/zipped.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/recess.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/goes-the-other-way.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/make-me-a-moon-23.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/understanding-the-laws-that-the-line-of-their-mysterious-orbits-obeyed-2.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/dusky-dolphin.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/untitled-7.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/anything-but-a-giraffe.jpg", show: "mike-nudelman" },
-  { image: "images/mike-nudelman/spit.jpg", show: "mike-nudelman" }
-];
-
-// The featured show on the home page (and top of exhibitions).
-const CURRENT = {
-  title: "Mike Nudelman: Moving",
-  dates: "06.12.2026 ● 07.19.2026",
-  buttonText: "enter exhibition",
-  link: "#mike-nudelman",                   // where the button goes
-  image: "images/mike-nudelman/see-through.jpg"  // the picture on the home page
-};
-
-
-// Exhibition pages. Each one opens at its own address, e.g. #mike-nudelman.
-const SHOWS = {
-  "mike-nudelman": {
-    title: "Mike Nudelman: Moving",
-    artist: "Mike Nudelman",
-    dates: "06.12.2026 ● 07.19.2026",
-    lede: "Moving is a solo exhibition featuring 12 works.",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    bio: "Mike Nudelman (b. 1985, Smithtown, New York) currently lives and works in Santa Fe, New Mexico. He received a BFA in Printmaking from Cornell University and an MFA in Painting & Drawing from the School of the Art Institute of Chicago. His work has been shown in solo exhibitions at Fortnight Institute (New York, NY), 5. Gallery (Santa Fe, NM), and Thomas Robertello Gallery (Chicago, IL), and in group exhibitions at Geoffrey Young Gallery (Great Barrington, MA), SPRING/BREAK Art Show (New York, NY), Good Naked Gallery (New York, NY), Hyde Park Art Center (Chicago, IL), Devening Projects + Editions (Chicago, IL), The Valley (Taos, NM), and Smoke the Moon (Santa Fe, NM), among others. He recently editioned two lithographs with the Tamarind Institute (Albuquerque, NM).",
-    statement: "Working with familiar materials, Nudelman transforms the recognizable into the unexpected. Like the luminous pixels of a digital screen, his intricate ballpoint strokes simultaneously mask and reveal what enigmatic sights lie beyond the paper's surface. For more than a decade, Nudelman’s work has explored the interplay of illusion, time, scale, and mediation, using sublime landscapes as a lens through which to examine the ways we perceive and construct reality. Ultimately, his drawings resist immediate comprehension and invite closer inspection.",
-    buttons: [
-      { text: "press release", link: "https://project-gallery.com/s/Mike-Nudelman-PR.pdf" },
-      { text: "price list",    link: "https://project-gallery.com/s/Mike-Nudelman-Image-List.pdf" },
-      { text: "social media",  link: "https://www.instagram.com/mikenudelman/" }
-    ],
-    // One line per artwork: title, year, medium, size. "image" is the file in your images folder.
-    works: [
-      { title: "See Through", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
-        image: "images/mike-nudelman/see-through.jpg", ratio: "1200/927" },
-      { title: "Lonesome and Empty", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
-        image: "images/mike-nudelman/lonesome-and-empty.jpg", ratio: "1200/927" },
-      { title: "Apparent", year: "", medium: "Ballpoint pen on paper", size: "5.5 x 4.5 in (13.8 × 11.4 cm)",
-        image: "images/mike-nudelman/apparent.jpg", ratio: "1200/982" },
-      { title: "Zipped", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
-        image: "images/mike-nudelman/zipped.jpg", ratio: "1200/927" },
-      { title: "Recess", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
-        image: "images/mike-nudelman/recess.jpg", ratio: "1200/927" },
-      { title: "Goes the Other Way", year: "", medium: "Ballpoint pen on paper", size: "7 x 5 in (17.8 × 12.7 cm)",
-        image: "images/mike-nudelman/goes-the-other-way.jpg", ratio: "1200/857" },
-      { title: "Make Me a Moon 23", year: "", medium: "Ballpoint pen on paper", size: "3 x 2 in (7.6 × 5 cm)",
-        image: "images/mike-nudelman/make-me-a-moon-23.jpg", ratio: "1200/800" },
-      { title: "Understanding the Laws that the Line of their Mysterious Orbits Obeyed 2", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
-        image: "images/mike-nudelman/understanding-the-laws-that-the-line-of-their-mysterious-orbits-obeyed-2.jpg", ratio: "1200/927" },
-      { title: "Dusky Dolphin", year: "", medium: "Ballpoint pen on paper", size: "5 x 4.25 in (12.7 × 10.8 cm)",
-        image: "images/mike-nudelman/dusky-dolphin.jpg", ratio: "1200/1020" },
-      { title: "Untitled 7", year: "", medium: "Ballpoint pen on paper", size: "5.5 x 4 in (13.9 × 10.2 cm)",
-        image: "images/mike-nudelman/untitled-7.jpg", ratio: "1200/871" },
-      { title: "Anything But a Giraffe", year: "", medium: "Ballpoint pen on paper", size: "4.1 x 3.9 in (10.5 × 9.9 cm)",
-        image: "images/mike-nudelman/anything-but-a-giraffe.jpg", ratio: "1200/1124" },
-      { title: "Spit", year: "", medium: "Ballpoint pen on paper", size: "5.5 x 5.5 in (13.9 × 13.9 cm)",
-        image: "images/mike-nudelman/spit.jpg", ratio: "1200/1200" }
-    ]
-  }
-};
-
-// Past shows. Newest year first.
-const PAST_EXHIBITIONS = [
-  // { year: 2025, title: "TD Reade: cancel my prayer", dates: "10.05.2025 – 11.05.2025" },
-];
-
-// Artist archive, like a spreadsheet: year | show | artist | instagram handle (no @)
-const ARTISTS = [
-  // { year: 2025, show: "TD Reade: cancel my prayer", artist: "TD Reade", instagram: "" },
-];
-
-/* ====================================================== */
 
 const UC = '<p class="construction">under construction</p>';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -481,8 +392,7 @@ function buildCloud() {
     const phi = i * Math.PI * (3 - Math.sqrt(5));
     const b = document.createElement("button");
     b.className = "cloud-item";
-    const sh = SHOWS[c.show] || {};
-    b.setAttribute("aria-label", sh.title || "exhibition");
+    b.setAttribute("aria-label", c.title || "exhibition");
     const img = new Image(); img.src = c.image; img.alt = "";
     b.appendChild(img);
     b.addEventListener("mouseenter", () => { target = 0.15; hideHint(); });
@@ -543,14 +453,15 @@ function hideHint() { document.getElementById("cloud-hint").classList.add("gone"
 
 const backdrop = document.getElementById("card-backdrop");
 function openCard(c) {
-  const sh = SHOWS[c.show] || {};
   document.getElementById("card-img").src = c.image;
-  document.getElementById("card-img").alt = sh.title || "";
-  document.getElementById("card-title").textContent = sh.title || "";
-  document.getElementById("card-dates").textContent = sh.dates || "";
-  document.getElementById("card-desc").textContent = sh.description || sh.lede || "";
+  document.getElementById("card-img").alt = c.title || "";
+  document.getElementById("card-title").textContent = c.title || "";
+  document.getElementById("card-dates").textContent = c.dates || "";
+  document.getElementById("card-desc").textContent = c.description || "";
   const enter = document.getElementById("card-enter");
-  enter.href = "#" + c.show;
+  enter.hidden = !c.link;
+  enter.href = c.link || "#";
+  if (/^https?:/.test(c.link || "")) { enter.target = "_blank"; enter.rel = "noopener"; } else { enter.removeAttribute("target"); }
   hideHint(); target = 0;
   backdrop.classList.add("open");
   requestAnimationFrame(() => backdrop.classList.add("shown"));
@@ -616,6 +527,21 @@ document.querySelectorAll("nav > a[data-view]").forEach(a => {
 });
 let lastView = null;
 
+/* grant page */
+function renderGrant() {
+  document.getElementById("grant-title").textContent = GRANT.title || "artist grant";
+  const intro = document.getElementById("grant-intro");
+  intro.innerHTML = GRANT.intro ? `<p>${esc(GRANT.intro)}</p>` : "";
+  const box = document.getElementById("grant-form");
+  if (!GRANT.tallyFormId) { box.innerHTML = UC; return; }
+  const id = encodeURIComponent(GRANT.tallyFormId.trim());
+  box.innerHTML = `<iframe data-tally-src="https://tally.so/embed/${id}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" title="${esc(GRANT.title || "artist grant")} application"></iframe>`;
+  const sc = document.createElement("script");
+  sc.src = "https://tally.so/widgets/embed.js";
+  sc.onload = () => { if (window.Tally) Tally.loadEmbeds(); };
+  document.body.appendChild(sc);
+}
+
 /* routing */
 const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "contact"];
 const header = document.getElementById("top");
@@ -647,7 +573,7 @@ window.addEventListener("hashchange", show);
 
 document.getElementById("home-cloud").hidden = HOME_STYLE !== "cloud";
 document.getElementById("home-featured").hidden = HOME_STYLE === "cloud";
-renderSite(); renderCurrent(); renderExArchive(); renderArtists(); buildCloud(); show();
+renderSite(); renderCurrent(); renderExArchive(); renderArtists(); renderGrant(); buildCloud(); show();
 </script>
 </body>
 </html>
