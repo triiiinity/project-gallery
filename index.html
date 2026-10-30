@@ -90,6 +90,7 @@ summary:hover { text-shadow: var(--glow); }
 summary::before { content: "+"; font-weight: 300; }
 details[open] summary::before { content: "−"; }
 details .detail-body { font-size: 13px; line-height: 1.55; padding: 10px 0 14px; }
+details .detail-body p { margin: 0 0 10px; }
 .ex-buttons { display: flex; flex-direction: column; gap: 6px; width: 180px; }
 .ex-buttons .enter { padding: 4px 12px; font-size: 11px; display: block; }
 .works { margin-top: clamp(120px, 18vh, 200px); margin-bottom: clamp(120px, 20vh, 220px); display: grid; gap: clamp(180px, 30vh, 320px); }
@@ -100,7 +101,15 @@ details .detail-body { font-size: 13px; line-height: 1.55; padding: 10px 0 14px;
 .work.center .work-caption, .pair .work-caption { text-align: left; margin-top: 14px; }
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: end; padding: 0 clamp(0px, 4vw, 64px); }
 .pair .work { display: block; }
+.work-image { position: relative; }
 .work-image img { width: 100%; display: block; cursor: zoom-in; }
+/* detail photos: small circles that rise up when you hover a work */
+.bubbles { position: absolute; left: 12px; bottom: 12px; display: flex; gap: 8px; }
+.bubble { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--bg); padding: 0; cursor: zoom-in; background-size: cover; background-position: center; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18); opacity: 0; transform: translateY(8px) scale(.85); transition: opacity .3s, transform .3s, box-shadow .2s; }
+.bubble:nth-child(2) { transition-delay: .04s; } .bubble:nth-child(3) { transition-delay: .08s; } .bubble:nth-child(4) { transition-delay: .12s; } .bubble:nth-child(5) { transition-delay: .16s; } .bubble:nth-child(6) { transition-delay: .2s; }
+.work-image:hover .bubble, .bubble:focus-visible { opacity: 1; transform: none; }
+.bubble:hover { box-shadow: 0 0 14px 2px rgba(0, 0, 0, 0.35); }
+@media (hover: none) { .bubble { opacity: 1; transform: none; } }
 .work-image .placeholder { width: 100%; }
 .work-caption { text-align: right; font-size: 13px; line-height: 1.5; }
 .work-caption em, .lb-caption em { font-style: italic; }
@@ -139,8 +148,8 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 @keyframes arrive { from { opacity: 0; transform: scale(.9); filter: blur(4px); } 60% { filter: none; } to { opacity: 1; transform: none; filter: none; } }
 
 /* film strip at the top of an exhibition */
-.strip { display: flex; gap: 12px; align-items: flex-end; margin-top: 40px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 6px; }
-.strip a { display: block; flex: 0 0 auto; height: clamp(84px, 8.5vw, 116px); transition: opacity .2s; }
+.strip { display: flex; gap: 14px; align-items: flex-end; margin-top: 40px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 6px; }
+.strip a { display: block; flex: 0 0 auto; height: clamp(150px, 34vh, 380px); transition: opacity .2s; }
 .strip img { height: 100%; width: auto; }
 .strip a:hover { opacity: .75; }
 .strip img { display: block; }
@@ -158,6 +167,12 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .lb-close { top: 14px; right: 18px; font-size: 24px; }
 .lb-prev, .lb-next { top: 50%; transform: translateY(-50%); font-size: 30px; padding: 12px; }
 .lb-prev { left: 6px; } .lb-next { right: 6px; }
+
+/* page previews under the menu */
+.nav-preview { position: fixed; z-index: 40; width: 260px; background: var(--bg); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14); pointer-events: none; opacity: 0; transform: translateY(-4px); transition: opacity .2s, transform .2s; }
+.nav-preview.on { opacity: 1; transform: none; }
+.nav-preview img { width: 100%; display: block; }
+@media (hover: none) { .nav-preview { display: none; } }
 
 /* typed logo on home */
 .caret { display: inline-block; width: 1px; height: 0.95em; background: var(--ink); margin-left: 2px; vertical-align: -0.1em; animation: blink 1s steps(1) infinite; }
@@ -377,6 +392,8 @@ footer a:hover { text-shadow: var(--glow); }
   <p class="lb-caption" id="lb-caption"></p>
 </div>
 
+<div class="nav-preview" id="nav-preview" aria-hidden="true"><img alt=""></div>
+
 <footer>
   <a href="mailto:trinity@project-gallery.com" id="footer-email"></a>
   <span>© project gallery</span>
@@ -462,8 +479,9 @@ function renderShow(key) {
   const sh = SHOWS[key];
   document.getElementById("show-title").textContent = sh.title;
   document.getElementById("show-lede").textContent = sh.lede;
-  document.getElementById("show-bio").textContent = sh.bio || "artist bio coming soon";
-  document.getElementById("show-statement").textContent = sh.statement || "artist statement coming soon";
+  const paras = t => String(t).split(/\n\s*\n/).map(x => `<p>${esc(x.trim())}</p>`).join("");
+  document.getElementById("show-bio").innerHTML = paras(sh.bio || "artist bio coming soon");
+  document.getElementById("show-statement").innerHTML = paras(sh.statement || "artist statement coming soon");
   document.querySelectorAll("#view-show details").forEach(d => d.open = false);
   document.getElementById("show-buttons").innerHTML = sh.buttons.map(b =>
     `<a class="enter" href="${esc(b.link)}" target="_blank" rel="noopener">${esc(b.text)}</a>`).join("");
@@ -484,20 +502,22 @@ function renderShow(key) {
     const el = document.createElement("article");
     el.className = "work " + (w.layout === "pair" ? "" : (w.layout || "left"));
     el.id = "work-" + i;
-    const subject = `Purchase Inquiry for ${sh.artist}'s drawing ${w.title}`;
-    el.innerHTML = `<div class="work-image"><div class="placeholder" style="aspect-ratio:${w.ratio}">image</div></div>
+    const subject = `Purchase Inquiry for ${sh.artist}'s ${w.title}`;
+    const dets = w.details || [];
+    el.innerHTML = `<div class="work-image"><div class="placeholder" style="aspect-ratio:${w.ratio}">image</div>${dets.length ? `<div class="bubbles" aria-label="detail photos">${dets.map((d, k) => `<button class="bubble" data-d="${k}" aria-label="detail ${k + 1} of ${dets.length}" style="background-image:url('${esc(d)}')"></button>`).join("")}</div>` : ""}</div>
       <div class="work-caption">
         <p><em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}</p>
         <p>${esc(w.medium)}</p>
         <p>${esc(w.size)}</p>
-        <a class="inquire" href="mailto:${SITE.email}?subject=${encodeURIComponent(subject)}">inquire</a><button class="save" data-save="${esc(key + ":" + i)}"></button>
+        ${w.forSale ? `<a class="inquire" href="mailto:${SITE.email}?subject=${encodeURIComponent(subject)}">inquire</a>` : ""}<button class="save" data-save="${esc(key + ":" + i)}"></button>
       </div>`;
     const box = el.querySelector(".work-image");
     const img = new Image();
     img.alt = `${sh.artist}, ${w.title}`;
-    img.onload = () => { box.innerHTML = ""; box.appendChild(img); };
+    img.onload = () => { box.querySelector(".placeholder")?.remove(); box.prepend(img); };
     img.addEventListener("click", () => openLightbox(i));
     loadImage(img, [w.image, w.backup], () => {});
+    box.querySelectorAll(".bubble").forEach(bt => bt.addEventListener("click", () => openDetails(i, Number(bt.dataset.d))));
     return el;
   };
   for (let i = 0; i < sh.works.length; i++) {
@@ -543,7 +563,7 @@ function refreshSaveButtons() {
 function workInfo(saved) {
   const [key, idx] = String(saved.id).split(":");
   const w = SHOWS[key] && SHOWS[key].works[Number(idx)];
-  return w ? { ...saved, ...w, artist: SHOWS[key].artist, showTitle: SHOWS[key].title } : saved;
+  return w ? { ...saved, ...w, artist: SHOWS[key].artist, showTitle: SHOWS[key].title, status: SHOWS[key].status || "past show" } : saved;
 }
 // pick a colour from each saved picture, kept dark enough to read
 const colourCache = {};
@@ -591,7 +611,8 @@ function renderCollection() {
   // tags: types, years, for sale
   const types = ["drawing", "painting", "print", "sculpture"].filter(t => all.some(w => w.type === t));
   const years = [...new Set(all.map(w => w.year).filter(y => /^\d{4}/.test(y || "")))].sort().reverse();
-  const tags = ["all", ...types.map(t => t + "s"), ...years, ...(all.some(w => w.forSale) ? ["for sale"] : [])];
+  const statuses = ["current show", "past show"].filter(t => all.some(w => w.status === t));
+  const tags = ["all", ...types.map(t => t + "s"), ...years, ...statuses, ...(all.some(w => w.forSale) ? ["for sale"] : [])];
   if (!tags.includes(collectionFilter)) collectionFilter = "all";
   tagsEl.innerHTML = tags.map(t => `<button class="tag${t === collectionFilter ? " on" : ""}" data-tag="${esc(t)}">${esc(t)}</button>`).join("");
   Promise.all(all.map(w => pickColour(w.image))).then(cols => {
@@ -600,7 +621,7 @@ function renderCollection() {
   tagsEl.querySelectorAll(".tag").forEach(b => b.addEventListener("click", () => { collectionFilter = b.dataset.tag; renderCollection(); }));
 
   const f = collectionFilter;
-  const list = all.filter(w => f === "all" || w.type + "s" === f || w.year === f || (f === "for sale" && w.forSale));
+  const list = all.filter(w => f === "all" || w.type + "s" === f || w.year === f || w.status === f || (f === "for sale" && w.forSale));
   box.innerHTML = list.map(w => `<div class="c-item">
       <img src="${esc(w.image)}" alt="${esc(w.artist + ", " + w.title)}" data-open="${esc(w.id)}">
       <p>${esc(w.artist)}</p>
@@ -617,25 +638,36 @@ function renderCollection() {
 }
 
 /* zoom view: click a work to see it large; click again to zoom into the detail */
-let currentWorks = [], lbIndex = 0;
+let currentWorks = [], lbItems = [], lbIndex = 0;
 const lb = document.getElementById("lightbox"), lbStage = document.getElementById("lb-stage"), lbImg = document.getElementById("lb-img");
+const capLine = w => `<em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}`;
 function lbShow(i) {
-  lbIndex = (i + currentWorks.length) % currentWorks.length;
-  const w = currentWorks[lbIndex];
+  lbIndex = (i + lbItems.length) % lbItems.length;
+  const it = lbItems[lbIndex], w = it.work;
   lbStage.classList.remove("zoomed");
-  lbImg.src = w.image;
-  lbImg.alt = `${w.artist}, ${w.title}`;
-  document.getElementById("lb-caption").innerHTML =
-    `<em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""} :: ${esc(w.medium)} :: ${esc(w.size)}<button class="save" data-save="${esc(w.id)}"></button>`;
+  lbImg.src = it.image;
+  lbImg.alt = `${w.artist}, ${w.title}${it.detail ? ", detail" : ""}`;
+  document.getElementById("lb-caption").innerHTML = it.detail
+    ? `${capLine(w)} :: detail ${it.detail} of ${it.of}`
+    : `${capLine(w)} :: ${esc(w.medium)} :: ${esc(w.size)}<button class="save" data-save="${esc(w.id)}"></button>`;
   const sb = document.querySelector("#lb-caption .save");
-  sb.addEventListener("click", () => { toggleSaved(w); if (location.hash === "#collection") renderCollection(); refreshSaveButtons(); });
+  if (sb) sb.addEventListener("click", () => { toggleSaved(w); if (location.hash === "#collection") renderCollection(); refreshSaveButtons(); });
   refreshSaveButtons();
 }
-function openLightbox(i) {
-  lbShow(i);
+function openDetails(workIndex, d) {
+  const w = currentWorks[workIndex];
+  const dets = w.details || [];
+  lbItems = [{ image: w.image, work: w }, ...dets.map((src, k) => ({ image: src, work: w, detail: k + 1, of: dets.length }))];
+  lbShow(d + 1); lbOpen();
+}
+function lbOpen() {
   lb.classList.add("open");
   requestAnimationFrame(() => lb.classList.add("shown"));
   document.getElementById("lb-close").focus();
+}
+function openLightbox(i) {
+  lbItems = currentWorks.map(w => ({ image: w.image, work: w }));
+  lbShow(i); lbOpen();
 }
 function closeLightbox() {
   lb.classList.remove("shown");
@@ -889,6 +921,28 @@ document.getElementById("gb-form").addEventListener("submit", e => {
   msg.textContent = "thank you for signing";
   renderGuestbook();
 });
+
+/* hovering a menu item shows a small picture of that page */
+(() => {
+  const pv = document.getElementById("nav-preview"), pvImg = pv.querySelector("img");
+  let t = null;
+  document.querySelectorAll("nav > a[data-view]").forEach(a => {
+    const src = `images/previews/${a.dataset.view}.jpg`;
+    new Image().src = src;                                   // load ahead so it appears instantly
+    a.addEventListener("mouseenter", () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        const r = a.getBoundingClientRect();
+        pvImg.src = src;
+        pv.style.top = (r.bottom + 14) + "px";
+        pv.style.left = Math.min(window.innerWidth - 276, Math.max(16, r.left + r.width / 2 - 130)) + "px";
+        pv.classList.add("on");
+      }, 180);
+    });
+    a.addEventListener("mouseleave", () => { clearTimeout(t); pv.classList.remove("on"); });
+    a.addEventListener("click", () => { clearTimeout(t); pv.classList.remove("on"); });
+  });
+})();
 
 /* routing */
 const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", "contact", "collection"];
