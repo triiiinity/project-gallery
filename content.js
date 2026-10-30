@@ -201,6 +201,11 @@ const EXHIBITIONS_FEATURE = {
 //          swap in your own file (images/...) before Squarespace is turned off.
 //   artists: names for group shows, shown as "including artists ..."
 const SHOW_CARDS = {
+  "white-whale": {
+    kind: "", title: "White Whale", year: "2026", dates: "coming soon", soon: true, note: "",
+    image: "", description: "opening December 2026.",
+    link: "", show: "", artists: []
+  },
   "tdreade": {
     kind: "solo exhibition",
     title: "TD Reade: cancel my prayer",
@@ -443,7 +448,7 @@ const TICKER = [
 ];
 
 // THE ARCHIVE LIST under "exhibitions": card keys, newest first.
-const ARCHIVE_LIST = ["tdreade", "ryker-woodward", "gitte-maria-moller", "lumierebelge", "tao-lin", "person-place-thing", "chaeri-kim", "grace-nkem", "nutsa-gogaladze", "artist-curator", "ara-hao", "inimitable", "filip-lav", "hearts-of-palm", "neurosis", "first-note", "betwixt-and-between", "unfolding-pattern", "new-light", "wet-dream", "syncretic", "splinters", "erika-shiba", "we-are-still-in-eden", "if-fluid-was-a-song", "time-wont-tell", "spliced-energy", "transcendental-states", "illuminated", "people-places-things", "the-alternative-states", "multitudes", "eternal-flame", "in-the-cool-of-the-evening"];
+const ARCHIVE_LIST = ["white-whale", "mike-nudelman", "tdreade", "ryker-woodward", "gitte-maria-moller", "lumierebelge", "tao-lin", "person-place-thing", "chaeri-kim", "grace-nkem", "nutsa-gogaladze", "artist-curator", "ara-hao", "inimitable", "filip-lav", "hearts-of-palm", "neurosis", "first-note", "betwixt-and-between", "unfolding-pattern", "new-light", "wet-dream", "syncretic", "splinters", "erika-shiba", "we-are-still-in-eden", "if-fluid-was-a-song", "time-wont-tell", "spliced-energy", "transcendental-states", "illuminated", "people-places-things", "the-alternative-states", "multitudes", "eternal-flame", "in-the-cool-of-the-evening"];
 
 // NEWSLETTER: offered after someone signs the guest book.
 // Paste the sign-up form address from your newsletter service here when you have one.

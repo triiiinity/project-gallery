@@ -153,11 +153,12 @@ details .detail-body p { margin: 0 0 10px; }
 body.entering .card-backdrop { background: rgba(255, 255, 255, 1); transition: background .95s ease-in; }
 body.entering .card { transform: scale(1.12); opacity: 0; filter: blur(2px); transition: transform .95s cubic-bezier(.5, 0, .75, 0), opacity .9s ease-in, filter .95s ease-in; }
 body.entering main, body.entering footer { opacity: 0; transition: opacity .5s; }
+body.entering.from-page main { transform: scale(1.06); filter: blur(2px); opacity: 0; transform-origin: var(--ex, 50%) var(--ey, 50%); transition: transform .95s cubic-bezier(.5, 0, .75, 0), opacity .9s ease-in, filter .95s ease-in; }
 body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) both; transform-origin: var(--ox, 50%) var(--oy, 40vh); }
 @keyframes arrive { from { opacity: 0; transform: scale(.9); filter: blur(4px); } 60% { filter: none; } to { opacity: 1; transform: none; filter: none; } }
 
 /* film strip at the top of an exhibition */
-.strip { display: flex; gap: 14px; align-items: flex-end; margin-top: 40px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 6px; }
+.strip { display: flex; gap: 14px; align-items: flex-end; margin-top: 40px; overflow: hidden; }
 .strip a { display: block; flex: 0 0 auto; height: clamp(84px, 9vw, 120px); transition: opacity .2s; }
 .strip img { height: 100%; width: auto; }
 .strip a:hover { opacity: .75; }
@@ -181,6 +182,7 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .nav-preview { position: fixed; z-index: 40; width: 260px; background: var(--bg); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14); pointer-events: none; opacity: 0; transform: translateY(-4px); transition: opacity .2s, transform .2s; }
 .nav-preview.on { opacity: 1; transform: none; }
 .nav-preview img { width: 100%; display: block; }
+.nav-preview.small { width: 130px; }
 @media (hover: none) { .nav-preview { display: none; } }
 
 /* typed logo on home */
@@ -263,18 +265,21 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .archive-wrap { margin-top: clamp(72px, 10vh, 120px); }
 /* the heading hangs from a full-width line */
 .archive-head { font-size: clamp(22px, 2.4vw, 28px); font-weight: 400; letter-spacing: -0.015em; line-height: .74; margin: 0 calc(var(--gutter) * -1) 28px; padding: 0 var(--gutter); border-bottom: 3px solid var(--ink); border-top: 0; }
+.archive-head span { position: relative; top: 2px; }
 .arch-year { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 26px 0; }
 .arch-year > span { font-size: 19px; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 .arch-items { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px 28px; align-items: start; }
-.arch-item { position: relative; background: var(--bg); border: 0; padding: 14px 40px 18px 0; text-align: left; min-width: 0; overflow-wrap: anywhere; font-family: var(--font); color: var(--ink); cursor: pointer; display: grid; gap: 2px; }
+.arch-item { position: relative; background: var(--bg); border: 0; padding: 14px 0 22px 0; text-align: left; min-width: 0; overflow-wrap: anywhere; font-family: var(--font); color: var(--ink); cursor: pointer; display: grid; gap: 2px; }
 .arch-item .a-title { font-size: 14px; line-height: 1.3; transition: color .2s; }
 .arch-item .a-dates { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .arch-item .a-note { font-size: 11px; color: var(--muted); }
-.arch-item img { position: absolute; bottom: 18px; right: 0; width: 30px; height: 30px; object-fit: cover; transition: box-shadow .25s; }
+.arch-item .a-foot { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; min-height: 30px; }
+.arch-item img { flex: 0 0 auto; width: 30px; height: 30px; object-fit: cover; transition: box-shadow .25s; }
+.arch-item .a-soon { font-size: 12px; color: var(--accent); }
 .arch-item:hover img { box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.3); }
 .arch-item:hover .a-title { color: var(--accent); }
 /* show cards: spotlight image takes most of the card */
-.card.wide { grid-template-columns: 1.25fr 1fr; width: min(1240px, 100%); }
+.card.wide { grid-template-columns: 1.25fr 1fr; width: min(1240px, 100%); column-gap: calc(var(--pad) * 1.6); }
 .card.wide .card-img img { max-height: calc(100vh - 140px); object-fit: contain; object-position: left center; }
 .card-note { margin: -4px 0 10px; font-size: 12px; color: var(--muted); }
 .card-note:empty { display: none; }
@@ -283,8 +288,8 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .card.noimg .card-text { padding-top: 12px; }
 .card-icons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .card-icons:empty { display: none; }
-.card-icons { flex-wrap: nowrap; gap: 5px; }
-.card-icons img { flex: 1 1 0; min-width: 0; max-width: 56px; aspect-ratio: 1; height: auto; object-fit: cover; display: block; }
+.card-icons { flex-wrap: nowrap; gap: 6px; margin-top: 22px; }
+.card-icons img { flex: 1 1 0; min-width: 0; max-width: 40px; aspect-ratio: 1; height: auto; object-fit: cover; display: block; }
 .card-artists { margin: 10px 0 0; font-size: 11px; color: var(--muted); text-align: justify; line-height: 1.5; }
 .card-artists:empty { display: none; }
 
@@ -381,7 +386,7 @@ footer a:hover { color: var(--accent); }
     </div>
     <div class="ticker" id="ticker" aria-label="past exhibitions"><div class="ticker-track" id="ticker-track"></div></div>
     <div class="archive-wrap">
-      <h2 class="archive-head">exhibitions</h2>
+      <h2 class="archive-head"><span>exhibitions</span></h2>
       <div id="ex-archive"></div>
     </div>
   </section>
@@ -579,11 +584,11 @@ function renderExhibitionsPage() {
   // archive list by year
   const byYear = new Map();
   ARCHIVE_LIST.forEach(k => { const c = SHOW_CARDS[k]; if (!c) return; if (!byYear.has(c.year)) byYear.set(c.year, []); byYear.get(c.year).push(k); });
-  const start = k => { const m = /(\d{2})\.(\d{2})\.(\d{4})/.exec(SHOW_CARDS[k].dates || ""); return m ? m[3] + m[1] + m[2] : ""; };
+  const start = k => { if (SHOW_CARDS[k].soon) return "99999999"; const m = /(\d{2})\.(\d{2})\.(\d{4})/.exec(SHOW_CARDS[k].dates || ""); return m ? m[3] + m[1] + m[2] : ""; };
   byYear.forEach(keys => keys.sort((a, b) => start(b).localeCompare(start(a))));
   document.getElementById("ex-archive").innerHTML = [...byYear].sort((a, b) => b[0] - a[0]).map(([y, keys]) =>
     `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${keys.map(k =>
-      `<button class="arch-item" data-card="${esc(k)}">${SHOW_CARDS[k].image ? `<img src="${esc(sized(SHOW_CARDS[k].image, 100))}" alt="" loading="lazy">` : ""}<span class="a-title">${esc(SHOW_CARDS[k].title)}</span><span class="a-dates">${esc(SHOW_CARDS[k].dates)}</span>${SHOW_CARDS[k].note ? `<span class="a-note">${esc(SHOW_CARDS[k].note)}</span>` : ""}</button>`).join("")}</div></div>`).join("");
+      `<button class="arch-item" data-card="${esc(k)}"><span class="a-title">${esc(SHOW_CARDS[k].title)}</span><span class="${SHOW_CARDS[k].soon ? "a-soon" : "a-dates"}">${esc(SHOW_CARDS[k].dates)}</span><span class="a-foot"><span class="a-note">${esc(SHOW_CARDS[k].note || "")}</span>${SHOW_CARDS[k].image ? `<img src="${esc(sized(SHOW_CARDS[k].image, 100))}" alt="" loading="lazy">` : ""}</span></button>`).join("")}</div></div>`).join("");
   document.querySelectorAll("#ex-archive .arch-item").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
 }
 // pictures still hosted on Squarespace can be asked for at a smaller size
@@ -636,6 +641,15 @@ function loadImage(img, srcs, fail) {
   if (list.length) img.src = list[0]; else fail();
 }
 
+// show only the pictures that fit whole on the line
+function fitStrip(strip) {
+  const items = [...strip.children];
+  items.forEach(a => a.hidden = false);
+  const w = strip.clientWidth;
+  items.forEach(a => { if (a.offsetLeft - strip.offsetLeft + a.offsetWidth > w + 1) a.hidden = true; });
+}
+window.addEventListener("resize", () => { const s = document.getElementById("show-strip"); if (s) fitStrip(s); });
+
 function renderShow(key) {
   const sh = SHOWS[key];
   document.getElementById("show-title").textContent = sh.title;
@@ -651,6 +665,8 @@ function renderShow(key) {
   strip.innerHTML = sh.works.map((w, i) => {
     return `<a href="#work-${i}" data-work="${i}" aria-label="${esc(w.title)}"><img src="${esc(w.image)}" alt=""></a>`;
   }).join("");
+  fitStrip(strip);
+  strip.querySelectorAll("img").forEach(im => im.addEventListener("load", () => fitStrip(strip)));
   strip.querySelectorAll("a").forEach(a => a.addEventListener("click", ev => {
     ev.preventDefault();
     const row = document.getElementById("work-" + a.dataset.work);
@@ -962,19 +978,25 @@ function closeCard() {
 }
 document.getElementById("card-close").addEventListener("click", closeCard);
 backdrop.addEventListener("click", e => { if (e.target === backdrop) closeCard(); });
-/* "enter exhibition": the card moves toward you and fades to white, then the show eases in */
-document.getElementById("card-enter").addEventListener("click", e => {
-  const href = e.currentTarget.getAttribute("href");
-  if (!href || !href.startsWith("#") || reduceMotion) { backdrop.classList.remove("shown", "open"); target = 1; return; }
+/* entering a show: whatever you clicked moves toward you and fades to white, then the show eases in.
+   Used for every link into an exhibition page. */
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[href^='#']");
+  if (!a) return;
+  const href = a.getAttribute("href");
+  if (!SHOWS[href.slice(1)]) return;
+  if (reduceMotion) { backdrop.classList.remove("shown", "open"); target = 1; return; }
   e.preventDefault();
-  document.body.classList.add("entering");
+  document.body.classList.add("entering", backdrop.classList.contains("open") ? "from-card" : "from-page");
   const vs = document.getElementById("view-show");
+  document.querySelector("main").style.setProperty("--ex", e.clientX + "px");
+  document.querySelector("main").style.setProperty("--ey", (e.clientY + scrollY) + "px");
   vs.style.setProperty("--ox", e.clientX + "px");
   vs.style.setProperty("--oy", e.clientY + "px");
   setTimeout(() => {
     location.hash = href;
     backdrop.classList.remove("shown", "open");
-    document.body.classList.remove("entering");
+    document.body.classList.remove("entering", "from-card", "from-page");
     document.body.classList.add("arriving");
     target = 1;
     setTimeout(() => document.body.classList.remove("arriving"), 1400);
@@ -1192,10 +1214,11 @@ document.getElementById("ex-archive").addEventListener("mouseover", e => {
   const key = im.closest(".arch-item").dataset.card;
   pvImg.src = sized(SHOW_CARDS[key].image, 500);
   const r = im.getBoundingClientRect();
-  pv.style.top = Math.max(16, r.top - 14 - 260) + "px";
-  pv.style.left = Math.min(window.innerWidth - 276, Math.max(16, r.right - 260)) + "px";
+  pv.classList.add("small");
+  pv.style.top = Math.max(16, r.top - 12 - 150) + "px";
+  pv.style.left = Math.min(window.innerWidth - 146, Math.max(16, r.right - 130)) + "px";
   pv.classList.add("on");
-  im.addEventListener("mouseleave", () => pv.classList.remove("on"), { once: true });
+  im.addEventListener("mouseleave", () => { pv.classList.remove("on"); setTimeout(() => pv.classList.remove("small"), 200); }, { once: true });
 });
 
 /* routing */
