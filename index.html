@@ -27,10 +27,11 @@ a:focus-visible, button:focus-visible { outline: 1px solid var(--ink); outline-o
 /* header */
 header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px var(--gutter); position: relative; }
 .logo { font-size: 23px; letter-spacing: -0.01em; white-space: nowrap; }
-.logo:hover { text-shadow: var(--glow); }
+
 nav { display: flex; align-items: center; gap: 24px; }
 nav a, .plus { font-size: 15px; line-height: 1; transition: text-shadow .2s; }
-nav a:hover, .plus:hover, nav a[aria-current="page"]:hover { text-shadow: var(--glow); }
+.plus:hover, .dropdown a:hover { text-shadow: var(--glow); }
+nav > a.typed-link { display: inline-block; text-align: left; white-space: nowrap; }
 .more { position: relative; display: flex; align-items: center; }
 .plus { background: none; border: 0; padding: 0; font-family: var(--font); font-size: 19px; font-weight: 300; cursor: pointer; color: var(--ink); }
 .dropdown { position: absolute; right: -4px; top: calc(100% + 10px); background: var(--bg); display: none; flex-direction: column; gap: 8px; padding: 4px; z-index: 5; }
@@ -155,6 +156,7 @@ footer a:hover { text-shadow: var(--glow); }
     <a href="#home" data-view="home">home</a>
     <a href="#exhibitions" data-view="exhibitions">exhibitions</a>
     <a href="#artists" data-view="artists">artists</a>
+    <a href="#grant" data-view="grant">grant</a>
     <div class="more" id="more">
       <button class="plus" id="plus" aria-expanded="false" aria-controls="dropdown" aria-label="More pages">+</button>
       <div class="dropdown" id="dropdown">
@@ -214,6 +216,12 @@ footer a:hover { text-shadow: var(--glow); }
   <section class="view" id="view-artists">
     <h1 class="page-title">artist archive</h1>
     <div id="artist-archive"></div>
+  </section>
+
+  <!-- GRANT -->
+  <section class="view" id="view-grant">
+    <h1 class="page-title">artist grant</h1>
+    <p class="construction">under construction</p>
   </section>
 
   <!-- ABOUT -->
@@ -563,34 +571,53 @@ const LOGO = "project gallery";
 let typing = null;
 function typeLogo() {
   const el = document.getElementById("logo-text");
-  clearTimeout(typing);
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = LOGO; return; }
+  if (logoBusy) return;
+  if (reduceMotion) { el.textContent = LOGO; return; }
+  logoBusy = true;
   const caret = '<span class="caret"></span>';
   const show = t => { el.innerHTML = esc(t) + caret; };
-  // the script: type "project", slip an extra "t", pause, backspace it, finish
+  // the script: type "project galleryv", pause, backspace the v, then let the cursor blink a while
   const steps = [];
-  const typeWord = (from, to) => { for (let i = from; i <= to.length; i++) steps.push([to.slice(0, i), 150 + Math.random() * 110]); };
+  const typeTo = (from, word) => { for (let i = from; i <= word.length; i++) steps.push([word.slice(0, i), 150 + Math.random() * 110]); };
   steps.push(["", 1100]);                       // empty, cursor blinking before typing starts
-  typeWord(1, "project");
-  steps.push(["projectt", 160]);                // the typo
-  steps.push(["projectt", 650]);                // notices it
-  steps.push(["project", 260]);                 // backspace
-  steps.push(["project", 350]);
-  typeWord(8, LOGO);
-  steps.push([LOGO, 2200]);                     // cursor keeps blinking at the end
+  typeTo(1, LOGO + "v");
+  steps.push([LOGO + "v", 800]);                // notices the v
+  steps.push([LOGO, 3600]);                     // backspace, then the cursor keeps blinking
   let k = 0;
   const run = () => {
-    if (k >= steps.length) { el.textContent = LOGO; return; }
+    if (k >= steps.length) { el.textContent = LOGO; logoBusy = false; return; }
     const [text, wait] = steps[k++];
     show(text);
     typing = setTimeout(run, wait);
   };
   run();
 }
+let logoBusy = false;
+document.querySelector(".logo").addEventListener("mouseenter", typeLogo);
+
+/* top menu words type themselves out on hover */
+document.querySelectorAll("nav > a[data-view]").forEach(a => {
+  const word = a.textContent;
+  a.classList.add("typed-link");
+  a.setAttribute("aria-label", word);
+  let busy = false;
+  a.addEventListener("mouseenter", () => {
+    if (busy || reduceMotion) return;
+    busy = true;
+    a.style.width = a.offsetWidth + "px";       // keep the menu from shifting while it types
+    let i = 0;
+    const step = () => {
+      a.innerHTML = esc(word.slice(0, i)) + '<span class="caret"></span>';
+      if (i < word.length) { i++; setTimeout(step, 55 + Math.random() * 45); }
+      else setTimeout(() => { a.textContent = word; a.style.width = ""; busy = false; }, 700);
+    };
+    step();
+  });
+});
 let lastView = null;
 
 /* routing */
-const VIEWS = ["home", "exhibitions", "artists", "about", "contact"];
+const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "contact"];
 const header = document.getElementById("top");
 const more = document.getElementById("more");
 const plus = document.getElementById("plus");
