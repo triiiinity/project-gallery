@@ -256,14 +256,18 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .ticker { overflow-x: auto; } .ticker-track { animation: none; } }
 .archive-wrap { margin-top: clamp(72px, 10vh, 120px); }
-.archive-head { font-size: 13px; }
-.arch-year { display: grid; grid-template-columns: 90px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid #e6e6e6; }
-.arch-year > span { font-size: 13px; font-variant-numeric: tabular-nums; }
-.arch-items { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px 24px; align-items: start; }
-.arch-item { background: none; border: 0; padding: 0; text-align: left; min-width: 0; overflow-wrap: anywhere; font-family: var(--font); color: var(--ink); cursor: pointer; display: grid; gap: 2px; }
-.arch-item span:first-child { font-size: 14px; line-height: 1.3; transition: text-shadow .2s; }
-.arch-item span:last-child { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.arch-item:hover span:first-child { text-shadow: var(--glow); }
+/* the heading hangs from a full-width line */
+.archive-head { font-size: clamp(22px, 2.4vw, 28px); font-weight: 400; letter-spacing: -0.015em; line-height: .78; margin: 0 calc(var(--gutter) * -1) 28px; padding: 0 var(--gutter); border-top: 3px solid var(--ink); border-bottom: 0; }
+.arch-year { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 26px 0; }
+.arch-year > span { font-size: 19px; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.arch-items { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px 28px; align-items: start; }
+.arch-item { position: relative; background: var(--bg); border: 0; padding: 14px 40px 18px 0; text-align: left; min-width: 0; overflow-wrap: anywhere; font-family: var(--font); color: var(--ink); cursor: pointer; display: grid; gap: 2px; }
+.arch-item .a-title { font-size: 14px; line-height: 1.3; transition: text-shadow .2s; }
+.arch-item .a-dates { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.arch-item .a-note { font-size: 11px; color: var(--muted); }
+.arch-item img { position: absolute; top: 14px; right: 0; width: 30px; height: 30px; object-fit: cover; transition: box-shadow .25s; }
+.arch-item:hover img { box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.3); }
+.arch-item:hover .a-title { text-shadow: var(--glow); }
 /* show cards: spotlight image takes most of the card */
 .card.wide { grid-template-columns: 1.45fr 1fr; width: min(1100px, 100%); }
 .card.wide .card-img img { max-height: calc(100vh - 140px); object-fit: contain; object-position: left center; }
@@ -571,14 +575,16 @@ function renderExhibitionsPage() {
   byYear.forEach(keys => keys.sort((a, b) => start(b).localeCompare(start(a))));
   document.getElementById("ex-archive").innerHTML = [...byYear].sort((a, b) => b[0] - a[0]).map(([y, keys]) =>
     `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${keys.map(k =>
-      `<button class="arch-item" data-card="${esc(k)}"><span>${esc(SHOW_CARDS[k].title)}</span><span>${esc(SHOW_CARDS[k].dates)}</span></button>`).join("")}</div></div>`).join("");
+      `<button class="arch-item" data-card="${esc(k)}">${SHOW_CARDS[k].image ? `<img src="${esc(sized(SHOW_CARDS[k].image, 100))}" alt="" loading="lazy">` : ""}<span class="a-title">${esc(SHOW_CARDS[k].title)}</span><span class="a-dates">${esc(SHOW_CARDS[k].dates)}</span>${SHOW_CARDS[k].note ? `<span class="a-note">${esc(SHOW_CARDS[k].note)}</span>` : ""}</button>`).join("")}</div></div>`).join("");
   document.querySelectorAll("#ex-archive .arch-item").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
 }
+// pictures still hosted on Squarespace can be asked for at a smaller size
+function sized(src, w) { return /squarespace-cdn\.com/.test(src) ? src + "?format=" + w + "w" : src; }
 function openShowCard(key) {
   const c = SHOW_CARDS[key]; if (!c) return;
   const sh = SHOWS[c.show];
   openCard({
-    label: c.kind, image: c.image, title: c.title, dates: c.dates, note: c.note, description: c.description, link: c.link,
+    label: c.kind, image: c.image ? sized(c.image, 1500) : "", title: c.title, dates: c.dates, note: c.note, description: c.description, link: c.link,
     wide: true,
     icons: sh ? sh.works.map(w => w.image) : [],
     artists: c.artists || []
