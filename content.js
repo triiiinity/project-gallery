@@ -8,7 +8,7 @@
 const SITE = {
   // where the old Squarespace pages live. Change to "https://archive.project-gallery.com"
   // once the old site has moved to that address.
-  archive: "https://project-gallery.com",
+  archive: "https://archive.project-gallery.com",
   email: "trinity@project-gallery.com",
   instagramIcon: "images/instagram.png"   // put the icon file in the images folder with this name
 };
@@ -65,8 +65,8 @@ const SHOWS = {
     bio: "TD Reade is a self taught artist, in private collections across Europe, USA, South America, and Asia living and working in Melbourne, Australia.",
     statement: "TD Reade’s practice examines the disjunctions that emerge within seemingly ordinary moments, positioning the routine as a site of latent tension. His paintings foreground figures caught within the choreography of social performance, highlighting how engagement is sustained through subtle negotiations of posture, glance, and proximity, gestures that simultaneously express intimacy and reinforce hierarchies. What emerges is not a seamless choreography but a field of tension, where the maintenance of coherence is continually unsettled by the pressures of public visibility, internal sentiment and the shifting evaluation of one’s station.\n\nIn Reade’s work, social interaction is framed less as a transparent exchange than as an ongoing performance that subjects the individual to forms of scrutiny, expectation, and judgment. The familiar setting becomes charged precisely because it reveals the precariousness of belonging: recognition is contingent, and one’s position within the collective can be affirmed or destabilized by the smallest cues. These dynamics foreground the uncertainty of power, showing how authority and deference circulate fluidly through moments that appear otherwise routine.\n\nRather than resolving such tensions, Reade’s compositions sustain them. The works refuse narrative closure, offering instead a space where the visible and the implied coexist. This suspension underscores how interpersonal station is never fixed but must be repeatedly enacted and recalibrated within the collective gaze. Pressures, obligations, and unspoken structures underpin social relations. The tension lies in the balance between genuine connection and the necessity of playing a role. Also sometimes he just does whatever…",
     buttons: [
-      { text: "press release", link: "https://project-gallery.com/s/TD-Reade-PRdocx.pdf" },
-      { text: "price list",    link: "https://project-gallery.com/s/TDReadeImageListdocx-compressed.pdf" },
+      { text: "press release", link: "https://archive.project-gallery.com/s/TD-Reade-PRdocx.pdf" },
+      { text: "price list",    link: "https://archive.project-gallery.com/s/TDReadeImageListdocx-compressed.pdf" },
       { text: "social media",  link: "https://www.instagram.com/tdreade/" }
     ],
     // details: close-up photos for a work. They appear as small circles when you hover the picture.
@@ -120,8 +120,8 @@ const SHOWS = {
     bio: "Mike Nudelman (b. 1985, Smithtown, New York) currently lives and works in Santa Fe, New Mexico. He received a BFA in Printmaking from Cornell University and an MFA in Painting & Drawing from the School of the Art Institute of Chicago. His work has been shown in solo exhibitions at Fortnight Institute (New York, NY), 5. Gallery (Santa Fe, NM), and Thomas Robertello Gallery (Chicago, IL), and in group exhibitions at Geoffrey Young Gallery (Great Barrington, MA), SPRING/BREAK Art Show (New York, NY), Good Naked Gallery (New York, NY), Hyde Park Art Center (Chicago, IL), Devening Projects + Editions (Chicago, IL), The Valley (Taos, NM), and Smoke the Moon (Santa Fe, NM), among others. He recently editioned two lithographs with the Tamarind Institute (Albuquerque, NM).",
     statement: "Working with familiar materials, Nudelman transforms the recognizable into the unexpected. Like the luminous pixels of a digital screen, his intricate ballpoint strokes simultaneously mask and reveal what enigmatic sights lie beyond the paper's surface. For more than a decade, Nudelman’s work has explored the interplay of illusion, time, scale, and mediation, using sublime landscapes as a lens through which to examine the ways we perceive and construct reality. Ultimately, his drawings resist immediate comprehension and invite closer inspection.",
     buttons: [
-      { text: "press release", link: "https://project-gallery.com/s/Mike-Nudelman-PR.pdf" },
-      { text: "price list",    link: "https://project-gallery.com/s/Mike-Nudelman-Image-List.pdf" },
+      { text: "press release", link: "https://archive.project-gallery.com/s/Mike-Nudelman-PR.pdf" },
+      { text: "price list",    link: "https://archive.project-gallery.com/s/Mike-Nudelman-Image-List.pdf" },
       { text: "social media",  link: "https://www.instagram.com/mikenudelman/" }
     ],
     // One block per artwork, in the order they appear on the page.

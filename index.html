@@ -1623,7 +1623,12 @@ window.addEventListener("popstate", show);
   if (!path || routeName("/" + path)) return;
   const archive = SITE.archive.replace(/\/$/, "");
   const isOld = path.startsWith("s/") || Object.values(SHOW_CARDS).some(c => c.link === "archive:/" + path);
-  if (isOld && new URL(archive).host !== location.host) location.replace(archive + "/" + path);
+  // guard: if the archive sends people straight back here, stop instead of bouncing between the two
+  let recent = 0; try { recent = Number(sessionStorage.getItem("pg-bounce:" + path)) || 0; } catch (e) {}
+  if (isOld && new URL(archive).host !== location.host && Date.now() - recent > 15000) {
+    try { sessionStorage.setItem("pg-bounce:" + path, String(Date.now())); } catch (e) {}
+    location.replace(archive + "/" + path);
+  }
 })();
 
 function show() {
