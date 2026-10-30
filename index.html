@@ -16,6 +16,7 @@
   --glow: 0 0 6px rgba(0, 0, 0, 0.45);
   --glow-box: 0 0 14px 2px rgba(0, 0, 0, 0.4);
   --faint: #f2f2f2;
+  --accent: #0000ee;               /* link blue: the site's one accent, used sparingly */
   --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --gutter: clamp(16px, 4vw, 48px);
   color-scheme: light;
@@ -31,14 +32,11 @@ a:focus-visible, button:focus-visible { outline: 1px solid var(--ink); outline-o
 header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px var(--gutter); position: relative; }
 .logo { display: inline-block; font-size: 26px; letter-spacing: -0.01em; white-space: nowrap; }
 
-nav { display: flex; align-items: center; gap: 24px; }
-nav a, .plus { font-size: 15px; line-height: 1; transition: text-shadow .2s; }
-.plus:hover, .dropdown a:hover { text-shadow: var(--glow); }
+nav { display: flex; align-items: center; gap: 22px; }
+nav a { font-size: 15px; line-height: 1; transition: text-shadow .2s; }
+nav a.plus:hover { text-shadow: var(--glow); }
 nav > a.typed-link { display: inline-block; text-align: left; white-space: nowrap; }
-.more { position: relative; display: flex; align-items: center; }
-.plus { background: none; border: 0; padding: 0; font-family: var(--font); font-size: 19px; font-weight: 300; cursor: pointer; color: var(--ink); }
-.dropdown { position: absolute; right: -4px; top: calc(100% + 10px); background: var(--bg); display: none; flex-direction: column; gap: 8px; padding: 4px; z-index: 5; }
-.more.open .dropdown { display: flex; }
+nav a.plus { font-size: 19px; font-weight: 300; }
 .ig { display: inline-flex; align-items: center; }
 .ig img { width: 16px; height: 16px; display: block; }
 .ig:hover img { filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5)); }
@@ -170,18 +168,43 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .grant-form iframe { width: 100%; border: 0; min-height: 600px; }
 
 /* save + my collection */
-.save { background: none; border: 0; padding: 0; margin: 10px 0 0 14px; font-family: var(--font); font-size: 12px; color: var(--ink); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; transition: text-shadow .2s; }
+.save { background: none; border: 0; padding: 0 2px; margin: 10px 0 0 14px; font-family: var(--font); font-size: 17px; font-weight: 300; line-height: 1; color: var(--ink); cursor: pointer; vertical-align: -2px; transition: text-shadow .2s; }
 .save:hover { text-shadow: var(--glow); }
-.save[aria-pressed="true"] { text-decoration: none; }
 .work.right .save, .work.center .save, .pair .save { margin: 10px 14px 0 0; }
 .lb-caption .save { margin: 0 0 0 16px; }
-.collection-note { margin: -18px 0 36px; font-size: 12px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: -14px 0 14px; }
+.tag { background: none; border: 0; padding: 0; font-family: var(--font); font-size: 14px; color: var(--ink); cursor: pointer; transition: color .2s; }
+.tag:hover { color: var(--tag, var(--accent)); }
+.tag.on { color: var(--tag, var(--accent)); }
+.collection-note { margin: 0 0 36px; font-size: 11px; }
 .collection { columns: 4 220px; column-gap: 28px; }
 .c-item { break-inside: avoid; margin: 0 0 36px; font-size: 12px; line-height: 1.5; }
 .c-item img { width: 100%; display: block; margin-bottom: 8px; cursor: zoom-in; }
 .c-item p { margin: 0; }
 .c-item a:hover, .c-item button:hover { text-shadow: var(--glow); }
-.c-item .save { margin: 6px 0 0; }
+.c-item .save { margin: 0 0 0 10px; font-size: 15px; }
+
+/* guest book */
+.gb-intro { max-width: 640px; text-align: justify; margin: -12px 0 28px; }
+.gb-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; padding: 24px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.gb-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; align-content: start; }
+.gb-fields label, .gb-sign-label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--muted); }
+.gb-note-label { grid-column: 1 / -1; }
+.gb-fields input, .gb-fields textarea { font-family: var(--font); font-size: 14px; color: var(--ink); border: 0; border-bottom: 1px solid #c9c9c9; padding: 6px 0; background: transparent; resize: vertical; border-radius: 0; }
+.gb-fields input:focus, .gb-fields textarea:focus { outline: none; border-bottom-color: var(--ink); }
+.gb-sign-label { flex-direction: row; justify-content: space-between; }
+.gb-clear { background: none; border: 0; padding: 0; font: inherit; color: var(--muted); cursor: pointer; }
+.gb-clear:hover { text-shadow: var(--glow); }
+#gb-pad { width: 100%; height: 140px; border-bottom: 1px solid #c9c9c9; touch-action: none; cursor: crosshair; display: block; margin-top: 6px; }
+.gb-actions { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.gb-msg { margin: 0; font-size: 12px; color: var(--muted); }
+.gb-draft { font-size: 11px; margin: 14px 0 40px; }
+.gb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; }
+.gb-entry { border: 1px solid #dcdcdc; padding: 18px 20px 14px; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; font-size: 13px; }
+.gb-entry p { margin: 0; text-align: justify; line-height: 1.55; }
+.gb-entry footer, .gb-entry .gb-by { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; font-size: 11px; color: var(--muted); padding: 0; }
+.gb-entry img { height: 44px; width: auto; max-width: 55%; }
+.gb-entry.empty { border-style: dashed; color: #b5b5b5; justify-content: center; align-items: center; }
 
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
@@ -191,8 +214,7 @@ footer a:hover { text-shadow: var(--glow); }
   .burger { display: block; }
   nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--bg); flex-direction: column; align-items: flex-start; gap: 14px; padding: 8px var(--gutter) 24px; z-index: 4; }
   header.menu-open nav { display: flex; }
-  .more { flex-direction: column; align-items: flex-start; }
-  .dropdown { position: static; padding: 10px 0 0 12px; }
+
   .home-grid { grid-template-columns: 1fr; margin-top: 24px; }
   .card { grid-template-columns: 1fr; }
   .cloud { height: 64vh; min-height: 360px; }
@@ -202,6 +224,7 @@ footer a:hover { text-shadow: var(--glow); }
   .ex-buttons { width: 100%; max-width: 260px; }
   .work-caption { text-align: left; }
   .work.center { width: 100%; }
+  .gb-form, .gb-fields { grid-template-columns: 1fr; }
   .pair { grid-template-columns: 1fr; padding: 0; gap: 64px; }
   .work.right .work-image, .work.right .work-caption { grid-column: auto; grid-row: auto; }
   .works { gap: 96px; }
@@ -219,15 +242,10 @@ footer a:hover { text-shadow: var(--glow); }
     <a href="#exhibitions" data-view="exhibitions">exhibitions</a>
     <a href="#artists" data-view="artists">artists</a>
     <a href="#grant" data-view="grant">grant</a>
-    <div class="more" id="more">
-      <button class="plus" id="plus" aria-expanded="false" aria-controls="dropdown" aria-label="More pages">+</button>
-      <div class="dropdown" id="dropdown">
-        <a href="#about" data-view="about">about</a>
-        <a href="#guestbook" data-view="guestbook">guest book</a>
-        <a href="#contact" data-view="contact">contact</a>
-        <a href="#collection" data-view="collection">my collection</a>
-      </div>
-    </div>
+    <a href="#about" data-view="about">about</a>
+    <a href="#guestbook" data-view="guestbook">guest book</a>
+    <a href="#contact" data-view="contact">contact</a>
+    <a href="#collection" class="plus" data-view="collection" aria-label="my collection" title="my collection">+</a>
     <a class="ig" id="ig" href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener" aria-label="project gallery on Instagram"></a>
   </nav>
 </header>
@@ -302,13 +320,28 @@ footer a:hover { text-shadow: var(--glow); }
   <!-- GUEST BOOK -->
   <section class="view" id="view-guestbook">
     <h1 class="page-title">guest book</h1>
-    <p class="construction">under construction</p>
+    <p class="gb-intro" id="gb-intro"></p>
+    <form class="gb-form" id="gb-form" novalidate>
+      <div class="gb-fields">
+        <label for="gb-name">name<input id="gb-name" maxlength="60" autocomplete="name" required></label>
+        <label for="gb-place">from<input id="gb-place" maxlength="60" placeholder="city, optional"></label>
+        <label for="gb-note" class="gb-note-label">note<textarea id="gb-note" maxlength="300" rows="3" required></textarea></label>
+      </div>
+      <div class="gb-sign">
+        <span class="gb-sign-label">signature <button type="button" class="gb-clear" id="gb-clear">clear</button></span>
+        <canvas id="gb-pad" width="560" height="140" aria-label="Draw your signature"></canvas>
+      </div>
+      <div class="gb-actions"><p class="gb-msg" id="gb-msg" role="status"></p><button class="enter" type="submit">sign the guest book</button></div>
+    </form>
+    <p class="construction gb-draft">draft: notes signed here are only visible in your own browser until the guest book goes live</p>
+    <div class="gb-grid" id="gb-grid"></div>
   </section>
 
   <!-- MY COLLECTION (saved in each visitor's own browser) -->
   <section class="view" id="view-collection">
     <h1 class="page-title">my collection</h1>
-    <p class="construction collection-note">works you save are kept in this browser, on this device</p>
+    <div class="tags" id="collection-tags"></div>
+    <p class="construction collection-note">kept in this browser, on this device</p>
     <div class="collection" id="collection"></div>
   </section>
 
@@ -500,26 +533,86 @@ function toggleSaved(w) {
 function refreshSaveButtons() {
   document.querySelectorAll(".save[data-save]").forEach(b => {
     const on = isSaved(b.dataset.save);
-    b.textContent = on ? "saved ✓" : "save";
+    b.textContent = on ? "×" : "+";
     b.setAttribute("aria-pressed", String(on));
+    b.setAttribute("aria-label", on ? "remove from my collection" : "add to my collection");
+    b.title = on ? "remove from my collection" : "add to my collection";
   });
 }
+// fresh details for a saved work (type, sale status, year) from the current site content
+function workInfo(saved) {
+  const [key, idx] = String(saved.id).split(":");
+  const w = SHOWS[key] && SHOWS[key].works[Number(idx)];
+  return w ? { ...saved, ...w, artist: SHOWS[key].artist, showTitle: SHOWS[key].title } : saved;
+}
+// pick a colour from each saved picture, kept dark enough to read
+const colourCache = {};
+function pickColour(src) {
+  if (colourCache[src]) return Promise.resolve(colourCache[src]);
+  return new Promise(res => {
+    const im = new Image();
+    im.onload = () => {
+      try {
+        const cv = document.createElement("canvas"); cv.width = cv.height = 32;
+        const cx = cv.getContext("2d"); cx.drawImage(im, 0, 0, 32, 32);
+        const d = cx.getImageData(0, 0, 32, 32).data;
+        let best = null, bestScore = -1;
+        for (let i = 0; i < d.length; i += 4) {
+          const r = d[i] / 255, g = d[i + 1] / 255, b = d[i + 2] / 255;
+          const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2;
+          const sat = mx === mn ? 0 : (mx - mn) / (1 - Math.abs(2 * l - 1));
+          const score = sat * (1 - Math.abs(l - 0.5));
+          if (score > bestScore) { bestScore = score; best = [r, g, b]; }
+        }
+        // convert to hsl and hold lightness in a readable range
+        const [r, g, b] = best, mx = Math.max(r, g, b), mn = Math.min(r, g, b);
+        let h = 0; const l = (mx + mn) / 2, dd = mx - mn;
+        if (dd) { h = mx === r ? ((g - b) / dd) % 6 : mx === g ? (b - r) / dd + 2 : (r - g) / dd + 4; h *= 60; if (h < 0) h += 360; }
+        const sat = dd ? Math.min(0.85, Math.max(0.45, dd / (1 - Math.abs(2 * l - 1)))) : 0;
+        colourCache[src] = sat ? `hsl(${Math.round(h)}, ${Math.round(sat * 100)}%, ${Math.round(Math.min(0.42, Math.max(0.3, l)) * 100)}%)` : "var(--accent)";
+      } catch (e) { colourCache[src] = "var(--accent)"; }
+      res(colourCache[src]);
+    };
+    im.onerror = () => res("var(--accent)");
+    im.src = src;
+  });
+}
+
+let collectionFilter = "all";
 function renderCollection() {
   const box = document.getElementById("collection");
-  const list = getSaved();
-  if (!list.length) { box.innerHTML = '<p class="construction">nothing saved yet. click "save" under any work to keep it here.</p>'; return; }
+  const tagsEl = document.getElementById("collection-tags");
+  const all = getSaved().map(workInfo);
+  if (!all.length) {
+    tagsEl.innerHTML = "";
+    box.innerHTML = '<p class="construction">nothing here yet. click the + under any work to add it to your collection.</p>';
+    return;
+  }
+  // tags: types, years, for sale
+  const types = ["drawing", "painting", "print", "sculpture"].filter(t => all.some(w => w.type === t));
+  const years = [...new Set(all.map(w => w.year).filter(y => /^\d{4}/.test(y || "")))].sort().reverse();
+  const tags = ["all", ...types.map(t => t + "s"), ...years, ...(all.some(w => w.forSale) ? ["for sale"] : [])];
+  if (!tags.includes(collectionFilter)) collectionFilter = "all";
+  tagsEl.innerHTML = tags.map(t => `<button class="tag${t === collectionFilter ? " on" : ""}" data-tag="${esc(t)}">${esc(t)}</button>`).join("");
+  Promise.all(all.map(w => pickColour(w.image))).then(cols => {
+    tagsEl.querySelectorAll(".tag").forEach((b, i) => b.style.setProperty("--tag", cols[i % cols.length] || "var(--accent)"));
+  });
+  tagsEl.querySelectorAll(".tag").forEach(b => b.addEventListener("click", () => { collectionFilter = b.dataset.tag; renderCollection(); }));
+
+  const f = collectionFilter;
+  const list = all.filter(w => f === "all" || w.type + "s" === f || w.year === f || (f === "for sale" && w.forSale));
   box.innerHTML = list.map(w => `<div class="c-item">
       <img src="${esc(w.image)}" alt="${esc(w.artist + ", " + w.title)}" data-open="${esc(w.id)}">
       <p>${esc(w.artist)}</p>
       <p><em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}</p>
-      <p><a href="${esc(w.link)}">${esc(w.showTitle)}</a></p>
-      <button class="save" data-save="${esc(w.id)}">remove</button>
+      <p><a href="${esc(w.link)}">${esc(w.showTitle)}</a><button class="save" data-save="${esc(w.id)}"></button></p>
     </div>`).join("");
   box.querySelectorAll("[data-save]").forEach(b => b.addEventListener("click", () => {
     setSaved(getSaved().filter(x => x.id !== b.dataset.save)); renderCollection();
   }));
+  refreshSaveButtons();
   box.querySelectorAll("img[data-open]").forEach((im, i) => im.addEventListener("click", () => {
-    currentWorks = getSaved(); openLightbox(i);
+    currentWorks = list; openLightbox(i);
   }));
 }
 
@@ -719,7 +812,7 @@ let logoBusy = false;
 document.querySelector(".logo").addEventListener("mouseenter", typeLogo);
 
 /* top menu words type themselves out on hover */
-document.querySelectorAll("nav > a[data-view]").forEach(a => {
+document.querySelectorAll("nav > a[data-view]:not(.plus)").forEach(a => {
   const word = a.textContent;
   a.classList.add("typed-link");
   a.setAttribute("aria-label", word);
@@ -754,11 +847,52 @@ function renderGrant() {
   document.body.appendChild(sc);
 }
 
+/* guest book (draft: stored in this browser until it is connected to the site's database) */
+const GB_STORE = "pg-guestbook-draft";
+const gbPad = document.getElementById("gb-pad"), gbCtx = gbPad.getContext("2d");
+let gbDrawing = false, gbInked = false;
+function gbPoint(e) { const r = gbPad.getBoundingClientRect(); return [(e.clientX - r.left) * gbPad.width / r.width, (e.clientY - r.top) * gbPad.height / r.height]; }
+gbCtx.lineWidth = 2; gbCtx.lineCap = "round"; gbCtx.lineJoin = "round"; gbCtx.strokeStyle = "#000";
+gbPad.addEventListener("pointerdown", e => { gbDrawing = true; gbInked = true; gbPad.setPointerCapture(e.pointerId); gbCtx.beginPath(); gbCtx.moveTo(...gbPoint(e)); });
+gbPad.addEventListener("pointermove", e => { if (!gbDrawing) return; gbCtx.lineTo(...gbPoint(e)); gbCtx.stroke(); });
+["pointerup", "pointerleave", "pointercancel"].forEach(ev => gbPad.addEventListener(ev, () => { gbDrawing = false; }));
+document.getElementById("gb-clear").addEventListener("click", () => { gbCtx.clearRect(0, 0, gbPad.width, gbPad.height); gbInked = false; });
+
+function gbBlocked(text) {
+  const t = " " + text.toLowerCase().replace(/[^a-z0-9]+/g, " ") + " ";
+  return (GUESTBOOK.blockedWords || []).some(w => t.includes(" " + w.toLowerCase() + " ") || t.replace(/ /g, "").includes(w.toLowerCase()));
+}
+function gbLoad() { try { return JSON.parse(localStorage.getItem(GB_STORE)) || []; } catch (e) { return []; } }
+function renderGuestbook() {
+  document.getElementById("gb-intro").textContent = GUESTBOOK.intro || "";
+  const notes = gbLoad();
+  const fmt = d => new Date(d).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" }).replace(/\//g, ".");
+  let html = notes.map(n => `<article class="gb-entry">
+      <p>${esc(n.note)}</p>
+      <div class="gb-by"><span>${esc(n.name)}${n.place ? " · " + esc(n.place) : ""} · ${fmt(n.date)}</span>${n.sig ? `<img src="${n.sig}" alt="signature of ${esc(n.name)}">` : ""}</div>
+    </article>`).join("");
+  for (let i = notes.length; i < 6; i++) html += '<div class="gb-entry empty" aria-hidden="true">&nbsp;</div>';
+  document.getElementById("gb-grid").innerHTML = html;
+}
+document.getElementById("gb-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = document.getElementById("gb-name").value.trim();
+  const place = document.getElementById("gb-place").value.trim();
+  const note = document.getElementById("gb-note").value.trim();
+  const msg = document.getElementById("gb-msg");
+  if (!name || !note) { msg.textContent = "add your name and a note to sign"; return; }
+  if (gbBlocked(name + " " + place + " " + note)) { msg.textContent = "please keep the guest book kind; edit your note and try again"; return; }
+  const notes = gbLoad();
+  notes.unshift({ name, place, note, sig: gbInked ? gbPad.toDataURL("image/png") : "", date: Date.now() });
+  try { localStorage.setItem(GB_STORE, JSON.stringify(notes.slice(0, 50))); } catch (err) {}
+  e.target.reset(); gbCtx.clearRect(0, 0, gbPad.width, gbPad.height); gbInked = false;
+  msg.textContent = "thank you for signing";
+  renderGuestbook();
+});
+
 /* routing */
 const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", "contact", "collection"];
 const header = document.getElementById("top");
-const more = document.getElementById("more");
-const plus = document.getElementById("plus");
 const burger = document.getElementById("burger");
 
 function show() {
@@ -766,6 +900,7 @@ function show() {
   let name = VIEWS.includes(h) ? h : "home";
   if (SHOWS[h]) { name = "show"; renderShow(h); }
   if (name === "collection") renderCollection();
+  if (name === "guestbook") renderGuestbook();
   if (name === "home" && lastView !== "home") typeLogo();
   if (name === "home" && HOME_STYLE === "cloud") startCloud(); else stopCloud();
   lastView = name;
@@ -775,10 +910,8 @@ function show() {
   window.scrollTo(0, 0);
 }
 function closeMenus() {
-  more.classList.remove("open"); plus.setAttribute("aria-expanded", "false");
   header.classList.remove("menu-open"); burger.setAttribute("aria-expanded", "false");
 }
-plus.addEventListener("click", e => { e.stopPropagation(); plus.setAttribute("aria-expanded", String(more.classList.toggle("open"))); });
 burger.addEventListener("click", e => { e.stopPropagation(); burger.setAttribute("aria-expanded", String(header.classList.toggle("menu-open"))); });
 document.addEventListener("click", e => { if (!header.contains(e.target)) closeMenus(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenus(); });

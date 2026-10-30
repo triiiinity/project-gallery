@@ -72,31 +72,33 @@ const SHOWS = {
     //     "right"  picture in the right half, caption bottom-left
     //     "center" picture in the middle, caption underneath
     //     "pair"   this work and the next one side by side (give both "pair")
+    //   type:   "drawing", "painting", "print", "sculpture" (used for tags in my collection)
+    //   forSale: true or false
     //   image:  the picture file inside the images folder
     works: [
-      { title: "See Through", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "center",
+      { title: "See Through", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "center", type: "drawing", forSale: true,
         image: "images/mike-nudelman/see-through.jpg", ratio: "1200/927" },
-      { title: "Lonesome and Empty", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "right",
+      { title: "Lonesome and Empty", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "right", type: "drawing", forSale: true,
         image: "images/mike-nudelman/lonesome-and-empty.jpg", ratio: "1200/927" },
-      { title: "Apparent", year: "year", medium: "Ballpoint pen on paper", size: "5.5 x 4.5 in (13.8 × 11.4 cm)", layout: "left",
+      { title: "Apparent", year: "year", medium: "Ballpoint pen on paper", size: "5.5 x 4.5 in (13.8 × 11.4 cm)", layout: "left", type: "drawing", forSale: true,
         image: "images/mike-nudelman/apparent.jpg", ratio: "1200/982" },
-      { title: "Zipped", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "center",
+      { title: "Zipped", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "center", type: "drawing", forSale: true,
         image: "images/mike-nudelman/zipped.jpg", ratio: "1200/927" },
-      { title: "Recess", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "pair",
+      { title: "Recess", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "pair", type: "drawing", forSale: true,
         image: "images/mike-nudelman/recess.jpg", ratio: "1200/927" },
-      { title: "Goes the Other Way", year: "year", medium: "Ballpoint pen on paper", size: "7 x 5 in (17.8 × 12.7 cm)", layout: "pair",
+      { title: "Goes the Other Way", year: "year", medium: "Ballpoint pen on paper", size: "7 x 5 in (17.8 × 12.7 cm)", layout: "pair", type: "drawing", forSale: true,
         image: "images/mike-nudelman/goes-the-other-way.jpg", ratio: "1200/857" },
-      { title: "Make Me a Moon 23", year: "year", medium: "Ballpoint pen on paper", size: "3 x 2 in (7.6 × 5 cm)", layout: "right",
+      { title: "Make Me a Moon 23", year: "year", medium: "Ballpoint pen on paper", size: "3 x 2 in (7.6 × 5 cm)", layout: "right", type: "drawing", forSale: true,
         image: "images/mike-nudelman/make-me-a-moon-23.jpg", ratio: "1200/800" },
-      { title: "Understanding the Laws that the Line of their Mysterious Orbits Obeyed 2", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "center",
+      { title: "Understanding the Laws that the Line of their Mysterious Orbits Obeyed 2", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "center", type: "drawing", forSale: true,
         image: "images/mike-nudelman/understanding-the-laws-that-the-line-of-their-mysterious-orbits-obeyed-2.jpg", ratio: "1200/927" },
-      { title: "Dusky Dolphin", year: "year", medium: "Ballpoint pen on paper", size: "5 x 4.25 in (12.7 × 10.8 cm)", layout: "left",
+      { title: "Dusky Dolphin", year: "year", medium: "Ballpoint pen on paper", size: "5 x 4.25 in (12.7 × 10.8 cm)", layout: "left", type: "drawing", forSale: true,
         image: "images/mike-nudelman/dusky-dolphin.jpg", ratio: "1200/1020" },
-      { title: "Untitled 7", year: "year", medium: "Ballpoint pen on paper", size: "5.5 x 4 in (13.9 × 10.2 cm)", layout: "right",
+      { title: "Untitled 7", year: "year", medium: "Ballpoint pen on paper", size: "5.5 x 4 in (13.9 × 10.2 cm)", layout: "right", type: "drawing", forSale: true,
         image: "images/mike-nudelman/untitled-7.jpg", ratio: "1200/871" },
-      { title: "Anything But a Giraffe", year: "year", medium: "Ballpoint pen on paper", size: "4.1 x 3.9 in (10.5 × 9.9 cm)", layout: "center",
+      { title: "Anything But a Giraffe", year: "year", medium: "Ballpoint pen on paper", size: "4.1 x 3.9 in (10.5 × 9.9 cm)", layout: "center", type: "drawing", forSale: true,
         image: "images/mike-nudelman/anything-but-a-giraffe.jpg", ratio: "1200/1124" },
-      { title: "Spit", year: "year", medium: "Ballpoint pen on paper", size: "5.5 x 5.5 in (13.9 × 13.9 cm)", layout: "left",
+      { title: "Spit", year: "year", medium: "Ballpoint pen on paper", size: "5.5 x 5.5 in (13.9 × 13.9 cm)", layout: "left", type: "drawing", forSale: true,
         image: "images/mike-nudelman/spit.jpg", ratio: "1200/1200" }
     ]
   }
@@ -112,6 +114,14 @@ const ARTISTS = [
   // { year: 2025, show: "TD Reade: cancel my prayer", artist: "TD Reade", instagram: "" },
 ];
 
+
+// THE GUEST BOOK
+// Words that can't be posted. Add more inside the brackets, in quotes, separated by commas.
+// (A fuller filter and your approval step get added when the guest book goes live.)
+const GUESTBOOK = {
+  intro: "sign the book. leave a note about a show, a work, or just that you were here.",
+  blockedWords: ["fuck", "shit", "bitch", "cunt", "asshole"]
+};
 
 // THE GRANT PAGE
 // tallyFormId: the letters at the end of your Tally share link
