@@ -371,6 +371,21 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .secret-note { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: var(--ink); color: var(--bg); font-size: 12px; padding: 8px 14px; z-index: 70; opacity: 0; transition: opacity .3s; pointer-events: none; }
 .secret-note.on { opacity: 1; }
 
+.people { margin-top: 44px; }
+.person a.who { color: var(--accent); }
+.about-reveal { position: fixed; pointer-events: none; opacity: 0; transform: scale(.98); transition: opacity .45s ease, transform .45s ease; z-index: 5; }
+.about-reveal.on { opacity: 1; transform: none; }
+.about-reveal img { display: block; max-width: 100%; max-height: 100%; box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12); }
+@media (max-width: 720px) { .about-reveal { display: none; } }
+
+.aa-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.aa-peek { display: flex; gap: 8px; margin-top: 48px; }
+.aa-peek span { position: relative; width: 44px; height: 44px; overflow: hidden; background: #f3f3f3; }
+.aa-peek img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease; }
+.aa-peek img.on { opacity: 1; }
+
+a.secret { color: inherit; text-decoration: none; cursor: text; }
+
 /* contact form */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
 .cf { display: grid; gap: 14px; max-width: 560px; }
@@ -429,7 +444,6 @@ footer a:hover { color: var(--accent); }
     <a href="/" data-view="home">home</a>
     <a href="/exhibitions" data-view="exhibitions">exhibitions</a>
     <a href="/artists" data-view="artists">artists</a>
-    <a href="/grant" data-view="grant">grant</a>
     <a href="/about" data-view="about">about</a>
     <a href="/guestbook" data-view="guestbook">guest book</a>
     <a href="/contact" data-view="contact">contact</a>
@@ -492,7 +506,7 @@ footer a:hover { color: var(--accent); }
 
   <!-- ARTISTS -->
   <section class="view" id="view-artists">
-    <h1 class="page-title">artist archive</h1>
+    <div class="aa-head"><h1 class="page-title">artist archive</h1><div class="aa-peek" id="aa-peek" aria-hidden="true"><span></span><span></span><span></span></div></div>
     <div class="counters" id="aa-counters"></div>
     <nav class="year-jump" id="aa-years" aria-label="jump to a year"></nav>
     <p class="aa-progress" id="aa-progress"></p>
@@ -516,8 +530,8 @@ footer a:hover { color: var(--accent); }
       <p>pg hosts curated exhibitions organized by Trinity Lester. pg is based in new york city but functions primarily online, with select infrequent in-person exhibitions in brooklyn, ny.</p>
       <p class="notice">project gallery is going through website updates. we are in the process of moving our older exhibitions into an archive on the new site. please be patient, and check that your old links still work if they are on your cv or elsewhere.</p>
     </div>
-    <h2 class="sub-head">leadership</h2>
     <div class="people" id="people"></div>
+    <div class="about-reveal" id="about-reveal" aria-hidden="true"><img alt=""></div>
   </section>
 
   <!-- GUEST BOOK -->
@@ -771,6 +785,27 @@ function countUp(el, to, ms) {
   requestAnimationFrame(step);
 }
 let countersDone = false;
+// every artwork picture the new site holds, for the little squares on the artist archive
+function siteArt() {
+  const set = new Set();
+  Object.values(SHOWS).forEach(sh => sh.works.forEach(w => set.add(w.image)));
+  (TICKER || []).forEach(t => set.add(t.image));
+  return [...set];
+}
+let peekTimer = null;
+function startPeek() {
+  const art = siteArt(), slots = [...document.querySelectorAll("#aa-peek span")];
+  if (!art.length || !slots.length) return;
+  const pick = () => art[Math.floor(Math.random() * art.length)];
+  const swap = slot => {
+    const old = slot.querySelector("img.on"), im = new Image();
+    im.alt = ""; im.onload = () => { slot.appendChild(im); requestAnimationFrame(() => im.classList.add("on")); if (old) { old.classList.remove("on"); setTimeout(() => old.remove(), 1300); } };
+    im.src = pick();
+  };
+  slots.forEach(swap);
+  clearInterval(peekTimer);
+  if (!reduceMotion) { let i = 0; peekTimer = setInterval(() => swap(slots[i++ % slots.length]), 2600); }
+}
 /* exploring: remember which artist pages a visitor has opened (in their browser only) */
 const SEEN = "pg-artists-seen", AWARDS = "pg-awards";
 function getSeen() { try { return new Set(JSON.parse(localStorage.getItem(SEEN)) || []); } catch (e) { return new Set(); } }
@@ -868,9 +903,9 @@ function renderArtists() {
   Object.values(SHOW_CARDS).forEach(c => { const m = /^(?:curated|juried) by (.+)$/.exec(c.note || ""); if (m) m[1].split(/ and |, /).forEach(n => curators.add(n.trim())); });
   const since = new Date(2020, 9, 1), now = new Date();
   const years = now.getFullYear() - since.getFullYear() - (now.getMonth() < since.getMonth() ? 1 : 0);
-  const C = [[people.size, "artists shown"], [order.length, "exhibitions"], [curators.size, "curators"], [years, "years online, since october 2020"]];
+  const C = [[people.size, "artists shown"], [order.length, "exhibitions"], [curators.size, "curators"], [years, '<a class="secret" href="/grant">years</a> online, since october 2020']];
   const box = document.getElementById("aa-counters");
-  box.innerHTML = C.map(([n, l]) => `<div class="counter"><b>${n}</b><span>${esc(l)}</span></div>`).join("");
+  box.innerHTML = C.map(([n, l]) => `<div class="counter"><b>${n}</b><span>${l.startsWith("<a") ? l : esc(l)}</span></div>`).join("");
 
 
   // year links
@@ -1524,36 +1559,41 @@ document.getElementById("ex-archive").addEventListener("mouseover", e => {
 /* about: leadership (names show a picture on hover) */
 function renderPeople() {
   const box = document.getElementById("people");
+  const site = p => ((p.links || []).find(l => l.text === "website" && l.url) || {}).url;
   box.innerHTML = (LEADERSHIP || []).map((p, i) => `<div class="person">
-      <p><span class="who" data-i="${i}">${esc(p.name)}</span> ${esc(p.bio)}</p>
+      <p>${site(p) ? `<a class="who" data-i="${i}" href="${esc(site(p))}" target="_blank" rel="noopener">${esc(p.name)}</a>` : `<span class="who" data-i="${i}">${esc(p.name)}</span>`} ${esc(p.bio)}</p>
       <div class="links">${(p.links || []).filter(l => l.url).map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.text)}</a>`).join("")}</div>
     </div>`).join("");
-  const pv = document.getElementById("nav-preview"), pvImg = pv.querySelector("img");
+  // hovering a name reveals their work, centred in the empty space to the right of the text
+  const rv = document.getElementById("about-reveal"), rvImg = rv.querySelector("img");
   box.querySelectorAll(".who").forEach(w => {
     const p = LEADERSHIP[w.dataset.i];
     w.addEventListener("mouseenter", () => {
       if (!p.image) return;
-      pvImg.src = p.image; const r = w.getBoundingClientRect();
-      const col = box.getBoundingClientRect();                 // beside the text, never on top of it
-      pv.style.top = Math.max(16, r.top - 10) + "px"; pv.style.left = Math.min(window.innerWidth - 276, col.right + 32) + "px";
-      pv.classList.add("on");
+      rvImg.src = p.image;
+      const textRight = box.getBoundingClientRect().right, gutter = 48;
+      const left = textRight + gutter, right = window.innerWidth - gutter, top = 110, bottom = window.innerHeight - 60;
+      const w0 = Math.max(160, right - left), h0 = Math.max(160, bottom - top);
+      const size = Math.min(w0 * 0.8, h0 * 0.8, 520);
+      rv.style.width = size + "px"; rv.style.height = size + "px";
+      rv.style.left = (left + (w0 - size) / 2) + "px"; rv.style.top = (top + (h0 - size) / 2) + "px";
+      rv.style.display = "grid"; rv.style.placeItems = "center";
+      rv.classList.add("on");
     });
-    w.addEventListener("mouseleave", () => pv.classList.remove("on"));
+    w.addEventListener("mouseleave", () => rv.classList.remove("on"));
   });
-  // a secret: click "Trinity Lester" three times quickly to collect every award in this browser
-  const me = [...box.querySelectorAll(".who")].find(w => /trinity/i.test(w.textContent));
-  if (me) {
-    let clicks = [];
-    me.addEventListener("click", () => {
-      const now = Date.now(); clicks = clicks.filter(t => now - t < 1500); clicks.push(now);
-      if (clicks.length >= 3) {
-        clicks = [];
-        const got = getAwards(); Object.keys(AWARD_LIST).forEach(id => { if (!got[id]) got[id] = now; });
-        try { localStorage.setItem(AWARDS, JSON.stringify(got)); } catch (e) {}
-        const n = document.getElementById("secret-note"); n.classList.add("on"); setTimeout(() => n.classList.remove("on"), 2600);
-      }
-    });
-  }
+  // a secret: click the word "about" at the top three times quickly to collect every award in this browser
+  const title = document.querySelector("#view-about .page-title");
+  let clicks = [];
+  title.addEventListener("click", () => {
+    const now = Date.now(); clicks = clicks.filter(t => now - t < 1500); clicks.push(now);
+    if (clicks.length >= 3) {
+      clicks = [];
+      const got = getAwards(); Object.keys(AWARD_LIST).forEach(id => { if (!got[id]) got[id] = now; });
+      try { localStorage.setItem(AWARDS, JSON.stringify(got)); } catch (e) {}
+      const n = document.getElementById("secret-note"); n.classList.add("on"); setTimeout(() => n.classList.remove("on"), 2600);
+    }
+  });
 }
 
 /* contact form: writes an email to the gallery in the visitor's own email app */
@@ -1638,6 +1678,7 @@ function show() {
   document.getElementById("award").classList.remove("open");
   if (backdrop.classList.contains("open") && !document.body.classList.contains("entering")) { backdrop.classList.remove("shown", "open"); target = 1; }
   if (name === "collection") renderCollection();
+  if (name === "artists") startPeek(); else clearInterval(peekTimer);
   if (name === "guestbook") renderGuestbook();
   if (name === "home" && lastView !== "home") typeLogo();
   if (name === "home" && HOME_STYLE === "cloud") startCloud(); else stopCloud();
