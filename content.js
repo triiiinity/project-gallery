@@ -14,102 +14,31 @@ const SITE = {
 const HOME_STYLE = "cloud";
 
 // THE IMAGE CLOUD (home page)
-// One block per picture, between { and }. Each block is what the card shows when that picture is clicked.
-//   image:       the picture file, inside the images folder
-//   title:       exhibition title
-//   dates:       exhibition dates
-//   description: a short paragraph about the show
-//   link:        where "enter exhibition" goes. Use "#mike-nudelman" style for shows on this site,
-//                or a full address like "https://archive.project-gallery.com/eternal-flame" for old ones.
-//                Leave it "" to hide the button.
-// To add one: copy a whole block (from { to },), paste it after another, change the words.
-// To remove one: delete its whole block.
+// The pictures floating in the cloud, one per line.
 const CLOUD = [
-  {
-    image: "images/mike-nudelman/see-through.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/lonesome-and-empty.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/apparent.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/zipped.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/recess.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/goes-the-other-way.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/make-me-a-moon-23.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/understanding-the-laws-that-the-line-of-their-mysterious-orbits-obeyed-2.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/dusky-dolphin.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/untitled-7.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/anything-but-a-giraffe.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  },
-  {
-    image: "images/mike-nudelman/spit.jpg",
-    title: "Mike Nudelman: Moving",
-    dates: "06.12.2026 ● 07.19.2026",
-    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
-    link: "#mike-nudelman"
-  }
+  "images/mike-nudelman/see-through.jpg",
+  "images/mike-nudelman/lonesome-and-empty.jpg",
+  "images/mike-nudelman/apparent.jpg",
+  "images/mike-nudelman/zipped.jpg",
+  "images/mike-nudelman/recess.jpg",
+  "images/mike-nudelman/goes-the-other-way.jpg",
+  "images/mike-nudelman/make-me-a-moon-23.jpg",
+  "images/mike-nudelman/understanding-the-laws-that-the-line-of-their-mysterious-orbits-obeyed-2.jpg",
+  "images/mike-nudelman/dusky-dolphin.jpg",
+  "images/mike-nudelman/untitled-7.jpg",
+  "images/mike-nudelman/anything-but-a-giraffe.jpg",
+  "images/mike-nudelman/spit.jpg"
 ];
+
+// THE CARD that opens when any picture in the cloud is clicked.
+const CLOUD_CARD = {
+  label: "solo exhibition",
+  image: "images/mike-nudelman/zipped.jpg",
+  title: "Mike Nudelman: Moving",
+  dates: "06.12.2026 ● 07.19.2026",
+  description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
+  link: "#mike-nudelman"      // where "enter exhibition" goes
+};
 
 // The featured show on the home page (and top of exhibitions).
 const CURRENT = {

@@ -26,7 +26,7 @@ a:focus-visible, button:focus-visible { outline: 1px solid var(--ink); outline-o
 
 /* header */
 header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px var(--gutter); position: relative; }
-.logo { font-size: 23px; letter-spacing: -0.01em; white-space: nowrap; }
+.logo { display: inline-block; font-size: 23px; letter-spacing: -0.01em; white-space: nowrap; }
 
 nav { display: flex; align-items: center; gap: 24px; }
 nav a, .plus { font-size: 15px; line-height: 1; transition: text-shadow .2s; }
@@ -70,6 +70,8 @@ h2 { font-size: 12px; font-weight: 400; letter-spacing: 0.02em; margin: 0 0 12px
 .show-name { color: var(--muted); font-size: 12px; margin-top: 12px; }
 .prose { max-width: 520px; font-size: 15px; }
 .prose p { margin: 0 0 14px; }
+/* body text is justified on both sides; captions keep their own alignment */
+.prose p, .detail-body, .card-text .desc, .grant-intro p { text-align: justify; text-justify: inter-word; }
 .prose a:hover { text-shadow: var(--glow); }
 
 
@@ -108,17 +110,31 @@ details .detail-body { font-size: 13px; line-height: 1.55; padding: 10px 0 14px;
 .card-backdrop { position: fixed; inset: 0; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; place-items: center; z-index: 50; padding: var(--gutter); opacity: 0; transition: opacity .35s; }
 .card-backdrop.open { display: grid; }
 .card-backdrop.shown { opacity: 1; }
-.card { background: var(--bg); width: min(980px, 100%); max-height: calc(100vh - 48px); overflow: auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 3vw, 40px); padding: clamp(16px, 2.5vw, 32px); box-shadow: 0 0 60px rgba(0, 0, 0, 0.12); position: relative; transform: scale(.97); transition: transform .35s; }
+.card { --pad: clamp(20px, 2.6vw, 32px); background: var(--bg); width: min(980px, 100%); max-height: calc(100vh - 48px); overflow: auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--pad); padding: var(--pad); box-shadow: 0 0 60px rgba(0, 0, 0, 0.12); position: relative; transform: scale(.97); transition: transform .35s; }
 .card-backdrop.shown .card { transform: scale(1); }
 .card-img img { width: 100%; display: block; }
 .card-text { display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; font-size: 13px; }
 .card-label { color: var(--muted); font-size: 11px; letter-spacing: 0.04em; margin: 0; }
 .card-text .show-title { margin: 0; border: 0; padding: 0; font-size: clamp(22px, 2.6vw, 32px); letter-spacing: -0.02em; }
 .card-text .dates { margin: 0 0 8px; }
-.card-text .desc { margin: 0 0 16px; line-height: 1.55; max-width: 46ch; }
-.card-text .enter { align-self: flex-start; }
-.card-close { position: absolute; top: 10px; right: 14px; background: none; border: 0; font-family: var(--font); font-size: 20px; font-weight: 300; cursor: pointer; color: var(--ink); line-height: 1; transition: text-shadow .2s; }
+.card-text .desc { margin: 0 0 var(--pad); line-height: 1.55; }
+.card-text .enter { align-self: stretch; display: block; text-align: center; }
+.card-close { position: absolute; top: 6px; right: 10px; background: none; border: 0; font-family: var(--font); font-size: 20px; font-weight: 300; cursor: pointer; color: var(--ink); line-height: 1; transition: text-shadow .2s; }
 .card-close:hover { text-shadow: var(--glow); }
+
+/* enter-exhibition transition */
+.card-backdrop, .card { transition: opacity .35s, transform .35s; }
+body.entering .card-backdrop { background: rgba(255, 255, 255, 1); transition: background .75s ease-in; }
+body.entering .card { transform: scale(1.12); opacity: 0; filter: blur(2px); transition: transform .75s cubic-bezier(.5, 0, .75, 0), opacity .7s ease-in, filter .75s ease-in; }
+body.entering main, body.entering footer { opacity: 0; transition: opacity .5s; }
+body.arriving #view-show { animation: arrive 1s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes arrive { from { opacity: 0; transform: scale(1.035); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+
+/* film strip at the top of an exhibition */
+.strip { display: flex; gap: 10px; align-items: flex-end; margin-top: 40px; }
+.strip a { display: block; min-width: 0; transition: opacity .2s; }
+.strip a:hover { opacity: .75; }
+.strip img { width: 100%; height: auto; display: block; }
 
 /* typed logo on home */
 .caret { display: inline-block; width: 1px; height: 0.95em; background: var(--ink); margin-left: 2px; vertical-align: -0.1em; animation: blink 1s steps(1) infinite; }
@@ -204,6 +220,7 @@ footer a:hover { text-shadow: var(--glow); }
 
   <!-- EXHIBITION PAGE (not in the menu; reached from "enter exhibition") -->
   <section class="view" id="view-show">
+    <div class="strip" id="show-strip"></div>
     <div class="ex-intro">
       <h1 class="show-title" id="show-title"></h1>
       <div class="ex-text">
@@ -253,7 +270,7 @@ footer a:hover { text-shadow: var(--glow); }
     <button class="card-close" id="card-close" aria-label="Close">×</button>
     <div class="card-img"><img id="card-img" alt=""></div>
     <div class="card-text">
-      <p class="card-label">exhibition</p>
+      <p class="card-label" id="card-label">solo exhibition</p>
       <h2 class="show-title" id="card-title"></h2>
       <p class="dates" id="card-dates"></p>
       <p class="desc" id="card-desc"></p>
@@ -352,11 +369,23 @@ function renderShow(key) {
   document.querySelectorAll("#view-show details").forEach(d => d.open = false);
   document.getElementById("show-buttons").innerHTML = sh.buttons.map(b =>
     `<a class="enter" href="${esc(b.link)}" target="_blank" rel="noopener">${esc(b.text)}</a>`).join("");
+  // one line of all the works, each sized by its shape so the row fills the width exactly
+  const strip = document.getElementById("show-strip");
+  strip.innerHTML = sh.works.map((w, i) => {
+    const [rw, rh] = String(w.ratio || "4/3").split("/").map(Number);
+    return `<a href="#work-${i}" data-work="${i}" style="flex:${(rw / rh).toFixed(4)} 1 0" aria-label="${esc(w.title)}"><img src="${esc(w.image)}" alt=""></a>`;
+  }).join("");
+  strip.querySelectorAll("a").forEach(a => a.addEventListener("click", ev => {
+    ev.preventDefault();
+    const row = document.getElementById("work-" + a.dataset.work);
+    if (row) row.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+  }));
   const wrap = document.getElementById("show-works");
   wrap.innerHTML = "";
   sh.works.forEach(w => {
     const row = document.createElement("article");
     row.className = "work";
+    row.id = "work-" + sh.works.indexOf(w);
     const subject = `Purchase Inquiry for ${sh.artist}'s drawing ${w.title}`;
     row.innerHTML = `<div class="work-image"><div class="placeholder" style="aspect-ratio:${w.ratio}">image</div></div>
       <div class="work-caption">
@@ -392,12 +421,12 @@ function buildCloud() {
     const phi = i * Math.PI * (3 - Math.sqrt(5));
     const b = document.createElement("button");
     b.className = "cloud-item";
-    b.setAttribute("aria-label", c.title || "exhibition");
-    const img = new Image(); img.src = c.image; img.alt = "";
+    b.setAttribute("aria-label", CLOUD_CARD.title || "exhibition");
+    const img = new Image(); img.src = c; img.alt = "";
     b.appendChild(img);
     b.addEventListener("mouseenter", () => { target = 0.15; hideHint(); });
     b.addEventListener("mouseleave", () => { target = 1; });
-    b.addEventListener("click", () => openCard(c));
+    b.addEventListener("click", () => openCard(CLOUD_CARD));
     wrap.appendChild(b);
     const rnd = seeded(i + 1);
     const reach = 0.78 + rnd() * 0.4;                         // some sit further out than others
@@ -453,6 +482,7 @@ function hideHint() { document.getElementById("cloud-hint").classList.add("gone"
 
 const backdrop = document.getElementById("card-backdrop");
 function openCard(c) {
+  document.getElementById("card-label").textContent = c.label || "";
   document.getElementById("card-img").src = c.image;
   document.getElementById("card-img").alt = c.title || "";
   document.getElementById("card-title").textContent = c.title || "";
@@ -473,7 +503,21 @@ function closeCard() {
 }
 document.getElementById("card-close").addEventListener("click", closeCard);
 backdrop.addEventListener("click", e => { if (e.target === backdrop) closeCard(); });
-document.getElementById("card-enter").addEventListener("click", () => { backdrop.classList.remove("shown", "open"); target = 1; });
+/* "enter exhibition": the card moves toward you and fades to white, then the show eases in */
+document.getElementById("card-enter").addEventListener("click", e => {
+  const href = e.currentTarget.getAttribute("href");
+  if (!href || !href.startsWith("#") || reduceMotion) { backdrop.classList.remove("shown", "open"); target = 1; return; }
+  e.preventDefault();
+  document.body.classList.add("entering");
+  setTimeout(() => {
+    location.hash = href;
+    backdrop.classList.remove("shown", "open");
+    document.body.classList.remove("entering");
+    document.body.classList.add("arriving");
+    target = 1;
+    setTimeout(() => document.body.classList.remove("arriving"), 1100);
+  }, 750);
+});
 document.addEventListener("keydown", e => { if (e.key === "Escape" && backdrop.classList.contains("open")) closeCard(); });
 window.addEventListener("resize", () => placeCloud(performance.now()));
 
@@ -485,6 +529,8 @@ function typeLogo() {
   if (logoBusy) return;
   if (reduceMotion) { el.textContent = LOGO; return; }
   logoBusy = true;
+  const logo = document.querySelector(".logo");
+  logo.style.minWidth = logo.offsetWidth + "px";   // the full word's space stays clickable while it types
   const caret = '<span class="caret"></span>';
   const show = t => { el.innerHTML = esc(t) + caret; };
   // the script: type "project galleryv", pause, backspace the v, then let the cursor blink a while
