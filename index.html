@@ -338,22 +338,20 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .salon-scale { flex-basis: 100%; text-align: center; font-size: 11px; color: var(--muted); margin-top: 4px; }
 
 /* awards */
-.award { position: fixed; inset: 0; z-index: 58; display: none; place-items: center; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); padding: var(--gutter); }
-.award.open { display: grid; animation: arrive .9s cubic-bezier(.16, .8, .3, 1) both; }
-.award-box { background: var(--bg); width: min(380px, 100%); padding: 30px; box-shadow: 0 0 60px rgba(0, 0, 0, 0.14); text-align: center; display: grid; gap: 10px; font-size: 13px; }
-.award-box p { margin: 0; }
-.award-label { font-size: 11px; color: var(--accent); }
-.award-art svg, .award-shelf svg { width: 96px; height: 96px; image-rendering: pixelated; margin: 6px auto; display: block; }
-.award-name { font-size: 18px; }
-.award-text { text-align: justify; text-align-last: center; }
-.award-fine { font-size: 11px; color: var(--muted); }
-.award-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
-.award-link { font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
-.award-link:hover { color: var(--accent); }
-.coll-head { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
-.coll-head .page-title { flex: 0 0 auto; }
+/* award toast: slides in under the menu, stays a moment, then goes. never blocks anything. */
+.toasts { position: fixed; right: var(--gutter); z-index: 58; display: grid; gap: 8px; justify-items: end; pointer-events: none; }
+.toast { display: flex; align-items: center; gap: 12px; background: var(--bg); padding: 10px 16px 10px 10px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.12);
+  opacity: 0; transform: translateX(24px); transition: opacity .8s ease, transform .9s cubic-bezier(.16, .8, .3, 1); }
+.toast.in { opacity: 1; transform: none; }
+.toast svg { width: 36px; height: 36px; image-rendering: pixelated; display: block; }
+.toast p { margin: 0; line-height: 1.35; }
+.toast-label { font-size: 11px; color: var(--muted); }
+.toast-name { font-size: 14px; }
+.award-shelf svg { image-rendering: pixelated; display: block; }
 .award-shelf { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 10px 14px; margin: 48px 0 28px; }
-.award-shelf figure { margin: 0; cursor: help; }
+.award-shelf figure { margin: 0; position: relative; cursor: default; }
+.award-shelf figure::after { content: attr(data-name); position: absolute; top: calc(100% + 6px); right: 0; white-space: nowrap; font-size: 11px; color: var(--muted); opacity: 0; transition: opacity .3s ease; pointer-events: none; }
+.award-shelf figure:hover::after { opacity: 1; }
 .award-shelf svg { width: 28px; height: 28px; margin: 0; }
 
 /* about: leadership */
@@ -676,17 +674,7 @@ footer a:hover { color: var(--accent); }
   </form>
 </div>
 
-<div class="award" id="award" role="dialog" aria-modal="true" aria-label="you earned an award">
-  <div class="award-box">
-    <p class="award-label">you earned an award</p>
-    <div class="award-art"></div>
-    <p class="award-name"></p>
-    <p class="award-text"></p>
-    <p class="award-fine">it's kept in my collection, in this browser.</p>
-    <div class="award-row"><a class="award-link" href="/collection">see my collection</a><button class="enter" id="award-close">thank you</button></div>
-  </div>
-</div>
-
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 <div class="secret-note" id="secret-note" role="status">every award is now in your collection</div>
 
 <div class="nav-preview" id="nav-preview" aria-hidden="true"><img alt=""></div>
@@ -941,11 +929,19 @@ function giveAward(id) {
   const got = getAwards(); if (got[id]) return;
   got[id] = Date.now();
   try { localStorage.setItem(AWARDS, JSON.stringify(got)); } catch (e) {}
-  const a = AWARD_LIST[id], box = document.getElementById("award");
-  box.querySelector(".award-art").innerHTML = a.art;
-  box.querySelector(".award-name").textContent = a.name;
-  box.querySelector(".award-text").textContent = a.text;
-  box.classList.add("open");
+  awardToast(AWARD_LIST[id]);
+  if (document.getElementById("view-collection").classList.contains("active")) renderAwardShelf();
+}
+function awardToast(a) {
+  const box = document.getElementById("toasts"), head = document.querySelector("header").getBoundingClientRect();
+  box.style.top = Math.max(16, head.bottom + 4) + "px";      // just under the menu, or the top corner once scrolled
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.innerHTML = `${a.art}<div><p class="toast-label">award unlocked</p><p class="toast-name">${esc(a.name)}</p></div>`;
+  box.appendChild(t);
+  requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add("in")));
+  setTimeout(() => t.classList.remove("in"), 5200);
+  setTimeout(() => t.remove(), 6200);
 }
 function renderArtists() {
   const el = document.getElementById("artist-archive");
@@ -1147,7 +1143,7 @@ let collectionFilter = "all";
 function renderAwardShelf() {
   const got = getAwards();
   document.getElementById("award-shelf").innerHTML = Object.keys(got).filter(id => AWARD_LIST[id]).map(id =>
-    `<figure title="${esc(AWARD_LIST[id].name)}" aria-label="${esc(AWARD_LIST[id].name)}">${AWARD_LIST[id].art}</figure>`).join("");
+    `<figure data-name="${esc(AWARD_LIST[id].name)}" aria-label="${esc(AWARD_LIST[id].name)}">${AWARD_LIST[id].art}</figure>`).join("");
 }
 // read "23.6 x 19.7 in" as height and width in inches
 function inches(size) { const m = /([\d.]+)\s*x\s*([\d.]+)(?:\s*x\s*[\d.]+)?\s*in/i.exec(size || ""); return m ? [parseFloat(m[1]), parseFloat(m[2])] : null; }
@@ -1612,8 +1608,6 @@ const nl = document.getElementById("nl"), nlForm = document.getElementById("nl-f
 function openNewsletter() { document.getElementById("nl-msg").textContent = ""; nlForm.reset(); nl.classList.add("open"); document.getElementById("nl-email").focus(); }
 function closeNewsletter() { nl.classList.remove("open"); }
 document.getElementById("nl-skip").addEventListener("click", closeNewsletter);
-document.getElementById("award-close").addEventListener("click", () => document.getElementById("award").classList.remove("open"));
-document.querySelector(".award-link").addEventListener("click", () => document.getElementById("award").classList.remove("open"));
 nl.addEventListener("click", e => { if (e.target === nl) closeNewsletter(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && nl.classList.contains("open")) closeNewsletter(); });
 nlForm.addEventListener("submit", e => {
@@ -1734,7 +1728,7 @@ function renderPeople() {
 /* clicking empty white space shows (or hides) the grid behind the site */
 document.addEventListener("click", e => {
   if (e.button !== 0 || e.defaultPrevented) return;
-  if (document.querySelector(".card-backdrop.open, .lightbox.open, .nl.open, .award.open")) return;
+  if (document.querySelector(".card-backdrop.open, .lightbox.open, .nl.open")) return;
   const busy = "a, button, input, textarea, select, label, img, svg, canvas, iframe, video, p, h1, h2, h3, li, figure, summary, details, .card, .gb-entry, .work-caption, .cloud-item, .arch-item, .aa-cell, .counter, .tag, .bubble, nav, form";
   if (e.target.closest(busy)) return;
   if (window.getSelection && String(window.getSelection())) return;
@@ -1814,7 +1808,6 @@ function show() {
   const h = currentRoute();
   let name = VIEWS.includes(h) ? h : "home";
   if (SHOWS[h]) { name = "show"; renderShow(h); const ck = Object.keys(SHOW_CARDS).find(k => SHOW_CARDS[k].show === h); markDoor(ck); }
-  document.getElementById("award").classList.remove("open");
   if (backdrop.classList.contains("open") && !document.body.classList.contains("entering")) { backdrop.classList.remove("shown", "open"); target = 1; }
   if (name === "collection") renderCollection();
   if (name === "artists") startPeek(); else clearInterval(peekTimer);
