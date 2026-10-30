@@ -412,6 +412,12 @@ a.secret { color: inherit; text-decoration: none; cursor: text; }
   background-image: linear-gradient(to right, #dedede 1px, transparent 1px), linear-gradient(to bottom, #dedede 1px, transparent 1px);
   background-size: calc(100vw / 5) 46px; background-position: -1px -1px; }
 body.grid-on #bg-grid { opacity: 1; }
+.grid-cloud { position: fixed; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 1.1s ease;
+  background-image: linear-gradient(to right, #dedede 1px, transparent 1px), linear-gradient(to bottom, #dedede 1px, transparent 1px);
+  background-size: calc(100vw / 5) 46px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); }
+.grid-cloud.on { opacity: 1; }
+@media (max-width: 720px) { .grid-cloud { background-size: calc(100vw / 2) 46px; } }
 header, main, footer { position: relative; z-index: 1; }
 @media (max-width: 720px) { #bg-grid { background-size: calc(100vw / 2) 46px; } }
 
@@ -875,6 +881,19 @@ const AWARD_LIST = {
     "k.bbbbbbbb.k",
     "k..........k",
     "kkkkkkkkkkkk"]) },
+  gridexplorer: { name: "grid explorer", text: "you kept looking until the grid stayed. it's yours now, behind every page. a few more clicks and the walls go white again.", art: pixelArt([
+    "kkkkkkkkkkkk",
+    "kbbbkbbbkbbk",
+    "kbbbkbbbkbbk",
+    "kkkkkkkkkkkk",
+    "kbbbkbbbkbbk",
+    "kbbbkwwwkbbk",
+    "kkkkkwwwkkkk",
+    "kbbbkwwwkbbk",
+    "kbbbkbbbkbbk",
+    "kkkkkkkkkkkk",
+    "kbbbkbbbkbbk",
+    "kkkkkkkkkkkk"]) },
   grid: { name: "behind the walls", text: "you found the grid that holds the whole gallery up.", art: pixelArt([
     "kkkkkkkkkkkk",
     "k...k...k..k",
@@ -913,7 +932,7 @@ function markDoor(key) {
   if (all.every(k => d.has(k))) giveAward("doors");
 }
 function pixelArt(rows) {
-  const col = { b: "#0000ee", w: "#ffffff", k: "#000000" };
+  const col = { b: "#9b9b9b", w: "#ffffff", k: "#000000" };
   const cells = rows.flatMap((r, y) => [...r].map((c, x) => col[c] ? `<rect x="${x}" y="${y}" width="1" height="1" fill="${col[c]}"/>` : "")).join("");
   return `<svg viewBox="0 0 ${rows[0].length} ${rows.length}" shape-rendering="crispEdges" aria-hidden="true">${cells}</svg>`;
 }
@@ -1719,9 +1738,30 @@ document.addEventListener("click", e => {
   const busy = "a, button, input, textarea, select, label, img, svg, canvas, iframe, video, p, h1, h2, h3, li, figure, summary, details, .card, .gb-entry, .work-caption, .cloud-item, .arch-item, .aa-cell, .counter, .tag, .bubble, nav, form";
   if (e.target.closest(busy)) return;
   if (window.getSelection && String(window.getSelection())) return;
-  const on = document.body.classList.toggle("grid-on");
-  if (on) giveAward("grid");
+  // 1st click: a first glimpse (and an award). clicks 1-9: a small cloud of grid where you clicked.
+  // 10th: the grid stays for good (another award). 15th: back to white, and the clouds start again.
+  let n = 0; try { n = Number(localStorage.getItem("pg-grid-clicks")) || 0; } catch (err) {}
+  n = n % 15 + 1;
+  try { localStorage.setItem("pg-grid-clicks", String(n)); } catch (err) {}
+  if (n === 1) giveAward("grid");
+  if (n === 10) { document.body.classList.add("grid-on"); giveAward("gridexplorer"); return; }
+  if (n === 15) { document.body.classList.remove("grid-on"); return; }
+  if (n > 10) return;                       // the grid is already showing everywhere
+  gridCloud(e.clientX, e.clientY);
 });
+function gridCloud(x, y) {
+  const r = 190, c = document.createElement("div");
+  c.className = "grid-cloud";
+  c.style.left = (x - r) + "px"; c.style.top = (y - r) + "px";
+  c.style.width = c.style.height = (r * 2) + "px";
+  c.style.backgroundPosition = `${-(x - r) - 1}px ${-(y - r) - 1}px`;   // lines up with the full grid
+  document.body.appendChild(c);
+  requestAnimationFrame(() => c.classList.add("on"));
+  setTimeout(() => c.classList.remove("on"), 1500);
+  setTimeout(() => c.remove(), 2700);
+}
+// the permanent grid stays on from page to page until the 15th click
+try { const n = Number(localStorage.getItem("pg-grid-clicks")) || 0; if (n >= 10 && n < 15) document.body.classList.add("grid-on"); } catch (err) {}
 
 /* routing */
 const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", "contact", "collection", "guestbook-review"];
