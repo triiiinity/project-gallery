@@ -285,7 +285,7 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .arch-item:hover .a-title { color: var(--accent); }
 /* artist archive */
 .counters { display: flex; flex-wrap: wrap; gap: 28px clamp(36px, 5vw, 72px); margin: 8px 0 40px; }
-.counter b { display: block; font-weight: 400; font-size: clamp(34px, 4.4vw, 56px); letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.counter b { display: block; font-weight: 400; font-size: clamp(24px, 2.9vw, 37px); letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
 .counter span { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); }
 .year-jump { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; margin: 0 0 28px; }
 .year-jump .dot { font-size: 7px; color: var(--ink); }
@@ -331,7 +331,7 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .nl-skip:hover { color: var(--accent); }
 
 /* salon wall: saved works hung together at their real relative sizes */
-.salon { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 22px 26px; min-height: 0; padding: 30px 0 36px; margin-bottom: 30px; border-bottom: 1px solid #dedede; }
+.salon { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 22px 26px; min-height: 0; padding: 56px 0 64px; margin-bottom: 36px; border-bottom: 1px solid #dedede; }
 .salon:empty { display: none; }
 .salon img { display: block; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); cursor: zoom-in; }
 .salon-scale { flex-basis: 100%; text-align: center; font-size: 11px; color: var(--muted); margin-top: 4px; }
@@ -355,6 +355,32 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .award-shelf figure { margin: 0; cursor: help; }
 .award-shelf svg { width: 28px; height: 28px; margin: 0; }
 
+/* about: leadership */
+.sub-head { font-size: 13px; font-weight: 400; color: var(--muted); margin: 56px 0 14px; padding: 0; border: 0; }
+.people { display: grid; gap: 22px; max-width: 560px; }
+.person p { margin: 0; text-align: justify; font-size: 14px; }
+.person .who { font-size: 16px; display: inline-block; cursor: default; }
+.person .who:hover { color: var(--accent); }
+.person .links { margin-top: 4px; font-size: 12px; display: flex; gap: 14px; }
+.person .links a { text-decoration: underline; text-underline-offset: 3px; }
+.person .links a:hover { color: var(--accent); }
+.secret-note { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: var(--ink); color: var(--bg); font-size: 12px; padding: 8px 14px; z-index: 70; opacity: 0; transition: opacity .3s; pointer-events: none; }
+.secret-note.on { opacity: 1; }
+
+/* contact form */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.cf { display: grid; gap: 14px; max-width: 560px; }
+.cf label { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
+.cf input, .cf select, .cf textarea { font-family: var(--font); font-size: 14px; color: var(--ink); border: 0; border-bottom: 1px solid #c9c9c9; padding: 6px 0; background: transparent; border-radius: 0; }
+.cf select { appearance: none; -webkit-appearance: none; cursor: pointer; background: linear-gradient(45deg, transparent 50%, var(--ink) 50%) right 6px center / 5px 5px no-repeat, linear-gradient(-45deg, transparent 50%, var(--ink) 50%) right 1px center / 5px 5px no-repeat; }
+.cf input:focus, .cf select:focus, .cf textarea:focus { outline: none; border-bottom-color: var(--ink); }
+.cf textarea { resize: vertical; }
+.cf .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+.cf .work-found { font-size: 12px; color: var(--accent); min-height: 1em; margin: -6px 0 0; }
+.cf-actions { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 6px; }
+.cf-msg { font-size: 12px; color: var(--muted); margin: 0; }
+.cf-head { font-size: 13px; color: var(--muted); margin: 0 0 4px; }
+
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
 footer a:hover { color: var(--accent); }
@@ -375,6 +401,7 @@ footer a:hover { color: var(--accent); }
   .work.center { width: 100%; }
   .work.left .work-image, .work.right .work-image, .pair .work-image { width: 100%; }
   .gb-form, .gb-fields { grid-template-columns: 1fr; }
+  .contact-grid, .cf .two { grid-template-columns: 1fr; }
   .gb-top { flex-direction: column; align-items: flex-start; }
   .ex-feature, .card.wide { grid-template-columns: 1fr; }
   .bubbles.r, .bubbles.l { left: 8px; right: auto; bottom: 8px; padding: 0; flex-direction: row; }
@@ -481,9 +508,11 @@ footer a:hover { color: var(--accent); }
   <section class="view" id="view-about">
     <h1 class="page-title">about</h1>
     <div class="prose">
-      <p>project gallery is an online gallery established in 2020.</p>
+      <p>project gallery is an online gallery that was established in october 2020.</p>
       <p>pg hosts curated exhibitions organized by Trinity Lester. pg is based in new york city but functions primarily online, with select infrequent in-person exhibitions in brooklyn, ny.</p>
     </div>
+    <h2 class="sub-head">leadership</h2>
+    <div class="people" id="people"></div>
   </section>
 
   <!-- GUEST BOOK -->
@@ -516,8 +545,8 @@ footer a:hover { color: var(--accent); }
   <!-- MY COLLECTION (saved in each visitor's own browser) -->
   <section class="view" id="view-collection">
     <div class="coll-head"><h1 class="page-title">my collection</h1><div class="award-shelf" id="award-shelf" aria-label="your awards"></div></div>
-    <div class="salon" id="salon" aria-label="your saved works, shown at their real relative sizes"></div>
     <div class="tags" id="collection-tags"></div>
+    <div class="salon" id="salon" aria-label="your saved works, shown at their real relative sizes"></div>
     <p class="construction collection-note">kept in this browser, on this device</p>
     <div class="collection" id="collection"></div>
   </section>
@@ -525,9 +554,37 @@ footer a:hover { color: var(--accent); }
   <!-- CONTACT -->
   <section class="view" id="view-contact">
     <h1 class="page-title">contact</h1>
-    <div class="prose">
-      <p>email: <a href="mailto:trinity@project-gallery.com">trinity@project-gallery.com</a></p>
-      <p>ig: <a href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener">@projectgallery</a></p>
+    <div class="contact-grid">
+      <div class="prose">
+        <p>email: <a href="mailto:trinity@project-gallery.com">trinity@project-gallery.com</a></p>
+        <p>ig: <a href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener">@projectgallery</a></p>
+      </div>
+      <form class="cf" id="cf" novalidate>
+        <p class="cf-head">write to us</p>
+        <label for="cf-type">this is about
+          <select id="cf-type">
+            <option value="artwork">inquiring about an artwork</option>
+            <option value="show">a question about a show</option>
+            <option value="artist">i'm an artist</option>
+            <option value="curator">i'm a curator</option>
+            <option value="grant">the artist grant</option>
+            <option value="other" selected>something else</option>
+          </select>
+        </label>
+        <div id="cf-work-wrap" hidden>
+          <label for="cf-work">which work
+            <input id="cf-work" list="cf-works" placeholder="start typing a title or artist" autocomplete="off">
+          </label>
+          <datalist id="cf-works"></datalist>
+          <p class="work-found" id="cf-work-found"></p>
+        </div>
+        <div class="two">
+          <label for="cf-name">name<input id="cf-name" autocomplete="name"></label>
+          <label for="cf-email">your email<input id="cf-email" type="email" autocomplete="email"></label>
+        </div>
+        <label for="cf-msg">message<textarea id="cf-text" rows="5"></textarea></label>
+        <div class="cf-actions"><p class="cf-msg" id="cf-msg">opens your email app with everything filled in</p><button class="enter" type="submit">write the email</button></div>
+      </form>
     </div>
   </section>
 </main>
@@ -579,6 +636,8 @@ footer a:hover { color: var(--accent); }
     <div class="award-row"><a class="award-link" href="#collection">see my collection</a><button class="enter" id="award-close">thank you</button></div>
   </div>
 </div>
+
+<div class="secret-note" id="secret-note" role="status">every award is now in your collection</div>
 
 <div class="nav-preview" id="nav-preview" aria-hidden="true"><img alt=""></div>
 
@@ -802,10 +861,10 @@ function renderArtists() {
   Object.values(SHOW_CARDS).forEach(c => { const m = /^(?:curated|juried) by (.+)$/.exec(c.note || ""); if (m) m[1].split(/ and |, /).forEach(n => curators.add(n.trim())); });
   const since = new Date(2020, 9, 1), now = new Date();
   const years = now.getFullYear() - since.getFullYear() - (now.getMonth() < since.getMonth() ? 1 : 0);
-  const C = [[people.size, "artists"], [order.length, "exhibitions"], [curators.size, "curators"], [STATS.artworks, "artworks shown"], [years, "years, since october 2020"]];
+  const C = [[people.size, "artists shown"], [order.length, "exhibitions"], [curators.size, "curators"], [STATS.artworks, "artworks shown"], [years, "years online, since october 2020"]];
   const box = document.getElementById("aa-counters");
   box.innerHTML = C.map(([n, l]) => `<div class="counter"><b>${n}</b><span>${esc(l)}</span></div>`).join("");
-  if (!countersDone) { box.querySelectorAll("b").forEach((b, i) => countUp(b, C[i][0], 1400)); countersDone = true; }
+
 
   // year links
   const yrs = [...byYear.keys()];
@@ -993,6 +1052,7 @@ function renderAwardShelf() {
 }
 // read "23.6 x 19.7 in" as height and width in inches
 function inches(size) { const m = /([\d.]+)\s*x\s*([\d.]+)(?:\s*x\s*[\d.]+)?\s*in/i.exec(size || ""); return m ? [parseFloat(m[1]), parseFloat(m[2])] : null; }
+function shuffled(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
 function renderSalon(works) {
   const box = document.getElementById("salon");
   const sized = works.map(w => ({ w, d: inches(w.size) })).filter(x => x.d);
@@ -1005,7 +1065,7 @@ function renderSalon(works) {
 }
 function renderCollection() {
   renderAwardShelf();
-  renderSalon(getSaved().map(workInfo));
+
   const box = document.getElementById("collection");
   const tagsEl = document.getElementById("collection-tags");
   const all = getSaved().map(workInfo);
@@ -1032,6 +1092,7 @@ function renderCollection() {
 
   const f = collectionFilter;
   const list = all.filter(w => f === "all" || w.type + "s" === f || w.year === f || w.status === f || (f === "for sale" && w.forSale));
+  renderSalon(f === "all" ? shuffled(list) : list);
   box.innerHTML = list.map(w => `<div class="c-item">
       <img src="${esc(w.image)}" alt="${esc(w.artist + ", " + w.title)}" data-open="${esc(w.id)}">
       <p>${esc(w.artist)}</p>
@@ -1453,6 +1514,70 @@ document.getElementById("ex-archive").addEventListener("mouseover", e => {
   im.addEventListener("mouseleave", () => { pv.classList.remove("on"); setTimeout(() => pv.classList.remove("small"), 200); }, { once: true });
 });
 
+/* about: leadership (names show a picture on hover) */
+function renderPeople() {
+  const box = document.getElementById("people");
+  box.innerHTML = (LEADERSHIP || []).map((p, i) => `<div class="person">
+      <span class="who" data-i="${i}">${esc(p.name)}</span>
+      <p>${esc(p.bio)}</p>
+      <div class="links">${(p.links || []).filter(l => l.url).map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.text)}</a>`).join("")}</div>
+    </div>`).join("");
+  const pv = document.getElementById("nav-preview"), pvImg = pv.querySelector("img");
+  box.querySelectorAll(".who").forEach(w => {
+    const p = LEADERSHIP[w.dataset.i];
+    w.addEventListener("mouseenter", () => {
+      if (!p.image) return;
+      pvImg.src = p.image; const r = w.getBoundingClientRect();
+      const col = box.getBoundingClientRect();                 // beside the text, never on top of it
+      pv.style.top = Math.max(16, r.top - 10) + "px"; pv.style.left = Math.min(window.innerWidth - 276, col.right + 32) + "px";
+      pv.classList.add("on");
+    });
+    w.addEventListener("mouseleave", () => pv.classList.remove("on"));
+  });
+  // a secret: click "Trinity Lester" three times quickly to collect every award in this browser
+  const me = [...box.querySelectorAll(".who")].find(w => /trinity/i.test(w.textContent));
+  if (me) {
+    let clicks = [];
+    me.addEventListener("click", () => {
+      const now = Date.now(); clicks = clicks.filter(t => now - t < 1500); clicks.push(now);
+      if (clicks.length >= 3) {
+        clicks = [];
+        const got = getAwards(); Object.keys(AWARD_LIST).forEach(id => { if (!got[id]) got[id] = now; });
+        try { localStorage.setItem(AWARDS, JSON.stringify(got)); } catch (e) {}
+        const n = document.getElementById("secret-note"); n.classList.add("on"); setTimeout(() => n.classList.remove("on"), 2600);
+      }
+    });
+  }
+}
+
+/* contact form: writes an email to the gallery in the visitor's own email app */
+(() => {
+  const type = document.getElementById("cf-type"), wrap = document.getElementById("cf-work-wrap");
+  const workIn = document.getElementById("cf-work"), found = document.getElementById("cf-work-found");
+  const all = Object.entries(SHOWS).flatMap(([k, sh]) => sh.works.map(w => ({ ...w, artist: sh.artist, show: sh.title, key: k })));
+  document.getElementById("cf-works").innerHTML = all.map(w => `<option value="${esc(w.title + " — " + w.artist)}"></option>`).join("");
+  const match = () => all.find(w => (w.title + " — " + w.artist).toLowerCase() === workIn.value.trim().toLowerCase())
+    || all.find(w => w.title.toLowerCase() === workIn.value.trim().toLowerCase());
+  type.addEventListener("change", () => { wrap.hidden = type.value !== "artwork"; });
+  workIn.addEventListener("input", () => { const w = match(); found.textContent = w ? `${w.artist}, ${w.title}${w.year && w.year !== "year" ? ", " + w.year : ""} · ${w.show}` : ""; });
+  document.getElementById("cf").addEventListener("submit", e => {
+    e.preventDefault();
+    const name = document.getElementById("cf-name").value.trim(), email = document.getElementById("cf-email").value.trim();
+    const text = document.getElementById("cf-text").value.trim(), msg = document.getElementById("cf-msg");
+    if (!name || !text) { msg.textContent = "please add your name and a message"; return; }
+    const labels = { artwork: "artwork inquiry", show: "question about a show", artist: "artist", curator: "curator", grant: "artist grant", other: "message" };
+    let subject = `[${labels[type.value]}] from ${name}`, extra = "";
+    if (type.value === "artwork") {
+      const w = match();
+      subject = `[IMPORTANT · artwork inquiry] ${w ? w.title + " by " + w.artist : workIn.value.trim() || "an artwork"}`;
+      if (w) extra = `\n\nwork: ${w.title}${w.year && w.year !== "year" ? ", " + w.year : ""}\nartist: ${w.artist}\nshow: ${w.show}\nmedium: ${w.medium}\nsize: ${w.size}\npage: ${location.origin}${location.pathname}#${w.key}`;
+    }
+    const body = `${text}${extra}\n\n— ${name}${email ? "\n" + email : ""}`;
+    location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    msg.textContent = "your email app should open with the message ready to send";
+  });
+})();
+
 /* routing */
 const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", "contact", "collection"];
 const header = document.getElementById("top");
@@ -1484,7 +1609,7 @@ window.addEventListener("hashchange", show);
 
 document.getElementById("home-cloud").hidden = HOME_STYLE !== "cloud";
 document.getElementById("home-featured").hidden = HOME_STYLE === "cloud";
-renderSite(); renderCurrent(); renderExhibitionsPage(); renderArtists(); renderGrant(); buildCloud(); show();
+renderPeople(); renderSite(); renderCurrent(); renderExhibitionsPage(); renderArtists(); renderGrant(); buildCloud(); show();
 if (getSaved().length) setTimeout(() => giveAward("collector"), 1200);   // for people who saved works before this award existed
 </script>
 </body>

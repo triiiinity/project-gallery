@@ -815,6 +815,28 @@ const NEWSLETTER = {
   formAction: ""
 };
 
+// LEADERSHIP on the about page. "image" shows when someone hovers the name.
+const LEADERSHIP = [
+  {
+    name: "Trinity Lester",
+    bio: "Trinity Lester is the director of project gallery and an artist and curator in new york city.",
+    image: "images/archive/archive-08.jpg",
+    links: [
+      { text: "instagram", url: "https://www.instagram.com/triiinity.lester/" },
+      { text: "art", url: "https://trinitylester.com" }
+    ]
+  },
+  {
+    name: "Cary Hulbert",
+    bio: "Cary Hulbert was a co-founder of project gallery until 2024. she is an artist in new york city.",
+    image: "images/archive/archive-07.jpg",
+    links: [
+      { text: "instagram", url: "https://www.instagram.com/cary_hulbert/" },
+      { text: "art", url: "" }
+    ]
+  }
+];
+
 // THE GRANT PAGE
 // tallyFormId: the letters at the end of your Tally share link
 //   (tally.so/r/wA8bQz  ->  "wA8bQz"). Leave "" to show "under construction".
