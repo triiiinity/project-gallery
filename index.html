@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>project gallery</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -356,6 +357,7 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .award-shelf svg { width: 28px; height: 28px; margin: 0; }
 
 /* about: leadership */
+.notice { margin-top: 26px !important; padding-top: 14px; border-top: 1px solid #dedede; color: var(--muted); font-size: 13px; }
 .sub-head { font-size: 13px; font-weight: 400; color: var(--muted); margin: 56px 0 14px; padding: 0; border: 0; }
 .people { display: grid; gap: 22px; max-width: 520px; }
 #view-about .prose, #view-about .people { max-width: 520px; }
@@ -421,17 +423,17 @@ footer a:hover { color: var(--accent); }
 <body>
 
 <header id="top">
-  <a class="logo" href="#home" aria-label="project gallery"><span id="logo-text" aria-hidden="true">project gallery</span></a>
+  <a class="logo" href="/" aria-label="project gallery"><span id="logo-text" aria-hidden="true">project gallery</span></a>
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   <nav id="nav">
-    <a href="#home" data-view="home">home</a>
-    <a href="#exhibitions" data-view="exhibitions">exhibitions</a>
-    <a href="#artists" data-view="artists">artists</a>
-    <a href="#grant" data-view="grant">grant</a>
-    <a href="#about" data-view="about">about</a>
-    <a href="#guestbook" data-view="guestbook">guest book</a>
-    <a href="#contact" data-view="contact">contact</a>
-    <a href="#collection" class="plus" data-view="collection" aria-label="my collection" title="my collection"><span class="px-plus">+</span><span class="px-x" aria-hidden="true">×</span></a>
+    <a href="/" data-view="home">home</a>
+    <a href="/exhibitions" data-view="exhibitions">exhibitions</a>
+    <a href="/artists" data-view="artists">artists</a>
+    <a href="/grant" data-view="grant">grant</a>
+    <a href="/about" data-view="about">about</a>
+    <a href="/guestbook" data-view="guestbook">guest book</a>
+    <a href="/contact" data-view="contact">contact</a>
+    <a href="/collection" class="plus" data-view="collection" aria-label="my collection" title="my collection"><span class="px-plus">+</span><span class="px-x" aria-hidden="true">×</span></a>
     <a class="ig" id="ig" href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener" aria-label="project gallery on Instagram"></a>
   </nav>
 </header>
@@ -512,6 +514,7 @@ footer a:hover { color: var(--accent); }
     <div class="prose">
       <p>project gallery is an online gallery that was established in october 2020.</p>
       <p>pg hosts curated exhibitions organized by Trinity Lester. pg is based in new york city but functions primarily online, with select infrequent in-person exhibitions in brooklyn, ny.</p>
+      <p class="notice">project gallery is going through website updates. we are in the process of moving our older exhibitions into an archive on the new site. please be patient, and check that your old links still work if they are on your cv or elsewhere.</p>
     </div>
     <h2 class="sub-head">leadership</h2>
     <div class="people" id="people"></div>
@@ -635,7 +638,7 @@ footer a:hover { color: var(--accent); }
     <p class="award-name"></p>
     <p class="award-text"></p>
     <p class="award-fine">it's kept in my collection, in this browser.</p>
-    <div class="award-row"><a class="award-link" href="#collection">see my collection</a><button class="enter" id="award-close">thank you</button></div>
+    <div class="award-row"><a class="award-link" href="/collection">see my collection</a><button class="enter" id="award-close">thank you</button></div>
   </div>
 </div>
 
@@ -695,7 +698,7 @@ function renderExhibitionsPage() {
   document.getElementById("exf-title").textContent = sh.title || "";
   document.getElementById("exf-dates").textContent = sh.dates || "";
   document.getElementById("exf-lede").textContent = F.lede || "";
-  document.getElementById("exf-enter").href = "#" + F.show;
+  document.getElementById("exf-enter").href = "/" + F.show;
   const fader = document.getElementById("ex-fader");
   fader.innerHTML = F.images.map((src, i) => `<img src="${esc(src)}" alt="${i ? "" : esc(sh.title || "")}"${i === 0 ? ' class="on"' : ""}>`).join("");
   clearInterval(faderTimer);
@@ -722,6 +725,8 @@ function renderExhibitionsPage() {
       `<button class="arch-item" data-card="${esc(k)}"><span class="a-title">${esc(SHOW_CARDS[k].title)}</span><span class="${SHOW_CARDS[k].soon ? "a-soon" : "a-dates"}">${esc(SHOW_CARDS[k].dates)}</span><span class="a-foot"><span class="a-note">${esc(SHOW_CARDS[k].note || "")}</span>${SHOW_CARDS[k].image ? `<img src="${esc(sized(SHOW_CARDS[k].image, 100))}" alt="" loading="lazy">` : ""}</span></button>`).join("")}${'<span class="a-fill"></span>'.repeat((5 - keys.length % 5) % 5)}</div></div>`).join("");
   document.querySelectorAll("#ex-archive .arch-item").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
 }
+// "archive:/eternal-flame" -> the old site's address for that page
+function archiveLink(link) { return (link || "").replace(/^archive:/, SITE.archive.replace(/\/$/, "")); }
 // pictures still hosted on Squarespace can be asked for at a smaller size
 function sized(src, w) { return /squarespace-cdn\.com/.test(src) ? src + "?format=" + w + "w" : src; }
 let openCardKey = "";
@@ -730,7 +735,7 @@ function openShowCard(key) {
   openCardKey = key;
   const sh = SHOWS[c.show];
   openCard({
-    label: c.kind, image: c.image ? sized(c.image, 1500) : "", title: c.title, dates: c.dates, note: c.note, description: c.description, link: c.link,
+    label: c.kind, image: c.image ? sized(c.image, 1500) : "", title: c.title, dates: c.dates, note: c.note, description: c.description, link: archiveLink(c.link),
     wide: true,
     icons: sh ? sh.works.map(w => w.image) : [],
     artists: c.artists || []
@@ -944,7 +949,7 @@ function renderShow(key) {
   }));
   const wrap = document.getElementById("show-works");
   wrap.innerHTML = "";
-  currentWorks = sh.works.map((w, i) => ({ ...w, artist: sh.artist, id: key + ":" + i, showTitle: sh.title, link: "#" + key }));
+  currentWorks = sh.works.map((w, i) => ({ ...w, artist: sh.artist, id: key + ":" + i, showTitle: sh.title, link: "/" + key }));
   const makeWork = (w, i) => {
     const el = document.createElement("article");
     el.className = "work " + (w.layout === "pair" ? "" : (w.layout || "left"));
@@ -1124,7 +1129,7 @@ function lbShow(i) {
     ? `${capLine(w)} :: detail ${it.detail} of ${it.of}`
     : `${capLine(w)} :: ${esc(w.medium)} :: ${esc(w.size)}<button class="save" data-save="${esc(w.id)}"></button>`;
   const sb = document.querySelector("#lb-caption .save");
-  if (sb) sb.addEventListener("click", () => { toggleSaved(w); if (location.hash === "#collection") renderCollection(); refreshSaveButtons(); });
+  if (sb) sb.addEventListener("click", () => { toggleSaved(w); if (currentRoute() === "collection") renderCollection(); refreshSaveButtons(); });
   refreshSaveButtons();
 }
 function openDetails(workIndex, d) {
@@ -1274,10 +1279,10 @@ backdrop.addEventListener("click", e => { if (e.target === backdrop) closeCard()
 /* entering a show: whatever you clicked moves toward you and fades to white, then the show eases in.
    Used for every link into an exhibition page. */
 document.addEventListener("click", e => {
-  const a = e.target.closest("a[href^='#']");
-  if (!a) return;
-  const href = a.getAttribute("href");
-  if (!SHOWS[href.slice(1)]) return;
+  const a = e.target.closest("a[href]");
+  if (!a || a.target === "_blank") return;
+  const dest = routeName(a.getAttribute("href"));
+  if (!dest || !SHOWS[dest]) return;
   if (reduceMotion) { backdrop.classList.remove("shown", "open"); target = 1; return; }
   e.preventDefault();
   document.body.classList.add("entering", backdrop.classList.contains("open") ? "from-card" : "from-page");
@@ -1287,7 +1292,7 @@ document.addEventListener("click", e => {
   vs.style.setProperty("--ox", e.clientX + "px");
   vs.style.setProperty("--oy", e.clientY + "px");
   setTimeout(() => {
-    location.hash = href;
+    go(dest);
     backdrop.classList.remove("shown", "open");
     document.body.classList.remove("entering", "from-card", "from-page");
     document.body.classList.add("arriving");
@@ -1571,7 +1576,7 @@ function renderPeople() {
     if (type.value === "artwork") {
       const w = match();
       subject = `[IMPORTANT · artwork inquiry] ${w ? w.title + " by " + w.artist : workIn.value.trim() || "an artwork"}`;
-      if (w) extra = `\n\nwork: ${w.title}${w.year && w.year !== "year" ? ", " + w.year : ""}\nartist: ${w.artist}\nshow: ${w.show}\nmedium: ${w.medium}\nsize: ${w.size}\npage: ${location.origin}${location.pathname}#${w.key}`;
+      if (w) extra = `\n\nwork: ${w.title}${w.year && w.year !== "year" ? ", " + w.year : ""}\nartist: ${w.artist}\nshow: ${w.show}\nmedium: ${w.medium}\nsize: ${w.size}\npage: ${location.origin}/${w.key}`;
     }
     const body = `${text}${extra}\n\n— ${name}${email ? "\n" + email : ""}`;
     location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -1584,8 +1589,45 @@ const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", 
 const header = document.getElementById("top");
 const burger = document.getElementById("burger");
 
+/* page addresses: project-gallery.com/exhibitions, /grant, /tdreade ... (old #grant links still work) */
+function routeName(href) {
+  if (!href) return null;
+  let s = href.startsWith("#") ? href.slice(1) : href.startsWith("/") ? href.slice(1) : null;
+  if (s === null) return null;
+  s = s.split(/[?#]/)[0].replace(/\/$/, "");
+  if (s === "") return "home";
+  return VIEWS.includes(s) || SHOWS[s] ? s : null;
+}
+function currentRoute() { return routeName(location.pathname) || "home"; }
+function go(name) {
+  const path = name === "home" ? "/" : "/" + name;
+  if (location.pathname !== path) history.pushState(null, "", path);
+  show();
+}
+// any link to a page of this site changes the page without reloading
+document.addEventListener("click", e => {
+  if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+  const a = e.target.closest("a[href]");
+  if (!a || a.target === "_blank") return;
+  const dest = routeName(a.getAttribute("href"));
+  if (!dest) return;
+  e.preventDefault();
+  go(dest);
+});
+window.addEventListener("popstate", show);
+// an old "#grant" style link, or an old Squarespace address that now lives in the archive
+(function legacy() {
+  const fromHash = routeName(location.hash);
+  if (fromHash && location.pathname === "/") { history.replaceState(null, "", fromHash === "home" ? "/" : "/" + fromHash); return; }
+  const path = location.pathname.replace(/^\/|\/$/g, "");
+  if (!path || routeName("/" + path)) return;
+  const archive = SITE.archive.replace(/\/$/, "");
+  const isOld = path.startsWith("s/") || Object.values(SHOW_CARDS).some(c => c.link === "archive:/" + path);
+  if (isOld && new URL(archive).host !== location.host) location.replace(archive + "/" + path);
+})();
+
 function show() {
-  const h = location.hash.slice(1);
+  const h = currentRoute();
   let name = VIEWS.includes(h) ? h : "home";
   if (SHOWS[h]) { name = "show"; renderShow(h); const ck = Object.keys(SHOW_CARDS).find(k => SHOW_CARDS[k].show === h); markDoor(ck); }
   document.getElementById("award").classList.remove("open");
@@ -1606,7 +1648,7 @@ function closeMenus() {
 burger.addEventListener("click", e => { e.stopPropagation(); burger.setAttribute("aria-expanded", String(header.classList.toggle("menu-open"))); });
 document.addEventListener("click", e => { if (!header.contains(e.target)) closeMenus(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenus(); });
-window.addEventListener("hashchange", show);
+window.addEventListener("hashchange", () => { const r = routeName(location.hash); if (r) history.replaceState(null, "", r === "home" ? "/" : "/" + r); show(); });
 
 document.getElementById("home-cloud").hidden = HOME_STYLE !== "cloud";
 document.getElementById("home-featured").hidden = HOME_STYLE === "cloud";
