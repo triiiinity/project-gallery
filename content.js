@@ -179,6 +179,77 @@ const GUESTBOOK = {
   blockedWords: ["fuck", "shit", "bitch", "cunt", "asshole"]
 };
 
+// THE EXHIBITIONS PAGE
+// The featured show at the top: its pictures fade from one to the next.
+const EXHIBITIONS_FEATURE = {
+  show: "mike-nudelman",
+  label: "solo exhibition",
+  lede: "Moving is a solo exhibition of 12 works by Mike Nudelman.",
+  images: [
+    "images/mike-nudelman/see-through.jpg",
+    "images/mike-nudelman/zipped-square.jpg",
+    "images/mike-nudelman/make-me-a-moon-23-square.jpg"
+  ]
+};
+
+// SHOW CARDS: one block per past show. The ticker and the archive list both open these.
+//   kind:  "solo exhibition", "two-person exhibition" or "group exhibition"
+//   show:  the show's key in SHOWS if it has a page on this site (gives the little icons)
+//   link:  where "enter exhibition" goes ("#tdreade" for this site, or the old Squarespace address)
+//   artists: names for group shows, shown as "including artists ..."
+const SHOW_CARDS = {
+  "tdreade": {
+    kind: "solo exhibition",
+    title: "TD Reade: cancel my prayer",
+    year: "2025",
+    dates: "10.05.2025 – 11.05.2025",
+    image: "images/td-reade/heavy-misfortunes.jpg",
+    description: "cancel my prayer features 12 original artworks from Melbourne based artist TD Reade. His paintings foreground figures caught within the choreography of social performance, where ordinary moments become sites of latent tension.",
+    link: "#tdreade",
+    show: "tdreade",
+    artists: []
+  },
+  "mike-nudelman": {
+    kind: "solo exhibition",
+    title: "Mike Nudelman: Moving",
+    year: "2026",
+    dates: "06.12.2026 – 07.19.2026",
+    image: "images/mike-nudelman/zipped-square.jpg",
+    description: "Working with familiar materials, Mike Nudelman transforms the recognizable into the unexpected. His intricate ballpoint drawings use sublime landscapes to examine the ways we perceive and construct reality.",
+    link: "#mike-nudelman",
+    show: "mike-nudelman",
+    artists: []
+  }
+};
+
+// THE TICKER: pictures sliding slowly across the exhibitions page.
+// card: which show card it opens (from SHOW_CARDS). Leave "" until the show has a card.
+const TICKER = [
+  { image: "images/archive/archive-01.jpg", card: "" },
+  { image: "images/td-reade/heavy-misfortunes.jpg", card: "tdreade" },
+  { image: "images/archive/archive-02.jpg", card: "" },
+  { image: "images/archive/archive-03.jpg", card: "" },
+  { image: "images/td-reade/new-management.jpg", card: "tdreade" },
+  { image: "images/archive/archive-04.jpg", card: "" },
+  { image: "images/archive/archive-05.jpg", card: "" },
+  { image: "images/archive/archive-06.jpg", card: "" },
+  { image: "images/td-reade/material-test.jpg", card: "tdreade" },
+  { image: "images/archive/archive-07.jpg", card: "" },
+  { image: "images/archive/archive-08.jpg", card: "" },
+  { image: "images/archive/archive-09.jpg", card: "" },
+  { image: "images/archive/archive-10.jpg", card: "" },
+  { image: "images/archive/archive-11.jpg", card: "" }
+];
+
+// THE ARCHIVE LIST under "exhibitions": card keys, newest first.
+const ARCHIVE_LIST = ["tdreade"];
+
+// NEWSLETTER: offered after someone signs the guest book.
+// Paste the sign-up form address from your newsletter service here when you have one.
+const NEWSLETTER = {
+  formAction: ""
+};
+
 // THE GRANT PAGE
 // tallyFormId: the letters at the end of your Tally share link
 //   (tally.so/r/wA8bQz  ->  "wA8bQz"). Leave "" to show "under construction".

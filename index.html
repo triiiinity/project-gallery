@@ -233,6 +233,54 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .gb-mark { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: var(--ink); white-space: pre; }
 .gb-entry.empty { border-style: dashed; color: #b5b5b5; justify-content: center; align-items: center; }
 
+/* exhibitions page */
+.ex-feature { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 64px); align-items: end; margin-top: 48px; }
+.fader { position: relative; aspect-ratio: 4 / 3; max-height: 72vh; }
+.fader img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: left bottom; opacity: 0; transition: opacity 1.8s ease-in-out; }
+.fader img.on { opacity: 1; }
+.ex-feature-text .show-title { margin: 2px 0 6px; }
+.ex-feature-text .dates { margin: 0 0 14px; }
+.exf-lede { margin: 0 0 22px; text-align: justify; }
+.exf-enter { display: block; text-align: center; padding: 3px 12px; }
+.ticker { overflow: hidden; margin: clamp(80px, 12vh, 140px) calc(var(--gutter) * -1) 0; padding: 4px 0; }
+.ticker-track { display: flex; gap: 22px; width: max-content; animation: tick var(--tick, 120s) linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-track button { flex: 0 0 auto; height: clamp(150px, 22vh, 240px); padding: 0; border: 0; background: none; cursor: default; transition: box-shadow .3s; }
+.ticker-track button[data-card]:not([data-card=""]) { cursor: pointer; }
+.ticker-track button[data-card]:not([data-card=""]):hover { box-shadow: 0 0 24px 3px rgba(0, 0, 0, 0.18); }
+.ticker-track img { height: 100%; width: auto; display: block; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker { overflow-x: auto; } .ticker-track { animation: none; } }
+.archive-wrap { margin-top: clamp(72px, 10vh, 120px); }
+.archive-head { font-size: 13px; }
+.arch-year { display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid #e6e6e6; }
+.arch-year > span { font-size: 13px; font-variant-numeric: tabular-nums; }
+.arch-items { display: grid; gap: 14px; }
+.arch-item { background: none; border: 0; padding: 0; text-align: left; font-family: var(--font); color: var(--ink); cursor: pointer; display: grid; gap: 2px; }
+.arch-item span:first-child { font-size: 15px; transition: text-shadow .2s; }
+.arch-item span:last-child { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.arch-item:hover span:first-child { text-shadow: var(--glow); }
+/* show cards: spotlight image takes most of the card */
+.card.wide { grid-template-columns: 1.45fr 1fr; width: min(1100px, 100%); }
+.card.wide .card-img img { max-height: calc(100vh - 140px); object-fit: contain; object-position: left center; }
+.card-icons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.card-icons:empty { display: none; }
+.card-icons img { width: 28px; height: 28px; object-fit: cover; display: block; }
+.card-artists { margin: 10px 0 0; font-size: 11px; color: var(--muted); text-align: justify; line-height: 1.5; }
+.card-artists:empty { display: none; }
+
+/* newsletter offer after signing */
+.nl { position: fixed; inset: 0; z-index: 55; display: none; place-items: center; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); padding: var(--gutter); }
+.nl.open { display: grid; }
+.nl-box { background: var(--bg); width: min(440px, 100%); padding: 28px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.12); display: grid; gap: 14px; font-size: 13px; }
+.nl-box p { margin: 0; text-align: justify; }
+.nl-box .fine { font-size: 11px; color: var(--muted); }
+.nl-box input { font-family: var(--font); font-size: 14px; border: 0; border-bottom: 1px solid #c9c9c9; padding: 6px 0; border-radius: 0; }
+.nl-box input:focus { outline: none; border-bottom-color: var(--ink); }
+.nl-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.nl-skip { background: none; border: 0; padding: 0; font: inherit; font-size: 12px; color: var(--muted); cursor: pointer; }
+.nl-skip:hover { text-shadow: var(--glow); }
+
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
 footer a:hover { text-shadow: var(--glow); }
@@ -253,6 +301,8 @@ footer a:hover { text-shadow: var(--glow); }
   .work.center { width: 100%; }
   .gb-form, .gb-fields { grid-template-columns: 1fr; }
   .gb-top { flex-direction: column; align-items: flex-start; }
+  .ex-feature, .card.wide { grid-template-columns: 1fr; }
+  .arch-year { grid-template-columns: 70px 1fr; }
   .pair { grid-template-columns: 1fr; padding: 0; gap: 64px; }
   .work.right .work-image, .work.right .work-caption { grid-column: auto; grid-row: auto; }
   .works { gap: 96px; }
@@ -297,13 +347,19 @@ footer a:hover { text-shadow: var(--glow); }
 
   <!-- EXHIBITIONS -->
   <section class="view" id="view-exhibitions">
-    <div class="current">
-      <h1 class="show-title" data-field="title"></h1>
-      <p class="dates" data-field="dates"></p>
-      <a class="enter" data-field="button"></a>
+    <div class="ex-feature">
+      <div class="fader" id="ex-fader"></div>
+      <div class="ex-feature-text">
+        <p class="card-label" id="exf-label"></p>
+        <h1 class="show-title" id="exf-title"></h1>
+        <p class="dates" id="exf-dates"></p>
+        <p class="exf-lede" id="exf-lede"></p>
+        <a class="enter exf-enter" id="exf-enter">enter exhibition</a>
+      </div>
     </div>
-    <div class="section">
-      <h2>exhibitions archive</h2>
+    <div class="ticker" id="ticker" aria-label="past exhibitions"><div class="ticker-track" id="ticker-track"></div></div>
+    <div class="archive-wrap">
+      <h2 class="archive-head">exhibitions</h2>
       <div id="ex-archive"></div>
     </div>
   </section>
@@ -400,6 +456,8 @@ footer a:hover { text-shadow: var(--glow); }
       <p class="dates" id="card-dates"></p>
       <p class="desc" id="card-desc"></p>
       <a class="enter" id="card-enter">enter exhibition</a>
+      <div class="card-icons" id="card-icons"></div>
+      <p class="card-artists" id="card-artists"></p>
     </div>
   </div>
 </div>
@@ -410,6 +468,18 @@ footer a:hover { text-shadow: var(--glow); }
   <button class="lb-btn lb-next" id="lb-next" aria-label="Next work">›</button>
   <div class="lb-stage" id="lb-stage"><img id="lb-img" alt=""></div>
   <p class="lb-caption" id="lb-caption"></p>
+</div>
+
+<div class="nl" id="nl" role="dialog" aria-modal="true" aria-labelledby="nl-title">
+  <form class="nl-box" id="nl-form" novalidate>
+    <p id="nl-title">thank you for signing the guest book.</p>
+    <p>would you like project gallery's newsletter? new shows, open calls and the artist grant, now and then.</p>
+    <label class="fine" for="nl-email">email</label>
+    <input id="nl-email" type="email" autocomplete="email" placeholder="you@example.com">
+    <p class="fine">your email is never shown in the guest book.</p>
+    <div class="nl-row"><button type="button" class="nl-skip" id="nl-skip">no thanks</button><button class="enter" type="submit">sign up</button></div>
+    <p class="fine" id="nl-msg" role="status"></p>
+  </form>
 </div>
 
 <div class="nav-preview" id="nav-preview" aria-hidden="true"><img alt=""></div>
@@ -456,6 +526,50 @@ function groupByYear(rows) {
   const m = new Map();
   [...rows].sort((a, b) => b.year - a.year).forEach(r => { if (!m.has(r.year)) m.set(r.year, []); m.get(r.year).push(r); });
   return m;
+}
+
+/* exhibitions page: featured show, slow ticker, archive list */
+let faderTimer = null;
+function renderExhibitionsPage() {
+  const F = EXHIBITIONS_FEATURE, sh = SHOWS[F.show] || {};
+  document.getElementById("exf-label").textContent = F.label || "";
+  document.getElementById("exf-title").textContent = sh.title || "";
+  document.getElementById("exf-dates").textContent = sh.dates || "";
+  document.getElementById("exf-lede").textContent = F.lede || "";
+  document.getElementById("exf-enter").href = "#" + F.show;
+  const fader = document.getElementById("ex-fader");
+  fader.innerHTML = F.images.map((src, i) => `<img src="${esc(src)}" alt="${i ? "" : esc(sh.title || "")}"${i === 0 ? ' class="on"' : ""}>`).join("");
+  clearInterval(faderTimer);
+  if (!reduceMotion && F.images.length > 1) {
+    let k = 0;
+    faderTimer = setInterval(() => {
+      const imgs = fader.querySelectorAll("img");
+      imgs[k].classList.remove("on"); k = (k + 1) % imgs.length; imgs[k].classList.add("on");
+    }, 4800);
+  }
+  // ticker: the list twice, so it loops without a seam
+  const track = document.getElementById("ticker-track");
+  const one = TICKER.map(t => `<button data-card="${esc(t.card || "")}" aria-label="${esc(SHOW_CARDS[t.card]?.title || "past exhibition")}"${t.card ? "" : ' tabindex="-1"'}><img src="${esc(t.image)}" alt="" loading="lazy"></button>`).join("");
+  track.innerHTML = one + one.replace(/<button /g, '<button aria-hidden="true" tabindex="-1" ');
+  track.style.setProperty("--tick", (TICKER.length * 9) + "s");
+  track.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { if (b.dataset.card) openShowCard(b.dataset.card); }));
+  // archive list by year
+  const byYear = new Map();
+  ARCHIVE_LIST.forEach(k => { const c = SHOW_CARDS[k]; if (!c) return; if (!byYear.has(c.year)) byYear.set(c.year, []); byYear.get(c.year).push(k); });
+  document.getElementById("ex-archive").innerHTML = [...byYear].sort((a, b) => b[0] - a[0]).map(([y, keys]) =>
+    `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${keys.map(k =>
+      `<button class="arch-item" data-card="${esc(k)}"><span>${esc(SHOW_CARDS[k].title)}</span><span>${esc(SHOW_CARDS[k].dates)}</span></button>`).join("")}</div></div>`).join("");
+  document.querySelectorAll("#ex-archive .arch-item").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
+}
+function openShowCard(key) {
+  const c = SHOW_CARDS[key]; if (!c) return;
+  const sh = SHOWS[c.show];
+  openCard({
+    label: c.kind, image: c.image, title: c.title, dates: c.dates, description: c.description, link: c.link,
+    wide: true,
+    icons: sh ? sh.works.map(w => w.image) : [],
+    artists: c.artists || []
+  });
 }
 
 function renderExArchive() {
@@ -796,6 +910,9 @@ function openCard(c) {
   document.getElementById("card-title").textContent = c.title || "";
   document.getElementById("card-dates").textContent = c.dates || "";
   document.getElementById("card-desc").textContent = c.description || "";
+  document.querySelector("#card-backdrop .card").classList.toggle("wide", !!c.wide);
+  document.getElementById("card-icons").innerHTML = (c.icons || []).slice(0, 16).map(src => `<img src="${esc(src)}" alt="" loading="lazy">`).join("");
+  document.getElementById("card-artists").textContent = (c.artists && c.artists.length) ? "including artists " + c.artists.join(", ") : "";
   const enter = document.getElementById("card-enter");
   enter.hidden = !c.link;
   enter.href = c.link || "#";
@@ -903,10 +1020,10 @@ function renderGrant() {
 const GB_STORE = "pg-guestbook-draft";
 const gbPad = document.getElementById("gb-pad"), gbCtx = gbPad.getContext("2d");
 // small marks drawn from text, net-art style
-const GB_MARKS = ["", "✶", ":)", "<3", "°˖✧", "~~~", "[•]", "-->", "∞", "(•‿•)", "¯\\_(ツ)_/¯"];
+const GB_MARKS = ["", "✶", ":)", "<3", "°˖✧", "~~~", "[•]", "-->", "∞", "※", "△", "◌", "{ }", "//", ";)", "=)", "· · ·", "[:::]", "+ + +", "(•‿•)", "¯\\_(ツ)_/¯"];
 let gbDrawing = false, gbStrokes = [], gbMark = "";
 function gbPoint(e) { const r = gbPad.getBoundingClientRect(); return [Math.round((e.clientX - r.left) * gbPad.width / r.width), Math.round((e.clientY - r.top) * gbPad.height / r.height)]; }
-gbCtx.lineWidth = 1.2; gbCtx.lineCap = "round"; gbCtx.lineJoin = "round"; gbCtx.strokeStyle = "#000";
+gbCtx.lineWidth = 2.2; gbCtx.lineCap = "round"; gbCtx.lineJoin = "round"; gbCtx.strokeStyle = "#000";
 gbPad.addEventListener("pointerdown", e => { gbDrawing = true; gbPad.setPointerCapture(e.pointerId); const pt = gbPoint(e); gbStrokes.push([pt]); gbCtx.beginPath(); gbCtx.moveTo(...pt); });
 gbPad.addEventListener("pointermove", e => { if (!gbDrawing) return; const pt = gbPoint(e); gbStrokes[gbStrokes.length - 1].push(pt); gbCtx.lineTo(...pt); gbCtx.stroke(); });
 ["pointerup", "pointerleave", "pointercancel"].forEach(ev => gbPad.addEventListener(ev, () => { gbDrawing = false; }));
@@ -939,7 +1056,7 @@ function sigSVG(strokes, name) {
   const pad = 4, x0 = Math.min(...xs) - pad, y0 = Math.min(...ys) - pad;
   const w = Math.max(...xs) - x0 + pad, h = Math.max(...ys) - y0 + pad;
   const d = strokes.map(st => st.length === 1 ? `M${st[0][0]} ${st[0][1]}h0.1` : "M" + st.map(p => p.join(" ")).join("L")).join("");
-  return `<svg viewBox="${x0} ${y0} ${w} ${h}" role="img" aria-label="signature of ${esc(name)}"><path d="${d}" fill="none" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`;
+  return `<svg viewBox="${x0} ${y0} ${w} ${h}" role="img" aria-label="signature of ${esc(name)}"><path d="${d}" fill="none" stroke="#000" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`;
 }
 // older drafts saved the signature as a picture: thin its line by one pixel
 function thinPNG(img) {
@@ -990,6 +1107,26 @@ gbForm.addEventListener("submit", e => {
   e.target.reset(); gbClearPad();
   msg.textContent = "thank you for signing";
   renderGuestbook();
+  gbForm.hidden = true; gbOpen.setAttribute("aria-expanded", "false"); gbOpen.textContent = "sign the guest book";
+  openNewsletter();
+});
+
+/* newsletter offer (not connected yet: nothing is saved until NEWSLETTER.formAction is set) */
+const nl = document.getElementById("nl"), nlForm = document.getElementById("nl-form");
+function openNewsletter() { document.getElementById("nl-msg").textContent = ""; nlForm.reset(); nl.classList.add("open"); document.getElementById("nl-email").focus(); }
+function closeNewsletter() { nl.classList.remove("open"); }
+document.getElementById("nl-skip").addEventListener("click", closeNewsletter);
+nl.addEventListener("click", e => { if (e.target === nl) closeNewsletter(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && nl.classList.contains("open")) closeNewsletter(); });
+nlForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const email = document.getElementById("nl-email").value.trim();
+  const msg = document.getElementById("nl-msg");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = "please check your email address"; return; }
+  if (!NEWSLETTER.formAction) { msg.textContent = "the newsletter is launching soon. sign-ups open here when it does."; return; }
+  fetch(NEWSLETTER.formAction, { method: "POST", body: new URLSearchParams({ email }), mode: "no-cors" })
+    .then(() => { msg.textContent = "you're on the list. thank you."; setTimeout(closeNewsletter, 1600); })
+    .catch(() => { msg.textContent = "that didn't go through. please try again."; });
 });
 
 /* hovering a menu item shows a small picture of that page */
@@ -1043,7 +1180,7 @@ window.addEventListener("hashchange", show);
 
 document.getElementById("home-cloud").hidden = HOME_STYLE !== "cloud";
 document.getElementById("home-featured").hidden = HOME_STYLE === "cloud";
-renderSite(); renderCurrent(); renderExArchive(); renderArtists(); renderGrant(); buildCloud(); show();
+renderSite(); renderCurrent(); renderExhibitionsPage(); renderArtists(); renderGrant(); buildCloud(); show();
 </script>
 </body>
 </html>
