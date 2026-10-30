@@ -65,31 +65,38 @@ const SHOWS = {
       { text: "price list",    link: "https://project-gallery.com/s/Mike-Nudelman-Image-List.pdf" },
       { text: "social media",  link: "https://www.instagram.com/mikenudelman/" }
     ],
-    // One line per artwork: title, year, medium, size. "image" is the file in your images folder.
+    // One block per artwork, in the order they appear on the page.
+    //   year:   replace "year" with the real year
+    //   layout: where the work sits on the page
+    //     "left"   picture in the left half, caption bottom-right
+    //     "right"  picture in the right half, caption bottom-left
+    //     "center" picture in the middle, caption underneath
+    //     "pair"   this work and the next one side by side (give both "pair")
+    //   image:  the picture file inside the images folder
     works: [
-      { title: "See Through", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+      { title: "See Through", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "center",
         image: "images/mike-nudelman/see-through.jpg", ratio: "1200/927" },
-      { title: "Lonesome and Empty", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+      { title: "Lonesome and Empty", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "right",
         image: "images/mike-nudelman/lonesome-and-empty.jpg", ratio: "1200/927" },
-      { title: "Apparent", year: "", medium: "Ballpoint pen on paper", size: "5.5 x 4.5 in (13.8 × 11.4 cm)",
+      { title: "Apparent", year: "year", medium: "Ballpoint pen on paper", size: "5.5 x 4.5 in (13.8 × 11.4 cm)", layout: "left",
         image: "images/mike-nudelman/apparent.jpg", ratio: "1200/982" },
-      { title: "Zipped", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+      { title: "Zipped", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "center",
         image: "images/mike-nudelman/zipped.jpg", ratio: "1200/927" },
-      { title: "Recess", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+      { title: "Recess", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "pair",
         image: "images/mike-nudelman/recess.jpg", ratio: "1200/927" },
-      { title: "Goes the Other Way", year: "", medium: "Ballpoint pen on paper", size: "7 x 5 in (17.8 × 12.7 cm)",
+      { title: "Goes the Other Way", year: "year", medium: "Ballpoint pen on paper", size: "7 x 5 in (17.8 × 12.7 cm)", layout: "pair",
         image: "images/mike-nudelman/goes-the-other-way.jpg", ratio: "1200/857" },
-      { title: "Make Me a Moon 23", year: "", medium: "Ballpoint pen on paper", size: "3 x 2 in (7.6 × 5 cm)",
+      { title: "Make Me a Moon 23", year: "year", medium: "Ballpoint pen on paper", size: "3 x 2 in (7.6 × 5 cm)", layout: "right",
         image: "images/mike-nudelman/make-me-a-moon-23.jpg", ratio: "1200/800" },
-      { title: "Understanding the Laws that the Line of their Mysterious Orbits Obeyed 2", year: "", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)",
+      { title: "Understanding the Laws that the Line of their Mysterious Orbits Obeyed 2", year: "year", medium: "Ballpoint pen on paper", size: "11 x 8.5 in (27.9 × 21.6 cm)", layout: "center",
         image: "images/mike-nudelman/understanding-the-laws-that-the-line-of-their-mysterious-orbits-obeyed-2.jpg", ratio: "1200/927" },
-      { title: "Dusky Dolphin", year: "", medium: "Ballpoint pen on paper", size: "5 x 4.25 in (12.7 × 10.8 cm)",
+      { title: "Dusky Dolphin", year: "year", medium: "Ballpoint pen on paper", size: "5 x 4.25 in (12.7 × 10.8 cm)", layout: "left",
         image: "images/mike-nudelman/dusky-dolphin.jpg", ratio: "1200/1020" },
-      { title: "Untitled 7", year: "", medium: "Ballpoint pen on paper", size: "5.5 x 4 in (13.9 × 10.2 cm)",
+      { title: "Untitled 7", year: "year", medium: "Ballpoint pen on paper", size: "5.5 x 4 in (13.9 × 10.2 cm)", layout: "right",
         image: "images/mike-nudelman/untitled-7.jpg", ratio: "1200/871" },
-      { title: "Anything But a Giraffe", year: "", medium: "Ballpoint pen on paper", size: "4.1 x 3.9 in (10.5 × 9.9 cm)",
+      { title: "Anything But a Giraffe", year: "year", medium: "Ballpoint pen on paper", size: "4.1 x 3.9 in (10.5 × 9.9 cm)", layout: "center",
         image: "images/mike-nudelman/anything-but-a-giraffe.jpg", ratio: "1200/1124" },
-      { title: "Spit", year: "", medium: "Ballpoint pen on paper", size: "5.5 x 5.5 in (13.9 × 13.9 cm)",
+      { title: "Spit", year: "year", medium: "Ballpoint pen on paper", size: "5.5 x 5.5 in (13.9 × 13.9 cm)", layout: "left",
         image: "images/mike-nudelman/spit.jpg", ratio: "1200/1200" }
     ]
   }
