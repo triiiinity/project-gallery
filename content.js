@@ -165,6 +165,11 @@ const PAST_EXHIBITIONS = [
   // { year: 2025, title: "TD Reade: cancel my prayer", dates: "10.05.2025 – 11.05.2025" },
 ];
 
+// NUMBERS for the artist archive counters (the others are counted automatically)
+const STATS = {
+  artworks: 333        // placeholder until we count every work
+};
+
 // ARTIST ARCHIVE: one line per artist per show, like a spreadsheet.
 //   show:      the show's key in SHOW_CARDS (gives the title and year)
 //   artist:    name as it should appear
@@ -703,7 +708,7 @@ const SHOW_CARDS = {
     artists: ["Priscilla Aleman", "Ruhee Maknojia", "Dante Migone-Ojeda", "Shani Strand", "A young Yu"]
   },
   "splinters": {
-    kind: "group exhibition", title: "Splinters in the ongoing normal", year: "2022", dates: "03.15.2022 – 04.15.2022", note: "",
+    kind: "group exhibition", title: "Splinters in the ongoing normal", year: "2022", dates: "03.15.2022 – 04.15.2022", note: "curated by Junni Chen",
     image: "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/6126c9a5-1e08-48a7-b587-dbafdfa5f5ea/serhii_hulievych_anthill_etching_2019_24.5x28.5.jpg", description: "",
     link: "https://project-gallery.com/splinters-in-the-ongoing-normal", show: "",
     artists: ["Aurora Abzug", "Louisa Armbrust", "Julia Baroni", "Emily Bartolone", "Katina Bitsicas", "Sunny Moxin Chen", "Annie Chen Ziyao", "Kelly Chuning", "Larkin Cook", "Ana Maria Farina", "Robyn A. Frank", "Pauline Galiana", "Kristi Gallup", "Sara Hess", "Megan Adams Irving", "Bonam Kim", "Christine Lee", "Em Miller", "Di Miranda", "Judith Mullen", "Aaron Nemec", "Megan Nugroho", "Ami Park", "Lily Prince", "PlantBotGenetics", "Abby Robinson", "Hulievych Serhii", "Malu Tan", "Siyuan Tan", "Theo Trotter", "Curtis Widem", "William Glaser Wilson", "Lizzie Zelter"]

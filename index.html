@@ -86,7 +86,8 @@ h2 { font-size: 12px; font-weight: 400; letter-spacing: 0.02em; margin: 0 0 12px
 .ex-intro .ex-text { grid-area: text; }
 .ex-intro .ex-buttons { grid-area: buttons; }
 .ex-intro .lede { font-style: italic; margin: 0 0 4px; font-size: 14px; }
-.ex-intro .lede { margin-bottom: 24px; }
+.ex-intro .lede { margin-bottom: 6px; }
+.show-hint { font-size: 11px; color: #9a9a9a; margin: 0 0 24px; }
 details { max-width: 560px; border: 0; margin: 0 0 6px; }
 summary { list-style: none; cursor: pointer; font-size: 13px; display: inline-flex; gap: 6px; transition: color .2s; }
 summary::-webkit-details-marker { display: none; }
@@ -264,32 +265,41 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 @media (prefers-reduced-motion: reduce) { .ticker { overflow-x: auto; } .ticker-track { animation: none; } }
 .archive-wrap { margin-top: clamp(72px, 10vh, 120px); }
 /* the heading hangs from a full-width line */
-.archive-head { font-size: clamp(22px, 2.4vw, 28px); font-weight: 400; letter-spacing: -0.015em; line-height: .74; margin: 0 calc(var(--gutter) * -1) 28px; padding: 0 var(--gutter); border-bottom: 3px solid var(--ink); border-top: 0; }
-.archive-head span { position: relative; top: 2px; }
-.arch-year { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 26px 0; }
-.arch-year > span { font-size: 19px; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
-.arch-items { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px 28px; align-items: start; }
-.arch-item { position: relative; background: var(--bg); border: 0; padding: 14px 0 22px 0; text-align: left; min-width: 0; overflow-wrap: anywhere; font-family: var(--font); color: var(--ink); cursor: pointer; display: grid; gap: 2px; }
+.archive-head { font-size: clamp(22px, 2.4vw, 28px); font-weight: 400; letter-spacing: -0.015em; margin: 0 0 20px; padding: 0; border: 0; }
+.archive-head span { position: static; }
+.arch-year { display: grid; grid-template-columns: 110px 1fr; gap: 0; padding: 0; border-top: 1px solid #dedede; }
+.arch-year:last-child { border-bottom: 1px solid #dedede; }
+#ex-archive .arch-year > span, .aa-year > span { padding: 18px 0; border-right: 1px solid #dedede; }
+.arch-year > span { font-size: 19px; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; scroll-margin-top: 24px; }
+.arch-items { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 1px; background: #dedede; align-items: stretch; }
+.arch-items .a-fill { background: var(--bg); }
+.arch-item { position: relative; background: var(--bg); border: 0; padding: 16px 16px 16px 18px; aspect-ratio: 4 / 3; display: flex; flex-direction: column; text-align: left; min-width: 0; overflow-wrap: anywhere; font-family: var(--font); color: var(--ink); cursor: pointer; }
 .arch-item .a-title { font-size: 14px; line-height: 1.3; transition: color .2s; }
 .arch-item .a-dates { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .arch-item .a-note { font-size: 11px; color: var(--muted); }
-.arch-item .a-foot { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; min-height: 30px; }
+.arch-item .a-foot { margin-top: auto; padding-top: 16px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; min-height: 30px; }
 .arch-item img { flex: 0 0 auto; width: 30px; height: 30px; object-fit: cover; transition: box-shadow .25s; }
 .arch-item .a-soon { font-size: 12px; color: var(--accent); }
 .arch-item:hover img { box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.3); }
 .arch-item:hover .a-title { color: var(--accent); }
 /* artist archive */
-.aa-intro { color: var(--muted); font-size: 13px; margin: -16px 0 0; }
-.aa-wrap { margin-top: 56px; }
-.aa-shows { display: grid; gap: 34px; }
-.aa-title { background: none; border: 0; padding: 0; font-family: var(--font); font-size: 12px; color: var(--muted); cursor: pointer; text-align: left; margin-bottom: 10px; transition: color .2s; }
+.counters { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; margin: 8px 0 40px; }
+.counter b { display: block; font-weight: 400; font-size: clamp(34px, 4.4vw, 56px); letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.counter span { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); }
+.year-jump { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0 0 28px; }
+.year-jump a { font-size: 15px; font-variant-numeric: tabular-nums; transition: color .2s; }
+.year-jump a:hover { color: var(--accent); }
+.aa-wrap { margin-top: 0; }
+.aa-shows { display: grid; }
+.aa-show { display: grid; grid-template-columns: 210px 1fr; border-bottom: 1px solid #dedede; }
+.aa-show:last-child { border-bottom: 0; }
+.aa-title { background: none; border: 0; border-right: 1px solid #dedede; padding: 14px 16px; font-family: var(--font); font-size: 12px; color: var(--muted); cursor: pointer; text-align: left; align-self: stretch; transition: color .2s; overflow-wrap: anywhere; }
 .aa-title:hover { color: var(--accent); }
-.aa-label { font-size: 12px; color: var(--muted); margin: 0 0 10px; }
-.aa-names { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px 28px; font-size: 14px; }
-.aa-names a, .aa-names span { overflow-wrap: anywhere; }
+.aa-names { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: #dedede; font-size: 14px; }
+.aa-names a, .aa-names span { background: var(--bg); padding: 12px 14px; overflow-wrap: anywhere; }
 .aa-names a { transition: color .2s; }
 .aa-names a:hover { color: var(--accent); }
-.aa-names span { color: #8a8a8a; }
+.aa-names span.nolink { color: #8a8a8a; }
 
 /* show cards: spotlight image takes most of the card */
 .card.wide { grid-template-columns: 1.25fr 1fr; width: min(1240px, 100%); column-gap: calc(var(--pad) * 1.6); }
@@ -343,6 +353,9 @@ footer a:hover { color: var(--accent); }
   .bubbles.r, .bubbles.l { left: 8px; right: auto; bottom: 8px; padding: 0; flex-direction: row; }
   .arch-year { grid-template-columns: 1fr; gap: 12px; }
   .arch-items, .aa-names { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .counters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .aa-show { grid-template-columns: 1fr; }
+  .aa-title { border-right: 0; }
   .pair { grid-template-columns: 1fr; padding: 0; gap: 64px; }
   .work.right .work-image, .work.right .work-caption { grid-column: auto; grid-row: auto; }
   .works { gap: 96px; }
@@ -411,6 +424,7 @@ footer a:hover { color: var(--accent); }
       <h1 class="show-title" id="show-title"></h1>
       <div class="ex-text">
         <p class="lede" id="show-lede"></p>
+        <p class="show-hint" id="show-hint"></p>
         <details><summary>artist bio</summary><div class="detail-body" id="show-bio"></div></details>
         <details><summary>artist statement</summary><div class="detail-body" id="show-statement"></div></details>
       </div>
@@ -422,9 +436,9 @@ footer a:hover { color: var(--accent); }
   <!-- ARTISTS -->
   <section class="view" id="view-artists">
     <h1 class="page-title">artist archive</h1>
-    <p class="aa-intro" id="aa-intro"></p>
-    <div class="archive-wrap aa-wrap">
-      <h2 class="archive-head"><span>artists</span></h2>
+    <div class="counters" id="aa-counters"></div>
+    <nav class="year-jump" id="aa-years" aria-label="jump to a year"></nav>
+    <div class="aa-wrap">
       <div id="artist-archive"></div>
     </div>
   </section>
@@ -605,7 +619,7 @@ function renderExhibitionsPage() {
   byYear.forEach(keys => keys.sort((a, b) => start(b).localeCompare(start(a))));
   document.getElementById("ex-archive").innerHTML = [...byYear].sort((a, b) => b[0] - a[0]).map(([y, keys]) =>
     `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${keys.map(k =>
-      `<button class="arch-item" data-card="${esc(k)}"><span class="a-title">${esc(SHOW_CARDS[k].title)}</span><span class="${SHOW_CARDS[k].soon ? "a-soon" : "a-dates"}">${esc(SHOW_CARDS[k].dates)}</span><span class="a-foot"><span class="a-note">${esc(SHOW_CARDS[k].note || "")}</span>${SHOW_CARDS[k].image ? `<img src="${esc(sized(SHOW_CARDS[k].image, 100))}" alt="" loading="lazy">` : ""}</span></button>`).join("")}</div></div>`).join("");
+      `<button class="arch-item" data-card="${esc(k)}"><span class="a-title">${esc(SHOW_CARDS[k].title)}</span><span class="${SHOW_CARDS[k].soon ? "a-soon" : "a-dates"}">${esc(SHOW_CARDS[k].dates)}</span><span class="a-foot"><span class="a-note">${esc(SHOW_CARDS[k].note || "")}</span>${SHOW_CARDS[k].image ? `<img src="${esc(sized(SHOW_CARDS[k].image, 100))}" alt="" loading="lazy">` : ""}</span></button>`).join("")}${'<span class="a-fill"></span>'.repeat((5 - keys.length % 5) % 5)}</div></div>`).join("");
   document.querySelectorAll("#ex-archive .arch-item").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
 }
 // pictures still hosted on Squarespace can be asked for at a smaller size
@@ -632,26 +646,57 @@ function renderExArchive() {
   el.innerHTML = html;
 }
 
+// a show's own title without the artist's name ("Mandalas: Tao Lin" -> "Mandalas")
+function shortTitle(k) {
+  const t = SHOW_CARDS[k].title;
+  const names = ARTISTS.filter(a => a.show === k).map(a => a.artist.toLowerCase());
+  const hasName = part => names.some(n => part.toLowerCase().includes(n.split(" ")[0]));
+  for (const sep of [": ", ", "]) {
+    const parts = t.split(sep);
+    if (parts.length > 1) { const keep = parts.filter(p => !hasName(p)); if (keep.length) return keep.join(sep); }
+  }
+  return t;
+}
+function countUp(el, to, ms) {
+  if (reduceMotion || !isFinite(to)) { el.textContent = to; return; }
+  const t0 = performance.now();
+  const step = now => { const k = Math.min(1, (now - t0) / ms); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+let countersDone = false;
 function renderArtists() {
   const el = document.getElementById("artist-archive");
   if (!ARTISTS.length) { el.innerHTML = UC; return; }
-  // group: year -> show -> artists, following the exhibitions archive order
   const order = ARCHIVE_LIST.filter(k => ARTISTS.some(a => a.show === k));
   const byYear = new Map();
   order.forEach(k => { const y = SHOW_CARDS[k].year; if (!byYear.has(y)) byYear.set(y, []); byYear.get(y).push(k); });
+
+  // counters
   const people = new Set(ARTISTS.map(a => a.artist.replace(/\s*\(.*\)$/, "")));
-  document.getElementById("aa-intro").textContent = `${people.size} artists across ${order.length} exhibitions since 2020. names link to each artist's instagram.`;
+  const curators = new Set(["Trinity Lester"]);
+  Object.values(SHOW_CARDS).forEach(c => { const m = /^(?:curated|juried) by (.+)$/.exec(c.note || ""); if (m) m[1].split(/ and |, /).forEach(n => curators.add(n.trim())); });
+  const since = new Date(2020, 9, 1), now = new Date();
+  const years = now.getFullYear() - since.getFullYear() - (now.getMonth() < since.getMonth() ? 1 : 0);
+  const C = [[people.size, "artists"], [order.length, "exhibitions"], [curators.size, "curators"], [STATS.artworks, "artworks shown"], [years, "years, since october 2020"]];
+  const box = document.getElementById("aa-counters");
+  box.innerHTML = C.map(([n, l]) => `<div class="counter"><b>${n}</b><span>${esc(l)}</span></div>`).join("");
+  if (!countersDone) { box.querySelectorAll("b").forEach((b, i) => countUp(b, C[i][0], 1400)); countersDone = true; }
+
+  // year links
+  document.getElementById("aa-years").innerHTML = [...byYear.keys()].map(y => `<a href="#aa-${y}" data-year="${y}">${y}</a>`).join("");
+  document.querySelectorAll("#aa-years a").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault();
+    document.getElementById("aa-" + a.dataset.year).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }));
+
   const name = p => p.instagram
     ? `<a href="https://www.instagram.com/${encodeURIComponent(p.instagram)}/" target="_blank" rel="noopener">${esc(p.artist)}</a>`
-    : `<span>${esc(p.artist)}</span>`;
-  el.innerHTML = [...byYear].map(([y, keys]) => {
-    // solo and two-person shows share one block per year; group shows get their own
-    const solos = keys.filter(k => SHOW_CARDS[k].kind !== "group exhibition");
-    const groups = keys.filter(k => SHOW_CARDS[k].kind === "group exhibition");
-    let html = solos.length ? `<div class="aa-show"><p class="aa-label">solo exhibitions</p><div class="aa-names">${solos.map(k => ARTISTS.filter(a => a.show === k).map(name).join("")).join("")}</div></div>` : "";
-    html += groups.map(k => `<div class="aa-show"><button class="aa-title" data-card="${esc(k)}">${esc(SHOW_CARDS[k].title)}</button><div class="aa-names">${ARTISTS.filter(a => a.show === k).map(name).join("")}</div></div>`).join("");
-    return `<div class="arch-year aa-year"><span>${esc(y)}</span><div class="aa-shows">${html}</div></div>`;
-  }).join("");
+    : `<span class="nolink">${esc(p.artist)}</span>`;
+  el.innerHTML = [...byYear].map(([y, keys]) => `<div class="arch-year aa-year"><span id="aa-${y}">${esc(y)}</span><div class="aa-shows">${keys.map(k => {
+    const list = ARTISTS.filter(a => a.show === k);
+    const fill = '<span></span>'.repeat((5 - list.length % 5) % 5);
+    return `<div class="aa-show"><button class="aa-title" data-card="${esc(k)}">${esc(shortTitle(k))}</button><div class="aa-names">${list.map(name).join("")}${fill}</div></div>`;
+  }).join("")}</div></div>`).join("");
   el.querySelectorAll(".aa-title").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
 }
 
@@ -677,6 +722,9 @@ function renderShow(key) {
   const sh = SHOWS[key];
   document.getElementById("show-title").textContent = sh.title;
   document.getElementById("show-lede").textContent = sh.lede;
+  document.getElementById("show-hint").textContent = sh.works.some(w => (w.details || []).length)
+    ? "hover over a painting to find close-up details. click any work to see it larger."
+    : "click any work to see it larger.";
   const paras = t => String(t).split(/\n\s*\n/).map(x => `<p>${esc(x.trim())}</p>`).join("");
   document.getElementById("show-bio").innerHTML = paras(sh.bio || "artist bio coming soon");
   document.getElementById("show-statement").innerHTML = paras(sh.statement || "artist statement coming soon");
