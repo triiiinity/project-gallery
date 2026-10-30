@@ -183,5 +183,5 @@ const ARTISTS = [
 const GRANT = {
   title: "artist grant",
   intro: "",
-  tallyFormId: ""
+  tallyFormId: "5XbBrv"
 };
