@@ -165,10 +165,8 @@ const PAST_EXHIBITIONS = [
   // { year: 2025, title: "TD Reade: cancel my prayer", dates: "10.05.2025 – 11.05.2025" },
 ];
 
-// NUMBERS for the artist archive counters (the others are counted automatically)
-const STATS = {
-  artworks: 333        // placeholder until we count every work
-};
+// NUMBERS for the artist archive counters are counted automatically.
+const STATS = {};
 
 // ARTIST ARCHIVE: one line per artist per show, like a spreadsheet.
 //   show:      the show's key in SHOW_CARDS (gives the title and year)
@@ -819,20 +817,20 @@ const NEWSLETTER = {
 const LEADERSHIP = [
   {
     name: "Trinity Lester",
-    bio: "Trinity Lester is the director of project gallery and an artist and curator in new york city.",
-    image: "images/archive/archive-08.jpg",
+    bio: "is the director of project gallery and an artist and curator in new york city.",
+    image: "images/about/trinity-lester.jpg",
     links: [
       { text: "instagram", url: "https://www.instagram.com/triiinity.lester/" },
-      { text: "art", url: "https://trinitylester.com" }
+      { text: "website", url: "https://trinitylester.com" }
     ]
   },
   {
     name: "Cary Hulbert",
-    bio: "Cary Hulbert was a co-founder of project gallery until 2024. she is an artist in new york city.",
-    image: "images/archive/archive-07.jpg",
+    bio: "was a co-founder of project gallery who left in 2023. she is an artist in new york city.",
+    image: "images/about/cary-hulbert.jpg",
     links: [
       { text: "instagram", url: "https://www.instagram.com/cary_hulbert/" },
-      { text: "art", url: "" }
+      { text: "website", url: "https://www.caryhulbert.com/" }
     ]
   }
 ];

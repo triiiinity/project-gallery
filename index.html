@@ -357,10 +357,12 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 
 /* about: leadership */
 .sub-head { font-size: 13px; font-weight: 400; color: var(--muted); margin: 56px 0 14px; padding: 0; border: 0; }
-.people { display: grid; gap: 22px; max-width: 560px; }
-.person p { margin: 0; text-align: justify; font-size: 14px; }
-.person .who { font-size: 16px; display: inline-block; cursor: default; }
-.person .who:hover { color: var(--accent); }
+.people { display: grid; gap: 22px; max-width: 520px; }
+#view-about .prose, #view-about .people { max-width: 520px; }
+#view-about .prose p, #view-about .person p { text-align: justify; }
+.person p { margin: 0; text-align: justify; font-size: 15px; }
+.person .who { color: var(--accent); cursor: default; }
+.person .who:hover { text-decoration: underline; text-underline-offset: 3px; }
 .person .links { margin-top: 4px; font-size: 12px; display: flex; gap: 14px; }
 .person .links a { text-decoration: underline; text-underline-offset: 3px; }
 .person .links a:hover { color: var(--accent); }
@@ -861,7 +863,7 @@ function renderArtists() {
   Object.values(SHOW_CARDS).forEach(c => { const m = /^(?:curated|juried) by (.+)$/.exec(c.note || ""); if (m) m[1].split(/ and |, /).forEach(n => curators.add(n.trim())); });
   const since = new Date(2020, 9, 1), now = new Date();
   const years = now.getFullYear() - since.getFullYear() - (now.getMonth() < since.getMonth() ? 1 : 0);
-  const C = [[people.size, "artists shown"], [order.length, "exhibitions"], [curators.size, "curators"], [STATS.artworks, "artworks shown"], [years, "years online, since october 2020"]];
+  const C = [[people.size, "artists shown"], [order.length, "exhibitions"], [curators.size, "curators"], [years, "years online, since october 2020"]];
   const box = document.getElementById("aa-counters");
   box.innerHTML = C.map(([n, l]) => `<div class="counter"><b>${n}</b><span>${esc(l)}</span></div>`).join("");
 
@@ -1518,8 +1520,7 @@ document.getElementById("ex-archive").addEventListener("mouseover", e => {
 function renderPeople() {
   const box = document.getElementById("people");
   box.innerHTML = (LEADERSHIP || []).map((p, i) => `<div class="person">
-      <span class="who" data-i="${i}">${esc(p.name)}</span>
-      <p>${esc(p.bio)}</p>
+      <p><span class="who" data-i="${i}">${esc(p.name)}</span> ${esc(p.bio)}</p>
       <div class="links">${(p.links || []).filter(l => l.url).map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.text)}</a>`).join("")}</div>
     </div>`).join("");
   const pv = document.getElementById("nav-preview"), pvImg = pv.querySelector("img");
