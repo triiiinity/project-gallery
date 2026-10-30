@@ -65,6 +65,7 @@ main { padding: 0 var(--gutter) 64px; flex: 1; }
 
 /* exhibitions / artists / about / contact */
 .page-title { font-size: clamp(20px, 2.2vw, 26px); letter-spacing: -0.015em; font-weight: 400; margin: 48px 0 28px; }
+.align-right { text-align: right; }
 .current { margin-top: 48px; }
 h2 { font-size: 12px; font-weight: 400; letter-spacing: 0.02em; margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--ink); }
 .section { margin-top: 64px; max-width: 640px; }
@@ -265,9 +266,9 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 @media (prefers-reduced-motion: reduce) { .ticker { overflow-x: auto; } .ticker-track { animation: none; } }
 .archive-wrap { margin-top: clamp(72px, 10vh, 120px); }
 /* the heading hangs from a full-width line */
-.archive-head { font-size: clamp(22px, 2.4vw, 28px); font-weight: 400; letter-spacing: -0.015em; margin: 0 0 20px; padding: 0; border: 0; }
+.archive-head { font-size: clamp(22px, 2.4vw, 28px); font-weight: 400; letter-spacing: -0.015em; margin: 0 0 20px; padding: 0; border: 0; text-align: right; }
 .archive-head span { position: static; }
-.arch-year { display: grid; grid-template-columns: 110px 1fr; gap: 0; padding: 0; border-top: 1px solid #dedede; }
+.arch-year { display: grid; grid-template-columns: 110px 1fr; gap: 0; padding: 0 0 0 var(--gutter); margin: 0 calc(var(--gutter) * -1); border-top: 1px solid #dedede; }
 .arch-year:last-child { border-bottom: 1px solid #dedede; }
 #ex-archive .arch-year > span, .aa-year > span { padding: 18px 0; border-right: 1px solid #dedede; }
 .arch-year > span { font-size: 19px; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; scroll-margin-top: 24px; }
@@ -283,23 +284,24 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .arch-item:hover img { box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.3); }
 .arch-item:hover .a-title { color: var(--accent); }
 /* artist archive */
-.counters { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; margin: 8px 0 40px; }
+.counters { display: flex; flex-wrap: wrap; gap: 28px clamp(36px, 5vw, 72px); margin: 8px 0 40px; }
 .counter b { display: block; font-weight: 400; font-size: clamp(34px, 4.4vw, 56px); letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
 .counter span { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); }
-.year-jump { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0 0 28px; }
-.year-jump a { font-size: 15px; font-variant-numeric: tabular-nums; transition: color .2s; }
+.year-jump { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; margin: 0 0 28px; }
+.year-jump .dot { font-size: 7px; color: var(--ink); }
+.year-jump a { font-size: 15px; font-variant-numeric: tabular-nums; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color .2s; }
 .year-jump a:hover { color: var(--accent); }
 .aa-wrap { margin-top: 0; }
-.aa-shows { display: grid; }
-.aa-show { display: grid; grid-template-columns: 210px 1fr; border-bottom: 1px solid #dedede; }
-.aa-show:last-child { border-bottom: 0; }
-.aa-title { background: none; border: 0; border-right: 1px solid #dedede; padding: 14px 16px; font-family: var(--font); font-size: 12px; color: var(--muted); cursor: pointer; text-align: left; align-self: stretch; transition: color .2s; overflow-wrap: anywhere; }
-.aa-title:hover { color: var(--accent); }
-.aa-names { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: #dedede; font-size: 14px; }
-.aa-names a, .aa-names span { background: var(--bg); padding: 12px 14px; overflow-wrap: anywhere; }
-.aa-names a { transition: color .2s; }
-.aa-names a:hover { color: var(--accent); }
-.aa-names span.nolink { color: #8a8a8a; }
+.aa-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: #dedede; border-left: 1px solid #dedede; }
+.aa-grid > * { background: var(--bg); padding: 12px 14px; min-width: 0; overflow-wrap: anywhere; }
+.aa-cell small, .aa-gtitle { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+.aa-gtitle { grid-column: 1 / -1; background: none; border: 0; text-align: left; font-family: var(--font); cursor: pointer; padding: 18px 14px 6px; margin: 0; background: var(--bg); transition: color .2s; }
+.aa-gtitle:hover { color: var(--accent); }
+.aa-cell a, .aa-cell .nolink { font-size: 14px; }
+.aa-cell a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: #b8b8b8; transition: color .2s; }
+.aa-cell a:hover, .aa-cell a:visited, .aa-cell a.seen { color: var(--accent); text-decoration-color: currentColor; }
+.aa-cell .nolink { color: #8a8a8a; }
+.aa-progress { font-size: 11px; color: var(--muted); margin: 0 0 18px; }
 
 /* show cards: spotlight image takes most of the card */
 .card.wide { grid-template-columns: 1.25fr 1fr; width: min(1240px, 100%); column-gap: calc(var(--pad) * 1.6); }
@@ -328,6 +330,23 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .nl-skip { background: none; border: 0; padding: 0; font: inherit; font-size: 12px; color: var(--muted); cursor: pointer; }
 .nl-skip:hover { color: var(--accent); }
 
+/* awards */
+.award { position: fixed; inset: 0; z-index: 58; display: none; place-items: center; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); padding: var(--gutter); }
+.award.open { display: grid; animation: arrive .9s cubic-bezier(.16, .8, .3, 1) both; }
+.award-box { background: var(--bg); width: min(380px, 100%); padding: 30px; box-shadow: 0 0 60px rgba(0, 0, 0, 0.14); text-align: center; display: grid; gap: 10px; font-size: 13px; }
+.award-box p { margin: 0; }
+.award-label { font-size: 11px; color: var(--accent); }
+.award-art svg, .award-shelf svg { width: 96px; height: 96px; image-rendering: pixelated; margin: 6px auto; display: block; }
+.award-name { font-size: 18px; }
+.award-text { text-align: justify; text-align-last: center; }
+.award-fine { font-size: 11px; color: var(--muted); }
+.award-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+.award-link { font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.award-link:hover { color: var(--accent); }
+.award-shelf { display: flex; flex-wrap: wrap; gap: 24px; margin: 0 0 36px; }
+.award-shelf figure { margin: 0; text-align: center; font-size: 11px; color: var(--muted); }
+.award-shelf svg { width: 56px; height: 56px; margin: 0 auto 6px; }
+
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
 footer a:hover { color: var(--accent); }
@@ -354,8 +373,7 @@ footer a:hover { color: var(--accent); }
   .arch-year { grid-template-columns: 1fr; gap: 12px; }
   .arch-items, .aa-names { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .counters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .aa-show { grid-template-columns: 1fr; }
-  .aa-title { border-right: 0; }
+  .aa-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pair { grid-template-columns: 1fr; padding: 0; gap: 64px; }
   .work.right .work-image, .work.right .work-caption { grid-column: auto; grid-row: auto; }
   .works { gap: 96px; }
@@ -435,9 +453,10 @@ footer a:hover { color: var(--accent); }
 
   <!-- ARTISTS -->
   <section class="view" id="view-artists">
-    <h1 class="page-title">artist archive</h1>
+    <h1 class="page-title align-right">artist archive</h1>
     <div class="counters" id="aa-counters"></div>
     <nav class="year-jump" id="aa-years" aria-label="jump to a year"></nav>
+    <p class="aa-progress" id="aa-progress"></p>
     <div class="aa-wrap">
       <div id="artist-archive"></div>
     </div>
@@ -489,6 +508,7 @@ footer a:hover { color: var(--accent); }
   <!-- MY COLLECTION (saved in each visitor's own browser) -->
   <section class="view" id="view-collection">
     <h1 class="page-title">my collection</h1>
+    <div class="award-shelf" id="award-shelf"></div>
     <div class="tags" id="collection-tags"></div>
     <p class="construction collection-note">kept in this browser, on this device</p>
     <div class="collection" id="collection"></div>
@@ -539,6 +559,17 @@ footer a:hover { color: var(--accent); }
     <div class="nl-row"><button type="button" class="nl-skip" id="nl-skip">no thanks</button><button class="enter" type="submit">sign up</button></div>
     <p class="fine" id="nl-msg" role="status"></p>
   </form>
+</div>
+
+<div class="award" id="award" role="dialog" aria-modal="true" aria-label="you earned an award">
+  <div class="award-box">
+    <p class="award-label">you earned an award</p>
+    <div class="award-art"></div>
+    <p class="award-name"></p>
+    <p class="award-text"></p>
+    <p class="award-fine">it's kept in my collection, in this browser.</p>
+    <div class="award-row"><a class="award-link" href="#collection">see my collection</a><button class="enter" id="award-close">thank you</button></div>
+  </div>
 </div>
 
 <div class="nav-preview" id="nav-preview" aria-hidden="true"><img alt=""></div>
@@ -664,6 +695,54 @@ function countUp(el, to, ms) {
   requestAnimationFrame(step);
 }
 let countersDone = false;
+/* exploring: remember which artist pages a visitor has opened (in their browser only) */
+const SEEN = "pg-artists-seen", AWARDS = "pg-awards";
+function getSeen() { try { return new Set(JSON.parse(localStorage.getItem(SEEN)) || []); } catch (e) { return new Set(); } }
+function allHandles() { return new Set(ARTISTS.filter(a => a.instagram).map(a => a.instagram.toLowerCase())); }
+function markSeen(h) {
+  const s = getSeen(); s.add(h);
+  try { localStorage.setItem(SEEN, JSON.stringify([...s])); } catch (e) {}
+  updateProgress();
+  const all = allHandles();
+  if ([...all].every(x => s.has(x))) giveAward("explorer");
+}
+function updateProgress() {
+  const all = allHandles(), s = getSeen(), n = [...all].filter(x => s.has(x)).length;
+  const el = document.getElementById("aa-progress");
+  if (el) el.textContent = n ? `you've visited ${n} of ${all.size} artists` : "";
+}
+/* awards: small pictures you earn by exploring the site, kept with your collection */
+const AWARD_LIST = {
+  explorer: { name: "the explorer", text: "you visited every artist in the archive. thank you for looking so closely.", art: pixelArt([
+    "....bbbb....",
+    "..bbbbbbbb..",
+    ".bbwwbbwwbb.",
+    ".bbwkbbwkbb.",
+    "bbbbbbbbbbbb",
+    "bbbbbbbbbbbb",
+    "bbbkkkkkkbbb",
+    "bbbbkkkkbbbb",
+    ".bbbbbbbbbb.",
+    ".b.bb..bb.b.",
+    "b..b....b..b",
+    "...b....b..."]) }
+};
+function pixelArt(rows) {
+  const col = { b: "#0000ee", w: "#ffffff", k: "#000000" };
+  const cells = rows.flatMap((r, y) => [...r].map((c, x) => col[c] ? `<rect x="${x}" y="${y}" width="1" height="1" fill="${col[c]}"/>` : "")).join("");
+  return `<svg viewBox="0 0 ${rows[0].length} ${rows.length}" shape-rendering="crispEdges" aria-hidden="true">${cells}</svg>`;
+}
+function getAwards() { try { return JSON.parse(localStorage.getItem(AWARDS)) || {}; } catch (e) { return {}; } }
+function giveAward(id) {
+  const got = getAwards(); if (got[id]) return;
+  got[id] = Date.now();
+  try { localStorage.setItem(AWARDS, JSON.stringify(got)); } catch (e) {}
+  const a = AWARD_LIST[id], box = document.getElementById("award");
+  box.querySelector(".award-art").innerHTML = a.art;
+  box.querySelector(".award-name").textContent = a.name;
+  box.querySelector(".award-text").textContent = a.text;
+  box.classList.add("open");
+}
 function renderArtists() {
   const el = document.getElementById("artist-archive");
   if (!ARTISTS.length) { el.innerHTML = UC; return; }
@@ -683,21 +762,34 @@ function renderArtists() {
   if (!countersDone) { box.querySelectorAll("b").forEach((b, i) => countUp(b, C[i][0], 1400)); countersDone = true; }
 
   // year links
-  document.getElementById("aa-years").innerHTML = [...byYear.keys()].map(y => `<a href="#aa-${y}" data-year="${y}">${y}</a>`).join("");
+  const yrs = [...byYear.keys()];
+  document.getElementById("aa-years").innerHTML = yrs.map((y, i) => `<a href="#aa-${y}" data-year="${y}">${y}</a>${i < yrs.length - 1 ? '<span class="dot" aria-hidden="true">●</span>' : ""}`).join("");
   document.querySelectorAll("#aa-years a").forEach(a => a.addEventListener("click", e => {
     e.preventDefault();
     document.getElementById("aa-" + a.dataset.year).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   }));
 
-  const name = p => p.instagram
-    ? `<a href="https://www.instagram.com/${encodeURIComponent(p.instagram)}/" target="_blank" rel="noopener">${esc(p.artist)}</a>`
-    : `<span class="nolink">${esc(p.artist)}</span>`;
-  el.innerHTML = [...byYear].map(([y, keys]) => `<div class="arch-year aa-year"><span id="aa-${y}">${esc(y)}</span><div class="aa-shows">${keys.map(k => {
-    const list = ARTISTS.filter(a => a.show === k);
-    const fill = '<span></span>'.repeat((5 - list.length % 5) % 5);
-    return `<div class="aa-show"><button class="aa-title" data-card="${esc(k)}">${esc(shortTitle(k))}</button><div class="aa-names">${list.map(name).join("")}${fill}</div></div>`;
-  }).join("")}</div></div>`).join("");
-  el.querySelectorAll(".aa-title").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
+  const seen = getSeen();
+  const cell = (p, title) => `<div class="aa-cell">${title ? `<small>${esc(title)}</small>` : ""}${p.instagram
+    ? `<a href="https://www.instagram.com/${encodeURIComponent(p.instagram)}/" target="_blank" rel="noopener" data-ig="${esc(p.instagram.toLowerCase())}"${seen.has(p.instagram.toLowerCase()) ? ' class="seen"' : ""}>${esc(p.artist)}</a>`
+    : `<span class="nolink">${esc(p.artist)}</span>`}</div>`;
+  const pad = n => '<div aria-hidden="true"></div>'.repeat((5 - n % 5) % 5);
+  el.innerHTML = [...byYear].map(([y, keys]) => {
+    // solo and two-person shows: show title in small type above each name
+    const solos = keys.filter(k => SHOW_CARDS[k].kind !== "group exhibition");
+    const soloCells = solos.flatMap(k => ARTISTS.filter(a => a.show === k).map(p => cell(p, shortTitle(k))));
+    let html = soloCells.join("") + pad(soloCells.length);
+    // group shows: the title once, then everyone in it
+    keys.filter(k => SHOW_CARDS[k].kind === "group exhibition").forEach(k => {
+      const list = ARTISTS.filter(a => a.show === k);
+      html += `<button class="aa-gtitle" data-card="${esc(k)}">${esc(SHOW_CARDS[k].title)}</button>` + list.map(p => cell(p, "")).join("") + pad(list.length);
+    });
+    return `<div class="arch-year aa-year"><span id="aa-${y}">${esc(y)}</span><div class="aa-grid">${html}</div></div>`;
+  }).join("");
+  el.querySelectorAll(".aa-gtitle").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
+  el.querySelectorAll("a[data-ig]").forEach(a => a.addEventListener("click", () => { a.classList.add("seen"); markSeen(a.dataset.ig); }));
+  updateProgress();
+
 }
 
 
@@ -847,7 +939,13 @@ function pickColours(src) {
 }
 
 let collectionFilter = "all";
+function renderAwardShelf() {
+  const got = getAwards();
+  document.getElementById("award-shelf").innerHTML = Object.keys(got).filter(id => AWARD_LIST[id]).map(id =>
+    `<figure title="${esc(AWARD_LIST[id].text)}">${AWARD_LIST[id].art}<figcaption>${esc(AWARD_LIST[id].name)}</figcaption></figure>`).join("");
+}
 function renderCollection() {
+  renderAwardShelf();
   const box = document.getElementById("collection");
   const tagsEl = document.getElementById("collection-tags");
   const all = getSaved().map(workInfo);
@@ -1243,6 +1341,8 @@ const nl = document.getElementById("nl"), nlForm = document.getElementById("nl-f
 function openNewsletter() { document.getElementById("nl-msg").textContent = ""; nlForm.reset(); nl.classList.add("open"); document.getElementById("nl-email").focus(); }
 function closeNewsletter() { nl.classList.remove("open"); }
 document.getElementById("nl-skip").addEventListener("click", closeNewsletter);
+document.getElementById("award-close").addEventListener("click", () => document.getElementById("award").classList.remove("open"));
+document.querySelector(".award-link").addEventListener("click", () => document.getElementById("award").classList.remove("open"));
 nl.addEventListener("click", e => { if (e.target === nl) closeNewsletter(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && nl.classList.contains("open")) closeNewsletter(); });
 nlForm.addEventListener("submit", e => {
@@ -1301,6 +1401,7 @@ function show() {
   const h = location.hash.slice(1);
   let name = VIEWS.includes(h) ? h : "home";
   if (SHOWS[h]) { name = "show"; renderShow(h); }
+  document.getElementById("award").classList.remove("open");
   if (name === "collection") renderCollection();
   if (name === "guestbook") renderGuestbook();
   if (name === "home" && lastView !== "home") typeLogo();
