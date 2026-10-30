@@ -349,9 +349,11 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .award-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
 .award-link { font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .award-link:hover { color: var(--accent); }
-.award-shelf { display: flex; flex-wrap: wrap; gap: 24px; margin: 0 0 36px; }
-.award-shelf figure { margin: 0; text-align: center; font-size: 11px; color: var(--muted); }
-.award-shelf svg { width: 56px; height: 56px; margin: 0 auto 6px; }
+.coll-head { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.coll-head .page-title { flex: 0 0 auto; }
+.award-shelf { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 10px 14px; margin: 48px 0 28px; }
+.award-shelf figure { margin: 0; cursor: help; }
+.award-shelf svg { width: 28px; height: 28px; margin: 0; }
 
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
@@ -513,9 +515,8 @@ footer a:hover { color: var(--accent); }
 
   <!-- MY COLLECTION (saved in each visitor's own browser) -->
   <section class="view" id="view-collection">
-    <h1 class="page-title">my collection</h1>
+    <div class="coll-head"><h1 class="page-title">my collection</h1><div class="award-shelf" id="award-shelf" aria-label="your awards"></div></div>
     <div class="salon" id="salon" aria-label="your saved works, shown at their real relative sizes"></div>
-    <div class="award-shelf" id="award-shelf"></div>
     <div class="tags" id="collection-tags"></div>
     <p class="construction collection-note">kept in this browser, on this device</p>
     <div class="collection" id="collection"></div>
@@ -988,7 +989,7 @@ let collectionFilter = "all";
 function renderAwardShelf() {
   const got = getAwards();
   document.getElementById("award-shelf").innerHTML = Object.keys(got).filter(id => AWARD_LIST[id]).map(id =>
-    `<figure title="${esc(AWARD_LIST[id].text)}">${AWARD_LIST[id].art}<figcaption>${esc(AWARD_LIST[id].name)}</figcaption></figure>`).join("");
+    `<figure title="${esc(AWARD_LIST[id].name)}" aria-label="${esc(AWARD_LIST[id].name)}">${AWARD_LIST[id].art}</figure>`).join("");
 }
 // read "23.6 x 19.7 in" as height and width in inches
 function inches(size) { const m = /([\d.]+)\s*x\s*([\d.]+)(?:\s*x\s*[\d.]+)?\s*in/i.exec(size || ""); return m ? [parseFloat(m[1]), parseFloat(m[2])] : null; }
@@ -998,8 +999,8 @@ function renderSalon(works) {
   if (!sized.length) { box.innerHTML = ""; return; }
   const tallest = Math.max(...sized.map(x => x.d[0]));
   const px = Math.min(11, 300 / tallest);                    // pixels per inch, shared by every work
-  box.innerHTML = sized.map(({ w, d }) => `<img src="${esc(w.image)}" alt="${esc(w.artist + ", " + w.title)}" title="${esc(w.title + ", " + w.size)}" style="height:${Math.max(18, d[0] * px).toFixed(0)}px;width:${Math.max(14, d[1] * px).toFixed(0)}px;object-fit:cover" data-id="${esc(w.id)}">`).join("")
-    + `<p class="salon-scale">your wall, hung at true scale</p>`;
+  box.innerHTML = sized.map(({ w, d }) => `<img src="${esc(w.image)}" alt="${esc(w.artist + ", " + w.title)}" title="${esc(w.title + ", " + w.size)}" style="height:${Math.max(18, d[0] * px).toFixed(0)}px;width:auto" data-id="${esc(w.id)}">`).join("")
+    ;
   box.querySelectorAll("img").forEach((im, i) => im.addEventListener("click", () => { currentWorks = sized.map(x => x.w); openLightbox(i); }));
 }
 function renderCollection() {
