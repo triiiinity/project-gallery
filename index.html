@@ -278,6 +278,19 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .arch-item .a-soon { font-size: 12px; color: var(--accent); }
 .arch-item:hover img { box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.3); }
 .arch-item:hover .a-title { color: var(--accent); }
+/* artist archive */
+.aa-intro { color: var(--muted); font-size: 13px; margin: -16px 0 0; }
+.aa-wrap { margin-top: 56px; }
+.aa-shows { display: grid; gap: 34px; }
+.aa-title { background: none; border: 0; padding: 0; font-family: var(--font); font-size: 12px; color: var(--muted); cursor: pointer; text-align: left; margin-bottom: 10px; transition: color .2s; }
+.aa-title:hover { color: var(--accent); }
+.aa-label { font-size: 12px; color: var(--muted); margin: 0 0 10px; }
+.aa-names { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px 28px; font-size: 14px; }
+.aa-names a, .aa-names span { overflow-wrap: anywhere; }
+.aa-names a { transition: color .2s; }
+.aa-names a:hover { color: var(--accent); }
+.aa-names span { color: #8a8a8a; }
+
 /* show cards: spotlight image takes most of the card */
 .card.wide { grid-template-columns: 1.25fr 1fr; width: min(1240px, 100%); column-gap: calc(var(--pad) * 1.6); }
 .card.wide .card-img img { max-height: calc(100vh - 140px); object-fit: contain; object-position: left center; }
@@ -329,7 +342,7 @@ footer a:hover { color: var(--accent); }
   .ex-feature, .card.wide { grid-template-columns: 1fr; }
   .bubbles.r, .bubbles.l { left: 8px; right: auto; bottom: 8px; padding: 0; flex-direction: row; }
   .arch-year { grid-template-columns: 1fr; gap: 12px; }
-  .arch-items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .arch-items, .aa-names { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pair { grid-template-columns: 1fr; padding: 0; gap: 64px; }
   .work.right .work-image, .work.right .work-caption { grid-column: auto; grid-row: auto; }
   .works { gap: 96px; }
@@ -409,7 +422,11 @@ footer a:hover { color: var(--accent); }
   <!-- ARTISTS -->
   <section class="view" id="view-artists">
     <h1 class="page-title">artist archive</h1>
-    <div id="artist-archive"></div>
+    <p class="aa-intro" id="aa-intro"></p>
+    <div class="archive-wrap aa-wrap">
+      <h2 class="archive-head"><span>artists</span></h2>
+      <div id="artist-archive"></div>
+    </div>
   </section>
 
   <!-- GRANT -->
@@ -618,18 +635,24 @@ function renderExArchive() {
 function renderArtists() {
   const el = document.getElementById("artist-archive");
   if (!ARTISTS.length) { el.innerHTML = UC; return; }
-  let html = "";
-  for (const [year, rows] of groupByYear(ARTISTS)) {
-    html += `<p class="year">${year}</p>`;
-    const shows = new Map();
-    rows.forEach(r => { if (!shows.has(r.show)) shows.set(r.show, []); shows.get(r.show).push(r); });
-    for (const [show, people] of shows) {
-      html += `<p class="show-name">${esc(show)}</p><ul class="archive">` + people.map(p => p.instagram
-        ? `<li><a href="https://www.instagram.com/${encodeURIComponent(p.instagram)}/" target="_blank" rel="noopener">${esc(p.artist)}</a></li>`
-        : `<li>${esc(p.artist)}</li>`).join("") + "</ul>";
-    }
-  }
-  el.innerHTML = html;
+  // group: year -> show -> artists, following the exhibitions archive order
+  const order = ARCHIVE_LIST.filter(k => ARTISTS.some(a => a.show === k));
+  const byYear = new Map();
+  order.forEach(k => { const y = SHOW_CARDS[k].year; if (!byYear.has(y)) byYear.set(y, []); byYear.get(y).push(k); });
+  const people = new Set(ARTISTS.map(a => a.artist.replace(/\s*\(.*\)$/, "")));
+  document.getElementById("aa-intro").textContent = `${people.size} artists across ${order.length} exhibitions since 2020. names link to each artist's instagram.`;
+  const name = p => p.instagram
+    ? `<a href="https://www.instagram.com/${encodeURIComponent(p.instagram)}/" target="_blank" rel="noopener">${esc(p.artist)}</a>`
+    : `<span>${esc(p.artist)}</span>`;
+  el.innerHTML = [...byYear].map(([y, keys]) => {
+    // solo and two-person shows share one block per year; group shows get their own
+    const solos = keys.filter(k => SHOW_CARDS[k].kind !== "group exhibition");
+    const groups = keys.filter(k => SHOW_CARDS[k].kind === "group exhibition");
+    let html = solos.length ? `<div class="aa-show"><p class="aa-label">solo exhibitions</p><div class="aa-names">${solos.map(k => ARTISTS.filter(a => a.show === k).map(name).join("")).join("")}</div></div>` : "";
+    html += groups.map(k => `<div class="aa-show"><button class="aa-title" data-card="${esc(k)}">${esc(SHOW_CARDS[k].title)}</button><div class="aa-names">${ARTISTS.filter(a => a.show === k).map(name).join("")}</div></div>`).join("");
+    return `<div class="arch-year aa-year"><span>${esc(y)}</span><div class="aa-shows">${html}</div></div>`;
+  }).join("");
+  el.querySelectorAll(".aa-title").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
 }
 
 
