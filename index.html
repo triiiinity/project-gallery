@@ -200,7 +200,11 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .c-item .save { margin: 0 0 0 10px; font-size: 15px; }
 
 /* guest book */
-.gb-intro { max-width: 640px; text-align: justify; margin: -12px 0 28px; }
+.gb-top { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin: -12px 0 28px; }
+.gb-intro { max-width: 640px; text-align: justify; margin: 0; }
+.gb-open { flex: 0 0 auto; }
+.gb-form:not([hidden]) { animation: gb-drop .35s ease-out; }
+@keyframes gb-drop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 .gb-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; padding: 24px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .gb-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; align-content: start; }
 .gb-fields label, .gb-sign-label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--muted); }
@@ -210,15 +214,23 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .gb-sign-label { flex-direction: row; justify-content: space-between; }
 .gb-clear { background: none; border: 0; padding: 0; font: inherit; color: var(--muted); cursor: pointer; }
 .gb-clear:hover { text-shadow: var(--glow); }
-#gb-pad { width: 100%; height: 140px; border-bottom: 1px solid #c9c9c9; touch-action: none; cursor: crosshair; display: block; margin-top: 6px; }
+#gb-pad { width: 100%; height: 160px; border-bottom: 1px solid #c9c9c9; touch-action: none; cursor: crosshair; display: block; margin-top: 6px; }
 .gb-actions { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
 .gb-msg { margin: 0; font-size: 12px; color: var(--muted); }
 .gb-draft { font-size: 11px; margin: 14px 0 40px; }
+.gb-syms { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-top: 12px; font-size: 12px; color: var(--muted); }
+.gb-sym { background: none; border: 0; padding: 2px 0; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--muted); cursor: pointer; transition: color .15s, text-shadow .2s; }
+.gb-sym:hover { text-shadow: var(--glow); color: var(--ink); }
+.gb-sym[aria-checked="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+#gb-sym-list { display: inline-flex; flex-wrap: wrap; gap: 6px 14px; }
 .gb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; }
-.gb-entry { border: 1px solid #dcdcdc; padding: 18px 20px 14px; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; font-size: 13px; }
+.gb-entry { border: 1px solid #dcdcdc; padding: 16px 20px 14px; min-height: 170px; display: flex; flex-direction: column; gap: 10px; font-size: 12px; }
+.gb-sig { height: 78px; width: 100%; display: block; }
+.gb-sig svg { height: 100%; width: auto; max-width: 100%; display: block; overflow: visible; }
+.gb-sig img { height: 100%; width: auto; max-width: 100%; display: block; }
 .gb-entry p { margin: 0; text-align: justify; line-height: 1.55; }
-.gb-entry footer, .gb-entry .gb-by { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; font-size: 11px; color: var(--muted); padding: 0; }
-.gb-entry img { height: 44px; width: auto; max-width: 55%; }
+.gb-entry .gb-by { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; font-size: 11px; color: var(--muted); }
+.gb-mark { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: var(--ink); white-space: pre; }
 .gb-entry.empty { border-style: dashed; color: #b5b5b5; justify-content: center; align-items: center; }
 
 /* footer */
@@ -240,6 +252,7 @@ footer a:hover { text-shadow: var(--glow); }
   .work-caption { text-align: left; }
   .work.center { width: 100%; }
   .gb-form, .gb-fields { grid-template-columns: 1fr; }
+  .gb-top { flex-direction: column; align-items: flex-start; }
   .pair { grid-template-columns: 1fr; padding: 0; gap: 64px; }
   .work.right .work-image, .work.right .work-caption { grid-column: auto; grid-row: auto; }
   .works { gap: 96px; }
@@ -335,8 +348,11 @@ footer a:hover { text-shadow: var(--glow); }
   <!-- GUEST BOOK -->
   <section class="view" id="view-guestbook">
     <h1 class="page-title">guest book</h1>
-    <p class="gb-intro" id="gb-intro"></p>
-    <form class="gb-form" id="gb-form" novalidate>
+    <div class="gb-top">
+      <p class="gb-intro" id="gb-intro"></p>
+      <button class="enter gb-open" id="gb-open" aria-expanded="false" aria-controls="gb-form">sign the guest book</button>
+    </div>
+    <form class="gb-form" id="gb-form" novalidate hidden>
       <div class="gb-fields">
         <label for="gb-name">name<input id="gb-name" maxlength="60" autocomplete="name" required></label>
         <label for="gb-place">from<input id="gb-place" maxlength="60" placeholder="city, optional"></label>
@@ -344,9 +360,13 @@ footer a:hover { text-shadow: var(--glow); }
       </div>
       <div class="gb-sign">
         <span class="gb-sign-label">signature <button type="button" class="gb-clear" id="gb-clear">clear</button></span>
-        <canvas id="gb-pad" width="560" height="140" aria-label="Draw your signature"></canvas>
+        <canvas id="gb-pad" width="560" height="160" aria-label="Draw your signature"></canvas>
+        <div class="gb-syms" role="radiogroup" aria-label="add a mark">
+          <span class="gb-sym-label">add a mark</span>
+          <span id="gb-sym-list"></span>
+        </div>
       </div>
-      <div class="gb-actions"><p class="gb-msg" id="gb-msg" role="status"></p><button class="enter" type="submit">sign the guest book</button></div>
+      <div class="gb-actions"><p class="gb-msg" id="gb-msg" role="status"></p><button class="enter" type="submit">sign</button></div>
     </form>
     <p class="construction gb-draft">draft: notes signed here are only visible in your own browser until the guest book goes live</p>
     <div class="gb-grid" id="gb-grid"></div>
@@ -882,13 +902,60 @@ function renderGrant() {
 /* guest book (draft: stored in this browser until it is connected to the site's database) */
 const GB_STORE = "pg-guestbook-draft";
 const gbPad = document.getElementById("gb-pad"), gbCtx = gbPad.getContext("2d");
-let gbDrawing = false, gbInked = false;
-function gbPoint(e) { const r = gbPad.getBoundingClientRect(); return [(e.clientX - r.left) * gbPad.width / r.width, (e.clientY - r.top) * gbPad.height / r.height]; }
-gbCtx.lineWidth = 2; gbCtx.lineCap = "round"; gbCtx.lineJoin = "round"; gbCtx.strokeStyle = "#000";
-gbPad.addEventListener("pointerdown", e => { gbDrawing = true; gbInked = true; gbPad.setPointerCapture(e.pointerId); gbCtx.beginPath(); gbCtx.moveTo(...gbPoint(e)); });
-gbPad.addEventListener("pointermove", e => { if (!gbDrawing) return; gbCtx.lineTo(...gbPoint(e)); gbCtx.stroke(); });
+// small marks drawn from text, net-art style
+const GB_MARKS = ["", "✶", ":)", "<3", "°˖✧", "~~~", "[•]", "-->", "∞", "(•‿•)", "¯\\_(ツ)_/¯"];
+let gbDrawing = false, gbStrokes = [], gbMark = "";
+function gbPoint(e) { const r = gbPad.getBoundingClientRect(); return [Math.round((e.clientX - r.left) * gbPad.width / r.width), Math.round((e.clientY - r.top) * gbPad.height / r.height)]; }
+gbCtx.lineWidth = 1.2; gbCtx.lineCap = "round"; gbCtx.lineJoin = "round"; gbCtx.strokeStyle = "#000";
+gbPad.addEventListener("pointerdown", e => { gbDrawing = true; gbPad.setPointerCapture(e.pointerId); const pt = gbPoint(e); gbStrokes.push([pt]); gbCtx.beginPath(); gbCtx.moveTo(...pt); });
+gbPad.addEventListener("pointermove", e => { if (!gbDrawing) return; const pt = gbPoint(e); gbStrokes[gbStrokes.length - 1].push(pt); gbCtx.lineTo(...pt); gbCtx.stroke(); });
 ["pointerup", "pointerleave", "pointercancel"].forEach(ev => gbPad.addEventListener(ev, () => { gbDrawing = false; }));
-document.getElementById("gb-clear").addEventListener("click", () => { gbCtx.clearRect(0, 0, gbPad.width, gbPad.height); gbInked = false; });
+function gbClearPad() { gbCtx.clearRect(0, 0, gbPad.width, gbPad.height); gbStrokes = []; }
+document.getElementById("gb-clear").addEventListener("click", gbClearPad);
+
+// mark picker
+const symList = document.getElementById("gb-sym-list");
+symList.innerHTML = GB_MARKS.map(m => `<button type="button" class="gb-sym" role="radio" aria-checked="${m === "" ? "true" : "false"}" data-m="${esc(m)}">${m ? esc(m) : "none"}</button>`).join("");
+symList.querySelectorAll(".gb-sym").forEach(b => b.addEventListener("click", () => {
+  gbMark = b.dataset.m;
+  symList.querySelectorAll(".gb-sym").forEach(x => x.setAttribute("aria-checked", String(x === b)));
+}));
+
+// open / close the signing form
+const gbOpen = document.getElementById("gb-open"), gbForm = document.getElementById("gb-form");
+gbOpen.addEventListener("click", () => {
+  const open = gbForm.hidden;
+  gbForm.hidden = !open;
+  gbOpen.setAttribute("aria-expanded", String(open));
+  gbOpen.textContent = open ? "close" : "sign the guest book";
+  if (open) document.getElementById("gb-name").focus();
+});
+
+// signature as a thin vector line (crisp at any size)
+function sigSVG(strokes, name) {
+  const pts = strokes.flat();
+  if (!pts.length) return "";
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const pad = 4, x0 = Math.min(...xs) - pad, y0 = Math.min(...ys) - pad;
+  const w = Math.max(...xs) - x0 + pad, h = Math.max(...ys) - y0 + pad;
+  const d = strokes.map(st => st.length === 1 ? `M${st[0][0]} ${st[0][1]}h0.1` : "M" + st.map(p => p.join(" ")).join("L")).join("");
+  return `<svg viewBox="${x0} ${y0} ${w} ${h}" role="img" aria-label="signature of ${esc(name)}"><path d="${d}" fill="none" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`;
+}
+// older drafts saved the signature as a picture: thin its line by one pixel
+function thinPNG(img) {
+  try {
+    const c = document.createElement("canvas"); c.width = img.naturalWidth; c.height = img.naturalHeight;
+    const x = c.getContext("2d"); x.drawImage(img, 0, 0);
+    const src = x.getImageData(0, 0, c.width, c.height), out = x.createImageData(c.width, c.height), W = c.width;
+    for (let y = 1; y < c.height - 1; y++) for (let i = 1; i < W - 1; i++) {
+      const k = (y * W + i) * 4;
+      const m = Math.min(src.data[k + 3], src.data[k - 1], src.data[k + 7], src.data[k + 3 - W * 4], src.data[k + 3 + W * 4]);
+      out.data[k + 3] = Math.min(255, m * 1.6);
+    }
+    x.putImageData(out, 0, 0);
+    img.onload = null; img.src = c.toDataURL();
+  } catch (e) {}
+}
 
 function gbBlocked(text) {
   const t = " " + text.toLowerCase().replace(/[^a-z0-9]+/g, " ") + " ";
@@ -900,13 +967,16 @@ function renderGuestbook() {
   const notes = gbLoad();
   const fmt = d => new Date(d).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" }).replace(/\//g, ".");
   let html = notes.map(n => `<article class="gb-entry">
+      <div class="gb-sig">${n.strokes ? sigSVG(n.strokes, n.name) : n.sig ? `<img src="${n.sig}" alt="signature of ${esc(n.name)}" data-thin>` : ""}</div>
       <p>${esc(n.note)}</p>
-      <div class="gb-by"><span>${esc(n.name)}${n.place ? " · " + esc(n.place) : ""} · ${fmt(n.date)}</span>${n.sig ? `<img src="${n.sig}" alt="signature of ${esc(n.name)}">` : ""}</div>
+      <div class="gb-by"><span>${esc(n.name)}${n.place ? " · " + esc(n.place) : ""} · ${fmt(n.date)}</span><span class="gb-mark">${esc(n.mark || "")}</span></div>
     </article>`).join("");
   for (let i = notes.length; i < 6; i++) html += '<div class="gb-entry empty" aria-hidden="true">&nbsp;</div>';
-  document.getElementById("gb-grid").innerHTML = html;
+  const grid = document.getElementById("gb-grid");
+  grid.innerHTML = html;
+  grid.querySelectorAll("img[data-thin]").forEach(im => { if (im.complete) thinPNG(im); else im.onload = () => thinPNG(im); });
 }
-document.getElementById("gb-form").addEventListener("submit", e => {
+gbForm.addEventListener("submit", e => {
   e.preventDefault();
   const name = document.getElementById("gb-name").value.trim();
   const place = document.getElementById("gb-place").value.trim();
@@ -915,9 +985,9 @@ document.getElementById("gb-form").addEventListener("submit", e => {
   if (!name || !note) { msg.textContent = "add your name and a note to sign"; return; }
   if (gbBlocked(name + " " + place + " " + note)) { msg.textContent = "please keep the guest book kind; edit your note and try again"; return; }
   const notes = gbLoad();
-  notes.unshift({ name, place, note, sig: gbInked ? gbPad.toDataURL("image/png") : "", date: Date.now() });
+  notes.unshift({ name, place, note, strokes: gbStrokes.filter(st => st.length), mark: gbMark, date: Date.now() });
   try { localStorage.setItem(GB_STORE, JSON.stringify(notes.slice(0, 50))); } catch (err) {}
-  e.target.reset(); gbCtx.clearRect(0, 0, gbPad.width, gbPad.height); gbInked = false;
+  e.target.reset(); gbClearPad();
   msg.textContent = "thank you for signing";
   renderGuestbook();
 });
