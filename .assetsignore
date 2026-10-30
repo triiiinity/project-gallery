@@ -1,5 +1,8 @@
 tools
 wrangler.jsonc
+worker.js
+node_modules
+.wrangler
 .gitignore
 .assetsignore
 .git

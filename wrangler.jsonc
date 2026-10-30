@@ -1,11 +1,17 @@
 // Cloudflare settings for the project gallery site.
-// "single-page-application" sends every address (like /grant or /tdreade) to index.html,
-// which then shows the right page.
+// Pages are plain files; "single-page-application" sends every address (like /grant) to index.html.
+// Only /api/ addresses run worker.js, which keeps the guest book in the D1 database.
 {
   "name": "project-gallery",
+  "main": "worker.js",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": ".",
-    "not_found_handling": "single-page-application"
-  }
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "pg-guestbook", "database_id": "fd8c098d-7006-4963-a135-31a5b51ff8f5" }
+  ]
 }

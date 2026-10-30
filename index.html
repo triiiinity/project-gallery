@@ -379,9 +379,9 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 @media (max-width: 720px) { .about-reveal { display: none; } }
 
 .aa-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
-.aa-peek { display: flex; gap: 8px; margin-top: 48px; }
-.aa-peek span { position: relative; width: 44px; height: 44px; overflow: hidden; background: #f3f3f3; }
-.aa-peek img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease; }
+.aa-peek { display: flex; gap: 12px; margin-top: 48px; }
+.aa-peek span { position: relative; width: 84px; height: 84px; }
+.aa-peek img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 2.4s ease; }
 .aa-peek img.on { opacity: 1; }
 
 a.secret { color: inherit; text-decoration: none; cursor: text; }
@@ -399,6 +399,13 @@ a.secret { color: inherit; text-decoration: none; cursor: text; }
 .cf-actions { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 6px; }
 .cf-msg { font-size: 12px; color: var(--muted); margin: 0; }
 .cf-head { font-size: 13px; color: var(--muted); margin: 0 0 4px; }
+
+/* guest book review */
+.gr-form { display: flex; align-items: flex-end; gap: 16px; margin: 0 0 18px; }
+.gr-form label { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
+.gr-form input { font-family: var(--font); font-size: 14px; border: 0; border-bottom: 1px solid #c9c9c9; padding: 6px 0; min-width: 240px; }
+.gr-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; margin-top: 20px; }
+.gr-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
 
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
@@ -559,6 +566,14 @@ footer a:hover { color: var(--accent); }
     </form>
     <p class="construction gb-draft">draft: notes signed here are only visible in your own browser until the guest book goes live</p>
     <div class="gb-grid" id="gb-grid"></div>
+  </section>
+
+  <!-- GUEST BOOK REVIEW (private: project-gallery.com/guestbook-review) -->
+  <section class="view" id="view-guestbook-review">
+    <h1 class="page-title">guest book: waiting notes</h1>
+    <form class="gr-form" id="gr-form"><label for="gr-key">password<input id="gr-key" type="password" autocomplete="current-password"></label><button class="enter" type="submit">open</button></form>
+    <p class="construction" id="gr-msg" role="status"></p>
+    <div class="gr-list" id="gr-list"></div>
   </section>
 
   <!-- MY COLLECTION (saved in each visitor's own browser) -->
@@ -799,12 +814,12 @@ function startPeek() {
   const pick = () => art[Math.floor(Math.random() * art.length)];
   const swap = slot => {
     const old = slot.querySelector("img.on"), im = new Image();
-    im.alt = ""; im.onload = () => { slot.appendChild(im); requestAnimationFrame(() => im.classList.add("on")); if (old) { old.classList.remove("on"); setTimeout(() => old.remove(), 1300); } };
+    im.alt = ""; im.onload = () => { slot.appendChild(im); requestAnimationFrame(() => im.classList.add("on")); if (old) { old.classList.remove("on"); setTimeout(() => old.remove(), 2600); } };
     im.src = pick();
   };
   slots.forEach(swap);
   clearInterval(peekTimer);
-  if (!reduceMotion) { let i = 0; peekTimer = setInterval(() => swap(slots[i++ % slots.length]), 2600); }
+  if (!reduceMotion) { let i = 0; peekTimer = setInterval(() => swap(slots[i++ % slots.length]), 9000); }
 }
 /* exploring: remember which artist pages a visitor has opened (in their browser only) */
 const SEEN = "pg-artists-seen", AWARDS = "pg-awards";
@@ -1468,21 +1483,35 @@ function gbBlocked(text) {
   return (GUESTBOOK.blockedWords || []).some(w => t.includes(" " + w.toLowerCase() + " ") || t.replace(/ /g, "").includes(w.toLowerCase()));
 }
 function gbLoad() { try { return JSON.parse(localStorage.getItem(GB_STORE)) || []; } catch (e) { return []; } }
-function renderGuestbook() {
-  document.getElementById("gb-intro").textContent = GUESTBOOK.intro || "";
-  const notes = gbLoad();
+let gbShared = null;   // null = not checked yet, false = no server, array = approved notes
+async function loadShared() {
+  try {
+    const r = await fetch("/api/guestbook", { cache: "no-store" });
+    if (!r.ok) throw new Error(r.status);
+    gbShared = await r.json();
+  } catch (e) { gbShared = false; }
+}
+function noteCard(n) {
   const fmt = d => new Date(d).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" }).replace(/\//g, ".");
-  let html = notes.map(n => `<article class="gb-entry">
-      <div class="gb-sig">${n.strokes ? sigSVG(n.strokes, n.name) : n.sig ? `<img src="${n.sig}" alt="signature of ${esc(n.name)}" data-thin>` : ""}</div>
+  return `<article class="gb-entry">
+      <div class="gb-sig">${n.strokes && n.strokes.length ? sigSVG(n.strokes, n.name) : n.sig ? `<img src="${n.sig}" alt="signature of ${esc(n.name)}" data-thin>` : ""}</div>
       <p>${esc(n.note)}</p>
-      <div class="gb-by"><span>${esc(n.name)}${n.place ? " · " + esc(n.place) : ""} · ${fmt(n.date)}</span><span class="gb-mark">${esc(n.mark || "")}</span></div>
-    </article>`).join("");
+      <div class="gb-by"><span>${esc(n.name)}${n.place ? " · " + esc(n.place) : ""} · ${fmt(n.created || n.date)}</span><span class="gb-mark">${esc(n.mark || "")}</span></div>
+    </article>`;
+}
+async function renderGuestbook() {
+  document.getElementById("gb-intro").textContent = GUESTBOOK.intro || "";
+  if (gbShared === null) await loadShared();
+  const live = Array.isArray(gbShared);
+  document.querySelector(".gb-draft").hidden = live;
+  const notes = live ? gbShared : gbLoad();
+  let html = notes.map(noteCard).join("");
   for (let i = notes.length; i < 6; i++) html += '<div class="gb-entry empty" aria-hidden="true">&nbsp;</div>';
   const grid = document.getElementById("gb-grid");
   grid.innerHTML = html;
   grid.querySelectorAll("img[data-thin]").forEach(im => { if (im.complete) thinPNG(im); else im.onload = () => thinPNG(im); });
 }
-gbForm.addEventListener("submit", e => {
+gbForm.addEventListener("submit", async e => {
   e.preventDefault();
   const name = document.getElementById("gb-name").value.trim();
   const place = document.getElementById("gb-place").value.trim();
@@ -1490,14 +1519,50 @@ gbForm.addEventListener("submit", e => {
   const msg = document.getElementById("gb-msg");
   if (!name || !note) { msg.textContent = "add your name and a note to sign"; return; }
   if (gbBlocked(name + " " + place + " " + note)) { msg.textContent = "please keep the guest book kind; edit your note and try again"; return; }
-  const notes = gbLoad();
-  notes.unshift({ name, place, note, strokes: gbStrokes.filter(st => st.length), mark: gbMark, date: Date.now() });
-  try { localStorage.setItem(GB_STORE, JSON.stringify(notes.slice(0, 50))); } catch (err) {}
+  const entry = { name, place, note, strokes: gbStrokes.filter(st => st.length), mark: gbMark };
+  if (gbShared === null) await loadShared();
+  if (Array.isArray(gbShared)) {
+    msg.textContent = "signing…";
+    try {
+      const r = await fetch("/api/guestbook", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(entry) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) { msg.textContent = j.error || "that didn't go through. please try again."; return; }
+    } catch (err) { msg.textContent = "that didn't go through. please try again."; return; }
+    msg.textContent = "thank you for signing. your note will appear once it's been read.";
+  } else {
+    const notes = gbLoad();
+    notes.unshift({ ...entry, date: Date.now() });
+    try { localStorage.setItem(GB_STORE, JSON.stringify(notes.slice(0, 50))); } catch (err) {}
+    msg.textContent = "thank you for signing";
+  }
   e.target.reset(); gbClearPad();
-  msg.textContent = "thank you for signing";
   renderGuestbook();
   gbForm.hidden = true; gbOpen.setAttribute("aria-expanded", "false"); gbOpen.textContent = "sign the guest book";
   openNewsletter();
+});
+
+/* guest book approvals: project-gallery.com/guestbook-review (needs the ADMIN_KEY password) */
+async function renderReview() {
+  const box = document.getElementById("gr-list"), msg = document.getElementById("gr-msg");
+  let key = ""; try { key = sessionStorage.getItem("pg-admin") || ""; } catch (e) {}
+  if (!key) { box.innerHTML = ""; msg.textContent = "enter your password to see waiting notes"; return; }
+  msg.textContent = "loading…";
+  const r = await fetch("/api/guestbook/pending", { headers: { "x-admin-key": key }, cache: "no-store" }).catch(() => null);
+  if (!r || !r.ok) { msg.textContent = r && r.status === 401 ? "that password didn't work" : "couldn't reach the guest book"; box.innerHTML = ""; return; }
+  const notes = await r.json();
+  msg.textContent = notes.length ? `${notes.length} waiting` : "nothing waiting. all caught up.";
+  box.innerHTML = notes.map(n => `<div class="gr-item">${noteCard(n)}<div class="gr-actions"><button class="enter" data-id="${n.id}" data-a="approve">approve</button><button class="gb-clear" data-id="${n.id}" data-a="delete">delete</button></div></div>`).join("");
+  box.querySelectorAll("button[data-id]").forEach(b => b.addEventListener("click", async () => {
+    b.disabled = true;
+    await fetch("/api/guestbook/review", { method: "POST", headers: { "content-type": "application/json", "x-admin-key": key }, body: JSON.stringify({ id: Number(b.dataset.id), action: b.dataset.a }) });
+    gbShared = null; renderReview();
+  }));
+}
+document.getElementById("gr-form").addEventListener("submit", e => {
+  e.preventDefault();
+  try { sessionStorage.setItem("pg-admin", document.getElementById("gr-key").value); } catch (err) {}
+  document.getElementById("gr-key").value = "";
+  renderReview();
 });
 
 /* newsletter offer (not connected yet: nothing is saved until NEWSLETTER.formAction is set) */
@@ -1625,7 +1690,7 @@ function renderPeople() {
 })();
 
 /* routing */
-const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", "contact", "collection"];
+const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", "contact", "collection", "guestbook-review"];
 const header = document.getElementById("top");
 const burger = document.getElementById("burger");
 
@@ -1680,6 +1745,7 @@ function show() {
   if (name === "collection") renderCollection();
   if (name === "artists") startPeek(); else clearInterval(peekTimer);
   if (name === "guestbook") renderGuestbook();
+  if (name === "guestbook-review") renderReview();
   if (name === "home" && lastView !== "home") typeLogo();
   if (name === "home" && HOME_STYLE === "cloud") startCloud(); else stopCloud();
   lastView = name;
