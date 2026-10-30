@@ -94,7 +94,7 @@ details[open] summary::before { content: "−"; }
 details .detail-body { font-size: 13px; line-height: 1.55; padding: 10px 0 14px; }
 .ex-buttons { display: flex; flex-direction: column; gap: 6px; width: 180px; }
 .ex-buttons .enter { padding: 4px 12px; font-size: 11px; display: block; }
-.works { margin-top: 112px; display: grid; gap: 140px; }
+.works { margin-top: clamp(120px, 18vh, 200px); margin-bottom: clamp(120px, 20vh, 220px); display: grid; gap: clamp(180px, 30vh, 320px); }
 .work { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
 .work.right .work-image { grid-column: 2; grid-row: 1; }
 .work.right .work-caption { grid-column: 1; grid-row: 1; text-align: left; }
@@ -134,10 +134,10 @@ details .detail-body { font-size: 13px; line-height: 1.55; padding: 10px 0 14px;
 
 /* enter-exhibition transition */
 .card-backdrop, .card { transition: opacity .35s, transform .35s; }
-body.entering .card-backdrop { background: rgba(255, 255, 255, 1); transition: background .75s ease-in; }
-body.entering .card { transform: scale(1.12); opacity: 0; filter: blur(2px); transition: transform .75s cubic-bezier(.5, 0, .75, 0), opacity .7s ease-in, filter .75s ease-in; }
+body.entering .card-backdrop { background: rgba(255, 255, 255, 1); transition: background .95s ease-in; }
+body.entering .card { transform: scale(1.12); opacity: 0; filter: blur(2px); transition: transform .95s cubic-bezier(.5, 0, .75, 0), opacity .9s ease-in, filter .95s ease-in; }
 body.entering main, body.entering footer { opacity: 0; transition: opacity .5s; }
-body.arriving #view-show { animation: arrive 1.1s cubic-bezier(.16, .8, .3, 1) both; transform-origin: var(--ox, 50%) var(--oy, 40vh); }
+body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) both; transform-origin: var(--ox, 50%) var(--oy, 40vh); }
 @keyframes arrive { from { opacity: 0; transform: scale(.9); filter: blur(4px); } 60% { filter: none; } to { opacity: 1; transform: none; filter: none; } }
 
 /* film strip at the top of an exhibition */
@@ -169,6 +169,20 @@ body.arriving #view-show { animation: arrive 1.1s cubic-bezier(.16, .8, .3, 1) b
 .grant-form { max-width: 680px; margin-top: 24px; }
 .grant-form iframe { width: 100%; border: 0; min-height: 600px; }
 
+/* save + my collection */
+.save { background: none; border: 0; padding: 0; margin: 10px 0 0 14px; font-family: var(--font); font-size: 12px; color: var(--ink); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; transition: text-shadow .2s; }
+.save:hover { text-shadow: var(--glow); }
+.save[aria-pressed="true"] { text-decoration: none; }
+.work.right .save, .work.center .save, .pair .save { margin: 10px 14px 0 0; }
+.lb-caption .save { margin: 0 0 0 16px; }
+.collection-note { margin: -18px 0 36px; font-size: 12px; }
+.collection { columns: 4 220px; column-gap: 28px; }
+.c-item { break-inside: avoid; margin: 0 0 36px; font-size: 12px; line-height: 1.5; }
+.c-item img { width: 100%; display: block; margin-bottom: 8px; cursor: zoom-in; }
+.c-item p { margin: 0; }
+.c-item a:hover, .c-item button:hover { text-shadow: var(--glow); }
+.c-item .save { margin: 6px 0 0; }
+
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
 footer a:hover { text-shadow: var(--glow); }
@@ -190,7 +204,7 @@ footer a:hover { text-shadow: var(--glow); }
   .work.center { width: 100%; }
   .pair { grid-template-columns: 1fr; padding: 0; gap: 64px; }
   .work.right .work-image, .work.right .work-caption { grid-column: auto; grid-row: auto; }
-  .works { gap: 64px; }
+  .works { gap: 96px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -209,7 +223,9 @@ footer a:hover { text-shadow: var(--glow); }
       <button class="plus" id="plus" aria-expanded="false" aria-controls="dropdown" aria-label="More pages">+</button>
       <div class="dropdown" id="dropdown">
         <a href="#about" data-view="about">about</a>
+        <a href="#guestbook" data-view="guestbook">guest book</a>
         <a href="#contact" data-view="contact">contact</a>
+        <a href="#collection" data-view="collection">my collection</a>
       </div>
     </div>
     <a class="ig" id="ig" href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener" aria-label="project gallery on Instagram"></a>
@@ -281,6 +297,19 @@ footer a:hover { text-shadow: var(--glow); }
       <p>project gallery is an online gallery established in 2020.</p>
       <p>pg hosts curated exhibitions organized by Trinity Lester. pg is based in new york city but functions primarily online, with select infrequent in-person exhibitions in brooklyn, ny.</p>
     </div>
+  </section>
+
+  <!-- GUEST BOOK -->
+  <section class="view" id="view-guestbook">
+    <h1 class="page-title">guest book</h1>
+    <p class="construction">under construction</p>
+  </section>
+
+  <!-- MY COLLECTION (saved in each visitor's own browser) -->
+  <section class="view" id="view-collection">
+    <h1 class="page-title">my collection</h1>
+    <p class="construction collection-note">works you save are kept in this browser, on this device</p>
+    <div class="collection" id="collection"></div>
   </section>
 
   <!-- CONTACT -->
@@ -417,7 +446,7 @@ function renderShow(key) {
   }));
   const wrap = document.getElementById("show-works");
   wrap.innerHTML = "";
-  currentWorks = sh.works.map(w => ({ ...w, artist: sh.artist }));
+  currentWorks = sh.works.map((w, i) => ({ ...w, artist: sh.artist, id: key + ":" + i, showTitle: sh.title, link: "#" + key }));
   const makeWork = (w, i) => {
     const el = document.createElement("article");
     el.className = "work " + (w.layout === "pair" ? "" : (w.layout || "left"));
@@ -428,7 +457,7 @@ function renderShow(key) {
         <p><em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}</p>
         <p>${esc(w.medium)}</p>
         <p>${esc(w.size)}</p>
-        <a class="inquire" href="mailto:${SITE.email}?subject=${encodeURIComponent(subject)}">inquire</a>
+        <a class="inquire" href="mailto:${SITE.email}?subject=${encodeURIComponent(subject)}">inquire</a><button class="save" data-save="${esc(key + ":" + i)}"></button>
       </div>`;
     const box = el.querySelector(".work-image");
     const img = new Image();
@@ -449,6 +478,49 @@ function renderShow(key) {
       i++;
     } else wrap.appendChild(makeWork(w, i));
   }
+  wrap.querySelectorAll(".save").forEach(b => {
+    const w = currentWorks[Number(b.dataset.save.split(":").pop())];
+    b.addEventListener("click", () => toggleSaved(w));
+  });
+  refreshSaveButtons();
+}
+
+/* my collection: saved in the visitor's own browser, no accounts, nothing public */
+const STORE = "pg-collection";
+function getSaved() { try { return JSON.parse(localStorage.getItem(STORE)) || []; } catch (e) { return []; } }
+function setSaved(list) { try { localStorage.setItem(STORE, JSON.stringify(list)); } catch (e) {} }
+function isSaved(id) { return getSaved().some(x => x.id === id); }
+function toggleSaved(w) {
+  let list = getSaved();
+  if (list.some(x => x.id === w.id)) list = list.filter(x => x.id !== w.id);
+  else list.unshift({ id: w.id, image: w.image, title: w.title, year: w.year, medium: w.medium, size: w.size, artist: w.artist, showTitle: w.showTitle, link: w.link, ratio: w.ratio });
+  setSaved(list);
+  refreshSaveButtons();
+}
+function refreshSaveButtons() {
+  document.querySelectorAll(".save[data-save]").forEach(b => {
+    const on = isSaved(b.dataset.save);
+    b.textContent = on ? "saved ✓" : "save";
+    b.setAttribute("aria-pressed", String(on));
+  });
+}
+function renderCollection() {
+  const box = document.getElementById("collection");
+  const list = getSaved();
+  if (!list.length) { box.innerHTML = '<p class="construction">nothing saved yet. click "save" under any work to keep it here.</p>'; return; }
+  box.innerHTML = list.map(w => `<div class="c-item">
+      <img src="${esc(w.image)}" alt="${esc(w.artist + ", " + w.title)}" data-open="${esc(w.id)}">
+      <p>${esc(w.artist)}</p>
+      <p><em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}</p>
+      <p><a href="${esc(w.link)}">${esc(w.showTitle)}</a></p>
+      <button class="save" data-save="${esc(w.id)}">remove</button>
+    </div>`).join("");
+  box.querySelectorAll("[data-save]").forEach(b => b.addEventListener("click", () => {
+    setSaved(getSaved().filter(x => x.id !== b.dataset.save)); renderCollection();
+  }));
+  box.querySelectorAll("img[data-open]").forEach((im, i) => im.addEventListener("click", () => {
+    currentWorks = getSaved(); openLightbox(i);
+  }));
 }
 
 /* zoom view: click a work to see it large; click again to zoom into the detail */
@@ -461,7 +533,10 @@ function lbShow(i) {
   lbImg.src = w.image;
   lbImg.alt = `${w.artist}, ${w.title}`;
   document.getElementById("lb-caption").innerHTML =
-    `<em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""} :: ${esc(w.medium)} :: ${esc(w.size)}`;
+    `<em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""} :: ${esc(w.medium)} :: ${esc(w.size)}<button class="save" data-save="${esc(w.id)}"></button>`;
+  const sb = document.querySelector("#lb-caption .save");
+  sb.addEventListener("click", () => { toggleSaved(w); if (location.hash === "#collection") renderCollection(); refreshSaveButtons(); });
+  refreshSaveButtons();
 }
 function openLightbox(i) {
   lbShow(i);
@@ -606,8 +681,8 @@ document.getElementById("card-enter").addEventListener("click", e => {
     document.body.classList.remove("entering");
     document.body.classList.add("arriving");
     target = 1;
-    setTimeout(() => document.body.classList.remove("arriving"), 1100);
-  }, 750);
+    setTimeout(() => document.body.classList.remove("arriving"), 1400);
+  }, 950);
 });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && backdrop.classList.contains("open")) closeCard(); });
 window.addEventListener("resize", () => placeCloud(performance.now()));
@@ -680,7 +755,7 @@ function renderGrant() {
 }
 
 /* routing */
-const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "contact"];
+const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", "contact", "collection"];
 const header = document.getElementById("top");
 const more = document.getElementById("more");
 const plus = document.getElementById("plus");
@@ -690,6 +765,7 @@ function show() {
   const h = location.hash.slice(1);
   let name = VIEWS.includes(h) ? h : "home";
   if (SHOWS[h]) { name = "show"; renderShow(h); }
+  if (name === "collection") renderCollection();
   if (name === "home" && lastView !== "home") typeLogo();
   if (name === "home" && HOME_STYLE === "cloud") startCloud(); else stopCloud();
   lastView = name;
