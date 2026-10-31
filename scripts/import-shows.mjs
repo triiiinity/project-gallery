@@ -77,10 +77,21 @@ for (const slug of SHOWS) {
           const html = (w && w.getAttribute("data-html")) || "";
           const src = (/src="([^"]+)"/.exec(html) || [])[1] || "";
           const title = (/title="([^"]*)"/.exec(html) || [])[1] || "";
-          const v = { ...base, type: "video", vtitle: title, video: "", thumb: "", ratio: "16/9" };
-          const yt = /youtube\.com\/embed\/([\w-]+)/.exec(src), vm = /vimeo\.com\/video\/(\d+)/.exec(src);
+          const v = { ...base, type: "video", vtitle: title, video: "", thumb: "", ratio: "16/9", html: html.slice(0, 600), url: (w && w.getAttribute("data-provider-name")) || "" };
+          const yt = /(?:youtube(?:-nocookie)?\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([\w-]{6,})/.exec(src + " " + html.replace(/&amp;/g, "&")), vm = /vimeo\.com\/video\/(\d+)/.exec(src);
           if (yt) { v.video = "https://www.youtube.com/watch?v=" + yt[1]; v.thumb = `https://img.youtube.com/vi/${yt[1]}/hqdefault.jpg`; v.ratio = "4/3"; }
-          else if (vm) { v.video = "https://vimeo.com/" + vm[1]; Object.assign(v, await vimeoThumb(vm[1])); v.vtitle = title || v.vtitle; }
+          else if (vm) {
+            v.video = "https://vimeo.com/" + vm[1]; Object.assign(v, await vimeoThumb(vm[1])); v.vtitle = title || v.vtitle;
+            if (!v.thumb) {      // private or domain-locked videos leave the thumbnail out; try the page, then the player config
+              for (const u of ["https://vimeo.com/" + vm[1], "https://player.vimeo.com/video/" + vm[1] + "/config"]) {
+                try {
+                  const t = await fetch(u, { headers: { referer: BASE + "/", "user-agent": "Mozilla/5.0" } }).then(r => r.text());
+                  const m = /property="og:image" content="([^"]+)"/.exec(t) || /"base":"(https:\/\/i\.vimeocdn\.com\/video\/[^"]+)"/.exec(t) || /(https:\/\/i\.vimeocdn\.com\/video\/[\w-]+)/.exec(t);
+                  if (m) { v.thumb = m[1].replace(/\\\//g, "/"); break; }
+                } catch (e) {}
+              }
+            }
+          }
           else {
             const nat = b.querySelector(".sqs-native-video");
             const cfg = nat ? nat.getAttribute("data-config-video") : "";
