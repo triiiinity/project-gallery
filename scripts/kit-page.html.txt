@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Documentation for compiling Cloudflare Custom Pages in README-cloudflare-pages.md -->
+    <title>Kit</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Kit: The creator marketing platform" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://cdn.kit.com/assets/favicon-fec1de03350a05b77c95fef9235c9a7a8c096ae4ff9992a0f2ee2d90115aa705.ico"
+    />
+
+    <style>
+      *,
+      :after,
+      :before {
+        border: 0 solid #dce1e5;
+      }
+      *,
+      :after,
+      :before {
+        box-sizing: border-box;
+      }
+      body,
+      html {
+        height: 100%;
+      }
+      body {
+        background: #f3f6f9;
+        background-color: #f3f6f9;
+        color: #3d3d3d;
+        font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.428571429;
+        margin: 0;
+        padding: 0;
+      }
+      .page {
+        height: auto;
+      }
+      .content_wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 101px);
+      }
+      .min-h-screen {
+        min-height: 100vh;
+      }
+      .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .w-full {
+        width: 100%;
+      }
+      .bg-white {
+        --bg-opacity: 1;
+        background-color: #fff;
+        background-color: rgba(255, 255, 255, var(--bg-opacity));
+      }
+      .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .pb-40 {
+        padding-bottom: 10rem;
+      }
+      .pt-12 {
+        padding-top: 3rem;
+      }
+      .hidden {
+        display: none;
+      }
+      @media (min-width: 768px) {
+        .md\:flex {
+          display: flex;
+        }
+        .md\:grid {
+          display: grid;
+        }
+      }
+      .relative {
+        position: relative;
+      }
+      .overflow-hidden {
+        overflow: hidden;
+      }
+      .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-h-screen {
+        max-height: 100vh;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+      .object-center {
+        -o-object-position: center;
+        object-position: center;
+      }
+      .object-cover {
+        -o-object-fit: cover;
+        object-fit: cover;
+      }
+      .min-h-full {
+        min-height: 100%;
+      }
+      img,
+      video {
+        height: auto;
+        max-width: 100%;
+      }
+      audio,
+      canvas,
+      embed,
+      iframe,
+      img,
+      object,
+      svg,
+      video {
+        display: block;
+        vertical-align: middle;
+      }
+      img {
+        border-style: solid;
+      }
+      .w-40 {
+        width: 10rem;
+      }
+      .bottom-0 {
+        bottom: 0;
+      }
+      .right-0 {
+        right: 0;
+      }
+      .absolute {
+        position: absolute;
+      }
+      .p-4 {
+        padding: 1rem;
+      }
+      .mb-8 {
+        margin-bottom: 2rem;
+      }
+      .mr-8 {
+        margin-right: 2rem;
+      }
+      .h-20 {
+        height: 5rem;
+      }
+      .flex-col {
+        flex-direction: column;
+      }
+      .flex-row {
+        flex-direction: row;
+      }
+      .flex {
+        display: flex;
+      }
+      .items-center {
+        align-items: center;
+      }
+      .rounded-br {
+        border-bottom-right-radius: 0.25rem;
+      }
+      .rounded-l {
+        border-bottom-left-radius: 0.25rem;
+        border-top-left-radius: 0.25rem;
+      }
+      .pb-2 {
+        padding-bottom: 0.5rem;
+      }
+      .text-base {
+        font-size: 1rem;
+      }
+      .font-semibold {
+        font-weight: 600;
+      }
+      .italic {
+        font-style: italic;
+      }
+    </style>
+  <meta http-equiv="refresh" content="360"></head>
+
+  <body>
+    <div class="page" ng-app="ckUnrouted" id="ck-page">
+      <div class="min-h-screen" style="display: flex; flex-direction: column;">
+        <div style="display: flex; flex: 1 1 auto">
+          <div class="bg-white w-full">
+            <div class="px-4 pb-40 pt-12">
+              <div style="max-width: 470px;" class="mx-auto">
+                <div class="flex" style="margin-bottom: 3rem;">
+                  <svg
+                    width="114"
+                    height="52"
+                    viewBox="0 0 400 181"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M109.562 75.1422c49.21 9.535 64.488 55.0968 64.903 100.9298 0 1.03-.831 1.878-1.86 1.878h-61.959c-1.03 0-1.86-.83-1.86-1.842-.181-35.557-5.942-66.925-41.1743-68.28-1.0474-.036-1.9322.795-1.9322 1.86v66.42c0 1.03-.8307 1.86-1.8601 1.86H1.86a1.857 1.857 0 0 1-1.86-1.86V6.8262c0-1.0294.8307-1.86 1.86-1.86h61.9775c1.0293 0 1.86.8306 1.86 1.86v63.4041c0 .939.7585 1.6975 1.6975 1.6975.7404 0 1.4086-.4876 1.6253-1.1919C84.9661 18.4379 114.781 5.2912 163.196 4.9842c1.03 0 1.86.8307 1.86 1.86v63.2416c0 1.0293-.83 1.86-1.86 1.86h-53.327c-.903 0-1.625.7224-1.625 1.6253 0 .7585.56 1.4266 1.318 1.5711Zm169.661 39.6388V73.7878c0-1.0293.831-1.86 1.861-1.86h45.598c.903 0 1.625-.7224 1.625-1.6253 0-.7765-.56-1.4447-1.318-1.5892-35.684-7.079-52.154-27.6117-52.714-61.8871-.018-1.0113.795-1.86 1.824-1.86h66.962c1.029 0 1.86.8306 1.86 1.86V35.702c0 1.0294.831 1.8601 1.86 1.8601h38.393c1.029 0 1.86.8307 1.86 1.86v30.6817c0 1.0294-.831 1.8601-1.86 1.8601h-38.393c-1.029 0-1.86.8307-1.86 1.86v33.0651c0 11.684 7.169 15.531 16.686 15.531 14.917 0 29.653-6.718 35.558-9.77 1.228-.632 2.709.253 2.709 1.643v51.468c0 1.372-.759 2.636-1.969 3.286-5.833 3.07-23.855 11.576-44.46 11.576-42.456-.036-74.222-17.318-74.222-65.842Zm-87.169 61.309V73.7878c0-1.0293.831-1.86 1.86-1.86h61.978c1.029 0 1.86.8307 1.86 1.86V176.09c0 1.03-.831 1.86-1.86 1.86h-61.978c-1.029-.018-1.86-.848-1.86-1.86Zm-3.521-144.5595c0 17.4086 12.298 31.5305 35.918 31.5305 23.621 0 35.919-14.1219 35.919-31.5305S248.09 0 224.451 0c-23.62 0-35.918 14.1219-35.918 31.5305Z"
+                      fill="#44B1FF"
+                    />
+                  </svg>
+                </div>
+                <div
+                  style="font-size: 1.25rem; font-weight: 600; margin-bottom: 2rem;"
+                >
+                  Are you a robot? 🤖
+                </div>
+                <div style="margin-bottom: 2rem;">
+                  Hey There! Sorry for the inconvenience, but we need to confirm
+                  you're not a robot.
+                </div>
+                <div>
+                  <div class="main-wrapper" role="main"><div class="main-content"><noscript><div class="h2"><span id="challenge-error-text">Enable JavaScript and cookies to continue</span></div></noscript></div></div><script>(function(){window._cf_chl_opt = {cFPWv: 'g',cH: 'ZlS4GjAC8vPqIxqFkziwSrj_aTyCy7VLytqYOq9Sm58-1793478601-1.2.1.1-5jTmYNHYk7REqAB92GuBO3sJB_nQ13232yFX66F_D62XewvJsd7BeQuZxvjZxreU',cITimeS: '1793478601',cRay: 'a5356a4e08a3b81f',cTplC:1,cTplO:0,cTplV:5,cType: 'managed',cUPMDTk:"/a8b9264c15?__cf_chl_tk=b.lP8e_A5Grp7dU.tuSbLlR6g5GJqRal11PH_Q22frY-1793478601-1.0.1.1-Xrzdotet5LX5MDyklle2d8ZVGc3TuGHHsaJ7AIdicK0",cvId: '3',cZone: 'project-gallery.kit.com',fa:"/a8b9264c15?__cf_chl_f_tk=b.lP8e_A5Grp7dU.tuSbLlR6g5GJqRal11PH_Q22frY-1793478601-1.0.1.1-Xrzdotet5LX5MDyklle2d8ZVGc3TuGHHsaJ7AIdicK0",md: 'uqpyTpEJ.S6yv7HTaCnlR5DObsLnnVTf04fWfpJrFe8-1793478601-1.2.1.1-WMwTaaox3wuKADkdg4l15D50aE2PFokD68w.TrRoVMP.jzbpyOtOSroDCFRk3zhczucuFbgA1Fz04XEyCrVAq9zzBJ_VetfTmjZDx7krrTrn3w3OR4c7LNIrXyoVFBUp0pqMvfJGPZ3VRTmburNnAPIWr4EmLn.6m2T1Sbd_lSw3kdQliEfaCqLaty_D7bxSg3vG.k7_OusPqe7RMb20AqIeZPSbQcfIPPGXcvzAQ8c4zfo1bCh_WDNKRI8rMbQ5yRcwZ73UC8mHtzAd4YyoQY9CUtdyv1YRNqEl4T6dvtZSGh8IaGtoeiGhzOVz0WJo7oJlJXOdZ7rsz5sX2xL76ENn3zfcqxKLFiKeVUqvzs1OWd5VUKmdpwU2zeaI5j9EH5qG3Iogm8V8Txiq_FY8oHJBkSB8kUVd.zIUdAb1N.OHwOkTbE8mNVqe3H9oNX3r0QfiHhyHt_4.xini2mqcBQYQy9FsQTJhn6.I3_jBIligW3SptKzowCvSF51Kym.Fg1YLWrh5mMJExeWYlm779d7j6k.D1c4zNeZcEDX2aJIvndvE9jBNL_TTAiR08.vwuxzp5AZbmCPNqMbVyJz_fBWMwtrb6RddXMjranTTkURjl67nlltBAS3lWS1WBEvcFO8V0zpyOLeadrlP4ZrGJ3r4fpMQCf8jlRxyLq6ukg.lXBbm9mqAcwE5qm8eEph_tEkFNqp9LAFTNChmphv.JaSWipHDPBCBjJgVT5XfPXHam0g1ZTkBkT8jSeyEJB_aHBXec1aETNrPnlpsbJzkF1eh0GoNFQlt4x8YlEURY2rlcfj_hoVAalWtQbVupiEyudqq3qwE1vWB_B5H8BfUGIskfpElQQNeVZ5b5FkHqwugQkVh5msGuxTRbk0hVSWAm8ovp9uSENmp9xQQaq7PLWA6_SfdtDMoeLy_8I5Rd6_Dfisct8L1BNAu4yvt2FLtYdLhaLD_WaXTPGQyU6g0sTVOa05ppPl.QnBLLKVbB44HTAAnilgr81CKaA4quQzPl.WbGZnqNG8MmiqvPpDMPA8XSuch9OUwEk2an60DcaxzZX2z8RQ1N3j6wQSbza3L',mdrd: '8EWfjVM435IRRnAG5inXoQGKVzLCwtI3Yb8M8g_SiKw-1793478601-1.2.1.1-hJcvTw2GYfOVoioq.4f0r7b5bJitfPs0.6p.7nmI6EoFpOeLTQk1GaoQJtuJBA6dHS6sUYN_LTcO8IMeHlE2QZVij_w8mo6j9UhqvbdzLA6RDTx4YlSbnXepLs_JGu7XKCQp1.3Z9XHxx_vyssU89d7nNxjz9aozSIPD06QRgl.Oll3Ty2KZfRTGxr6L2sejXDgfKlzMZGr9QqCRdj_jvxfy7p8FbHx2calvKfdp5o5Z9vO_5SY8kAHbYb.8hVzrrT7ZXKx271SqPP2bFAV2ytthGhg4Ji.YvAcsWe0N.3sAwnnx2klwx3W9CkPyirRC',};var a = document.createElement('script');a.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=a5356a4e08a3b81f';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null,"/a8b9264c15?__cf_chl_rt_tk=b.lP8e_A5Grp7dU.tuSbLlR6g5GJqRal11PH_Q22frY-1793478601-1.0.1.1-Xrzdotet5LX5MDyklle2d8ZVGc3TuGHHsaJ7AIdicK0"+ window._cf_chl_opt.cOgUHash);a.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(a);}());</script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

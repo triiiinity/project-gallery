@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Documentation for compiling Cloudflare Custom Pages in README-cloudflare-pages.md -->
+    <title>Kit</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Kit: The creator marketing platform" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://cdn.kit.com/assets/favicon-fec1de03350a05b77c95fef9235c9a7a8c096ae4ff9992a0f2ee2d90115aa705.ico"
+    />
+
+    <style>
+      *,
+      :after,
+      :before {
+        border: 0 solid #dce1e5;
+      }
+      *,
+      :after,
+      :before {
+        box-sizing: border-box;
+      }
+      body,
+      html {
+        height: 100%;
+      }
+      body {
+        background: #f3f6f9;
+        background-color: #f3f6f9;
+        color: #3d3d3d;
+        font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.428571429;
+        margin: 0;
+        padding: 0;
+      }
+      .page {
+        height: auto;
+      }
+      .content_wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 101px);
+      }
+      .min-h-screen {
+        min-height: 100vh;
+      }
+      .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .w-full {
+        width: 100%;
+      }
+      .bg-white {
+        --bg-opacity: 1;
+        background-color: #fff;
+        background-color: rgba(255, 255, 255, var(--bg-opacity));
+      }
+      .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .pb-40 {
+        padding-bottom: 10rem;
+      }
+      .pt-12 {
+        padding-top: 3rem;
+      }
+      .hidden {
+        display: none;
+      }
+      @media (min-width: 768px) {
+        .md\:flex {
+          display: flex;
+        }
+        .md\:grid {
+          display: grid;
+        }
+      }
+      .relative {
+        position: relative;
+      }
+      .overflow-hidden {
+        overflow: hidden;
+      }
+      .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-h-screen {
+        max-height: 100vh;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+      .object-center {
+        -o-object-position: center;
+        object-position: center;
+      }
+      .object-cover {
+        -o-object-fit: cover;
+        object-fit: cover;
+      }
+      .min-h-full {
+        min-height: 100%;
+      }
+      img,
+      video {
+        height: auto;
+        max-width: 100%;
+      }
+      audio,
+      canvas,
+      embed,
+      iframe,
+      img,
+      object,
+      svg,
+      video {
+        display: block;
+        vertical-align: middle;
+      }
+      img {
+        border-style: solid;
+      }
+      .w-40 {
+        width: 10rem;
+      }
+      .bottom-0 {
+        bottom: 0;
+      }
+      .right-0 {
+        right: 0;
+      }
+      .absolute {
+        position: absolute;
+      }
+      .p-4 {
+        padding: 1rem;
+      }
+      .mb-8 {
+        margin-bottom: 2rem;
+      }
+      .mr-8 {
+        margin-right: 2rem;
+      }
+      .h-20 {
+        height: 5rem;
+      }
+      .flex-col {
+        flex-direction: column;
+      }
+      .flex-row {
+        flex-direction: row;
+      }
+      .flex {
+        display: flex;
+      }
+      .items-center {
+        align-items: center;
+      }
+      .rounded-br {
+        border-bottom-right-radius: 0.25rem;
+      }
+      .rounded-l {
+        border-bottom-left-radius: 0.25rem;
+        border-top-left-radius: 0.25rem;
+      }
+      .pb-2 {
+        padding-bottom: 0.5rem;
+      }
+      .text-base {
+        font-size: 1rem;
+      }
+      .font-semibold {
+        font-weight: 600;
+      }
+      .italic {
+        font-style: italic;
+      }
+    </style>
+  <meta http-equiv="refresh" content="360"></head>
+
+  <body>
+    <div class="page" ng-app="ckUnrouted" id="ck-page">
+      <div class="min-h-screen" style="display: flex; flex-direction: column;">
+        <div style="display: flex; flex: 1 1 auto">
+          <div class="bg-white w-full">
+            <div class="px-4 pb-40 pt-12">
+              <div style="max-width: 470px;" class="mx-auto">
+                <div class="flex" style="margin-bottom: 3rem;">
+                  <svg
+                    width="114"
+                    height="52"
+                    viewBox="0 0 400 181"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M109.562 75.1422c49.21 9.535 64.488 55.0968 64.903 100.9298 0 1.03-.831 1.878-1.86 1.878h-61.959c-1.03 0-1.86-.83-1.86-1.842-.181-35.557-5.942-66.925-41.1743-68.28-1.0474-.036-1.9322.795-1.9322 1.86v66.42c0 1.03-.8307 1.86-1.8601 1.86H1.86a1.857 1.857 0 0 1-1.86-1.86V6.8262c0-1.0294.8307-1.86 1.86-1.86h61.9775c1.0293 0 1.86.8306 1.86 1.86v63.4041c0 .939.7585 1.6975 1.6975 1.6975.7404 0 1.4086-.4876 1.6253-1.1919C84.9661 18.4379 114.781 5.2912 163.196 4.9842c1.03 0 1.86.8307 1.86 1.86v63.2416c0 1.0293-.83 1.86-1.86 1.86h-53.327c-.903 0-1.625.7224-1.625 1.6253 0 .7585.56 1.4266 1.318 1.5711Zm169.661 39.6388V73.7878c0-1.0293.831-1.86 1.861-1.86h45.598c.903 0 1.625-.7224 1.625-1.6253 0-.7765-.56-1.4447-1.318-1.5892-35.684-7.079-52.154-27.6117-52.714-61.8871-.018-1.0113.795-1.86 1.824-1.86h66.962c1.029 0 1.86.8306 1.86 1.86V35.702c0 1.0294.831 1.8601 1.86 1.8601h38.393c1.029 0 1.86.8307 1.86 1.86v30.6817c0 1.0294-.831 1.8601-1.86 1.8601h-38.393c-1.029 0-1.86.8307-1.86 1.86v33.0651c0 11.684 7.169 15.531 16.686 15.531 14.917 0 29.653-6.718 35.558-9.77 1.228-.632 2.709.253 2.709 1.643v51.468c0 1.372-.759 2.636-1.969 3.286-5.833 3.07-23.855 11.576-44.46 11.576-42.456-.036-74.222-17.318-74.222-65.842Zm-87.169 61.309V73.7878c0-1.0293.831-1.86 1.86-1.86h61.978c1.029 0 1.86.8307 1.86 1.86V176.09c0 1.03-.831 1.86-1.86 1.86h-61.978c-1.029-.018-1.86-.848-1.86-1.86Zm-3.521-144.5595c0 17.4086 12.298 31.5305 35.918 31.5305 23.621 0 35.919-14.1219 35.919-31.5305S248.09 0 224.451 0c-23.62 0-35.918 14.1219-35.918 31.5305Z"
+                      fill="#44B1FF"
+                    />
+                  </svg>
+                </div>
+                <div
+                  style="font-size: 1.25rem; font-weight: 600; margin-bottom: 2rem;"
+                >
+                  Are you a robot? 🤖
+                </div>
+                <div style="margin-bottom: 2rem;">
+                  Hey There! Sorry for the inconvenience, but we need to confirm
+                  you're not a robot.
+                </div>
+                <div>
+                  <div class="main-wrapper" role="main"><div class="main-content"><noscript><div class="h2"><span id="challenge-error-text">Enable JavaScript and cookies to continue</span></div></noscript></div></div><script>(function(){window._cf_chl_opt = {cFPWv: 'g',cH: 'cB2dL7Xj2oK7TxRGXboeWEFHgva7MVR77UuQ7P5Rs_o-1793478601-1.2.1.1-0fJC7ZYOuMFEDiMbDq9ALPPwXmpGQKMkcSW1vZ7JPwACPr8XGlQ3iEaUSEp0uJVk',cITimeS: '1793478601',cRay: 'a5356a4d9e5828cb',cTplC:1,cTplO:0,cTplV:5,cType: 'managed',cUPMDTk:"/a8b9264c15/index.js?__cf_chl_tk=v7vdu8iZy_Z02jKh3P2wcIs44cUk.yndcq__RTM.4X4-1793478601-1.0.1.1-_kUlT5u_1uJVanRBe.phCRBrdvzjBjEbZsIv2gmlqZ8",cvId: '3',cZone: 'project-gallery.kit.com',fa:"/a8b9264c15/index.js?__cf_chl_f_tk=v7vdu8iZy_Z02jKh3P2wcIs44cUk.yndcq__RTM.4X4-1793478601-1.0.1.1-_kUlT5u_1uJVanRBe.phCRBrdvzjBjEbZsIv2gmlqZ8",md: 'h_BvgjqYN_2aEn086Ak8N9dlT7T2ORjX5.bA_S0wx_E-1793478601-1.2.1.1-0y59Vzf0hUbhoY3J.3ZUo0.e_qVhp_ufgRHxjDVSuF52a9Ro5ld46VkMPLisKrj5t4sq6N5Yq.jJvYbKABIlicp233IiUgwicvlFnE29PnN9pTnv7U9oyz9DwkQSYNyagu2mq2g3LiNA_kxgDGrIEjVNmmpDIurOwxZKYUN5mfRdInVUS0ib3eA2ev2EY1jKM0BtJKp0LqoEXXQqLKyW9xZk0HWU.UsDIE5wIg0bTh1Ba8rbOhGmOckq_FOBKev_pLce_ACe2__p6bOioDja2WMb8mBzjWd36E5XUtCye4pkzkWrzb2qEO_w3GQzWlHtK4oN.pYv6b5DNobscy0DTEFswnzRhN_8AMhQzANsnlocm8Z6etU.78iW9KJUqPcLeREw_MK9m34k_KXzMMc9.ub2_NAUxEKfoILHElCEo0kWJEJjdrfGMk.z3ABDRnCk.e3_Xs2Ydbb9i_RoyHItVAndp7VfQmxrJGammMTgWqVMh_2oAcB_K6s8052YBzIfBuO_7uNkO1YP7TKwQ8e5ORshkceSRAXopuphFE5xuOH5TP0zTBrTDsaSwfHQuZmGPGJZ0FQ4s.R_b29S8rYI4G60df1Te2H7xXjtwPm_N.Jl6yYPVuVSBFutChZFYxUw_vIG8I061U9YteOrB_1AVW8Ra6WSp8beZsZtO2a6SeSZpFwkcLgFL4cUFXC5XM72OD7HwrRR8Z3eqlDSk61rZ8d.8kV8D5hcW80REGmu5ShzMlOOMtD7fQmQlTEf9vohJLPZn0VyZ8nMkfcpLTuSI40AkA9I30wQL9Caxdto5cEtJN5vJ8lEfCUPND6rxOzRzPqGXIe3OrYGxbO94CCiH2b1TIIxnjDws63CAxHplMixKTO2xDPSR5ORXRMy7iC3subXzYscJK4J9SMHJd9He0WuwgNwu6z5j2jkCxfng_cp3Jx7S12ryMUUJUDhgkuiU4V3IyQcCQdxBsAQrE5YERhpfsHIzzVyF3uepX5al13F5pZxccF3sX3_XdvFKop3W.C0zwtlmZX7JgNx6UqZ3st1Yg4H8.w0VzJU6FHbyqldWGu.K7ZLK4STiO3gcYR.rQvh_8ttZwgCebrLjl6AKA',mdrd: 'AXWfRBfkwPWxYMYDjuL5j79PAdcyE9OupvocGTwqvxg-1793478601-1.2.1.1-nvFvL2mkNs8VMs9GMIBzKp33uCH5dJ3aU9wWf23KUzqhRp3alivXbNUGLUxHJdd14veiyk.7d3ZoKYogDKgvImakUNvRxyRp2W0Ed28y7gb00qMdyI_Feyu.I9vJNAK_FkKpxiGaznMAIAEaZPDb6V7c9qdIfNzMqE9Gqk6eoBZgv_MZsjh0TmZja8zT2rqLsuSPyYyTws.5EAftqLlfulTCGUCh.e5R9fHDYa_xNF12Bdo2EO9Ihz.aOgzo8Wjqmv4182Q6GPMahlwGSFKZ7nCrJdjbEOGPuyjX0R1rUm_8UgsaoZFaphxXEkUXVIky',};var a = document.createElement('script');a.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=a5356a4d9e5828cb';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null,"/a8b9264c15/index.js?__cf_chl_rt_tk=v7vdu8iZy_Z02jKh3P2wcIs44cUk.yndcq__RTM.4X4-1793478601-1.0.1.1-_kUlT5u_1uJVanRBe.phCRBrdvzjBjEbZsIv2gmlqZ8"+ window._cf_chl_opt.cOgUHash);a.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(a);}());</script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
