@@ -1,0 +1,27 @@
+# One-time: copies the site's pictures, videos and PDFs off Squarespace (see scripts/move-off-squarespace.mjs).
+name: move off squarespace
+on:
+  push:
+    branches: [main]
+    paths: ["scripts/move-off-squarespace.mjs"]
+permissions:
+  contents: write
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - run: npm install --no-save sharp@0.33
+      - run: node scripts/move-off-squarespace.mjs || echo "move failed" >> scripts/move-off-squarespace.log
+      - name: save the copies
+        run: |
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add images/sq files videos scripts/sq-map.json scripts/move-off-squarespace.log || true
+          git commit -q -m "Copy the site's pictures, videos and PDFs off Squarespace" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
+          git pull -q --rebase && git push
