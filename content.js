@@ -2922,7 +2922,8 @@ const ARCHIVE_LIST = ["white-whale", "mike-nudelman", "tdreade", "ryker-woodward
 // NEWSLETTER: offered after someone signs the guest book.
 // Paste the sign-up form address from your newsletter service here when you have one.
 const NEWSLETTER = {
-  formAction: ""
+  kitUid: "a8b9264c15",   // the Kit form (from its embed code); Kit keeps the list and sends the confirmation email
+  formAction: ""         // optional instead: a plain form address to post to
 };
 
 // LEADERSHIP on the about page. "image" shows when someone hovers the name.

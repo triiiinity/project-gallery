@@ -367,6 +367,20 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .nl-box input { font-family: var(--font); font-size: 14px; border: 0; border-bottom: 1px solid #c9c9c9; padding: 6px 0; border-radius: 0; }
 .nl-box input:focus { outline: none; border-bottom-color: var(--ink); }
 .nl-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.nl-own { display: grid; gap: 14px; }
+/* Kit's signup form, dressed like the rest of the site */
+#nl-kit .formkit-form { max-width: none !important; background: none !important; border: 0 !important; box-shadow: none !important; font-family: var(--font) !important; }
+#nl-kit .formkit-form [data-style="clean"], #nl-kit .formkit-form .formkit-column { padding: 0 !important; }
+#nl-kit .formkit-header, #nl-kit .formkit-subheader, #nl-kit .formkit-image, #nl-kit .formkit-powered-by-convertkit-container, #nl-kit .formkit-powered-by { display: none !important; }
+#nl-kit .formkit-fields { display: flex !important; flex-wrap: wrap; gap: 14px !important; margin: 0 !important; align-items: flex-end; }
+#nl-kit .formkit-field { flex: 1 1 200px !important; margin: 0 !important; }
+#nl-kit .formkit-input { font-family: var(--font) !important; font-size: 14px !important; color: var(--ink) !important; background: none !important; border: 0 !important; border-bottom: 1px solid #c9c9c9 !important; border-radius: 0 !important; padding: 6px 0 !important; width: 100% !important; }
+#nl-kit .formkit-input:focus { outline: none !important; border-bottom-color: var(--ink) !important; }
+#nl-kit .formkit-submit { margin: 0 !important; flex: 0 0 auto !important; background: var(--ink) !important; color: #fff !important; border-radius: 999px !important; font-family: var(--font) !important; font-size: 13px !important; text-transform: lowercase; box-shadow: 0 0 14px rgba(0, 0, 0, 0.25); transition: box-shadow .6s ease !important; }
+#nl-kit .formkit-submit:hover { box-shadow: 0 0 22px rgba(0, 0, 0, 0.4); }
+#nl-kit .formkit-submit > span { padding: 8px 18px !important; }
+#nl-kit .formkit-alert { font-size: 12px !important; border-radius: 0 !important; text-transform: lowercase; }
+#nl-kit .formkit-guarantee { font-size: 11px !important; color: var(--muted) !important; margin: 10px 0 0 !important; }
 .nl-skip { background: none; border: 0; padding: 0; font: inherit; font-size: 12px; color: var(--muted); cursor: pointer; }
 .nl-skip:hover { color: var(--accent); }
 
@@ -805,15 +819,19 @@ footer a:hover { color: var(--accent); }
 </div>
 
 <div class="nl" id="nl" role="dialog" aria-modal="true" aria-labelledby="nl-title">
-  <form class="nl-box" id="nl-form" novalidate>
+  <div class="nl-box">
     <p id="nl-title">thank you for signing the guest book.</p>
     <p>would you like project gallery's newsletter? new shows, open calls and the artist grant, now and then.</p>
-    <label class="fine" for="nl-email">email</label>
-    <input id="nl-email" type="email" autocomplete="email" placeholder="you@example.com">
-    <p class="fine">your email is never shown in the guest book.</p>
-    <div class="nl-row"><button type="button" class="nl-skip" id="nl-skip">no thanks</button><button class="enter" type="submit">sign up</button></div>
-    <p class="fine" id="nl-msg" role="status"></p>
-  </form>
+    <form id="nl-form" class="nl-own" novalidate>
+      <label class="fine" for="nl-email">email</label>
+      <input id="nl-email" type="email" autocomplete="email" placeholder="you@example.com">
+      <p class="fine">your email is never shown in the guest book.</p>
+      <div class="nl-row"><span></span><button class="enter" type="submit">sign up</button></div>
+      <p class="fine" id="nl-msg" role="status"></p>
+    </form>
+    <div id="nl-kit" hidden></div>
+    <div class="nl-row"><button type="button" class="nl-skip" id="nl-skip">no thanks</button><span></span></div>
+  </div>
 </div>
 
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
@@ -1983,9 +2001,25 @@ document.getElementById("gr-form").addEventListener("submit", e => {
   renderReview();
 });
 
-/* newsletter offer (not connected yet: nothing is saved until NEWSLETTER.formAction is set) */
+/* newsletter offer: Kit's own signup form (NEWSLETTER.kitUid), loaded the first time the box opens; or a plain post to NEWSLETTER.formAction */
 const nl = document.getElementById("nl"), nlForm = document.getElementById("nl-form");
-function openNewsletter() { document.getElementById("nl-msg").textContent = ""; nlForm.reset(); nl.classList.add("open"); document.getElementById("nl-email").focus(); }
+let kitLoaded = false;
+function loadKit() {
+  const box = document.getElementById("nl-kit");
+  if (kitLoaded || !NEWSLETTER.kitUid || NEWSLETTER.formAction) return;
+  kitLoaded = true;
+  const sc = document.createElement("script");
+  sc.async = true; sc.dataset.uid = NEWSLETTER.kitUid;
+  sc.src = `https://project-gallery.kit.com/${NEWSLETTER.kitUid}/index.js`;
+  sc.onerror = () => { kitLoaded = false; nlForm.hidden = false; box.hidden = true; };   // if Kit can't load, the box says sign-ups open soon
+  box.appendChild(sc);
+  box.hidden = false; nlForm.hidden = true;
+}
+function openNewsletter() {
+  document.getElementById("nl-msg").textContent = ""; nlForm.reset(); loadKit(); nl.classList.add("open");
+  const f = nlForm.hidden ? document.querySelector("#nl-kit input[type=email], #nl-kit input") : document.getElementById("nl-email");
+  if (f) f.focus();
+}
 function closeNewsletter() { nl.classList.remove("open"); }
 document.getElementById("nl-skip").addEventListener("click", closeNewsletter);
 nl.addEventListener("click", e => { if (e.target === nl) closeNewsletter(); });
