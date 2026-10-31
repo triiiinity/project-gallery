@@ -22,7 +22,7 @@ const textOf = el => {
 const clean = s => String(s || "").replace(/ /g, " ").replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, "\n").trim();
 
 // 1. every post, following "older posts" until the end
-const posts = [], seenPages = new Set();
+const posts = [], seenPages = new Set(), excerpts = {};
 let page = "/spotlights";
 while (page && !seenPages.has(page) && seenPages.size < 30) {
   seenPages.add(page);
@@ -31,10 +31,16 @@ while (page && !seenPages.has(page) && seenPages.size < 30) {
     const h = a.getAttribute("href");
     if (/^\/spotlights\/(?!category|tag)[^?#]+$/.test(h) && !posts.includes(h)) posts.push(h);
   }
+  // the excerpt chosen for each post, shown on the old list page
+  for (const item of d.querySelectorAll("article, .blog-item, .summary-item, .blog-basic-grid--container > *, .blog-side-by-side-wrapper > *, .blog-single-column--container > *, .blog-alternating-side-by-side-wrapper > *")) {
+    const link = item.querySelector("a[href^='/spotlights/']:not([href*='/category/']):not([href*='/tag/'])");
+    const ex = item.querySelector(".blog-excerpt, .blog-excerpt-wrapper, .summary-excerpt, .excerpt, [class*='excerpt']");
+    if (link && ex) { const t = clean(textOf(ex)); if (t && !excerpts[link.getAttribute("href")]) excerpts[link.getAttribute("href")] = t; }
+  }
   const older = [...d.querySelectorAll("a[href*='offset=']")].map(a => a.getAttribute("href")).find(h => !seenPages.has(h));
   page = older || null;
 }
-log.push(`pages: ${seenPages.size}, posts: ${posts.length}`);
+log.push(`pages: ${seenPages.size}, posts: ${posts.length}, excerpts found: ${Object.keys(excerpts).length}`);
 
 // 2. each post: title, date, tags, then its text and pictures in order
 const out = [];
@@ -74,7 +80,7 @@ for (const path of posts) {
     // drop the "Written by" line and the title repeated at the top
     const trimmed = blocks.filter(b => !(b.p && /^written by /i.test(b.p)) && !(b.q && b.q === title));
     const slug = path.replace(/^\/spotlights\//, "");
-    out.push({ slug, title, date, tags, blocks: trimmed });
+    out.push({ slug, title, date, tags, excerpt: excerpts[path] || "", blocks: trimmed });
     log.push(`${date} ${slug}: ${trimmed.filter(b => b.p || b.q).length} paragraphs, ${trimmed.filter(b => b.q).length} questions, ${trimmed.filter(b => b.img).length} pictures`);
   } catch (e) {
     log.push(`FAILED ${path}: ${e.message}`);
@@ -85,6 +91,7 @@ out.sort((a, b) => b.date.localeCompare(a.date));
 const header = `// INTERVIEWS: the old "spotlights" posts from the Squarespace site, copied word for word on ${new Date().toISOString().slice(0, 10)}.
 // Each one: slug (its address, /interviews/<slug>), title, date, tags, and blocks in order:
 //   { p: "paragraph" }, { q: "a question" }, { img: "picture", ratio: "w/h", caption: "" }
+// excerpt: the short preview chosen for the post on the old spotlights list.
 // Loaded only when someone opens the interviews page.
 `;
 writeFileSync("interviews.js", header + "const INTERVIEWS = " + JSON.stringify(out, null, 1) + ";\n");
