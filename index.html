@@ -350,8 +350,11 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .award-shelf svg { image-rendering: pixelated; display: block; }
 .award-shelf { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 10px 14px; margin: 48px 0 28px; }
 .award-shelf figure { margin: 0; position: relative; cursor: default; }
-.award-shelf figure::after { content: attr(data-name); position: absolute; top: calc(100% + 6px); right: 0; white-space: nowrap; font-size: 11px; color: var(--muted); opacity: 0; transition: opacity .3s ease; pointer-events: none; }
-.award-shelf figure:hover::after { opacity: 1; }
+.shelf-tip { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; width: 230px; background: var(--bg); padding: 10px 12px; box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
+  opacity: 0; transition: opacity .3s ease; pointer-events: none; text-align: left; }
+.shelf-tip b { display: block; font-weight: 400; font-size: 13px; margin-bottom: 4px; }
+.shelf-tip span { display: block; font-size: 11px; line-height: 1.45; color: var(--muted); text-align: justify; }
+.award-shelf figure:hover .shelf-tip { opacity: 1; }
 .award-shelf svg { width: 28px; height: 28px; margin: 0; }
 
 /* about: leadership */
@@ -1143,7 +1146,7 @@ let collectionFilter = "all";
 function renderAwardShelf() {
   const got = getAwards();
   document.getElementById("award-shelf").innerHTML = Object.keys(got).filter(id => AWARD_LIST[id]).map(id =>
-    `<figure data-name="${esc(AWARD_LIST[id].name)}" aria-label="${esc(AWARD_LIST[id].name)}">${AWARD_LIST[id].art}</figure>`).join("");
+    `<figure aria-label="${esc(AWARD_LIST[id].name)}">${AWARD_LIST[id].art}<figcaption class="shelf-tip"><b>${esc(AWARD_LIST[id].name)}</b><span>${esc(AWARD_LIST[id].text)}</span></figcaption></figure>`).join("");
 }
 // read "23.6 x 19.7 in" as height and width in inches
 function inches(size) { const m = /([\d.]+)\s*x\s*([\d.]+)(?:\s*x\s*[\d.]+)?\s*in/i.exec(size || ""); return m ? [parseFloat(m[1]), parseFloat(m[2])] : null; }
