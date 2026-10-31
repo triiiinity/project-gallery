@@ -127,6 +127,7 @@ details .detail-body p { margin: 0 0 10px; }
 .work-image .placeholder { width: 100%; }
 .work-caption { text-align: right; font-size: 13px; line-height: 1.5; }
 .work-caption em, .lb-caption em { font-style: italic; }
+.work-caption .place { color: var(--muted); }
 .work-caption p { margin: 0; }
 .work-caption .inquire { display: inline-block; margin-top: 10px; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .work-caption .inquire:hover { color: var(--accent); }
@@ -544,8 +545,8 @@ footer a:hover { color: var(--accent); }
       <div class="ex-text">
         <p class="lede" id="show-lede"></p>
         <p class="show-hint" id="show-hint"></p>
-        <details><summary>artist bio</summary><div class="detail-body" id="show-bio"></div></details>
-        <details><summary>artist statement</summary><div class="detail-body" id="show-statement"></div></details>
+        <details><summary id="show-bio-label">artist bio</summary><div class="detail-body" id="show-bio"></div></details>
+        <details><summary id="show-statement-label">artist statement</summary><div class="detail-body" id="show-statement"></div></details>
       </div>
       <div class="ex-buttons" id="show-buttons"></div>
     </div>
@@ -846,7 +847,7 @@ function startPeek() {
   const swap = slot => {
     const old = slot.querySelector("img.on"), im = new Image();
     im.alt = ""; im.onload = () => { slot.appendChild(im); requestAnimationFrame(() => im.classList.add("on")); if (old) { old.classList.remove("on"); setTimeout(() => old.remove(), 2600); } };
-    im.src = pick();
+    im.src = sized(pick(), 300);
   };
   slots.forEach(swap);
   clearInterval(peekTimer);
@@ -1051,6 +1052,8 @@ function renderShow(key) {
     ? "hover over a painting to find close-up details. click any work to see it larger."
     : "click any work to see it larger.";
   const paras = t => String(t).split(/\n\s*\n/).map(x => `<p>${esc(x.trim())}</p>`).join("");
+  document.getElementById("show-bio-label").textContent = sh.bioLabel || "artist bio";
+  document.getElementById("show-statement-label").textContent = sh.statementLabel || "artist statement";
   document.getElementById("show-bio").innerHTML = paras(sh.bio || "artist bio coming soon");
   document.getElementById("show-statement").innerHTML = paras(sh.statement || "artist statement coming soon");
   document.querySelectorAll("#view-show details").forEach(d => d.open = false);
@@ -1059,7 +1062,7 @@ function renderShow(key) {
   // one line of all the works at the top
   const strip = document.getElementById("show-strip");
   strip.innerHTML = sh.works.map((w, i) => {
-    return `<a href="#work-${i}" data-work="${i}" aria-label="${esc(w.title)}"><img src="${esc(w.image)}" alt=""></a>`;
+    return `<a href="#work-${i}" data-work="${i}" aria-label="${esc(w.title)}"><img src="${esc(sized(w.image, 400))}" alt=""></a>`;
   }).join("");
   fitStrip(strip);
   strip.querySelectorAll("img").forEach(im => im.addEventListener("load", () => fitStrip(strip)));
@@ -1070,16 +1073,17 @@ function renderShow(key) {
   }));
   const wrap = document.getElementById("show-works");
   wrap.innerHTML = "";
-  currentWorks = sh.works.map((w, i) => ({ ...w, artist: sh.artist, id: key + ":" + i, showTitle: sh.title, link: "/" + key }));
+  currentWorks = sh.works.map((w, i) => ({ ...w, artist: w.artist || sh.artist, id: key + ":" + i, showTitle: sh.title, link: "/" + key }));
   const makeWork = (w, i) => {
     const el = document.createElement("article");
     el.className = "work " + (w.layout === "pair" ? "" : (w.layout || "left"));
     el.id = "work-" + i;
-    const subject = `Purchase Inquiry for ${sh.artist}'s ${w.title}`;
+    const subject = `Purchase Inquiry for ${w.artist || sh.artist}'s ${w.title}`;
     const dets = w.details || [];
     const side = w.layout === "right" ? "l" : "r";          // bubbles go where there's more white
-    el.innerHTML = `<div class="work-image"><div class="placeholder" style="aspect-ratio:${w.ratio}">image</div>${dets.length ? `<div class="bubbles ${side}" aria-label="detail photos">${dets.map((d, k) => `<button class="bubble" data-d="${k}" aria-label="detail ${k + 1} of ${dets.length}" style="background-image:url('${esc(d)}')"></button>`).join("")}</div>` : ""}</div>
+    el.innerHTML = `<div class="work-image"><div class="placeholder" style="aspect-ratio:${w.ratio}">image</div>${dets.length ? `<div class="bubbles ${side}" aria-label="detail photos">${dets.map((d, k) => `<button class="bubble" data-d="${k}" aria-label="detail ${k + 1} of ${dets.length}" style="background-image:url('${esc(sized(d, 300))}')"></button>`).join("")}</div>` : ""}</div>
       <div class="work-caption">
+        ${w.artist ? `<p>${esc(w.artist)}${w.place ? ` <span class="place">(${esc(w.place)})</span>` : ""}</p>` : ""}
         <p><em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}</p>
         <p>${esc(w.medium)}</p>
         <p>${esc(w.size)}</p>
@@ -1087,10 +1091,10 @@ function renderShow(key) {
       </div>`;
     const box = el.querySelector(".work-image");
     const img = new Image();
-    img.alt = `${sh.artist}, ${w.title}`;
+    img.alt = `${w.artist || sh.artist}, ${w.title}`;
     img.onload = () => { box.querySelector(".placeholder")?.remove(); box.prepend(img); };
     img.addEventListener("click", () => openLightbox(i));
-    loadImage(img, [w.image, w.backup], () => {});
+    loadImage(img, [sized(w.image, 1500), w.backup], () => {});
     box.querySelectorAll(".bubble").forEach(bt => bt.addEventListener("click", () => openDetails(i, Number(bt.dataset.d))));
     return el;
   };
@@ -1138,7 +1142,7 @@ function refreshSaveButtons() {
 function workInfo(saved) {
   const [key, idx] = String(saved.id).split(":");
   const w = SHOWS[key] && SHOWS[key].works[Number(idx)];
-  return w ? { ...saved, ...w, artist: SHOWS[key].artist, showTitle: SHOWS[key].title, status: SHOWS[key].status || "past show" } : saved;
+  return w ? { ...saved, ...w, artist: w.artist || SHOWS[key].artist, showTitle: SHOWS[key].title, status: SHOWS[key].status || "past show" } : saved;
 }
 // pick several colours from each saved picture (kept dark enough to read)
 const paletteCache = {};
@@ -1168,6 +1172,7 @@ function pickColours(src) {
       res(paletteCache[src]);
     };
     im.onerror = () => res([]);
+    if (/squarespace-cdn/.test(src)) im.crossOrigin = "anonymous";
     im.src = src;
   });
 }
@@ -1187,7 +1192,7 @@ function renderSalon(works) {
   if (!sized.length) { box.innerHTML = ""; return; }
   const tallest = Math.max(...sized.map(x => x.d[0]));
   const px = Math.min(11, 300 / tallest);                    // pixels per inch, shared by every work
-  box.innerHTML = sized.map(({ w, d }) => `<img src="${esc(w.image)}" alt="${esc(w.artist + ", " + w.title)}" title="${esc(w.title + ", " + w.size)}" style="height:${Math.max(18, d[0] * px).toFixed(0)}px;width:auto" data-id="${esc(w.id)}">`).join("")
+  box.innerHTML = sized.map(({ w, d }) => `<img src="${esc(sized(w.image, 750))}" alt="${esc(w.artist + ", " + w.title)}" title="${esc(w.title + ", " + w.size)}" style="height:${Math.max(18, d[0] * px).toFixed(0)}px;width:auto" data-id="${esc(w.id)}">`).join("")
     ;
   box.querySelectorAll("img").forEach((im, i) => im.addEventListener("click", () => { currentWorks = sized.map(x => x.w); openLightbox(i); }));
 }
@@ -1209,7 +1214,7 @@ function renderCollection() {
   const tags = ["all", ...types.map(t => t + "s"), ...years, ...statuses, ...(all.some(w => w.forSale) ? ["for sale"] : [])];
   if (!tags.includes(collectionFilter)) collectionFilter = "all";
   tagsEl.innerHTML = tags.map(t => `<button class="tag${t === collectionFilter ? " on" : ""}" data-tag="${esc(t)}">${esc(t)}</button>`).join("");
-  Promise.all(all.map(w => pickColours(w.image))).then(lists => {
+  Promise.all(all.map(w => pickColours(sized(w.image, 100)))).then(lists => {
     // take colours in turn from each saved work so every tag gets its own
     const pool = [], hues = [];
     const far = h => hues.every(x => Math.min(Math.abs(x - h), 360 - Math.abs(x - h)) >= 28);
@@ -1222,7 +1227,7 @@ function renderCollection() {
   const list = all.filter(w => f === "all" || w.type + "s" === f || w.year === f || w.status === f || (f === "for sale" && w.forSale));
   renderSalon(f === "all" ? shuffled(list) : list);
   box.innerHTML = list.map(w => `<div class="c-item">
-      <img src="${esc(w.image)}" alt="${esc(w.artist + ", " + w.title)}" data-open="${esc(w.id)}">
+      <img src="${esc(sized(w.image, 750))}" alt="${esc(w.artist + ", " + w.title)}" data-open="${esc(w.id)}">
       <p>${esc(w.artist)}</p>
       <p><em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}</p>
       <p><a href="${esc(w.link)}">${esc(w.showTitle)}</a><button class="save" data-save="${esc(w.id)}"></button></p>
@@ -1244,7 +1249,7 @@ function lbShow(i) {
   lbIndex = (i + lbItems.length) % lbItems.length;
   const it = lbItems[lbIndex], w = it.work;
   lbStage.classList.remove("zoomed");
-  lbImg.src = it.image;
+  lbImg.src = sized(it.image, 2500);
   lbImg.alt = `${w.artist}, ${w.title}${it.detail ? ", detail" : ""}`;
   document.getElementById("lb-caption").innerHTML = it.detail
     ? `${capLine(w)} :: detail ${it.detail} of ${it.of}`
@@ -1378,7 +1383,7 @@ function openCard(c) {
   document.querySelector("#card-backdrop .card").classList.toggle("wide", !!c.wide && !!c.image);
   document.querySelector("#card-backdrop .card").classList.toggle("noimg", !c.image);
   document.getElementById("card-note").textContent = c.note || "";
-  document.getElementById("card-icons").innerHTML = (c.icons || []).slice(0, 16).map(src => `<img src="${esc(src)}" alt="" loading="lazy">`).join("");
+  document.getElementById("card-icons").innerHTML = (c.icons || []).slice(0, 16).map(src => `<img src="${esc(sized(src, 100))}" alt="" loading="lazy">`).join("");
   document.getElementById("card-artists").textContent = (c.artists && c.artists.length) ? "including artists " + c.artists.join(", ") : "";
   document.getElementById("card-enter").textContent = /^https?:/.test(c.link || "") ? "enter exhibition ↗" : "enter exhibition";
   const enter = document.getElementById("card-enter");
@@ -1734,7 +1739,7 @@ function renderPeople() {
 (() => {
   const type = document.getElementById("cf-type"), wrap = document.getElementById("cf-work-wrap");
   const workIn = document.getElementById("cf-work"), found = document.getElementById("cf-work-found");
-  const all = Object.entries(SHOWS).flatMap(([k, sh]) => sh.works.map(w => ({ ...w, artist: sh.artist, show: sh.title, key: k })));
+  const all = Object.entries(SHOWS).flatMap(([k, sh]) => sh.works.map(w => ({ ...w, artist: w.artist || sh.artist, show: sh.title, key: k })));
   document.getElementById("cf-works").innerHTML = all.map(w => `<option value="${esc(w.title + " — " + w.artist)}"></option>`).join("");
   const match = () => all.find(w => (w.title + " — " + w.artist).toLowerCase() === workIn.value.trim().toLowerCase())
     || all.find(w => w.title.toLowerCase() === workIn.value.trim().toLowerCase());
