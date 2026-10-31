@@ -125,6 +125,12 @@ details .detail-body p { margin: 0 0 10px; }
 .bubble:hover { box-shadow: 0 0 14px 2px rgba(0, 0, 0, 0.35); }
 @media (hover: none) { .bubble { opacity: 1; transform: none; } }
 .work-image .placeholder { width: 100%; }
+/* shows with size: "large": every work fills its half of the page (at least ~40% of the screen) */
+.works.large .work.left .work-image, .works.large .work.right .work-image, .works.large .pair .work-image { width: 100%; }
+.works.large .work.center { width: min(56vw, 860px); }
+.works.large .pair { padding: 0; }
+.works.large .work-image img { width: auto; max-width: 100%; max-height: 92vh; }
+.works.large .work.right .work-image img { margin-left: auto; }
 .work-caption { text-align: right; font-size: 13px; line-height: 1.5; }
 .work-caption em, .lb-caption em { font-style: italic; }
 .work-caption .place { color: var(--muted); }
@@ -289,7 +295,7 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .arch-item img { flex: 0 0 auto; width: 30px; height: 30px; object-fit: cover; transition: box-shadow .25s; }
 .arch-item .a-soon { font-size: 12px; color: var(--accent); }
 .arch-item:hover img { box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.3); }
-.arch-item:hover .a-title { color: var(--accent); }
+.arch-item:hover .a-title, .arch-item.opened .a-title { color: var(--accent); }
 /* artist archive */
 .counters { display: flex; flex-wrap: wrap; gap: 28px clamp(36px, 5vw, 72px); margin: 8px 0 40px; }
 .counter b { display: block; font-weight: 400; font-size: clamp(24px, 2.9vw, 37px); letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
@@ -320,8 +326,15 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .card.noimg .card-text { padding-top: 12px; }
 .card-icons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .card-icons:empty { display: none; }
-.card-icons { flex-wrap: nowrap; gap: 6px; margin-top: 22px; }
-.card-icons img { flex: 1 1 0; min-width: 0; max-width: 40px; aspect-ratio: 1; height: auto; object-fit: cover; display: block; }
+.card-icons { flex-wrap: wrap; gap: 4px; margin-top: 22px; max-width: calc(var(--per, 12) * 32px - 4px); position: relative; }
+.card-icons a { flex: 0 0 28px; display: block; }
+.card-icons img { width: 28px; height: 28px; object-fit: cover; display: block; transition: box-shadow .25s; }
+.card-icons a:hover img, .card-icons a:focus-visible img { box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
+.icon-peek { position: absolute; bottom: calc(100% + 10px); left: 0; z-index: 3; background: var(--bg); padding: 6px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.14); pointer-events: none; opacity: 0; transition: opacity .25s; }
+.icon-peek.on { opacity: 1; }
+.icon-peek img { display: block; width: auto; height: auto; max-width: 180px; max-height: 180px; }
+.icon-peek p { margin: 6px 0 0; font-size: 11px; max-width: 180px; }
+@media (hover: none) { .icon-peek { display: none; } }
 .card-artists { margin: 10px 0 0; font-size: 11px; color: var(--muted); text-align: justify; line-height: 1.5; }
 .card-artists:empty { display: none; }
 
@@ -788,6 +801,12 @@ function renderExhibitionsPage() {
     `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${keys.map(k =>
       `<button class="arch-item" data-card="${esc(k)}"><span class="a-title">${esc(SHOW_CARDS[k].title)}</span><span class="${SHOW_CARDS[k].soon ? "a-soon" : "a-dates"}">${esc(SHOW_CARDS[k].dates)}</span><span class="a-foot"><span class="a-note">${esc(SHOW_CARDS[k].note || "")}</span>${SHOW_CARDS[k].image ? `<img src="${esc(sized(SHOW_CARDS[k].image, 100))}" alt="" loading="lazy">` : ""}</span></button>`).join("")}${fillers(keys.length, "span", "a-fill")}</div></div>`).join("");
   document.querySelectorAll("#ex-archive .arch-item").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
+  markOpened();
+}
+// shows you've been into stay link-blue in the archive, so you can see how many doors are left
+function markOpened() {
+  let d; try { d = new Set(JSON.parse(localStorage.getItem(DOORS)) || []); } catch (e) { d = new Set(); }
+  document.querySelectorAll("#ex-archive .arch-item").forEach(b => b.classList.toggle("opened", d.has(b.dataset.card)));
 }
 // "archive:/eternal-flame" -> the old site's address for that page
 function archiveLink(link) { return (link || "").replace(/^archive:/, SITE.archive.replace(/\/$/, "")); }
@@ -801,7 +820,7 @@ function openShowCard(key) {
   openCard({
     label: c.kind, image: c.image ? sized(c.image, 1500) : "", title: c.title, dates: c.dates, note: c.note, description: c.description, link: archiveLink(c.link),
     wide: true,
-    icons: sh ? sh.works.map(w => w.image) : [],
+    icons: sh ? sh.works.map((w, i) => ({ src: w.image, title: w.title, href: "/" + c.show, i })) : [],
     artists: c.artists || []
   });
 }
@@ -947,6 +966,7 @@ function markDoor(key) {
   let d; try { d = new Set(JSON.parse(localStorage.getItem(DOORS)) || []); } catch (e) { d = new Set(); }
   d.add(key);
   try { localStorage.setItem(DOORS, JSON.stringify([...d])); } catch (e) {}
+  if (typeof markOpened === "function") markOpened();
   const all = ARCHIVE_LIST.filter(k => SHOW_CARDS[k] && SHOW_CARDS[k].link);
   if (all.every(k => d.has(k))) giveAward("doors");
 }
@@ -1076,6 +1096,7 @@ function renderShow(key) {
   }));
   const wrap = document.getElementById("show-works");
   wrap.innerHTML = "";
+  wrap.classList.toggle("large", sh.size === "large");
   currentWorks = sh.works.map((w, i) => ({ ...w, artist: w.artist || sh.artist, id: key + ":" + i, showTitle: sh.title, link: "/" + key }));
   const makeWork = (w, i) => {
     const el = document.createElement("article");
@@ -1386,7 +1407,12 @@ function openCard(c) {
   document.querySelector("#card-backdrop .card").classList.toggle("wide", !!c.wide && !!c.image);
   document.querySelector("#card-backdrop .card").classList.toggle("noimg", !c.image);
   document.getElementById("card-note").textContent = c.note || "";
-  document.getElementById("card-icons").innerHTML = (c.icons || []).slice(0, 16).map(src => `<img src="${esc(sized(src, 100))}" alt="" loading="lazy">`).join("");
+  const icons = (c.icons || []).map(x => typeof x === "string" ? { src: x } : x);
+  const iconBox = document.getElementById("card-icons");
+  iconBox.style.setProperty("--per", icons.length > 12 ? Math.ceil(icons.length / 2) : 12);   // more than 12: two even rows
+  iconBox.innerHTML = icons.map(x => x.href
+    ? `<a href="${esc(x.href)}" data-work="${x.i}" data-full="${esc(sized(x.src, 500))}" data-title="${esc(x.title || "")}" aria-label="${esc(x.title || "")}"><img src="${esc(sized(x.src, 100))}" alt="" loading="lazy"></a>`
+    : `<a><img src="${esc(sized(x.src, 100))}" alt="" loading="lazy"></a>`).join("") + (icons.length ? `<div class="icon-peek" aria-hidden="true"><img alt=""><p></p></div>` : "");
   document.getElementById("card-artists").textContent = (c.artists && c.artists.length) ? "including artists " + c.artists.join(", ") : "";
   document.getElementById("card-enter").textContent = /^https?:/.test(c.link || "") ? "enter exhibition ↗" : "enter exhibition";
   const enter = document.getElementById("card-enter");
@@ -1403,6 +1429,20 @@ function closeCard() {
   setTimeout(() => backdrop.classList.remove("open"), 300);
 }
 document.getElementById("card-close").addEventListener("click", closeCard);
+// hovering a little icon shows a bigger peek of that work; clicking it goes straight to the work on the show page
+let pendingWork = null;
+(function cardIcons() {
+  const box = document.getElementById("card-icons");
+  box.addEventListener("mouseover", e => {
+    const a = e.target.closest("a[data-full]"), peek = box.querySelector(".icon-peek"); if (!a || !peek) return;
+    peek.querySelector("img").src = a.dataset.full;
+    peek.querySelector("p").textContent = a.dataset.title;
+    peek.style.left = Math.max(0, Math.min(a.offsetLeft - 70, box.clientWidth - 192)) + "px";
+    peek.classList.add("on");
+  });
+  box.addEventListener("mouseleave", () => box.querySelector(".icon-peek")?.classList.remove("on"));
+  box.addEventListener("click", e => { const a = e.target.closest("a[data-work]"); if (a) pendingWork = Number(a.dataset.work); }, true);
+})();
 document.getElementById("card-enter").addEventListener("click", e => { if (/^https?:/.test(e.currentTarget.getAttribute("href") || "")) markDoor(openCardKey); });
 backdrop.addEventListener("click", e => { if (e.target === backdrop) closeCard(); });
 /* entering a show: whatever you clicked moves toward you and fades to white, then the show eases in.
@@ -1853,9 +1893,15 @@ window.addEventListener("popstate", show);
 function show() {
   const h = currentRoute();
   let name = VIEWS.includes(h) ? h : "home";
-  if (SHOWS[h]) { name = "show"; renderShow(h); const ck = Object.keys(SHOW_CARDS).find(k => SHOW_CARDS[k].show === h); markDoor(ck); }
+  if (SHOWS[h]) { name = "show"; renderShow(h);
+    if (pendingWork !== null) { const n = pendingWork; pendingWork = null; requestAnimationFrame(() => {
+      const el = document.getElementById("work-" + n); if (!el) return;
+      let top = 0; for (let e = el; e; e = e.offsetParent) top += e.offsetTop;      // ignores the arriving animation's scaling
+      window.scrollTo(0, Math.max(0, top - Math.max(24, (innerHeight - el.offsetHeight) / 2)));
+    }); } const ck = Object.keys(SHOW_CARDS).find(k => SHOW_CARDS[k].show === h); markDoor(ck); }
   if (backdrop.classList.contains("open") && !document.body.classList.contains("entering")) { backdrop.classList.remove("shown", "open"); target = 1; }
   if (name === "collection") renderCollection();
+  if (name === "exhibitions") markOpened();
   if (name === "artists") startPeek(); else clearInterval(peekTimer);
   if (name === "guestbook") renderGuestbook();
   if (name === "guestbook-review") renderReview();

@@ -163,6 +163,7 @@ const SHOWS = {
   },
 
   "ryker-woodward": {
+    size: "large",          // works shown bigger on the page
     title: "Ryker Woodward: Nostalgic Signifiers From Digital Realms",
     artist: "Ryker Woodward",
     status: "past show",
@@ -333,6 +334,7 @@ const SHOWS = {
   },
 
   "tao-lin": {
+    size: "large",          // works shown bigger on the page
     title: "Mandalas: Tao Lin",
     artist: "Tao Lin",
     status: "past show",
