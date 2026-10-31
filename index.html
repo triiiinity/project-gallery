@@ -113,6 +113,8 @@ details .detail-body p { margin: 0 0 10px; }
 .work.center .work-caption, .pair .work-caption { text-align: left; margin-top: 14px; }
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: end; padding: 0 clamp(0px, 4vw, 64px); }
 .pair .work { display: block; }
+.trio { grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 4vw, 64px); }
+.trio .work-image { width: 100%; }
 .work-image { position: relative; }
 .work-image img { width: 100%; display: block; cursor: zoom-in; }
 /* detail photos: small circles that rise up when you hover a work */
@@ -137,6 +139,9 @@ details .detail-body p { margin: 0 0 10px; }
 .work-caption { text-align: right; font-size: 13px; line-height: 1.5; }
 .work-caption em, .lb-caption em { font-style: italic; }
 .work-caption .place { color: var(--muted); }
+.work-about { max-width: 360px; margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.55; text-align: justify; }
+.work.left .work-about { margin-left: auto; }
+.work-about p { margin: 0 0 8px; }
 .work-caption p { margin: 0; }
 .work-caption .inquire { display: inline-block; margin-top: 10px; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .work-caption .inquire:hover { color: var(--accent); }
@@ -360,7 +365,7 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 
 /* awards */
 /* award toast: slides in under the menu, stays a moment, then goes. never blocks anything. */
-.toasts { position: fixed; right: var(--gutter); z-index: 58; display: grid; gap: 8px; justify-items: end; pointer-events: none; }
+.toasts { position: fixed; right: var(--gutter); z-index: 70; display: grid; gap: 8px; justify-items: end; pointer-events: none; }
 .toast { display: flex; align-items: center; gap: 12px; background: var(--bg); padding: 10px 16px 10px 10px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.12);
   opacity: 0; transform: translateX(24px); transition: opacity .8s ease, transform .9s cubic-bezier(.16, .8, .3, 1); }
 .toast.in { opacity: 1; transform: none; }
@@ -895,6 +900,19 @@ function updateProgress() {
 }
 /* awards: small pictures you earn by exploring the site, kept with your collection */
 const AWARD_LIST = {
+  closer: { name: "a closer look", text: "you zoomed in to see the brushstrokes, the pencil lines, the little things. that's how this work is meant to be seen.", art: pixelArt([
+    "..kkkkk.....",
+    ".kbbbbbk....",
+    "kbwwbbbbk...",
+    "kbwbbbbbk...",
+    "kbbbbbbbk...",
+    "kbbbbbbbk...",
+    "kbbbbbbbk...",
+    ".kbbbbbk....",
+    "..kkkkkkk...",
+    "......kkkk..",
+    ".......kkkk.",
+    "........kkk."]) },
   explorer: { name: "the explorer", text: "you visited every artist in the archive. thank you for looking so closely.", art: pixelArt([
     "....bbbb....",
     "..bbbbbbbb..",
@@ -1078,7 +1096,8 @@ function renderShow(key) {
     : "click any work to see it larger.";
   const paras = t => String(t).split(/\n\s*\n/).map(x => `<p>${esc(x.trim())}</p>`).join("");
   document.getElementById("show-bio-label").textContent = sh.bioLabel || "artist bio";
-  document.getElementById("show-bio-label").parentElement.hidden = !!sh.hideBio;
+  document.getElementById("show-bio-label").parentElement.hidden = !!sh.hideBio || !sh.bio;
+  document.getElementById("show-statement-label").parentElement.hidden = !sh.statement;
   document.getElementById("show-statement-label").textContent = sh.statementLabel || "artist statement";
   document.getElementById("show-bio").innerHTML = paras(sh.bio || "artist bio coming soon");
   document.getElementById("show-statement").innerHTML = paras(sh.statement || "artist statement coming soon");
@@ -1114,6 +1133,7 @@ function renderShow(key) {
         <p><em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}</p>
         <p>${esc(w.medium)}</p>
         <p>${esc(w.size)}</p>
+        ${w.about ? `<div class="work-about">${String(w.about).split(/\n\s*\n/).map(x => `<p>${esc(x.trim())}</p>`).join("")}</div>` : ""}
         ${w.forSale ? `<a class="inquire" href="mailto:${SITE.email}?subject=${encodeURIComponent(subject)}">inquire</a>` : ""}<button class="save" data-save="${esc(key + ":" + i)}"></button>
       </div>`;
     const box = el.querySelector(".work-image");
@@ -1127,7 +1147,13 @@ function renderShow(key) {
   };
   for (let i = 0; i < sh.works.length; i++) {
     const w = sh.works[i];
-    if (w.layout === "pair" && sh.works[i + 1]) {
+    if (w.layout === "trio" && sh.works[i + 2]) {
+      const trio = document.createElement("div");
+      trio.className = "pair trio";
+      [0, 1, 2].forEach(k => trio.appendChild(makeWork(sh.works[i + k], i + k)));
+      wrap.appendChild(trio);
+      i += 2;
+    } else if (w.layout === "pair" && sh.works[i + 1]) {
       const pair = document.createElement("div");
       pair.className = "pair";
       pair.appendChild(makeWork(w, i));
@@ -1320,7 +1346,7 @@ function lbOrigin(e) {
   const x = ((e.clientX - r.left) / r.width) * 100, y = ((e.clientY - r.top) / r.height) * 100;
   lbImg.style.transformOrigin = `${Math.max(0, Math.min(100, x))}% ${Math.max(0, Math.min(100, y))}%`;
 }
-lbImg.addEventListener("click", e => { lbOrigin(e); lbStage.classList.toggle("zoomed"); });
+lbImg.addEventListener("click", e => { lbOrigin(e); if (lbStage.classList.toggle("zoomed")) giveAward("closer"); });
 lbStage.addEventListener("mousemove", e => { if (lbStage.classList.contains("zoomed")) lbOrigin(e); });
 lbStage.addEventListener("click", e => { if (e.target === lbStage) closeLightbox(); });
 document.getElementById("lb-close").addEventListener("click", closeLightbox);
