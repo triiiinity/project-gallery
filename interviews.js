@@ -1,6 +1,7 @@
 // INTERVIEWS: the old "spotlights" posts from the Squarespace site, copied word for word on 2026-10-31.
 // Each one: slug (its address, /interviews/<slug>), title, date, tags, and blocks in order:
 //   { p: "paragraph" }, { q: "a question" }, { img: "picture", ratio: "w/h", caption: "" }
+// excerpt: the short preview chosen for the post on the old spotlights list.
 // Loaded only when someone opens the interviews page.
 const INTERVIEWS = [
  {
@@ -8,6 +9,7 @@ const INTERVIEWS = [
   "title": "TD Reade",
   "date": "2025-10-05",
   "tags": [],
+  "excerpt": "“TD Reade’s practice examines the disjunctions that emerge within seemingly ordinary moments, positioning the routine as a site of latent tension. His paintings foreground figures caught within the choreography of social performance, highlighting how engagement is sustained through subtle negotiations of posture, glance, and proximity, gestures that simultaneously express intimacy and reinforce hierarchies.”",
   "blocks": [
    {
     "p": "TD Reade is a self taught artist, in private collections across Europe, USA, South America, and Asia living and working in Melbourne, Australia."
@@ -48,6 +50,7 @@ const INTERVIEWS = [
    "katie vota",
    "Artist Spotlight"
   ],
+  "excerpt": "Katie Vota was awarded the Summer 2024 Artist Grant.\nKatie Vota seeks to (re)evaluate our relationships to materiality, community, and environment through the medium of tapestry re-imagined in the digital age. Her current work utilizes pattern-based tapestry as a drawing medium to map the multitude of connections surrounding water as a shifting, living entity.",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/a5325ac5-cd73-40a7-b598-a3accf800ae9/05_sea_debris.jpg",
@@ -100,6 +103,7 @@ const INTERVIEWS = [
    "ryker woodward",
    "2024"
   ],
+  "excerpt": "\"We all trek the virtual domain alone in some way today. Of course painting can demand the same solo queue as well. The paradox however, lies in the mythos. Artist in the studio, peacefully laying down brushstrokes vs the isolated gamer who is locked in the grind, leveling a battle pass. One serene, the other insane. To me, no hierarchy exists between the two and these are parallel practices. The mastered gameplay annihilates the gallery. No canvas ever hit like a trickshot or frag montage.\"",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/705d228c-b0d9-44d2-ab9a-48b55c26f229/cs_door_stuck_gouache_2023.jpg",
@@ -176,6 +180,7 @@ const INTERVIEWS = [
    "Artist Spotlight",
    "Artist Grant"
   ],
+  "excerpt": "Adrienne Greenblatt was awarded the April 2024 Artist Grant.\nAdrienne’s practice is characterized by its multisensory nature and draws strong inspirations from the environment, alchemy, the body, wrought iron gates, medieval weaponry and esotericism. Using lampworking techniques, they craft experimental glass forms that appear aqueous and fluid.",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/da407801-c0d5-4df2-958b-bbaf08f80808/adrienne_greenblatt_ug_work_sample_1_sheol.png",
@@ -227,6 +232,7 @@ const INTERVIEWS = [
    "Light Love Gravity",
    "Artist Spotlight"
   ],
+  "excerpt": "Love, Light, Gravity is a solo exhibition highlighting nineteen works from an artist with a forceful style that permeates her work regardless of the employed medium. Chaeri Kim’s work in this show ranges from crisp graphite drawings to billowing chalk compositions on paper and tufted figures on cotton. The variety in this collection of works, deemed “dream journal” by the artist, show us the many ways she records her own tract of memory as it integrates into her psyche or disintegrates into the background of her practice.",
   "blocks": [
    {
     "p": "“This is my dream journal, my own records of emotions and daily log turn into the language of graphite or ink on paper and the digital collage on screen.” — Chaeri Kim"
@@ -292,6 +298,7 @@ const INTERVIEWS = [
    "Artist Spotlight",
    "artist interview"
   ],
+  "excerpt": "“I think of my collage-like, painted images as browser pop-ups and I draw upon compositional clichés and visual conventions we encounter when interacting with screens: icons, endless interfaces, a compacted depth of field, cut-paste image-overlay, and so on. It seems impossible to produce a twenty-first century painting that is not informed by digital images, given that our contemporary understanding thereof is inexorably shaped by and tied to their existence in cyberspace, though we only spend fractions of a second with some of the images we see on screens.”",
   "blocks": [
    {
     "p": "Grace Nkem’s solo exhibition CLOWN WORLD is currently live on Project Gallery V, including 20 works from the artist."
@@ -398,6 +405,7 @@ const INTERVIEWS = [
    "Artist Grant",
    "2023"
   ],
+  "excerpt": "Maria Rasheed was awarded the September 2023 PGV Artist Grant.\n“My work is an exploration of home, migration, loss and memory. It’s a process that allows me to document and archive associations one develops with people, places and objects.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/05ff37be-9055-47fb-b26f-fbc3a3d623f8/carpet_fragment_1_2023_gouache_9_x_12.jpg",
@@ -455,6 +463,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“In Time Won’t Tell I wanted to show work that engaged with an urge to know ourselves separate from the histories that we have inherited.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/74509c65-9537-4719-a82b-e6f5a628b434/Headshot+PGV.jpg",
@@ -562,6 +571,7 @@ const INTERVIEWS = [
    "artist interview",
    "unfoldingpattern"
   ],
+  "excerpt": "“Physically, my processes are fast segments of different mediums and actions, involving elements of surprises. Conceptually, my works are evolving testing grounds for me to investigate the relationship between the human body and the built space.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/e7a56619-a241-41d4-a440-c412250d1982/Screen+Shot+2022-10-19+at+4.48.30+PM.png",
@@ -637,6 +647,7 @@ const INTERVIEWS = [
    "unfoldingpattern",
    "artist interview"
   ],
+  "excerpt": "“My projects typically commence with extensive research into the history of the patterns that I am dealing with and compiling multiple sources to piece together the timeline of the story I am narrating through the work. “",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/9d730d73-c641-4985-b5b6-72cda6480798/Saloni+Shah-Headshot.jpg",
@@ -706,6 +717,7 @@ const INTERVIEWS = [
    "Solo Exhibition",
    "Interview"
   ],
+  "excerpt": "“Through my practice of printmaking and drawing I create a psychological universe which I like to call a “mentalscape”; the work I make exist as documents of discovery in this space.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8917d66f-f43b-4c34-bd23-e1cb56dc942e/1.jpg",
@@ -785,6 +797,7 @@ const INTERVIEWS = [
    "artist interview",
    "We Are Still in Eden"
   ],
+  "excerpt": "“Houses, trees, neighborhoods… I love to inventory a place, taking careful note of small hints, reminders of the lived day; umbrellas set out to dry, or laundry hanging, a bicycle parked, a garland in a window… these little suggestions nudge me to thread them into my own quiet narratives.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8839411f-4387-418d-b43c-1fbff821408c/04_AC_BLUEBIRD.jpg",
@@ -877,6 +890,7 @@ const INTERVIEWS = [
    "We Are Still in Eden",
    "artist interview"
   ],
+  "excerpt": "“My work looks at cycles of construction and destruction. I reference locations where the stakes of this struggle are high: flood zones, areas of fire, and vulnerable shelters.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/4df2b41e-e1b8-46bf-8cd6-96aa7537f409/Photo+by+Eat+the+Cake.JPG",
@@ -969,6 +983,7 @@ const INTERVIEWS = [
    "We Are Still in Eden",
    "artist interview"
   ],
+  "excerpt": "“ Drawing is the bone structure of my work to give shape to my thoughts, imagination or daydreams. Painting, on the other hand, emphasizes what I want to say by using a variety of paint applications to form an expression.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/6f8bd55c-8b23-42ad-bfac-f8d92afba61f/HS_SPACEAFTER.jpg",
@@ -1062,6 +1077,7 @@ const INTERVIEWS = [
    "We Are Still in Eden",
    "artist interview"
   ],
+  "excerpt": "“These two works were done in the depths of quarantine. The landscapes are of nowhere in particular, but rather a meditation on a place with no time, logical space, or habitable weather conditions. I think of the details of clashing paint, hypnotic fluidity, and urgent strokes as narrators of the backdrop they depict.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/a84db1ed-e436-440e-a825-b5e38d45c560/Image1_Adler_Studio.jpg",
@@ -1130,6 +1146,7 @@ const INTERVIEWS = [
    "We Are Still in Eden",
    "artist interview"
   ],
+  "excerpt": "“Many of my paintings look at the ways humans intervene in the landscape to build our homes, as well as the ways the land can reclaim these spaces. Nature itself has been the most important reference in my recent work.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/7d819cf8-4d38-4bae-b017-c4edea19db2e/Artist+Portrait+in+front+of+Moki+Steps_oil+on+linen_98x46in.jpg",
@@ -1207,6 +1224,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“My art process is rooted in patience. I often work with hand-painted patterns and repetitive strokes, a process that can take a lot of time, especially when working on large-scale projects. My work ranges from immersive installations to small-scale paintings, with the play in scale inspired by Mughal-era miniature paintings and large architectural gardens.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/6d43a3d3-5e4f-4c0d-868e-b32f266b83c9/Maknojia_6.jpg",
@@ -1320,6 +1338,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“I think about domestic labor often in my work, not washing dishes, but the work it takes to stay related to someone, even my mother who lives across distance and time zones. I work with photography, text, video, printmaking to realize these ideas. My process is slow and intuitive, structured within daily routines and bursts of art-making in my living room which alternates as my studio. ”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/beadf2cb-2e75-48e4-870c-f99c16258e5c/Mukherji_07.jpg",
@@ -1400,6 +1419,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“My works are more like hybrid of two ancient craft-woodcut and stained glass both of which I have a good deal of experience.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8c3de8cd-05ca-4de2-92c4-47d39f22a84f/image.jpg",
@@ -1469,6 +1489,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“My process is very gestural and experimental. My background is in photography, so I’ve earned my knowledge in sculpture through experimenting with materials and discovering forms, textures and shapes that excite me.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/03ad254f-059e-4762-a19a-aebdd842a790/nogacohen_1.jpg",
@@ -1576,6 +1597,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“My process is varied but I’m always taking from my life experiences and surroundings. I’ll usually start by drawing or painting from observation and continue investigating an idea in the studio with collage, printmaking, painting, or some combination of all three.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/eca3f1db-4101-477e-b702-2dc38e0549a4/Screen+Shot+2021-10-26+at+8.00.54+PM.png",
@@ -1656,6 +1678,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“I work largely intuitively, and I feel like when I’m making I become a channel for collective memory or knowledge to pass through. It feels directed in a way that is unlike other things I do.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/e21388a0-e098-40b1-828f-e3f42eaac9d1/IMG_1676.jpg",
@@ -1733,6 +1756,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“The line etching process is the longest as I build up the drawing with repetitive marks in circles, instead of straight-line drawings. This process is almost meditative. A monotone color palette dominates most of my works as it enhances the nostalgia of the visuals.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/9af9e88b-ef76-4648-ab55-6656d4ee40af/001.jpg",
@@ -1800,6 +1824,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“My practice involves a lot of research and the work that is produced as a result of this research is interdisciplinary. I am interested in ideas around identity formation and enjoy thinking about these ideas from different angles, which then necessitates working in different mediums.”",
   "blocks": [
    {
     "p": "Keli Safia Maksud is a Kenyan-Tanzanian-Canadian-Muslim-Christian visual artist and writer based in New York. Concerned with histories of colonial encounters and its effects on memory, Maksud’s interdisciplinary practice favors the space of in-between identities and its threshold, and works towards destabilizing received histories in order to expose fictions of the state.\nMaksud’s earned her BFA in Painting from the Ontario College of Art and Design University, a Diploma in Art and Curatorial Studies at the New Centre for Research and Practice and an MFA in Visual Arts at Columbia University. Her work has shown at the Huxley-Parlour, Miriam Gallery, Bamako Biennial, National Museum of Contemporary Art - Seoul, and the Biennial of Contemporary Art Sesc_Videobrasil."
@@ -1878,6 +1903,7 @@ const INTERVIEWS = [
    "artist interview",
    "Time Wont Tell"
   ],
+  "excerpt": "“I like to observe... Everything. I make it a point to walk everyday and notice the world around me no matter how seemingly mundane. I have noticed, over the years that this is how the thought process for any of my works begin... From life.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1eec49be-fb78-4492-8e70-96e5f483c4a7/new.jpg",
@@ -1955,6 +1981,7 @@ const INTERVIEWS = [
    "Transcendental States",
    "artist interview"
   ],
+  "excerpt": "“A memory fragment or a mood is usually the starting point for my work. I often start by covering the surface in loose drawings that are related to the idea of the piece, then I begin painting the central image on top of those drawings, using them as the foundation for the narrative.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568266446-W2AC7B67QXCJG73NDMDH/Studio.jpg",
@@ -2028,6 +2055,7 @@ const INTERVIEWS = [
    "Transcendental States",
    "artist interview"
   ],
+  "excerpt": "“I want the work to appear as if it grew in nature, when in fact each sculpture is composed of hundreds of small pieces of wood that are seamlessly jointed together. My work can be called the ultimate recycling: where I take the detritus of nature and give it a new life.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633621221888-E06QK2T7841MXB43EK6U/Loren+studio+sitting.jpg",
@@ -2101,6 +2129,7 @@ const INTERVIEWS = [
    "Transcendental States",
    "artist interview"
   ],
+  "excerpt": "“Quarantine felt like entering a cave; while my eyes adjusted to sudden total darkness, my brain constructed its own lights, shapes, and colors to focus on in the absence of clear vision. What forms out of the dust on paper are contracts of interconnection.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568076250-2U23U8WTW8BQIOK98CUC/Chelsea+Wrightson_installation+shot.JPG",
@@ -2181,6 +2210,7 @@ const INTERVIEWS = [
    "Interview",
    "artist interview"
   ],
+  "excerpt": "“What drives and inspires me is my experience of the world. I spent a lot of time outdoors growing up in Vermont and I still feel that same sense of wonder and mystery I felt as a little kid standing in the big woods and just feeling like, “I don’t know the half of what is really going on out there” and finding some calm in that.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633567684825-W3XYYH3UBDQYII4EUK23/NP_Interview_Photo_1.jpg",
@@ -2249,6 +2279,7 @@ const INTERVIEWS = [
    "Transcendental States",
    "artist interview"
   ],
+  "excerpt": "“I often have these lightning-bolt moments of images in my head, probably derived from something buried deep in my mind; a line of a poem that stuck to me, something that my ex said to me, etc. I try to stop whatever I’m doing when the image pops up in my head and grab whatever is nearest to me, a pen and a paper, or my phone, and just quickly sketch the image so I don’t forget about it. I use those rough sketches to stimulate my memory and jump right into painting. ”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632016381291-6ZQFLTVJ2395MKJ3RK1N/Screen+Shot+2021-09-18+at+9.52.41+PM.png",
@@ -2322,6 +2353,7 @@ const INTERVIEWS = [
    "Transcendental States",
    "artist interview"
   ],
+  "excerpt": "“Visions of objects come to the fore of my brain. I take the ones that linger to the studio and set out to build them physically. I have a background in dance and consider my art materials to be my dance partners. In the studio, we share who leads. We move about in an improvised choreography—a back-and-forth where one action influences the next. ”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632015496420-EXQHA7W357H3U8L59SYC/Mullis_Sidney_Headshot_Sarah+Huny+Young.jpg",
@@ -2407,6 +2439,7 @@ const INTERVIEWS = [
    "Transcendental States",
    "artist interview"
   ],
+  "excerpt": "“All of the references of my work are autobiographical in some way, in that they represent an interest of mine but that could range anywhere from cartoons, religion, history, or even pure math. As far as themes go I am aiming more for a feeling rather than someone understanding all of the references that may exist in a work.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632014804074-JS6FPKHDHE9W8NUHMO5A/flippa.JPG",
@@ -2475,6 +2508,7 @@ const INTERVIEWS = [
    "Transcendental States",
    "artist interview"
   ],
+  "excerpt": "“Photographs are the most direct method by which I can look at myself and my past. I am not the same person now that I was when I was photographed, but it is still me, so photographs are the best way I have of looking at myself objectively. I am looking at myself but also at the shape of something similar to me. Through this process, I can see and know myself a bit more.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632018259465-T9QAG4IC3K0ECDU6UJSQ/Jeong_Hur_Confession_Archival+Pigment+Print_30+x+20+inches_%242500+-+Jeong+Hur.jpg",
@@ -2566,6 +2600,7 @@ const INTERVIEWS = [
    "Illuminated",
    "artist interview"
   ],
+  "excerpt": "“As much as I like the perfection, I like the disorganization. Sometimes I start with a strict plan and specific location for each sticker and others are a collection of stickers placed without a plan. The shape is important and I precut them in various sizes. The circle references many different forms of light such as drones, orbs, stars and lite brite pegs.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974180607-IFRZGH5W94YSMW8FVTKV/1shot.jpg",
@@ -2637,6 +2672,7 @@ const INTERVIEWS = [
    "artist interview",
    "2021"
   ],
+  "excerpt": "“I am working freely on more complex paintings. I try not to judge them as much as I used to, embracing the process and their strangeness.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627917589010-64SLVV2WEC8XUM2KPJMR/Alina+Birkner+%C2%A9+Jane+B%C3%A4hren%2C.jpg",
@@ -2702,6 +2738,7 @@ const INTERVIEWS = [
    "Illuminated",
    "artist interview"
   ],
+  "excerpt": "“I often make maquettes, which is one way of playing. Instead of “thinking” of the image I want to make, I can interact with the maquettes until I “find” the image. I just don’t see my conscious mind as being particularly good at determining the image from the start. The play allows for other parts of me (the unconscious, the lower levels of the self, etc.) to influence the work. Meaning and content feel much richer to me that way.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628972831272-R9J14QE90E4KIT5W0YXJ/dsc_7919b.JPG",
@@ -2799,6 +2836,7 @@ const INTERVIEWS = [
    "Illuminated",
    "artist interview"
   ],
+  "excerpt": "“I think almost everybody has a paper and a pencil at home so it's a very accessible thing to do. Which is also what I love about drawing. It is almost as writing. It's a really direct way of making an image and transferring your mind onto the paper. You only need like 3 euros to make it and also you don't need a studio or a lot of space. I can always draw whenever I want, may it be at a cafe or a day at the lake. It’s simple and easy and it’s one of the most joyful things I can think of.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974498359-WM0MH9KATE59ATRGOAPH/artistpic2.jpg",
@@ -2892,6 +2930,7 @@ const INTERVIEWS = [
    "Illuminated",
    "artist interview"
   ],
+  "excerpt": "“When I draw characters in my own work, what comes out is usually whatever interests me and pleases me visually. They aren’t based on any existing narrative, although I think my drawings can sometimes suggest some kind of back story or universe.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628785934412-CINK7XT48FN1OZBJ0MR5/45790029.JPG",
@@ -2971,6 +3010,7 @@ const INTERVIEWS = [
    "Interview",
    "artist interview"
   ],
+  "excerpt": "“I’m really drawn to the communication and collective memory of things, sites, and abstract forms. I question the hierarchy of different life forms.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628354931182-3YCA9QDNAX23S958QCGO/IMG_0291.JPG",
@@ -3043,6 +3083,7 @@ const INTERVIEWS = [
    "artist interview",
    "2021"
   ],
+  "excerpt": "“My floor installations are my interior landscape and home. These silk flowers have made it possible for my stubborn imagination to attempt iteration after iteration of a forever-ness.”",
   "blocks": [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627956371899-0IQ1HBZ526MYMQ2SG048/01_Gyun_StudioPortrait.jpg",
