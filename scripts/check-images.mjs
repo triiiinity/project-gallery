@@ -1,17 +1,16 @@
-// Checks that every picture on the 2020-2022 show pages loads. Runs on GitHub (see .github/workflows/check-images.yml).
+// Live check after moving off Squarespace: every copied picture, file and video answers on project-gallery.com. Runs on GitHub.
 import { readFileSync, writeFileSync } from "node:fs";
-const src = readFileSync("content.js", "utf8");
-const keys = ["betwixt-and-between","unfolding-pattern","new-light","wet-dream","syncretic","splinters","erika-shiba","we-are-still-in-eden","if-fluid-was-a-song","time-wont-tell","spliced-energy","transcendental-states","illuminated","people-places-things","the-alternative-states","multitudes","eternal-flame","in-the-cool-of-the-evening"];
-const log = []; let bad = 0, n = 0;
-for (const k of keys) {
-  const a = src.indexOf(`\n  "${k}": {\n    `, src.indexOf("const SHOWS")); const b = src.indexOf("\n  }", a);
-  const urls = [...new Set([...src.slice(a, b).matchAll(/"(https:\/\/[^"]+\.(?:jpe?g|png|gif|webp|JPG|JPEG|PNG)[^"]*|https:\/\/[^"]*(?:thumbnail|hqdefault\.jpg|vimeocdn[^"]*))"/g)].map(m => m[1]))];
-  for (const u of urls) {
-    n++;
-    const t = /images\.squarespace-cdn/.test(u) ? u + "?format=1500w" : u;
-    try { const r = await fetch(t, { method: "GET", headers: { "user-agent": "Mozilla/5.0" } }); const ty = r.headers.get("content-type") || ""; if (!r.ok || !/image/.test(ty)) { bad++; log.push(`BAD ${k} ${r.status} ${ty} ${u}`); } }
-    catch (e) { bad++; log.push(`BAD ${k} ${e.message} ${u}`); }
-  }
+await new Promise(r => setTimeout(r, 240000));          // give the deploy a few minutes
+const map = JSON.parse(readFileSync("scripts/sq-map.json", "utf8"));
+const paths = Object.values(map).flatMap(p => p.startsWith("/images/sq/") ? ["s", "m", "l"].map(n => `${p}/${n}.webp`) : [p]);
+const log = []; let bad = 0;
+const home = await fetch("https://project-gallery.com/").then(r => r.text()).catch(() => "");
+log.push(`homepage has the grant window: ${home.includes('id="gwin"')}; still mentions squarespace-cdn: ${(await fetch("https://project-gallery.com/content.js").then(r => r.text())).includes("squarespace-cdn")}`);
+for (let i = 0; i < paths.length; i += 16) {
+  await Promise.all(paths.slice(i, i + 16).map(async p => {
+    try { const r = await fetch("https://project-gallery.com" + p, { method: "HEAD" }); const t = r.headers.get("content-type") || ""; if (!r.ok || /text\/html/.test(t)) { bad++; log.push(`BAD ${r.status} ${t} ${p}`); } }
+    catch (e) { bad++; log.push(`BAD ${e.message} ${p}`); }
+  }));
 }
-log.unshift(`${n} pictures checked, ${bad} failed`);
+log.splice(1, 0, `${paths.length} files checked on the live site, ${bad} missing`);
 writeFileSync("scripts/check-images.log", log.join("\n") + "\n"); console.log(log.join("\n"));
