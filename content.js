@@ -1623,6 +1623,9 @@ const SHOW_CARDS = {
 // AWARD COLORS: every award is a 3 x 3 grid of colors picked from works in the 2024–2026 shows.
 // Each line is [color, work title, show]. Change any color here and the award changes everywhere.
 // Colors are listed lightest first, filling the grid left to right, top to bottom.
+// New awards get a new palette the same way: nine colors from nine different works in the 2024–2026 shows,
+// read from small copies of the pictures in the browser. Only the nine color codes are kept; the artwork
+// itself isn't stored, shared or used for anything else. The codes aren't shown on the site.
 const AWARD_COLORS = {
   closer: [   // a closer look: blues
     ["#b6e7ef", "water mandala", "tao-lin"],

@@ -392,12 +392,6 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .shelf-tip b { display: block; font-weight: 400; font-size: 13px; margin-bottom: 4px; }
 .shelf-tip span { display: block; font-size: 11px; line-height: 1.45; color: var(--muted); text-align: justify; }
 .award-shelf figure:hover .shelf-tip { opacity: 1; }
-.shelf-cols { list-style: none; margin: 10px 0 0; padding: 8px 0 0; border-top: 1px solid #eee; font-size: 10.5px; line-height: 1.5; color: var(--muted); }
-.shelf-cols li { display: flex; gap: 7px; align-items: baseline; }
-.shelf-cols i { flex: 0 0 9px; width: 9px; height: 9px; align-self: center; }
-.shelf-tip .shelf-cols span { display: inline; text-align: left; font-size: 10.5px; color: var(--muted); }
-.shelf-cols li + li { margin-top: 2px; }
-.shelf-cols code { font-family: var(--font); color: var(--ink); font-variant-numeric: tabular-nums; }
 .award-shelf svg { width: 30px; height: 30px; margin: 0; }
 
 /* about: leadership */
@@ -1274,17 +1268,9 @@ let collectionFilter = "all";
 function renderAwardShelf() {
   const got = getAwards();
   document.getElementById("award-shelf").innerHTML = Object.keys(got).filter(id => AWARD_LIST[id]).map(id =>
-    `<figure aria-label="${esc(AWARD_LIST[id].name)}">${AWARD_LIST[id].art}<figcaption class="shelf-tip"><b>${esc(AWARD_LIST[id].name)}</b><span>${esc(AWARD_LIST[id].text)}</span>${colorList(AWARD_LIST[id].colors)}</figcaption></figure>`).join("");
+    `<figure aria-label="${esc(AWARD_LIST[id].name)}">${AWARD_LIST[id].art}<figcaption class="shelf-tip"><b>${esc(AWARD_LIST[id].name)}</b><span>${esc(AWARD_LIST[id].text)}</span></figcaption></figure>`).join("");
 }
-// each color in an award, and the work it was picked from
-function colorList(cols) {
-  if (!cols) return "";
-  return `<ul class="shelf-cols">${cols.map(([hex, title, show]) => {
-    const sh = SHOWS[show], w = sh && sh.works.find(x => x.title === title);
-    const who = (w && w.artist) || (sh && sh.artist) || "";
-    return `<li><i style="background:${hex}"></i><span><code>${esc(hex)}</code> from <em>${esc(title)}</em>${who ? ", " + esc(who) : ""}</span></li>`;
-  }).join("")}</ul>`;
-}
+
 // read "23.6 x 19.7 in" as height and width in inches
 function inches(size) { const m = /([\d.]+)\s*x\s*([\d.]+)(?:\s*x\s*[\d.]+)?\s*in/i.exec(size || ""); return m ? [parseFloat(m[1]), parseFloat(m[2])] : null; }
 function shuffled(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
@@ -1297,7 +1283,7 @@ function renderSalon(works) {
   const ACROSS = 7;
   const cols = pool.slice(0, ACROSS).map(x => [x]);
   const spare = pool.slice(ACROSS);
-  const tallest = Math.max(...cols.map(c => c[0].d[0]));
+  const tallest = Math.max(...cols.map(c => c[0].d[0]));   // only the works hanging on this wall
   // up to two small works get a partner stacked with them
   let stacked = 0;
   cols.forEach(c => {
@@ -1309,7 +1295,7 @@ function renderSalon(works) {
   // one scale for the whole wall: the tallest work about 300px, and the seven columns fit the width
   const gap = 26, widthIn = cols.reduce((t, c) => t + Math.max(...c.map(x => x.d[1])), 0);
   const room = Math.max(280, (box.clientWidth || document.querySelector("main").clientWidth) - gap * (cols.length - 1));
-  const px = Math.min(11, 300 / tallest, room / widthIn);
+  const px = Math.min(320 / tallest, room / widthIn);      // the tallest work on this wall is about 320px
   const hung = cols.flat();
   let n = 0;
   box.innerHTML = `<div class="salon-row">${cols.map(c => `<div class="salon-col">${c.map(({ w, d }) => { n++;
