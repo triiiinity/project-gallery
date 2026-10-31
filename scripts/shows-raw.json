@@ -388,6 +388,8 @@
     "video": "",
     "thumb": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/afe06b18-a6f6-4d0f-9cff-143b3eb3dadd/Screen+Shot+2022-10-31+at+4.24.47+PM.png",
     "ratio": "16/9",
+    "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FEa6WviBwgVQ%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DEa6WviBwgVQ&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FEa6WviBwgVQ%2Fhqdefault.jpg&key=61d05c9d54e8455ea7a9677c366be814&type=text%2Fhtml&schema=youtube\" width=\"854\" height=\"480\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
+    "url": "YouTube",
     "caption": ""
    },
    {
@@ -585,6 +587,8 @@
     "video": "https://video.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/236bf81a-55d8-40f6-94fc-c896ad4ee6e9/1920:1080/video.mp4",
     "thumb": "https://video.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/236bf81a-55d8-40f6-94fc-c896ad4ee6e9/thumbnail",
     "ratio": "1778/1000",
+    "html": "",
+    "url": "",
     "caption": ""
    },
    {
@@ -753,6 +757,8 @@
     "video": "https://vimeo.com/500629662",
     "thumb": "",
     "ratio": "1280/720",
+    "html": "<iframe src=\"https://player.vimeo.com/video/500629662?h=f735a1807e&amp;app_id=122963\" width=\"426\" height=\"240\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen title=\"Smoke\"></iframe>",
+    "url": "Vimeo",
     "caption": ""
    },
    {
@@ -1820,6 +1826,8 @@
     "video": "https://vimeo.com/715846484",
     "thumb": "https://i.vimeocdn.com/video/1442634661-6c0ff1bdf327620bf96b3153717f702c286c314001aabd9c2746bfd23e90de06-d_1280?region=us",
     "ratio": "1280/720",
+    "html": "<iframe src=\"https://player.vimeo.com/video/715846484?h=7e866b8b8c&amp;app_id=122963\" width=\"426\" height=\"240\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen title=\"negotiations.mp4\"></iframe>",
+    "url": "Vimeo",
     "caption": ""
    },
    {
@@ -2931,6 +2939,8 @@
     "video": "https://vimeo.com/346081454",
     "thumb": "",
     "ratio": "1280/720",
+    "html": "<iframe src=\"https://player.vimeo.com/video/346081454?h=cebcf09e6e&amp;app_id=122963\" width=\"426\" height=\"240\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen title=\"Salpuri\"></iframe>",
+    "url": "Vimeo",
     "caption": ""
    },
    {
@@ -3208,6 +3218,8 @@
     "video": "https://vimeo.com/692140638",
     "thumb": "",
     "ratio": "16/9",
+    "html": "<iframe src=\"https://player.vimeo.com/video/692140638?h=17eb32986d&amp;app_id=122963\" width=\"426\" height=\"164\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen title=\"Mourning Rituals\"></iframe>",
+    "url": "Vimeo",
     "caption": ""
    },
    {
@@ -4018,6 +4030,8 @@
     "video": "https://vimeo.com/330656301",
     "thumb": "https://i.vimeocdn.com/video/775795235-c0155a60ad113a0ea8aff04ad80b03343cca197a499bb03e9060f548abd2a92f-d_960?region=us",
     "ratio": "1280/720",
+    "html": "<iframe src=\"https://player.vimeo.com/video/330656301?h=f99a834339&amp;app_id=122963\" width=\"426\" height=\"240\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen title=\"Shuffling LMFAO Cabbage (Brassica LMFAO oleracera) by PlantBot Genetics\"></iframe>",
+    "url": "Vimeo",
     "caption": ""
    },
    {
@@ -4461,6 +4475,8 @@
     "video": "",
     "thumb": "",
     "ratio": "16/9",
+    "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FQ02tbi5iW28%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DQ02tbi5iW28&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FQ02tbi5iW28%2Fhqdefault.jpg&key=61d05c9d54e8455ea7a9677c366be814&type=text%2Fhtml&schema=youtube\" width=\"854\" height=\"480\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
+    "url": "YouTube",
     "caption": ""
    },
    {
@@ -4632,6 +4648,8 @@
     "video": "https://vimeo.com/369947860",
     "thumb": "https://i.vimeocdn.com/video/827035678-db8fe179d41b165e97c6e043b4cde5a7c28fbb8d9965aac1329866a652d50bf1-d_960?region=us",
     "ratio": "1280/670",
+    "html": "<iframe src=\"https://player.vimeo.com/video/369947860?h=6bdcc64507&amp;app_id=122963\" width=\"426\" height=\"224\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen title=\"Breath\"></iframe>",
+    "url": "Vimeo",
     "caption": ""
    },
    {
@@ -4798,6 +4816,8 @@
     "video": "",
     "thumb": "",
     "ratio": "16/9",
+    "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FIaxI16GTT5w%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DIaxI16GTT5w&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FIaxI16GTT5w%2Fhqdefault.jpg&key=61d05c9d54e8455ea7a9677c366be814&type=text%2Fhtml&schema=youtube\" width=\"854\" height=\"480\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
+    "url": "YouTube",
     "caption": ""
    },
    {
@@ -5308,6 +5328,8 @@
     "video": "",
     "thumb": "",
     "ratio": "16/9",
+    "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FSrxGioT6qlY%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSrxGioT6qlY&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FSrxGioT6qlY%2Fhqdefault.jpg&key=61d05c9d54e8455ea7a9677c366be814&type=text%2Fhtml&schema=youtube\" width=\"854\" height=\"480\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
+    "url": "YouTube",
     "caption": ""
    },
    {
@@ -8373,6 +8395,8 @@
     "video": "",
     "thumb": "",
     "ratio": "16/9",
+    "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FUp_xmfLMDXA%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DUp_xmfLMDXA&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FUp_xmfLMDXA%2Fhqdefault.jpg&key=61d05c9d54e8455ea7a9677c366be814&type=text%2Fhtml&schema=youtube\" width=\"640\" height=\"480\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
+    "url": "YouTube",
     "caption": ""
    },
    {
@@ -8795,6 +8819,8 @@
     "video": "",
     "thumb": "",
     "ratio": "16/9",
+    "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F0gPNrlpp0DM%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D0gPNrlpp0DM&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F0gPNrlpp0DM%2Fhqdefault.jpg&key=c6502efcb3c84824bc6c1f27d683be13&type=text%2Fhtml&schema=youtube\" width=\"854\" height=\"480\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
+    "url": "YouTube",
     "caption": ""
    },
    {
@@ -9045,6 +9071,8 @@
     "video": "",
     "thumb": "",
     "ratio": "16/9",
+    "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F501ibyR6qk8%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D501ibyR6qk8&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F501ibyR6qk8%2Fhqdefault.jpg&key=61d05c9d54e8455ea7a9677c366be814&type=text%2Fhtml&schema=youtube\" width=\"854\" height=\"480\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
+    "url": "YouTube",
     "caption": ""
    },
    {
@@ -13944,6 +13972,8 @@
     "video": "https://www.youtube.com/watch?v=pC7r5THyhxA",
     "thumb": "https://img.youtube.com/vi/pC7r5THyhxA/hqdefault.jpg",
     "ratio": "4/3",
+    "html": "<iframe src=\"//www.youtube.com/embed/pC7r5THyhxA?feature=emb_logo&amp;wmode=opaque&amp;enablejsapi=1\" height=\"480\" width=\"854\" scrolling=\"no\" frameborder=\"0\" allowfullscreen=\"\">\n</iframe>",
+    "url": "YouTube",
     "caption": ""
    },
    {
