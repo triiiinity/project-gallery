@@ -83,10 +83,11 @@ for (const slug of SHOWS) {
           else if (vm) {
             v.video = "https://vimeo.com/" + vm[1]; Object.assign(v, await vimeoThumb(vm[1])); v.vtitle = title || v.vtitle;
             if (!v.thumb) {      // private or domain-locked videos leave the thumbnail out; try the page, then the player config
-              for (const u of ["https://vimeo.com/" + vm[1], "https://player.vimeo.com/video/" + vm[1] + "/config"]) {
+              for (const u of ["https://vimeo.com/api/v2/video/" + vm[1] + ".json", "https://player.vimeo.com/video/" + vm[1], "https://vimeo.com/" + vm[1], "https://player.vimeo.com/video/" + vm[1] + "/config"]) {
                 try {
                   const t = await fetch(u, { headers: { referer: BASE + "/", "user-agent": "Mozilla/5.0" } }).then(r => r.text());
-                  const m = /property="og:image" content="([^"]+)"/.exec(t) || /"base":"(https:\/\/i\.vimeocdn\.com\/video\/[^"]+)"/.exec(t) || /(https:\/\/i\.vimeocdn\.com\/video\/[\w-]+)/.exec(t);
+                  const m = /"thumbnail_large":"([^"]+)"/.exec(t) || /property="og:image" content="([^"]+)"/.exec(t) || /"base":"(https:\/\/i\.vimeocdn\.com\/video\/[^"]+)"/.exec(t) || /(https:\/\/i\.vimeocdn\.com\/video\/[\w-]+)/.exec(t);
+                  log.push(`  vimeo ${vm[1]} ${u}: ${t.length} chars${m ? " found" : ""}`);
                   if (m) { v.thumb = m[1].replace(/\\\//g, "/"); break; }
                 } catch (e) {}
               }
