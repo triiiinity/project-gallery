@@ -197,7 +197,10 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 
 /* grant */
 .grant-form { max-width: 680px; margin-top: 24px; }
-.grant-form iframe { width: 100%; border: 0; min-height: 600px; }
+.grant-form iframe { width: 100%; border: 0; min-height: 600px; display: block; }
+.grant-open { font-size: 11px; color: var(--muted); margin-top: 18px; }
+.grant-open a { text-decoration: underline; text-underline-offset: 3px; }
+.grant-open a:hover { color: var(--accent); }
 
 /* save + my collection */
 .save { background: none; border: 0; padding: 0 2px; margin: 10px 0 0 14px; font-family: var(--font); font-size: 17px; font-weight: 300; line-height: 1; color: var(--ink); cursor: pointer; vertical-align: -2px; transition: color .2s; }
@@ -1489,10 +1492,15 @@ function renderGrant() {
   const box = document.getElementById("grant-form");
   if (!GRANT.tallyFormId) { box.innerHTML = UC; return; }
   const id = encodeURIComponent(GRANT.tallyFormId.trim());
-  box.innerHTML = `<iframe data-tally-src="https://tally.so/embed/${id}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" title="${esc(GRANT.title || "artist grant")} application"></iframe>`;
+  box.innerHTML = `<iframe data-tally-src="https://tally.so/embed/${id}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" title="${esc(GRANT.title || "artist grant")} application"></iframe>
+    <p class="grant-open">form not showing? <a href="https://tally.so/r/${id}" target="_blank" rel="noopener">open the application in a new tab</a></p>`;
+  const frame = box.querySelector("iframe");
+  const fallback = () => { if (!frame.src) frame.src = frame.dataset.tallySrc; };   // if Tally's script can't load, show the form anyway
+  if (window.Tally) { Tally.loadEmbeds(); setTimeout(fallback, 1500); return; }
   const sc = document.createElement("script");
   sc.src = "https://tally.so/widgets/embed.js";
-  sc.onload = () => { if (window.Tally) Tally.loadEmbeds(); };
+  sc.onload = () => { if (window.Tally) Tally.loadEmbeds(); setTimeout(fallback, 1500); };
+  sc.onerror = fallback;
   document.body.appendChild(sc);
 }
 

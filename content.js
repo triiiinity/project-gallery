@@ -1192,7 +1192,7 @@ const LEADERSHIP = [
 // tallyFormId: the letters at the end of your Tally share link
 //   (tally.so/r/wA8bQz  ->  "wA8bQz"). Leave "" to show "under construction".
 const GRANT = {
-  title: "artist grant",
+  title: "project grant 2026",
   intro: "",
   tallyFormId: "5XbBrv"
 };
