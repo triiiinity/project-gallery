@@ -4,7 +4,7 @@ const out = [];
 for (const u of ["https://project-gallery.kit.com/a8b9264c15/index.js", "https://project-gallery.kit.com/a8b9264c15"]) {
   try {
     const t = await fetch(u, { headers: { "user-agent": "Mozilla/5.0" } }).then(r => r.text());
-    out.push(`${u}: ${t.length} chars`);
+    out.push(`${u}: ${t.length} chars`); writeFileSync("scripts/kit-" + (u.endsWith(".js") ? "embed.js.txt" : "page.html.txt"), t);
     for (const re of [/https?:\/\/app\.(?:kit|convertkit)\.com\/forms\/\d+\/subscriptions/g, /data-sv-form=\\?"(\d+)/g, /name=\\?"(email_address|email)\\?"/g, /"id":\s*(\d{5,})/g])
       out.push("  " + [...new Set([...t.matchAll(re)].map(m => m[0]))].slice(0, 5).join(" | "));
   } catch (e) { out.push(`${u}: ${e.message}`); }

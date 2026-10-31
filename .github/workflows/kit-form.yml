@@ -17,6 +17,6 @@ jobs:
       - run: |
           git config user.name "Claude"
           git config user.email "noreply@anthropic.com"
-          git add scripts/kit-form.log
+          git add scripts/kit-form.log scripts/kit-embed.js.txt scripts/kit-page.html.txt
           git commit -m "Kit form lookup" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
           git push
