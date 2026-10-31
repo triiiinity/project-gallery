@@ -1,0 +1,25 @@
+# Runs the one-time interview import when the import script changes, then saves interviews.js to the site.
+name: import interviews
+on:
+  push:
+    branches: [main]
+    paths: ["scripts/import-interviews.mjs"]
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save linkedom@0.18
+      - run: node scripts/import-interviews.mjs || echo "import failed" >> scripts/import-interviews.log
+      - name: save the result
+        run: |
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add interviews.js scripts/import-interviews.log || true
+          git commit -m "Import the old spotlights posts into interviews.js" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
+          git push

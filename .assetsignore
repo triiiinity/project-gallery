@@ -6,3 +6,5 @@ node_modules
 .gitignore
 .assetsignore
 .git
+scripts
+.github
