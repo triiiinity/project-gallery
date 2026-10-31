@@ -212,6 +212,26 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .caret { display: inline-block; width: 1px; height: 0.95em; background: var(--ink); margin-left: 2px; vertical-align: -0.1em; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* grant window on the homepage: red and yellow close it, green opens the details */
+.gwin { position: fixed; right: 28px; bottom: 28px; z-index: 40; width: 318px; background: #fff; border-radius: 9px; overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.10); color: var(--ink);
+  opacity: 0; transform: translateY(14px); transition: opacity 1.2s ease, transform 1.2s ease, width .6s ease; pointer-events: none; }
+.gwin.shown { opacity: 1; transform: none; pointer-events: auto; }
+.gwin-bar { position: relative; height: 26px; background: linear-gradient(#f7f7f7, #e9e9e9); border-bottom: 1px solid #d4d4d4; }
+.gwin-lights { position: absolute; left: 10px; top: 0; bottom: 0; display: flex; align-items: center; gap: 7px; }
+.gwin-lights button { width: 11px; height: 11px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.25); transition: filter .4s; }
+.gwin-lights button:hover { filter: brightness(.9); }
+.gwin-lights .x { background: #e0827a; } .gwin-lights .m { background: #e8c36f; } .gwin-lights .z { background: #9cc38e; }
+.gwin-body { padding: 18px 20px 20px; display: grid; gap: 6px; }
+.gwin-body h3 { margin: 0; font-weight: 400; font-size: 19px; letter-spacing: -.01em; }
+.gwin-body p { margin: 0; font-size: 12px; line-height: 1.5; color: #555; text-align: justify; }
+.gwin-body .due { color: #0000ee; }
+.gwin-body a.apply { margin-top: 10px; display: block; text-align: center; background: #000; color: #fff; text-decoration: none; font-size: 12px; padding: 7px 0; box-shadow: 0 0 10px rgba(0,0,0,.25); transition: box-shadow .6s ease; }
+.gwin-body a.apply:hover { box-shadow: 0 0 18px rgba(0,0,0,.4); }
+.gwin-more { display: none; } .gwin.big { width: 460px; } .gwin.big .gwin-more { display: block; }
+.gwin-more ul { margin: 6px 0 0; padding: 0 0 0 14px; font-size: 12px; line-height: 1.6; color: #555; }
+@media (max-width: 720px) { .gwin, .gwin.big { left: 12px; right: 12px; bottom: 12px; width: auto; } }
+@media (prefers-reduced-motion: reduce) { .gwin { transition: none; } }
 /* grant */
 .grant-form { max-width: 680px; margin-top: 24px; }
 .grant-form iframe { width: 100%; border: 0; min-height: 600px; display: block; }
@@ -819,6 +839,16 @@ footer a:hover { color: var(--accent); }
   <p class="lb-caption" id="lb-caption"></p>
 </div>
 
+<div class="gwin" id="gwin" role="dialog" aria-labelledby="gwin-title" hidden>
+  <div class="gwin-bar"><div class="gwin-lights"><button class="x" data-g="close" aria-label="close"></button><button class="m" data-g="hide" aria-label="close for now"></button><button class="z" data-g="grow" aria-label="show details"></button></div></div>
+  <div class="gwin-body">
+    <h3 id="gwin-title"></h3>
+    <p id="gwin-line"></p>
+    <div class="gwin-more"><ul id="gwin-more"></ul></div>
+    <p class="due" id="gwin-due"></p>
+    <a class="apply" href="/grant">apply here</a>
+  </div>
+</div>
 <div class="nl" id="nl" role="dialog" aria-modal="true" aria-labelledby="nl-title">
   <div class="nl-box">
     <p id="nl-title">thank you for signing the guest book.</p>
@@ -2247,11 +2277,34 @@ function show() {
   if (name === "home" && lastView !== "home") typeLogo();
   if (name === "home" && HOME_STYLE === "cloud") startCloud(); else stopCloud();
   lastView = name;
+  grantWindow(name === "home");
   [...VIEWS, "show"].forEach(v => document.getElementById("view-" + v).classList.toggle("active", v === name));
   document.querySelectorAll("nav [data-view]").forEach(a => a.dataset.view === name ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   closeMenus();
   window.scrollTo(0, 0);
 }
+/* grant window: shows on the homepage while GRANT.popup is on and the grant is open.
+   red closes it for good (for this grant), yellow for this visit, green shows the details */
+const gwin = document.getElementById("gwin");
+function grantWindow(onHome) {
+  const g = GRANT.popup, key = "pg-grant-closed:" + GRANT.title;
+  const open = g && g.on && (!g.until || new Date() < new Date(g.until + "T23:59:59"));
+  let closed = false; try { closed = localStorage.getItem(key) || sessionStorage.getItem(key); } catch (e) {}
+  if (!onHome || !open || closed) { gwin.classList.remove("shown"); return; }
+  document.getElementById("gwin-title").textContent = GRANT.title;
+  document.getElementById("gwin-line").textContent = g.line;
+  document.getElementById("gwin-more").innerHTML = (g.details || []).map(d => `<li>${esc(d)}</li>`).join("");
+  document.getElementById("gwin-due").textContent = g.due || "";
+  gwin.hidden = false;
+  clearTimeout(gwin._t); gwin._t = setTimeout(() => { if (lastView === "home") gwin.classList.add("shown"); }, 2600);
+}
+gwin.addEventListener("click", e => {
+  const b = e.target.closest("[data-g]"); if (!b) { if (e.target.closest(".apply")) gwin.classList.remove("shown"); return; }
+  const key = "pg-grant-closed:" + GRANT.title;
+  if (b.dataset.g === "grow") { gwin.classList.toggle("big"); return; }
+  try { (b.dataset.g === "close" ? localStorage : sessionStorage).setItem(key, "1"); } catch (e) {}
+  gwin.classList.remove("shown");
+});
 function closeMenus() {
   header.classList.remove("menu-open"); burger.setAttribute("aria-expanded", "false");
 }
