@@ -1,0 +1,11 @@
+pictures: 801 copied, 0 failed, of 801
+files: 47 copied of 47
+  video 88a8fb2f-a342-4a5a-bbdc-3f6075b407d1 via 1920:1080/video.mp4: [in#0 @ 0x5651bab74ec0] Error opening input: Server returned 404 Not Found
+Error opening input file https://video.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/88a8fb2f-a342-4a5a-bbdc-3f6075
+video 88a8fb2f-a342-4a5a-bbdc-3f6075b407d1: from 88a8fb2f-a342-4a5a-bbdc-3f6075b407d1/playlist.m3u8, 12.5 MB
+  video b85cbeb9-5ae9-4c16-b5fa-63911ed157fe via 1920:1080/video.mp4: [in#0 @ 0x55f03d104ec0] Error opening input: Server returned 404 Not Found
+Error opening input file https://video.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/b85cbeb9-5ae9-4c16-b5fa-63911e
+video b85cbeb9-5ae9-4c16-b5fa-63911ed157fe: from b85cbeb9-5ae9-4c16-b5fa-63911ed157fe/playlist.m3u8, 18.2 MB
+  video 236bf81a-55d8-40f6-94fc-c896ad4ee6e9 via 1920:1080/video.mp4: [in#0 @ 0x55ec946efec0] Error opening input: Server returned 404 Not Found
+Error opening input file https://video.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/236bf81a-55d8-40f6-94fc-c896ad
+video 236bf81a-55d8-40f6-94fc-c896ad4ee6e9: from 236bf81a-55d8-40f6-94fc-c896ad4ee6e9/playlist.m3u8, 18.9 MB
