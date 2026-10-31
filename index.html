@@ -358,9 +358,17 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .nl-skip:hover { color: var(--accent); }
 
 /* salon wall: saved works hung together at their real relative sizes */
-.salon { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 22px 26px; min-height: 0; padding: 56px 0 64px; margin-bottom: 36px; border-bottom: 1px solid #dedede; }
+.salon { padding: 56px 0 40px; margin-bottom: 36px; border-bottom: 1px solid #dedede; }
 .salon:empty { display: none; }
-.salon img { display: block; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); cursor: zoom-in; }
+.salon-row { display: flex; align-items: center; justify-content: center; gap: 26px; }
+.salon-col { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.salon figure { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.salon img { display: block; max-width: 100%; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); cursor: zoom-in; }
+.salon figcaption { font-size: 10px; color: var(--muted); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.salon-key { columns: 3 220px; column-gap: 32px; margin: 40px 0 0; padding: 0; list-style: none; counter-reset: k; font-size: 11px; color: var(--muted); line-height: 1.6; }
+.salon-key li { counter-increment: k; break-inside: avoid; }
+.salon-key li::before { content: counter(k) "  "; color: var(--ink); font-variant-numeric: tabular-nums; }
+.salon-key span { color: var(--ink); }
 .salon-scale { flex-basis: 100%; text-align: center; font-size: 11px; color: var(--muted); margin-top: 4px; }
 
 /* awards */
@@ -1250,15 +1258,34 @@ function renderAwardShelf() {
 // read "23.6 x 19.7 in" as height and width in inches
 function inches(size) { const m = /([\d.]+)\s*x\s*([\d.]+)(?:\s*x\s*[\d.]+)?\s*in/i.exec(size || ""); return m ? [parseFloat(m[1]), parseFloat(m[2])] : null; }
 function shuffled(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
+// the salon wall: seven works across, at their real relative sizes, a new mix each visit.
+// small works can share a spot, two to a column, so a wall can hold eight or nine.
 function renderSalon(works) {
   const box = document.getElementById("salon");
-  const measured = works.map(w => ({ w, d: inches(w.size) })).filter(x => x.d);
-  if (!measured.length) { box.innerHTML = ""; return; }
-  const tallest = Math.max(...measured.map(x => x.d[0]));
-  const px = Math.min(11, 300 / tallest);                    // pixels per inch, shared by every work
-  box.innerHTML = measured.map(({ w, d }) => `<img src="${esc(sized(w.image, 750))}" alt="${esc(w.artist + ", " + w.title)}" title="${esc(w.title + ", " + w.size)}" style="height:${Math.max(18, d[0] * px).toFixed(0)}px;width:auto" data-id="${esc(w.id)}">`).join("")
-    ;
-  box.querySelectorAll("img").forEach((im, i) => im.addEventListener("click", () => { currentWorks = measured.map(x => x.w); openLightbox(i); }));
+  const pool = shuffled(works).map(w => ({ w, d: inches(w.size) })).filter(x => x.d);
+  if (!pool.length) { box.innerHTML = ""; return; }
+  const ACROSS = 7;
+  const cols = pool.slice(0, ACROSS).map(x => [x]);
+  const spare = pool.slice(ACROSS);
+  const tallest = Math.max(...cols.map(c => c[0].d[0]));
+  // up to two small works get a partner stacked with them
+  let stacked = 0;
+  cols.forEach(c => {
+    if (stacked >= 2 || c[0].d[0] > tallest * 0.45) return;
+    const k = spare.findIndex(x => x.d[0] <= tallest * 0.45 && c[0].d[0] + x.d[0] <= tallest * 0.95);
+    if (k < 0) return;
+    c.push(spare.splice(k, 1)[0]); stacked++;
+  });
+  // one scale for the whole wall: the tallest work about 300px, and the seven columns fit the width
+  const gap = 26, widthIn = cols.reduce((t, c) => t + Math.max(...c.map(x => x.d[1])), 0);
+  const room = Math.max(280, (box.clientWidth || document.querySelector("main").clientWidth) - gap * (cols.length - 1));
+  const px = Math.min(11, 300 / tallest, room / widthIn);
+  const hung = cols.flat();
+  let n = 0;
+  box.innerHTML = `<div class="salon-row">${cols.map(c => `<div class="salon-col">${c.map(({ w, d }) => { n++;
+      return `<figure><img src="${esc(sized(w.image, 750))}" alt="${esc(w.artist + ", " + w.title)}" style="height:${Math.max(16, d[0] * px).toFixed(0)}px;width:auto" data-i="${n - 1}"><figcaption>${n}</figcaption></figure>`; }).join("")}</div>`).join("")}</div>
+    <ol class="salon-key">${hung.map(({ w }) => `<li><span>${esc(w.artist)}</span>, <em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}</li>`).join("")}</ol>`;
+  box.querySelectorAll("img").forEach(im => im.addEventListener("click", () => { currentWorks = hung.map(x => x.w); openLightbox(Number(im.dataset.i)); }));
 }
 function renderCollection() {
   renderAwardShelf();
@@ -1289,7 +1316,7 @@ function renderCollection() {
 
   const f = collectionFilter;
   const list = all.filter(w => f === "all" || w.type + "s" === f || w.year === f || w.status === f || (f === "for sale" && w.forSale));
-  renderSalon(f === "all" ? shuffled(list) : list);
+  renderSalon(list);
   box.innerHTML = list.map(w => `<div class="c-item">
       <img src="${esc(sized(w.image, 750))}" alt="${esc(w.artist + ", " + w.title)}" data-open="${esc(w.id)}">
       <p>${esc(w.artist)}</p>
