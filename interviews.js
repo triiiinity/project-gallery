@@ -15,12 +15,12 @@ const INTERVIEWS = [
     "p": "TD Reade is a self taught artist, in private collections across Europe, USA, South America, and Asia living and working in Melbourne, Australia."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/2a59edfa-6c19-4d51-94b1-ab2b1a795c1c/TD+Reade+-+New+management+%282024%29.png",
+    "img": "/images/sq/2a59edfa-6c19-4d51-94b1-ab2b1a795c1c-TDReade-Newmanagement28202429/l.webp",
     "ratio": "2953/3543",
     "caption": "New Management, 2024. Acrylic on board, 23.6 x 19.7 in (60 x 50 cm)."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/270b5804-2437-40f3-8a80-f74bdfaeb6dc/TD+Reade+-+Authority+over+creation+%282024%29.png",
+    "img": "/images/sq/270b5804-2437-40f3-8a80-f74bdfaeb6dc-TDReade-Authorityovercreation28202429/l.webp",
     "ratio": "2953/3543",
     "caption": "Authority over creation, 2024. Acrylic on board, 23.6 x 19.7 in (60 x 50 cm)."
    },
@@ -53,7 +53,7 @@ const INTERVIEWS = [
   "excerpt": "Katie Vota was awarded the Summer 2024 Artist Grant.\nKatie Vota seeks to (re)evaluate our relationships to materiality, community, and environment through the medium of tapestry re-imagined in the digital age. Her current work utilizes pattern-based tapestry as a drawing medium to map the multitude of connections surrounding water as a shifting, living entity.",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/a5325ac5-cd73-40a7-b598-a3accf800ae9/05_sea_debris.jpg",
+    "img": "/images/sq/a5325ac5-cd73-40a7-b598-a3accf800ae9-05_sea_debris/l.webp",
     "ratio": "1240/1056",
     "caption": "Katie Vota, Sea Debris, 2024. Jacquard woven tapestry, mercerized cotton, wool, and plastic yarns, 27.5 x 21.5 in (69.85 x 54.61 cm)."
    },
@@ -70,12 +70,12 @@ const INTERVIEWS = [
     "p": "Katie Vota seeks to (re)evaluate our relationships to materiality, community, and environment through the medium of tapestry re-imagined in the digital age. Via collecting cast-offs and scavenging colors from nature, she transforms materials to create wholes from smaller parts, finding softness in many forms, textures, colors and patterns based in cloth. Her current work utilizes pattern-based tapestry as a drawing medium to map the multitude of connections surrounding water as a shifting, living entity. The woven wave forms and seascapes are both real and imagined—the beating of the loom akin to the ebb/flow of the tides. In drafting weaving patterns, she creates her own waves and ripples, and this deep focus on pattern is akin to larger observations of the sun sparkling off the water, or the moon reflecting its face. She juxtaposes the beautiful idealization of these images with the living reality of our polluted water systems."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/38bbe67c-e782-4bb8-a755-93167734c7b7/06_float_like_a_ghost.jpg",
+    "img": "/images/sq/38bbe67c-e782-4bb8-a755-93167734c7b7-06_float_like_a_ghost/l.webp",
     "ratio": "1240/1240",
     "caption": "Katie Vota, Float like a Ghost, 2024. Jacquard woven tapestry, mercerized cotton and wool yarns, 28 x 27 in (71.12 x 68.58 cm)."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1b565cb2-535f-4d1d-b553-e493beb67b5b/07_debris_floating.jpg",
+    "img": "/images/sq/1b565cb2-535f-4d1d-b553-e493beb67b5b-07_debris_floating/l.webp",
     "ratio": "1240/1145",
     "caption": "Katie Vota, Debris Floating, 2024. Jacquard woven tapestry, mercerized cotton and wool yarns, 27.5 x 24.5 in (69.85 x 62.23 cm)."
    },
@@ -106,7 +106,7 @@ const INTERVIEWS = [
   "excerpt": "\"We all trek the virtual domain alone in some way today. Of course painting can demand the same solo queue as well. The paradox however, lies in the mythos. Artist in the studio, peacefully laying down brushstrokes vs the isolated gamer who is locked in the grind, leveling a battle pass. One serene, the other insane. To me, no hierarchy exists between the two and these are parallel practices. The mastered gameplay annihilates the gallery. No canvas ever hit like a trickshot or frag montage.\"",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/705d228c-b0d9-44d2-ab9a-48b55c26f229/cs_door_stuck_gouache_2023.jpg",
+    "img": "/images/sq/705d228c-b0d9-44d2-ab9a-48b55c26f229-cs_door_stuck_gouache_2023/l.webp",
     "ratio": "3000/3000",
     "caption": "Door stuck, 2024. Gouache on panel, 5 x 7 in (12.7 x 17.78 cm)."
    },
@@ -129,12 +129,12 @@ const INTERVIEWS = [
     "p": "The initial phase of my process involves iterative sketches. This practice stage is derived from my training for competitive games, involving analysis and self reflection in pursuit of advancing my skills. My own techniques are pulled from the ab-ex artists I looked to for so many years. Abstraction is required to transform the digital into the analog all while navigating the limitations of paint. Reference photos are essential and I craft them from the raw gameplay to fit into what I define as a good composition or subject. This isn’t a process about representation, however. It’s about transmutation. What happens when you see Master Chief through the lens of abstraction? The iconic hero clips into the unknown."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8ef24228-bc1b-49f0-be73-4aaa8f36cb4a/halo_2_ctf_splitscreen_v1.jpg",
+    "img": "/images/sq/8ef24228-bc1b-49f0-be73-4aaa8f36cb4a-halo_2_ctf_splitscreen_v1/l.webp",
     "ratio": "2500/1849",
     "caption": "Split Screen Capture The Flag, 2024. Oil on canvas, four 9 x 12 in canvases (22.86 x 30.48 cm) 18 x 24 in (45.72 x 60.96 cm) total."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/a5fb9b07-3d3d-4cd8-b9d9-83b447eb92f5/haloce_blood_gulch_2022_oil.jpg",
+    "img": "/images/sq/a5fb9b07-3d3d-4cd8-b9d9-83b447eb92f5-haloce_blood_gulch_2022_oil/l.webp",
     "ratio": "1123/872",
     "caption": "Blood Gulch, 2022. Oil on canvas, 22 x 28 in (55.88 x 71.12 cm)."
    },
@@ -151,7 +151,7 @@ const INTERVIEWS = [
     "p": "Oddly enough, despite my practice being about connecting through games, my gaming these days is mostly solitary. Even when gaming alone, I'm still inhabiting virtual spaces that have been abandoned. We all trek the virtual domain alone in some way today. Of course painting can demand the same solo queue as well. The paradox however, lies in the mythos. Artist in the studio, peacefully laying down brushstrokes vs the isolated gamer who is locked in the grind, leveling a battle pass. One serene, the other insane. To me, no hierarchy exists between the two and these are parallel practices. The mastered gameplay annihilates the gallery. No canvas ever hit like a trickshot or frag montage."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/695a545c-fc9c-4a43-9d90-9a4e1ed08c62/button_combos_gouache_2024.jpg",
+    "img": "/images/sq/695a545c-fc9c-4a43-9d90-9a4e1ed08c62-button_combos_gouache_2024/l.webp",
     "ratio": "3000/3000",
     "caption": "Button Combos, 2024. Gouache on cotton, 4 x 7 in (10.16 x 17.78 cm)."
    },
@@ -183,7 +183,7 @@ const INTERVIEWS = [
   "excerpt": "Adrienne Greenblatt was awarded the April 2024 Artist Grant.\nAdrienne’s practice is characterized by its multisensory nature and draws strong inspirations from the environment, alchemy, the body, wrought iron gates, medieval weaponry and esotericism. Using lampworking techniques, they craft experimental glass forms that appear aqueous and fluid.",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/da407801-c0d5-4df2-958b-bbaf08f80808/adrienne_greenblatt_ug_work_sample_1_sheol.png",
+    "img": "/images/sq/da407801-c0d5-4df2-958b-bbaf08f80808-adrienne_greenblatt_ug_work_sample_1_she/l.webp",
     "ratio": "720/1084",
     "caption": "Adrienne Greenblatt, Sheon, 2023. Flameworked Borosilicate Glass, Found Object, 38 x 24 in. (96.52 x 60.96 cm)."
    },
@@ -200,12 +200,12 @@ const INTERVIEWS = [
     "p": "Adrienne’s practice is characterized by its multisensory nature and draws strong inspirations from the environment, alchemy, the body, wrought iron gates, medieval weaponry and esotericism. Using lampworking techniques, they craft experimental glass forms that appear aqueous and fluid. Their Texan upbringing, mixed Salvadoran-Ashkenazi heritage, deep interests in the spiritual and natural realms, as well as their fascination with synesthesia, the human body, and illness, profoundly inform their creative work."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/351dd858-2d23-4417-9cf5-0bb2a5251b21/adrienne_greenblatt_ug_work_sample_2_tzimtzum.png",
+    "img": "/images/sq/351dd858-2d23-4417-9cf5-0bb2a5251b21-adrienne_greenblatt_ug_work_sample_2_tzi/l.webp",
     "ratio": "576/867",
     "caption": ""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/d2f5eaeb-ae71-4611-8b33-814c16b497ce/adrienne_greenblatt_ug_work_sample_3_fetters_of_cocytus.png",
+    "img": "/images/sq/d2f5eaeb-ae71-4611-8b33-814c16b497ce-adrienne_greenblatt_ug_work_sample_3_fet/l.webp",
     "ratio": "720/1081",
     "caption": ""
    },
@@ -238,7 +238,7 @@ const INTERVIEWS = [
     "p": "“This is my dream journal, my own records of emotions and daily log turn into the language of graphite or ink on paper and the digital collage on screen.” — Chaeri Kim"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/87224e9f-e589-43fd-a279-172f9c214693/7.+Love%2C+Light%2C+Gravity+%28Installation+shot%29.jpg",
+    "img": "/images/sq/87224e9f-e589-43fd-a279-172f9c214693-7Love2CLight2CGravity28Installationshot2/l.webp",
     "ratio": "8002/5335",
     "caption": "Love, light, gravity, 2023. Acrylic, epoxy, wool on canvas, 31.4 x 39.3 in (80 x 100 cm)."
    },
@@ -252,12 +252,12 @@ const INTERVIEWS = [
     "p": "The eye is one of the most consistent characters in Kim’s work, haunting the foreground and background and arriving in many forms whether implied or actual. Many pieces incorporate the eye in a literal sense, starting with the opening work Love, Light, Gravity (2023) which superimposes a photographic representation in the angel or bird figure’s left wing. In Trinity drawing series proto: 00 (2022), the eyes breach the fourth wall and stare straight to face the viewer. Disembodied, eyeballs fly from the explosion of pigment and thread in Hilo y aguja 1 (2020). This persistent inclusion pushes us to find eyes in every work — whether that be through shimmering orbs or looming almond shapes."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/b86bfc65-e0c8-45bf-a77b-b43d17bf84ad/02.+Trinity+drawing+series_+proto+00.jpg",
+    "img": "/images/sq/b86bfc65-e0c8-45bf-a77b-b43d17bf84ad-02Trinitydrawingseries_proto00/l.webp",
     "ratio": "2188/3028",
     "caption": "Trinity drawing series proto: 00, 2022. Color pencil and pencil, label sticker on graph paper, 8.2 x 11.8 in (21 x 30 cm)."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/aaf0d528-577f-4799-b06c-7a62fe6307ba/19.+Salvation.jpg",
+    "img": "/images/sq/aaf0d528-577f-4799-b06c-7a62fe6307ba-19Salvation/l.webp",
     "ratio": "1318/1647",
     "caption": "Salvation, 2020. Tufting on cotton, 60.6 x 44.8 in (158 x 114 cm)."
    },
@@ -304,7 +304,7 @@ const INTERVIEWS = [
     "p": "Grace Nkem’s solo exhibition CLOWN WORLD is currently live on Project Gallery V, including 20 works from the artist."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/0d42ea70-4da0-49ce-bb68-583d1e4b0a88/Grace+Nkem+headshot+2+copy.jpg",
+    "img": "/images/sq/0d42ea70-4da0-49ce-bb68-583d1e4b0a88-GraceNkemheadshot2copy/l.webp",
     "ratio": "1694/1723",
     "caption": ""
    },
@@ -324,7 +324,7 @@ const INTERVIEWS = [
     "p": "About CLOWN WORLD"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/884a3c97-4a16-41d4-929e-f172ab7bc13d/_Clown+World_%2C+2023%2C+24+x+36in%2C+Oil+on+masonite.jpg",
+    "img": "/images/sq/884a3c97-4a16-41d4-929e-f172ab7bc13d-_ClownWorld_2C20232C24x36in2COilonmasoni/l.webp",
     "ratio": "2283/1568",
     "caption": "Clown World, 2023.\nOil on masonite, 24 x 36 in (60.96 x 91.44 cm)."
    },
@@ -344,12 +344,12 @@ const INTERVIEWS = [
     "p": "I think of my collage-like, painted images as browser pop-ups and I draw upon compositional clichés and visual conventions we encounter when interacting with screens: icons, endless interfaces, a compacted depth of field, cut-paste image-overlay, and so on. It seems impossible to produce a twenty-first century painting that is not informed by digital images, given that our contemporary understanding thereof is inexorably shaped by and tied to their existence in cyberspace, though we only spend fractions of a second with some of the images we see on screens. This goes beyond smartphone-photogenic curation of storefronts and apartments— the tyranny of the grid and the feed has infiltrated the cultural unconscious in ways that we, certainly, have yet to see. Even our eschatology is becoming cybernetic, as evidenced by the phrase, \"I don't want to become a hashtag.\""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/eef2a3b4-f8bc-43e1-a166-b7957c5e24d8/_Hallway%2C_+2021%2C+26+x+30in%2C+Oil+on+canvas.jpg",
+    "img": "/images/sq/eef2a3b4-f8bc-43e1-a166-b7957c5e24d8-_Hallway2C_20212C26x30in2COiloncanvas/l.webp",
     "ratio": "3436/3436",
     "caption": "Hallway, 2021.\nOil on canvas, 26 x 30 in (66.04 x 76.2 cm)."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/5902b874-6d62-46b7-9fab-4790f676f957/_BBC+%28Big+Black+Colt%29%2C_+2022%2C+16+x+20in%2C+Oil+on+masonite.jpg",
+    "img": "/images/sq/5902b874-6d62-46b7-9fab-4790f676f957-_BBC28BigBlackColt292C_20222C16x20in2COi/l.webp",
     "ratio": "2862/2862",
     "caption": "BBC (Big Black Colt), 2022.\nOil on masonite, 16 x 20 in (40.64 x 50.8 cm)."
    },
@@ -363,7 +363,7 @@ const INTERVIEWS = [
     "p": "Grace Nkem’s Artists Statement"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/a46a718a-9194-4776-97a8-dc25c0220041/IMG_5219.jpg",
+    "img": "/images/sq/a46a718a-9194-4776-97a8-dc25c0220041-IMG_5219/l.webp",
     "ratio": "3456/3456",
     "caption": "A view of Nkem’s studio."
    },
@@ -383,12 +383,12 @@ const INTERVIEWS = [
     "p": "So formally, I draw upon compositional clichés and visual conventions we encounter when interacting with screens: icons, endless interfaces, a compacted depth of field, cut-paste image-overlay, and so on. For example, in spite of the overall lack of direct reference to typically ‘digital’ iconography in my work, I think of my image-overlays as browser pop-ups. But I don’t want to make paintings about the digital by simply painting the digital. I want to apply what ‘the digital’ taught me about our visual field to produce something new and generative."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/41f9a689-68ee-47f0-8219-cc09b24f2dd0/_Meat+Mask_%2C+2023%2C+24+x+30in%2C+Oil+on+masonite.jpg",
+    "img": "/images/sq/41f9a689-68ee-47f0-8219-cc09b24f2dd0-_MeatMask_2C20232C24x30in2COilonmasonite/l.webp",
     "ratio": "3397/3397",
     "caption": "Meat Mask, 2023.\nOil on masonite, 24 x 30 in (60.96 x 76.2 cm)."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/29cd67f9-14ea-4048-bb97-1eaee557c2ca/me+and+meathead.jpg",
+    "img": "/images/sq/29cd67f9-14ea-4048-bb97-1eaee557c2ca-meandmeathead/l.webp",
     "ratio": "2031/2032",
     "caption": "Nkem with Meat Mask (2023)."
    },
@@ -408,7 +408,7 @@ const INTERVIEWS = [
   "excerpt": "Maria Rasheed was awarded the September 2023 PGV Artist Grant.\n“My work is an exploration of home, migration, loss and memory. It’s a process that allows me to document and archive associations one develops with people, places and objects.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/05ff37be-9055-47fb-b26f-fbc3a3d623f8/carpet_fragment_1_2023_gouache_9_x_12.jpg",
+    "img": "/images/sq/05ff37be-9055-47fb-b26f-fbc3a3d623f8-carpet_fragment_1_2023_gouache_9_x_12/l.webp",
     "ratio": "3839/2879",
     "caption": "Maria Rasheed, Study of a Mughal carpet fragment, 2023. Gouache on paper, 9 x 12 in (22.86 x 30.48 cm)."
    },
@@ -425,7 +425,7 @@ const INTERVIEWS = [
     "p": "There are places and memories depicted in my work; spaces I have experienced, inhabited, or built homes in (however temporary they may have been). Relocating to the U.S brought with it a shift towards exploring perceptions of migration, home, and memory. In documenting the lifecycle of a pomegranate tree, a Mughal carpet fragment, or my grandfather's prayer rugs, I am able to document memories of the past and reconnect with my roots in Pakistan."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/736b6d57-1fcc-4482-aafb-40132cca2f92/prayer_rugs_2_2022_clay_5_x_7.jpg",
+    "img": "/images/sq/736b6d57-1fcc-4482-aafb-40132cca2f92-prayer_rugs_2_2022_clay_5_x_7/l.webp",
     "ratio": "3819/2936",
     "caption": "Maria Rasheed, Prayer rugs, 2022. Linocut impressions on clay, 5 x 7 in (12.7 x 17.78 cm)."
    },
@@ -442,7 +442,7 @@ const INTERVIEWS = [
     "p": "“Prayer rugs that feature in my work are often repeated, turning it into a meditative process and I feel that learning printmaking techniques will help me achieve this repetition in my work.”"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/f26ff358-d76d-4e15-ba6a-a68c88b8f320/prayer_rugs_2022_cyanotype_7_x_11.jpg",
+    "img": "/images/sq/f26ff358-d76d-4e15-ba6a-a68c88b8f320-prayer_rugs_2022_cyanotype_7_x_11/l.webp",
     "ratio": "4032/3024",
     "caption": "Maria Rasheed, Prayer rugs, 2022. Cyanotypes on paper, 7 x 11 in (17.78 x 27.94 cm)."
    },
@@ -466,7 +466,7 @@ const INTERVIEWS = [
   "excerpt": "“In Time Won’t Tell I wanted to show work that engaged with an urge to know ourselves separate from the histories that we have inherited.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/74509c65-9537-4719-a82b-e6f5a628b434/Headshot+PGV.jpg",
+    "img": "/images/sq/74509c65-9537-4719-a82b-e6f5a628b434-HeadshotPGV/l.webp",
     "ratio": "5814/4743",
     "caption": "Farah Mohammad\nImage credit: Yekaterina Gyadu: @yekaterrrina and @artsymposia"
    },
@@ -480,7 +480,7 @@ const INTERVIEWS = [
     "p": "The saying “time will tell” helps us accept a difficult situation knowing there is no better way to understand it at present and overtime a truth will emerge. But deeply embedded social structures, and the generational impact from violent political histories have penetrated our psyches and continue to influence how we are able to show up in the world. In Time Won’t Tell I wanted to show work that engaged with an urge to know ourselves separate from the histories that we have inherited."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/35668fe3-3877-4bc2-9faa-c4ffd11c1879/Screen+Shot+2022-11-14+at+8.45.19+PM.png",
+    "img": "/images/sq/35668fe3-3877-4bc2-9faa-c4ffd11c1879-ScreenShot2022-11-14at84519PM/l.webp",
     "ratio": "1362/1640",
     "caption": "Included in Time Won’t Tell\nShahzia Sikander\nEmbark/Disembark III, 2004.\nOffset lithograph and screenprint.\n18 x 15 in (45.72 x 38.1).\nSold\nCourtesy of The LeRoy Neiman Center for Print Studies."
    },
@@ -500,7 +500,7 @@ const INTERVIEWS = [
     "q": "We know you are also an artist. From that perspective can you talk about what experiences are helpful for an up-and-coming curator?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/6438e3b2-246b-4093-aa5e-0bd227a025e2/w125+held.jpg",
+    "img": "/images/sq/6438e3b2-246b-4093-aa5e-0bd227a025e2-w125held/l.webp",
     "ratio": "3024/4032",
     "caption": "Farah Mohammad\nW125th | 25.5” X 19.5”| 2021 gouache and pencil on frosted mylar"
    },
@@ -529,7 +529,7 @@ const INTERVIEWS = [
     "q": "Can you share a bit about your ideas for your next curatorial exhibition with us?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/4bd738fe-40e3-4d5d-a90a-e0dcb76d0688/Screen+Shot+2022-11-14+at+8.47.59+PM.png",
+    "img": "/images/sq/4bd738fe-40e3-4d5d-a90a-e0dcb76d0688-ScreenShot2022-11-14at84759PM/l.webp",
     "ratio": "954/1360",
     "caption": "Included in Time Won’t Tell\nTakuji Hamanaka\nFour standing lights, 2021.\nCollaged woodcut.\n14.5 x 10.5 in (36.83 x 26.67 cm)."
    },
@@ -574,7 +574,7 @@ const INTERVIEWS = [
   "excerpt": "“Physically, my processes are fast segments of different mediums and actions, involving elements of surprises. Conceptually, my works are evolving testing grounds for me to investigate the relationship between the human body and the built space.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/e7a56619-a241-41d4-a440-c412250d1982/Screen+Shot+2022-10-19+at+4.48.30+PM.png",
+    "img": "/images/sq/e7a56619-a241-41d4-a440-c412250d1982-ScreenShot2022-10-19at44830PM/l.webp",
     "ratio": "1086/1488",
     "caption": ""
    },
@@ -594,7 +594,7 @@ const INTERVIEWS = [
     "p": "Soft Vessel is my most recent experiment probing the pliability and ephemeralness in everyday objects that are usually perceived as solid and long-lasting. Vessels are essential and ubiquitous — as intellectual and social objects, vessels reflect their chronology, culture, and ritual. From containing food for early sedentary communities to illustrating stories and demonstrating handicrafts throughout history, vessel, similar to architecture, is a subject that scales across functional, aesthetic, and cultural references."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/d4329b26-9f96-49fc-ae71-662c9b830958/Screen+Shot+2022-10-19+at+4.47.55+PM.png",
+    "img": "/images/sq/d4329b26-9f96-49fc-ae71-662c9b830958-ScreenShot2022-10-19at44755PM/l.webp",
     "ratio": "1238/1240",
     "caption": ""
    },
@@ -617,7 +617,7 @@ const INTERVIEWS = [
     "q": "Who are some of your favorite artists? Or who has been inspirational recently?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/c08901a2-0924-41c8-b45e-efdf3ae8b6b4/Screen+Shot+2022-10-19+at+4.48.04+PM.png",
+    "img": "/images/sq/c08901a2-0924-41c8-b45e-efdf3ae8b6b4-ScreenShot2022-10-19at44804PM/l.webp",
     "ratio": "1236/1418",
     "caption": ""
    },
@@ -650,7 +650,7 @@ const INTERVIEWS = [
   "excerpt": "“My projects typically commence with extensive research into the history of the patterns that I am dealing with and compiling multiple sources to piece together the timeline of the story I am narrating through the work. “",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/9d730d73-c641-4985-b5b6-72cda6480798/Saloni+Shah-Headshot.jpg",
+    "img": "/images/sq/9d730d73-c641-4985-b5b6-72cda6480798-SaloniShah-Headshot/l.webp",
     "ratio": "504/754",
     "caption": ""
    },
@@ -664,7 +664,7 @@ const INTERVIEWS = [
     "p": "My projects typically commence with extensive research into the history of the patterns that I am dealing with and compiling multiple sources to piece together the timeline of the story I am narrating through the work. I look at a lot of museum collections and current fashion before piecing the final image together. I enjoy spending a lot of time painting the details of the pattern; I grew up surrounded by intricately embroidered and dyed fabrics from all over India which involve a lot of careful labor which I hope to reflect in my own process."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/a5b3d7d1-b942-48b9-a80d-6fe580bab640/Saloni+Shah_The+English+Asthetic+Movement+Close+Up.jpg",
+    "img": "/images/sq/a5b3d7d1-b942-48b9-a80d-6fe580bab640-SaloniShah_TheEnglishAstheticMovementClo/l.webp",
     "ratio": "1800/1200",
     "caption": "Saloni Shah\n”The English Asthetic Movement” Close Up"
    },
@@ -681,7 +681,7 @@ const INTERVIEWS = [
     "p": "I refer to the Western Museum collections of Eastern artefacts that been wrongfully acquired and/or displayed in a manner that is evidently exotifying and manipulating the object to be something it was not made to be. I use these findings to highlight the othering that constantly occurs in institutions which then trickles down to everyday instances, generating long-lasting wounds."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/ca8fbb00-32d4-407b-911d-137b134e6a92/Saloni+Shah_Chintz+to+Chintzy+Close+Up.jpg",
+    "img": "/images/sq/ca8fbb00-32d4-407b-911d-137b134e6a92-SaloniShah_ChintztoChintzyCloseUp/l.webp",
     "ratio": "1600/2400",
     "caption": "Saloni Shah\n”Chintz to Chintzy” Close Up"
    },
@@ -720,7 +720,7 @@ const INTERVIEWS = [
   "excerpt": "“Through my practice of printmaking and drawing I create a psychological universe which I like to call a “mentalscape”; the work I make exist as documents of discovery in this space.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8917d66f-f43b-4c34-bd23-e1cb56dc942e/1.jpg",
+    "img": "/images/sq/8917d66f-f43b-4c34-bd23-e1cb56dc942e-1/l.webp",
     "ratio": "1169/846",
     "caption": "Artist working on a copper plate, later to be submerged into acid and etched."
    },
@@ -734,7 +734,7 @@ const INTERVIEWS = [
     "p": "It is important to me to have a balance of control and intuition in the process of creating my work. By trusting my intuition and using it to establish the structures within the mentalscapes, the imagery I build becomes a projection of my mind. When I can’t speak my thoughts, I draw. For this reason, I view the convoluted structures I create as extensions of my psyche. The concentration that I devote to my etchings and drawings suspends me in a meditative state. I view this mental state as being comparable to the Buddhist practice of shakyou, which translates to ‘copying sutras’ commonly done in temples in Japan."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/363e2529-0b74-4d30-b368-a5774ee34073/2.JPG",
+    "img": "/images/sq/363e2529-0b74-4d30-b368-a5774ee34073-2/l.webp",
     "ratio": "745/1219",
     "caption": "A full edition of artist’s print, “Document VII”."
    },
@@ -754,7 +754,7 @@ const INTERVIEWS = [
     "p": "Record-keeping, journaling, home(s), cryptology, and memory are at the core of my research. My main focus currently is on memory and its delicate nature. I have been recording, questioning, and reflecting on my own memory and creating ciphers to represent this process. I have also been memorializing intangible moments I remember from my home(s) and symbolizing them using obscure forms and structures."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/0c6367f8-2e97-45cf-a9c1-2629c3e3a792/3.jpg",
+    "img": "/images/sq/0c6367f8-2e97-45cf-a9c1-2629c3e3a792-3/l.webp",
     "ratio": "1170/1162",
     "caption": "An inked-up copper plate for artist’s print, “Red Orb Strain”."
    },
@@ -768,7 +768,7 @@ const INTERVIEWS = [
     "p": "On a similar note, I love The Drawing Stall (@thedrawingstall) run by Casey Jex Smith on Instagram. It is a lovely archive of drawings done by living drawers. It is not only beautifully curated, but as someone with a drawing practice, I feel a sense of community amongst artists from around the globe."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/e8fa3f86-6efe-40c3-bb8d-87e69848a1c9/4+%281%29.JPG",
+    "img": "/images/sq/e8fa3f86-6efe-40c3-bb8d-87e69848a1c9-428129/l.webp",
     "ratio": "750/1334",
     "caption": "Copper plate in the process of being inked up, later to be put through an etching press and printed."
    },
@@ -800,7 +800,7 @@ const INTERVIEWS = [
   "excerpt": "“Houses, trees, neighborhoods… I love to inventory a place, taking careful note of small hints, reminders of the lived day; umbrellas set out to dry, or laundry hanging, a bicycle parked, a garland in a window… these little suggestions nudge me to thread them into my own quiet narratives.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8839411f-4387-418d-b43c-1fbff821408c/04_AC_BLUEBIRD.jpg",
+    "img": "/images/sq/8839411f-4387-418d-b43c-1fbff821408c-04_AC_BLUEBIRD/l.webp",
     "ratio": "1800/1794",
     "caption": "The Bluebird, 2014. Graphite and oil on panel, 12 x 12 in. Private collection."
    },
@@ -811,7 +811,7 @@ const INTERVIEWS = [
     "q": "Can you tell us a bit about the process of making your work?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/9babe7ac-a60c-4e88-9bbe-b03b13c6c3ca/AC_DORIBURU2.jpg",
+    "img": "/images/sq/9babe7ac-a60c-4e88-9bbe-b03b13c6c3ca-AC_DORIBURU2/l.webp",
     "ratio": "3112/3084",
     "caption": "Dori Boru, 2016. Graphite and oil on panel, 6 x 6 in. Private collection."
    },
@@ -834,12 +834,12 @@ const INTERVIEWS = [
     "p": "A series of apartment buildings layered on top of one another, side by side, in front and behind. People evidenced only by their plants, their painted exteriors, and contrived habitats."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/621477a8-8b96-4cff-82e0-b823632909e9/AC_WINDOW_SM.jpg",
+    "img": "/images/sq/621477a8-8b96-4cff-82e0-b823632909e9-AC_WINDOW_SM/l.webp",
     "ratio": "2000/1993",
     "caption": ""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/fe3aeb53-ea8c-4f1b-91e0-ede374846fe2/AC_ALMOST_AWAKE.jpg",
+    "img": "/images/sq/fe3aeb53-ea8c-4f1b-91e0-ede374846fe2-AC_ALMOST_AWAKE/l.webp",
     "ratio": "3000/2993",
     "caption": ""
    },
@@ -850,7 +850,7 @@ const INTERVIEWS = [
     "p": "Houses, trees, neighborhoods… I love to inventory a place, taking careful note of small hints, reminders of the lived day; umbrellas set out to dry, or laundry hanging, a bicycle parked, a garland in a window…these little suggestions nudge me to thread them into my own quiet narratives."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/2565bba6-cc52-4999-9ff7-7a5875c18266/AC_Holiday_01.jpg",
+    "img": "/images/sq/2565bba6-cc52-4999-9ff7-7a5875c18266-AC_Holiday_01/l.webp",
     "ratio": "4014/4000",
     "caption": "Holiday, 2018. Graphite on primed panel, 20 x 20 in. Available for sale."
    },
@@ -864,7 +864,7 @@ const INTERVIEWS = [
     "q": "Who are some of your favorite artists? Or who has been inspirational recently?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/54a67ec5-53ff-44d0-97ff-32be3abb9e17/11AC_GOLDEN_HOUR.jpg",
+    "img": "/images/sq/54a67ec5-53ff-44d0-97ff-32be3abb9e17-11AC_GOLDEN_HOUR/l.webp",
     "ratio": "2101/2098",
     "caption": "Golden Hour, 2020. Graphite and oil on panel, 12 x 12 in. Available for sale."
    },
@@ -893,7 +893,7 @@ const INTERVIEWS = [
   "excerpt": "“My work looks at cycles of construction and destruction. I reference locations where the stakes of this struggle are high: flood zones, areas of fire, and vulnerable shelters.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/4df2b41e-e1b8-46bf-8cd6-96aa7537f409/Photo+by+Eat+the+Cake.JPG",
+    "img": "/images/sq/4df2b41e-e1b8-46bf-8cd6-96aa7537f409-PhotobyEattheCake/l.webp",
     "ratio": "6000/4000",
     "caption": "Virginia Wagner by Eat the Cake NYC."
    },
@@ -904,7 +904,7 @@ const INTERVIEWS = [
     "q": "Can you tell us a bit about the process of making your work?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/2f1c0176-1498-4f40-b81c-1ee88cd89bbf/Boardwalk_2021_Ink+and+oil+on+canvas_32x40.jpg",
+    "img": "/images/sq/2f1c0176-1498-4f40-b81c-1ee88cd89bbf-Boardwalk_2021_Inkandoiloncanvas_32x40/l.webp",
     "ratio": "4000/3207",
     "caption": "Boardwalk, 2021. Ink and oil on canvas, 32 x 40 in."
    },
@@ -918,12 +918,12 @@ const INTERVIEWS = [
     "p": "My paintings now begin with a series of these spills. I then use oil paint to map the human structures in the piece – the architecture, figures, and perspectival, gridded space. I let these two ways of working play and combat each other to direct the image. Sometimes, if the piece is becoming too rigid, I’ll put the canvas back on the ground, pour another oil spill, and wrestle the image out of that."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/52f30743-5a7c-4a6c-8c2d-5ba1328eaa55/Virginia+Wagner_Vinalhaven%2C+2018%2C+ink+and+oil+on+canvas%2C+44x56in.jpg",
+    "img": "/images/sq/52f30743-5a7c-4a6c-8c2d-5ba1328eaa55-VirginiaWagner_Vinalhaven2C20182Cinkando/l.webp",
     "ratio": "4000/3143",
     "caption": ""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/ba45f268-d4f1-405a-bbad-a5f0a0b89f53/Viirginia+Wagner_The+Museum%2C+2018%2C+ink+and+oil+on+canvas%2C+44x56in.jpg",
+    "img": "/images/sq/ba45f268-d4f1-405a-bbad-a5f0a0b89f53-ViirginiaWagner_TheMuseum2C20182Cinkando/l.webp",
     "ratio": "4000/3150",
     "caption": ""
    },
@@ -937,7 +937,7 @@ const INTERVIEWS = [
     "p": "The Museum pictures a flooded museum. We build these secular temples to house our stories and images and assume that they will be preserved indefinitely. But even these spaces are subject to entropy and change. This painting is also a look at the journey of the art object when it becomes unmoored from its originally intended resting place. Where will it travel to in its long life? How will it evolve?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/a63158f9-16e5-438d-8a97-b05c9d8e02a9/Opening+Night_2021_Ink+and+oil+on+canvas_32x40in.jpg",
+    "img": "/images/sq/a63158f9-16e5-438d-8a97-b05c9d8e02a9-OpeningNight_2021_Inkandoiloncanvas_32x4/l.webp",
     "ratio": "4000/3198",
     "caption": "Opening Night, 2021. Ink and oil on canvas, 32 x 40 in."
    },
@@ -951,7 +951,7 @@ const INTERVIEWS = [
     "q": "Who are some of your favorite artists? Or who has been inspirational recently?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/43a2a45a-bddf-4f38-a15b-57638a833e88/The+Bard_2021_Ink+and+oil+on+canvas_62x78.jpg",
+    "img": "/images/sq/43a2a45a-bddf-4f38-a15b-57638a833e88-TheBard_2021_Inkandoiloncanvas_62x78/l.webp",
     "ratio": "4000/3187",
     "caption": "The Bard, 2021. Ink and oil on canvas, 62 x 78 in."
    },
@@ -986,7 +986,7 @@ const INTERVIEWS = [
   "excerpt": "“ Drawing is the bone structure of my work to give shape to my thoughts, imagination or daydreams. Painting, on the other hand, emphasizes what I want to say by using a variety of paint applications to form an expression.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/6f8bd55c-8b23-42ad-bfac-f8d92afba61f/HS_SPACEAFTER.jpg",
+    "img": "/images/sq/6f8bd55c-8b23-42ad-bfac-f8d92afba61f-HS_SPACEAFTER/l.webp",
     "ratio": "2048/1643",
     "caption": "Space after, 2015. 40 x 50 inches, acrylic on canvas."
    },
@@ -1003,12 +1003,12 @@ const INTERVIEWS = [
     "p": "I make an imagined world inspired by memory, my everyday experience and interest. I create small 9 x12 inch drawings. The small size allows me to be comfortable and more direct in order to put a mental image on paper. Drawing is the bone structure of my work to give shape to my thoughts, imagination or daydreams. Painting, on the other hand, emphasizes what I want to say by using a variety of paint applications to form an expression."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/d79b0b9b-52f7-4b00-802e-d6217efe38f9/Hiro_S_BEAR_FISHING.jpg",
+    "img": "/images/sq/d79b0b9b-52f7-4b00-802e-d6217efe38f9-Hiro_S_BEAR_FISHING/l.webp",
     "ratio": "2000/1492",
     "caption": ""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/392e7d3c-dc3c-41bc-9ead-a51da85e5070/Hiro_Sakaguchi_The_Woods.jpg",
+    "img": "/images/sq/392e7d3c-dc3c-41bc-9ead-a51da85e5070-Hiro_Sakaguchi_The_Woods/l.webp",
     "ratio": "4000/2713",
     "caption": ""
    },
@@ -1037,7 +1037,7 @@ const INTERVIEWS = [
     "p": "Free association within my mind sets the groundwork for my imagery and is a common denominator in each piece."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1e458270-2e1d-4987-a0ce-82e25f115e40/HS_BABEL.jpg",
+    "img": "/images/sq/1e458270-2e1d-4987-a0ce-82e25f115e40-HS_BABEL/l.webp",
     "ratio": "2420/1824",
     "caption": "Babel, 2022, after Bruegel (from series No Particular Place to Go) 2022. 9x12 inches, graphite, ink and watercolor on paper."
    },
@@ -1051,7 +1051,7 @@ const INTERVIEWS = [
     "p": "Randall Sellers: I love his imaginative world and finely detailed drawings."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/16795a27-aaff-4d7f-87b6-75d1bc768e72/HS_VAPOR_TRAIL.jpg",
+    "img": "/images/sq/16795a27-aaff-4d7f-87b6-75d1bc768e72-HS_VAPOR_TRAIL/l.webp",
     "ratio": "2049/1539",
     "caption": "Vapor Trail of Debris, 2014. 54 x 68inches, acrylic on canvas."
    },
@@ -1080,7 +1080,7 @@ const INTERVIEWS = [
   "excerpt": "“These two works were done in the depths of quarantine. The landscapes are of nowhere in particular, but rather a meditation on a place with no time, logical space, or habitable weather conditions. I think of the details of clashing paint, hypnotic fluidity, and urgent strokes as narrators of the backdrop they depict.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/a84db1ed-e436-440e-a825-b5e38d45c560/Image1_Adler_Studio.jpg",
+    "img": "/images/sq/a84db1ed-e436-440e-a825-b5e38d45c560-Image1_Adler_Studio/l.webp",
     "ratio": "3024/3024",
     "caption": "Artist’s studio Fall 2021, working on The Great Wave for her solo exhibition Blameless as Daylight."
    },
@@ -1100,7 +1100,7 @@ const INTERVIEWS = [
     "p": "These two works were done in the depths of quarantine. The landscapes are of nowhere in particular, but rather a meditation on a place with no time, logical space, or habitable weather conditions. I think of the details of clashing paint, hypnotic fluidity, and urgent strokes as narrators of the backdrop they depict. My work is often a response to current events and personal experience."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/4c11e57f-258c-462a-81b8-8b0f4872f84b/Image2_Adler_Studio.jpg",
+    "img": "/images/sq/4c11e57f-258c-462a-81b8-8b0f4872f84b-Image2_Adler_Studio/l.webp",
     "ratio": "2667/3556",
     "caption": "A Place Twice Vanished drying outside on the studio porch in Savannah, Georgia, Spring 2021."
    },
@@ -1120,7 +1120,7 @@ const INTERVIEWS = [
     "q": "Who are some of your favorite artists? Or who has been inspirational recently?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8299f26c-c4cd-4451-8d3a-8c437ffc9965/Image4_Adler_IsThatAllThereIsToAFire_.jpg",
+    "img": "/images/sq/8299f26c-c4cd-4451-8d3a-8c437ffc9965-Image4_Adler_IsThatAllThereIsToAFire_/l.webp",
     "ratio": "3282/4185",
     "caption": "Is That All There Is To A Fire? Acrylic on plastic paper, 14 x 11 in., 2020."
    },
@@ -1149,7 +1149,7 @@ const INTERVIEWS = [
   "excerpt": "“Many of my paintings look at the ways humans intervene in the landscape to build our homes, as well as the ways the land can reclaim these spaces. Nature itself has been the most important reference in my recent work.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/7d819cf8-4d38-4bae-b017-c4edea19db2e/Artist+Portrait+in+front+of+Moki+Steps_oil+on+linen_98x46in.jpg",
+    "img": "/images/sq/7d819cf8-4d38-4bae-b017-c4edea19db2e-ArtistPortraitinfrontofMokiSteps_oilonli/l.webp",
     "ratio": "2932/2775",
     "caption": ""
    },
@@ -1163,7 +1163,7 @@ const INTERVIEWS = [
     "q": "Can you tell us a bit about the process of making your work?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/c2418ab5-db0a-4ff2-8e18-37246ccaee03/Nemett_quarantine+studio_2021.jpg",
+    "img": "/images/sq/c2418ab5-db0a-4ff2-8e18-37246ccaee03-Nemett_quarantinestudio_2021/l.webp",
     "ratio": "4032/3024",
     "caption": ""
    },
@@ -1177,7 +1177,7 @@ const INTERVIEWS = [
     "p": "The two paintings in this show came from my first trip to visit the slot canyons and ancient cliff dwellings of the Four Corners region. Jacal Corner is based on a series of 8 x 8” paintings of details of a 49-unit cliff dwelling from the 13th century – sort of an ancient apartment building. The “jacal” wall was hand-formed with mud over logs and twigs. Unlike Mesa Verde or some other restored ancient dwelling sites, this one and hundreds of others hidden throughout Cedar Mesa in SE Utah are still exactly as they were left, mostly untouched for over 800 years. I painted contemporary architecture for a long time, and was amazed to see how Ancestral Puebloans employed the land itself as a basic structure for building, like using the rock overhang created from millennia of erosion as a roof and back wall. I’ve been exploring the wild landforms in this region and using them as elements of architecture in collages coupled with actual built walls, roofs, or beams. Cliff Dwellers is a painting based on a collage of a slot canyon in Northern Arizona and Wapatki National Monument, a nearby ancient pueblo."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/d39c7baa-4eb5-4bdc-904e-7fafcd8ed540/Nemett-Pause+Install_Where+Water+Runs+Through+Rocks+1+%26+2.JPG",
+    "img": "/images/sq/d39c7baa-4eb5-4bdc-904e-7fafcd8ed540-Nemett-PauseInstall_WhereWaterRunsThroug/l.webp",
     "ratio": "1224/1200",
     "caption": "Installation view from Pause at the Crowell and West Galleries, Union College; Where Water Runs Through Rocks 1 & 2, oil on linen, 80 x 56 in each."
    },
@@ -1194,7 +1194,7 @@ const INTERVIEWS = [
     "p": "There are so many inspiring art spaces right now, especially in the upstate area where I live. One that I’ve followed for about 6 years since showing there in its early days is Collar Works in Troy, NY, which now hosts a residency program as well. Artport Kingston, Stoneleaf Retreat, LABspace, Wassaic, and Pamela Salisbury Gallery have all also been important hubs of the upstate artist community. All of these places have great Instagram presences, too, which lets me see a lot of great work even when we can’t venture out as much, though obviously nothing compares to seeing the work and gathering together in these spaces in person."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/891c3f1c-78ca-4743-862f-ceb855d6df73/Nemett_Moon+House+Portals.jpg",
+    "img": "/images/sq/891c3f1c-78ca-4743-862f-ceb855d6df73-Nemett_MoonHousePortals/l.webp",
     "ratio": "2000/1327",
     "caption": "Moon House Portals, oil on linen on panel, 8 x 8 in each"
    },
@@ -1227,7 +1227,7 @@ const INTERVIEWS = [
   "excerpt": "“My art process is rooted in patience. I often work with hand-painted patterns and repetitive strokes, a process that can take a lot of time, especially when working on large-scale projects. My work ranges from immersive installations to small-scale paintings, with the play in scale inspired by Mughal-era miniature paintings and large architectural gardens.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/6d43a3d3-5e4f-4c0d-868e-b32f266b83c9/Maknojia_6.jpg",
+    "img": "/images/sq/6d43a3d3-5e4f-4c0d-868e-b32f266b83c9-Maknojia_6/l.webp",
     "ratio": "3439/3213",
     "caption": "Ruhee in front of her work."
    },
@@ -1244,7 +1244,7 @@ const INTERVIEWS = [
     "q": "Can you tell us a bit about the process of making your work?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/480938a4-9c3a-49a0-9d2d-fe4af1c62ac4/Maknojia_2.jpg",
+    "img": "/images/sq/480938a4-9c3a-49a0-9d2d-fe4af1c62ac4-Maknojia_2/l.webp",
     "ratio": "827/1240",
     "caption": "Detail from Visualizing the Tradition of Folklore, 2019"
    },
@@ -1261,7 +1261,7 @@ const INTERVIEWS = [
     "p": "I have two paintings in the show Time Won’t Tell. The first painting, titled Infected, was made shortly after the World Health Organization (WHO) declared the coronavirus a global pandemic on March 11th, 2020. At the time, I did not know how long the pandemic would last nor the mass loss of life that would follow. The masked figure in the painting is dancing in a groundless space of uncertainty, unsure how history will unfold or be remembered. Despite the uncertainty surrounding COVID at the time, I believed that the WHO’s declaration of the pandemic was significant and not without substantial consequence."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/99d07733-7161-4006-bc1d-18f1b10877f4/Sepulcher.jpg",
+    "img": "/images/sq/99d07733-7161-4006-bc1d-18f1b10877f4-Sepulcher/l.webp",
     "ratio": "947/1200",
     "caption": "Sepulcher"
    },
@@ -1272,12 +1272,12 @@ const INTERVIEWS = [
     "p": "At the surface, the painting appears to be about bodies and mass death. However, upon further inspection, some of those arms and legs are in motion, indicating the bodies are living. Feet can be seen dancing while some hands are pointing and others are holding a beaded rope that weaves through the painting and connects the dead to the living. The beaded rope represents the tension that exists due to the lack of closure that funerals often provide for the surviving. Sepulcher does not question whether or not the wishes of the deceased matter; instead, the painting seeks to reflect upon the effects the lack of funerary rites have on the collective health and spirit of family, friends, communities, cities, and the country as a whole."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8a3f5671-5f24-4157-872d-efb5fee0017b/Maknojia_7.jpg",
+    "img": "/images/sq/8a3f5671-5f24-4157-872d-efb5fee0017b-Maknojia_7/l.webp",
     "ratio": "1871/2328",
     "caption": "Details of Ruhee’s work"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/76325dd0-5228-41b2-bc59-57922911ec13/Maknojia_8.jpg",
+    "img": "/images/sq/76325dd0-5228-41b2-bc59-57922911ec13-Maknojia_8/l.webp",
     "ratio": "6407/8048",
     "caption": "Details of Ruhee’s work"
    },
@@ -1291,7 +1291,7 @@ const INTERVIEWS = [
     "q": "Where are some of your favorite spaces that support contemporary art or design? Now that the art has an online presence, has that changed?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/b1ef55cd-c9d6-4fe1-b6bf-d3309c00b73b/Maknojia_3.jpg",
+    "img": "/images/sq/b1ef55cd-c9d6-4fe1-b6bf-d3309c00b73b-Maknojia_3/l.webp",
     "ratio": "875/1239",
     "caption": "Detail from Visualizing the Tradition of Folklore, 2019"
    },
@@ -1314,7 +1314,7 @@ const INTERVIEWS = [
     "p": "Shahzia Sikandar is another artist who inspires me. A Pakistani-American artist, she uses South Asian imagery to visualize culture that also includes American culture. As a second-generation Pakistani-American myself, I find elements of Sikandar’s work identifiable. I admire Sikander not only as an artist, but as a scholar too. The way she utilizes traditional miniature painting techniques to bring the art form to the 21st century is something I admire and is not easy to do. I am often inspired by her use of precision, patience, and time, a skill set I try to implement into my own art practice."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/2a92af6b-c86f-49ca-8dd2-bc0d50623f1c/Maknojia_4.jpg",
+    "img": "/images/sq/2a92af6b-c86f-49ca-8dd2-bc0d50623f1c-Maknojia_4/l.webp",
     "ratio": "4956/3414",
     "caption": "Detail from Visualizing the Tradition of Folklore, 2019"
    },
@@ -1341,7 +1341,7 @@ const INTERVIEWS = [
   "excerpt": "“I think about domestic labor often in my work, not washing dishes, but the work it takes to stay related to someone, even my mother who lives across distance and time zones. I work with photography, text, video, printmaking to realize these ideas. My process is slow and intuitive, structured within daily routines and bursts of art-making in my living room which alternates as my studio. ”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/beadf2cb-2e75-48e4-870c-f99c16258e5c/Mukherji_07.jpg",
+    "img": "/images/sq/beadf2cb-2e75-48e4-870c-f99c16258e5c-Mukherji_07/l.webp",
     "ratio": "2550/3300",
     "caption": "The Last Time, Text on screenprint, 2020"
    },
@@ -1349,7 +1349,7 @@ const INTERVIEWS = [
     "p": "Cheryl Mukherji (b. 1995, India) is a visual artist and writer currently based in Brooklyn, New York. She graduated with an MFA in Advanced Photographic Studies from the International Center of Photography-Bard College, New York in 2020. In her current work, Cheryl explores the idea of origin and inheritance, which is embedded in the figure of her mother and her presence in the family album, using photography, text, and video. Cheryl is a finalist in the Outwin Boochever Portrait Competition 2022 at the National Portrait Gallery, Smithsonian and a current Workspace Resident at Baxter Street at CCNY, New York where she will also host her debut solo show in January 2022. Previously, Cheryl has been the recipient of Capture Photography Festival’s Writing Prize 2020, Brooklyn Museum’s #Your2020Portrait Award 2020, South Asian Arts Resiliency Fund (SAARF), Firecracker Photography Grant 2020, and was nominated for the inaugural Next Step Award by Aperture Foundation. Her work has been exhibited at the Minnesota Museum of American Art (US), Huxley-Parlour Gallery (UK), Format Photo Festival (UK), Brooklyn Museum (US), Museum of Moving Image (US), International Center of Photography (US), Serendipity Arts Festival (IN), among others."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/b353c083-c57f-47fd-a43a-7b24f5f5247a/Mukherji_19.jpg",
+    "img": "/images/sq/b353c083-c57f-47fd-a43a-7b24f5f5247a-Mukherji_19/l.webp",
     "ratio": "5248/2953",
     "caption": "Still from Promise Me, 2020"
    },
@@ -1363,7 +1363,7 @@ const INTERVIEWS = [
     "q": "Tell us more about your work in the show."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/93475884-5b10-4a96-89f7-e6616e893c1d/Mukherji_14.jpg",
+    "img": "/images/sq/93475884-5b10-4a96-89f7-e6616e893c1d-Mukherji_14/l.webp",
     "ratio": "3775/4719",
     "caption": "I Held My Mother, Hand-embroidery on cotton lawn, 2020"
    },
@@ -1383,7 +1383,7 @@ const INTERVIEWS = [
     "p": "I draw a lot of my references from vernacular archives, family albums, and the non-fiction, poetry, auto-theory books I read. Some texts that I have gone back to over the course of making my current work are The Argonauts by Maggie Nelson, Reading Boyishly by Carol Mavor, The Mother in The Age of Mechanical Reproduction by Elissa Marder, Family Frames by Marianne Hirsch, On Earth We’re Briefly Gorgeous by Ocean Vuong, several texts by Roland Barthes, Anne Carson, Hito Steyerl, among others. I draw references from the works of many contemporary women artists who use text, image, and theory in their process, like Carrie Mae-Weems, Adrian Piper, Roni Horn, Moyra Davey, Shahzia Sikander, Ana Mendieta, Jo Spence to name a few, as a way to be in conversation with them. I am currently focussing on themes of memory, personal history, transgenerational trauma, and mother-daughter relationships."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/3d4bd840-4668-44c3-857c-889699bd774c/Mukherji_18.jpg",
+    "img": "/images/sq/3d4bd840-4668-44c3-857c-889699bd774c-Mukherji_18/l.webp",
     "ratio": "5333/3000",
     "caption": "Still from Promise Me, 2020"
    },
@@ -1422,7 +1422,7 @@ const INTERVIEWS = [
   "excerpt": "“My works are more like hybrid of two ancient craft-woodcut and stained glass both of which I have a good deal of experience.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8c3de8cd-05ca-4de2-92c4-47d39f22a84f/image.jpg",
+    "img": "/images/sq/8c3de8cd-05ca-4de2-92c4-47d39f22a84f-image/l.webp",
     "ratio": "2822/3604",
     "caption": "Vintage, 2020\n32”x 25 1/2”\nMedium: cut and pasted monochrome woodblock printed paper, mounted on museum board."
    },
@@ -1442,7 +1442,7 @@ const INTERVIEWS = [
     "p": "This is one of recent work where I used metallic foil on the ground. I am fascinated by the effect this new material can convey."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/e5be4e16-b1fd-40c3-bdba-a43e3f5c6cb2/image%281%29.jpg",
+    "img": "/images/sq/e5be4e16-b1fd-40c3-bdba-a43e3f5c6cb2-image28129/l.webp",
     "ratio": "2857/3640",
     "caption": "Atmospheric Phenomenon, 2020\n32”x 25 1/2”\nMedium: cut and pasted monochrome woodblock printed paper, mounted on museum board."
    },
@@ -1459,7 +1459,7 @@ const INTERVIEWS = [
     "p": "Various online platforms are nice places for visual resources and information. I could not name names much but especially during last year it was great to grasp some sense of what other artists were doing on Instagram. I still do like physical gallery space to view works up close though..."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/9ce5b4cb-aca6-4716-b1ef-405f4cbf80c6/image%282%29.jpg",
+    "img": "/images/sq/9ce5b4cb-aca6-4716-b1ef-405f4cbf80c6-image28229/l.webp",
     "ratio": "2889/3676",
     "caption": "Lights in the Northern Land, 2020\n32”x 25 1/2”\nMedium: cut and pasted monochrome woodblock printed paper, mounted on museum board."
    },
@@ -1492,7 +1492,7 @@ const INTERVIEWS = [
   "excerpt": "“My process is very gestural and experimental. My background is in photography, so I’ve earned my knowledge in sculpture through experimenting with materials and discovering forms, textures and shapes that excite me.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/03ad254f-059e-4762-a19a-aebdd842a790/nogacohen_1.jpg",
+    "img": "/images/sq/03ad254f-059e-4762-a19a-aebdd842a790-nogacohen_1/l.webp",
     "ratio": "1536/1920",
     "caption": "Noga Cohen, portrait by Nathan West"
    },
@@ -1521,7 +1521,7 @@ const INTERVIEWS = [
     "p": "In the past two years, I was thinking of how to approach making art in a world that is in a constant state of crisis, while healing myself. I spent time thinking about my role as an artist in a world that is becoming increasingly hostile and unsafe. I instinctively started to react with physical gestures in my studio when those questions came up to the surface level. I used the set of skills that I cultivated in my photographic practice in order to understand reality, myself and the world."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8b00d197-dc7f-49b4-9f1a-a49b5cc92e53/nogacohen_2.jpg",
+    "img": "/images/sq/8b00d197-dc7f-49b4-9f1a-a49b5cc92e53-nogacohen_2/l.webp",
     "ratio": "5472/3648",
     "caption": "Installation shot by Noga Cohen"
    },
@@ -1535,7 +1535,7 @@ const INTERVIEWS = [
     "p": "Tearing down objects, breaking and rebuilding, burning and melting, were actions I took to create a fragmented representation of the reality as I experienced it. I think of my practice as a merge between an internal and external reality, and the work that I make as an expression of this duality. I found similarities between the ways the inanimate objects held traces of pain and trauma, and the ways it’d manifest in one’s body. Through my process, I want to define what pain is, what violence is, and how it manifests in the body that carries those traces and notions of violence."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/74b338c5-0fab-4b42-b562-6558d75a38c2/nogacohen_3.jpg",
+    "img": "/images/sq/74b338c5-0fab-4b42-b562-6558d75a38c2-nogacohen_3/l.webp",
     "ratio": "3024/3024",
     "caption": "Close-up shot of “Cub Twist” by Noga Cohen"
    },
@@ -1558,7 +1558,7 @@ const INTERVIEWS = [
     "p": "I have many sources of inspiration, but I don’t use direct references. I usually listen to audiobooks in my studio while I sketch or collage, so I recently finished “The Body Keeps the Score” and I am currently reading Elaine Scary's “The Body in Pain”. Reading about the relationships between pain, trauma and the body has been really eye opening for me. In terms of visual references, I am fascinated by images of plastic islands in the ocean, fat-bergs (rock-like masses of waste matter found in sewer systems, especially in big cities) and micro plastics. Writing is a big part of my practice. I use my own writing, that is based on personal memories, as a starting point for making work."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/77fcead1-9771-4651-9e05-e34a9ad01f00/HeadOverHeels.jpg",
+    "img": "/images/sq/77fcead1-9771-4651-9e05-e34a9ad01f00-HeadOverHeels/l.webp",
     "ratio": "1200/800",
     "caption": "“Head Over Heels” by Noga Cohen"
    },
@@ -1600,7 +1600,7 @@ const INTERVIEWS = [
   "excerpt": "“My process is varied but I’m always taking from my life experiences and surroundings. I’ll usually start by drawing or painting from observation and continue investigating an idea in the studio with collage, printmaking, painting, or some combination of all three.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/eca3f1db-4101-477e-b702-2dc38e0549a4/Screen+Shot+2021-10-26+at+8.00.54+PM.png",
+    "img": "/images/sq/eca3f1db-4101-477e-b702-2dc38e0549a4-ScreenShot2021-10-26at80054PM/l.webp",
     "ratio": "1308/772",
     "caption": "Ivana Carman in front of her paintings, “I Leave My Windows Open At Night”, Acrylic, Oil, and Collage on Canvas, 60 x 96\" and “Living and Dying”, Acrylic on Canvas, 40 x 30”"
    },
@@ -1623,12 +1623,12 @@ const INTERVIEWS = [
     "p": "The two paintings come from a period in my life where I experienced deep loss and heartbreak. So, for me the duo of “Note that Night” and “Note that Day” speaks to the blending of time one experiences in a state of loss; where days and nights merge into one."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/d728c02a-cce4-41e9-94ab-9f6ac1d38a56/Screen+Shot+2021-10-26+at+8.02.17+PM.png",
+    "img": "/images/sq/d728c02a-cce4-41e9-94ab-9f6ac1d38a56-ScreenShot2021-10-26at80217PM/l.webp",
     "ratio": "984/1212",
     "caption": "“Note That Day”\nAcrylic on Canvas 20 x 16”"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/0a0570a2-799f-4609-9847-fac8f2086a0d/Screen+Shot+2021-10-26+at+8.02.29+PM.png",
+    "img": "/images/sq/0a0570a2-799f-4609-9847-fac8f2086a0d-ScreenShot2021-10-26at80229PM/l.webp",
     "ratio": "936/1180",
     "caption": "“Note That Night”\nAcrylic on Canvas 20 x16”"
    },
@@ -1648,7 +1648,7 @@ const INTERVIEWS = [
     "p": "I’m relatively new to New York so I’ve been really excited by exploring galleries around the lower east side that show emerging/contemporary artists like Half Gallery, Thierry Goldberg, Karma Gallery and many more. I don’t think viewing art online is comparable to in-person at this point in technology, but I’m excited to see how the online art space evolves as it has great potential. My secret favorite art blog is alongtimealone.tumblr.com which I look at every now and then for inspiration."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8d24a59d-399c-4e82-b00e-ba3999e92242/Screen+Shot+2021-10-26+at+8.03.00+PM.png",
+    "img": "/images/sq/8d24a59d-399c-4e82-b00e-ba3999e92242-ScreenShot2021-10-26at80300PM/l.webp",
     "ratio": "1194/508",
     "caption": "The Blue Studio, Acrylic and mixed media on Canvas, 48 x 120”"
    },
@@ -1681,7 +1681,7 @@ const INTERVIEWS = [
   "excerpt": "“I work largely intuitively, and I feel like when I’m making I become a channel for collective memory or knowledge to pass through. It feels directed in a way that is unlike other things I do.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/e21388a0-e098-40b1-828f-e3f42eaac9d1/IMG_1676.jpg",
+    "img": "/images/sq/e21388a0-e098-40b1-828f-e3f42eaac9d1-IMG_1676/l.webp",
     "ratio": "4032/3024",
     "caption": "Melissa in her studio (photo credit Kenny Rivero)"
    },
@@ -1698,7 +1698,7 @@ const INTERVIEWS = [
     "q": "Tell us more about your work in the show."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/07dbf17c-38e4-4cfe-b927-147795196b34/ceramic+window+with+felt.jpg",
+    "img": "/images/sq/07dbf17c-38e4-4cfe-b927-147795196b34-ceramicwindowwithfelt/l.webp",
     "ratio": "1504/2000",
     "caption": "Ceramic window with felt , stoneware, glaze, wool roving"
    },
@@ -1709,7 +1709,7 @@ const INTERVIEWS = [
     "p": "The images came from snaps we took while visiting India both as children and as young adults. One is of my cousin Appu with my Aunt Tessy in front of a car in the driveway at my grandparents' home sometime in the early 80s. It was just a normal day. There was nothing particularly notable about the place or time other than the fact that we were there, and we hadn’t been for a few years, and probably wouldn’t be again for a few more. The second is decades later on a visit to a famous temple in Thiruvananthapuram. We didn’t do many touristy things on our visits because there was always so much family to see. It is a very specific and hyperlocal version of India that I know. An amazing function of capturing this specificity is that it destroys tokenizing aspects of cultural identity and instead (I hope!) exposes a familiarity of the human condition."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/93021355-761d-4bbb-a38d-d48f75f21004/Ceramic+windows.jpg",
+    "img": "/images/sq/93021355-761d-4bbb-a38d-d48f75f21004-Ceramicwindows/l.webp",
     "ratio": "2000/1504",
     "caption": "2 from an ongoing series of ceramic airplane windows. 5 different stoneware clay bodies and glazes. (made at ArtShack)"
    },
@@ -1726,7 +1726,7 @@ const INTERVIEWS = [
     "p": "I am so grateful to be part of the REGULARNORMAL family. Danny Baez is really working hard to create a different kind of model for how we can have community within the commercial art world. He partners with other organizations and galleries that, in turn, become part of an extended network. Some of these include Art Noir, a powerhouse group of folks who are constantly doing amazing things, and Graham Wilson’s gallery, Swivel, that hosts community events all the time in addition to a strong and expanding exhibition program. I am also a member of Soloway Gallery in Williamsburg and I love that little space. They have really wonderful shows and are open to experimental works. Two other places that bring me a tremendous amount of joy are Dieu Donne in the Brooklyn Navy Yard, and Art Shack Ceramics in Bed Stuy. Both are full of incredibly talented, knowledgeable and generous folks that want to share with other artists."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/3fbc2e67-8630-4527-90fb-cee7f961866b/Felt+and+paper+pope.jpg",
+    "img": "/images/sq/3fbc2e67-8630-4527-90fb-cee7f961866b-Feltandpaperpope/l.webp",
     "ratio": "1161/1408",
     "caption": "When my uncle tried to hold hands with a cardboard cutout of the Pope, wool roving on cotton paper (made at Dieu Donne Workspace Residency)"
    },
@@ -1759,7 +1759,7 @@ const INTERVIEWS = [
   "excerpt": "“The line etching process is the longest as I build up the drawing with repetitive marks in circles, instead of straight-line drawings. This process is almost meditative. A monotone color palette dominates most of my works as it enhances the nostalgia of the visuals.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/9af9e88b-ef76-4648-ab55-6656d4ee40af/001.jpg",
+    "img": "/images/sq/9af9e88b-ef76-4648-ab55-6656d4ee40af-001/l.webp",
     "ratio": "720/1080",
     "caption": "Artist Portrait"
    },
@@ -1794,7 +1794,7 @@ const INTERVIEWS = [
     "p": "I am still struggling to find spaces that truly support contemporary arts and inexperienced artists. However, my interaction with a couple of international spaces has been absolutely delightful. That, I believe happened more profoundly because of the change to online platforms. Artists have a higher chance to connect globally with each other. As a result more versatile works are brought forward to be showcased."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/236da018-0996-4f93-b5df-b1d9e4ff88ca/IMG_8498.PNG",
+    "img": "/images/sq/236da018-0996-4f93-b5df-b1d9e4ff88ca-IMG_8498/l.webp",
     "ratio": "750/1334",
     "caption": "Close up of artists’ working on the canvas."
    },
@@ -1830,7 +1830,7 @@ const INTERVIEWS = [
     "p": "Keli Safia Maksud is a Kenyan-Tanzanian-Canadian-Muslim-Christian visual artist and writer based in New York. Concerned with histories of colonial encounters and its effects on memory, Maksud’s interdisciplinary practice favors the space of in-between identities and its threshold, and works towards destabilizing received histories in order to expose fictions of the state.\nMaksud’s earned her BFA in Painting from the Ontario College of Art and Design University, a Diploma in Art and Curatorial Studies at the New Centre for Research and Practice and an MFA in Visual Arts at Columbia University. Her work has shown at the Huxley-Parlour, Miriam Gallery, Bamako Biennial, National Museum of Contemporary Art - Seoul, and the Biennial of Contemporary Art Sesc_Videobrasil."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/4bfaac06-ff95-4597-b148-f78002cfe04b/01KeliSafiaMaksudAnthems.jpg",
+    "img": "/images/sq/4bfaac06-ff95-4597-b148-f78002cfe04b-01KeliSafiaMaksudAnthems/l.webp",
     "ratio": "1224/792",
     "caption": "Keli Safia Maksud, Anthems, Embroidery on Paper, 9 x 12”, 2020"
    },
@@ -1844,7 +1844,7 @@ const INTERVIEWS = [
     "p": "My current project, which deals with national anthems, began with me using sewing and embroidery as a drawing tool. The embroidery started as an experiment but it’s now what really what holds the project together. I began by sewing music scores of the various national anthems into paper resulting in a double-sided document where on the one side, you have something that resembles music and the other something nonlinear and abstract. Having this front and back has worked as a useful framework to think about national identities in that on the one side we see how the state envisions itself and its subjects but on the other, we can see what is actually happening on the ground. I also started to think about the back side as graphic notation so that these embroidered documents could be sounded into something new and performed. So many of the ways that identities, particularly on the national level, are formed is through acts of repetition and I employ this in my work but the more things are repeated the more abstracted they become."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/10eb76e8-caad-4d06-8ebd-db34e90c6665/03KeliSafiaMaksudAnthems.jpg",
+    "img": "/images/sq/10eb76e8-caad-4d06-8ebd-db34e90c6665-03KeliSafiaMaksudAnthems/l.webp",
     "ratio": "1224/792",
     "caption": "Keli Safia Maksud, Anthems, Embroidery on Paper, 9 x 12”, 2020"
    },
@@ -1867,7 +1867,7 @@ const INTERVIEWS = [
     "p": "When I am working, I solely listen to jazz and think a lot about improvisation. I draw from artists such as Kapwani Kiwanga, Torkwase Dyson and Sable Elyse Smith whose practices seem to be a process disentangling larger structural systems such as race, geography, colonization, carceral systems etc. I return to Saidiya Hartman’s Wayward Lives, Beautiful Experiments: Intimate Histories of Social Upheaval, because it gives me language to think about uncontainable bodies, riot, collective voice and one’s right to opacity. I’ve also always been fascinated with the metamorphosis of urban spaces and cities and love to look at city plans and maps. I reference Bauhaus design and minimalism in my sculptural work and also spend time looking at graphic notation."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/00114295-88c4-41d9-b35b-cdbfd76ac17c/02KeliSafiaMaksudAnthems.jpg",
+    "img": "/images/sq/00114295-88c4-41d9-b35b-cdbfd76ac17c-02KeliSafiaMaksudAnthems/l.webp",
     "ratio": "1224/792",
     "caption": "Keli Safia Maksud, Anthems, Embroidery on Paper, 9 x 12”, 2020"
    },
@@ -1906,7 +1906,7 @@ const INTERVIEWS = [
   "excerpt": "“I like to observe... Everything. I make it a point to walk everyday and notice the world around me no matter how seemingly mundane. I have noticed, over the years that this is how the thought process for any of my works begin... From life.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1eec49be-fb78-4492-8e70-96e5f483c4a7/new.jpg",
+    "img": "/images/sq/1eec49be-fb78-4492-8e70-96e5f483c4a7-new/l.webp",
     "ratio": "1127/1200",
     "caption": "The Self Portrait / experimentation before the creation of ‘The Act"
    },
@@ -1923,7 +1923,7 @@ const INTERVIEWS = [
     "q": "Tell us more about your work in the show."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/63bf7d7d-b29c-4c2b-b6b8-eb063cb78a81/IMG_20210624_162802.jpg",
+    "img": "/images/sq/63bf7d7d-b29c-4c2b-b6b8-eb063cb78a81-IMG_20210624_162802/l.webp",
     "ratio": "3464/4618",
     "caption": "An exploration of Konkani and English text through the use of Konkani lyrics and their English translations. These are found lyrics from famous songs of India and it was this exploration that led to the video work ‘Our Anthem.’"
    },
@@ -1949,7 +1949,7 @@ const INTERVIEWS = [
     "p": "The Karachi art scene for me is a quite an enjoyable experience. With a number of galleries and art spaces that are exhibiting new works fortnightly, it becomes a wonderful space to continue engaging with the diversity of art present in Pakistan. As a result one, is always emerged within the contemporary art scene when in Karachi. A positive aspect that came from the pandemic was the idea of online exhibitions. I believe this has not only allowed for a stronger intermingling between international artists, but it is also slowly changing the way we look at art and the medium with which to produce it. For me as well, the idea of life online has encouraged me to explore new media technology and marry it to my ideas and traditional skill."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/ba8f095e-9a79-4e2a-9231-164919c57d42/20210422_220841.jpg",
+    "img": "/images/sq/ba8f095e-9a79-4e2a-9231-164919c57d42-20210422_220841/l.webp",
     "ratio": "2235/2133",
     "caption": "Still from a video sculpture which explores the creation of the self through both the two dimensionality of new media and the three dimensionality of its sculptural form."
    },
@@ -1984,7 +1984,7 @@ const INTERVIEWS = [
   "excerpt": "“A memory fragment or a mood is usually the starting point for my work. I often start by covering the surface in loose drawings that are related to the idea of the piece, then I begin painting the central image on top of those drawings, using them as the foundation for the narrative.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568266446-W2AC7B67QXCJG73NDMDH/Studio.jpg",
+    "img": "/images/sq/1633568266446-W2AC7B67QXCJG73NDMDH-Studio/l.webp",
     "ratio": "2448/3264",
     "caption": ""
    },
@@ -2004,12 +2004,12 @@ const INTERVIEWS = [
     "p": "With this body of work, I was thinking a lot about the beaches near where I grew up in Washington state, as those places exist strongly in my memory. There is almost a parallel between remembrance and the tides, which have a cycle of pulling back to reveal and rising to conceal what lies beneath. On those beaches the landscape is overwhelmed by shades of blue and green, so I wanted to bring that into the drawings. I also wanted to evoke the sensation of closing your eyes, which is an action that turns the mind inwards towards introspection. When you close your eyes in bright sunlight for a few minutes, you open them to reveal the world tinted blue."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568657404-1FIAHCJOACZ7P2KY1XZK/EbbAndFlow_2.jpg",
+    "img": "/images/sq/1633568657404-1FIAHCJOACZ7P2KY1XZK-EbbAndFlow_2/l.webp",
     "ratio": "837/1200",
     "caption": "Ebb and Flow, acrylic and wax pastel on canvas, 44” x 32”, 2021."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568578580-DMMNO0YPTI2OEUSXZC0C/LaidBare.jpg",
+    "img": "/images/sq/1633568578580-DMMNO0YPTI2OEUSXZC0C-LaidBare/l.webp",
     "ratio": "800/1077",
     "caption": "Laid Bare, acrylic and wax pastel on canvas, 20” x 16”, 2021."
    },
@@ -2026,7 +2026,7 @@ const INTERVIEWS = [
     "p": "I am a huge fan of online art spaces. I think it’s very important that there are ways for people to access and engage with contemporary art, even when they are not living in a place that has a strong artistic community. However, I am lucky to be a few hours away from New York. While I try to visit different spaces each time I go, at the end of the day I almost always find myself back at Printed Matter where I love to flip through artists’ books."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568679264-JV7QHNW2I7HDBA9DXO0B/SlippingBeneath.jpg",
+    "img": "/images/sq/1633568679264-JV7QHNW2I7HDBA9DXO0B-SlippingBeneath/l.webp",
     "ratio": "800/1082",
     "caption": "Slipping Beneath, acrylic, wax pastel, acetone transfer, and charcoal on collaged paper, 24” x 18”, 2021."
    },
@@ -2058,7 +2058,7 @@ const INTERVIEWS = [
   "excerpt": "“I want the work to appear as if it grew in nature, when in fact each sculpture is composed of hundreds of small pieces of wood that are seamlessly jointed together. My work can be called the ultimate recycling: where I take the detritus of nature and give it a new life.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633621221888-E06QK2T7841MXB43EK6U/Loren+studio+sitting.jpg",
+    "img": "/images/sq/1633621221888-E06QK2T7841MXB43EK6U-Lorenstudiositting/l.webp",
     "ratio": "3456/5184",
     "caption": ""
    },
@@ -2075,7 +2075,7 @@ const INTERVIEWS = [
     "q": "Your work feels so magical. Can you talk about your use of wood and natural materials to recreate or reference nature?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633621255708-UHUMWLUMM17QEJUQWC60/Eiferman_NatureWillHeal-Car_108+pieces+of+wood%2C+plastic+toy%2C+iron+metal+and+sand_22x16x18_%244500.jpg",
+    "img": "/images/sq/1633621255708-UHUMWLUMM17QEJUQWC60-Eiferman_NatureWillHeal-Car_108piecesofw/l.webp",
     "ratio": "1200/873",
     "caption": "\"Nature Will Heal/Car\", 2016, 108 pieces of wood, plastic toy car, iron metal coating and rust patina, 22\" x 16\" x 18\"."
    },
@@ -2086,7 +2086,7 @@ const INTERVIEWS = [
     "q": "What are some references you draw upon in your work? Are there any themes in particular that you like to focus on when creating?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633621379195-PMOGQ4AIXRA1IEI8ATNF/7.+_7r_%2C+42+x+25+x10%2C166+pieces+of+wood%2C+ash+and+graphite.jpg",
+    "img": "/images/sq/1633621379195-PMOGQ4AIXRA1IEI8ATNF-7_7r_2C42x25x102C166piecesofwood2Cashand/l.webp",
     "ratio": "898/1500",
     "caption": "\"7r\", 166 pieces of wood, ash, matte medium and powdered graphite, 42\" x 25\" x 10\"."
    },
@@ -2103,7 +2103,7 @@ const INTERVIEWS = [
     "q": "Who are some of your favorite artists? Or who has been inspirational recently?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633621293313-26FU67C5UXKWN4KW13BM/2.+_11V_%2C+2018%2C+45+pieces+of+wood+with+acrylic+paint+and+sand%2C+16_x18_x24_.jpg",
+    "img": "/images/sq/1633621293313-26FU67C5UXKWN4KW13BM-2_11V_2C20182C45piecesofwoodwithacrylicp/l.webp",
     "ratio": "3600/2880",
     "caption": "\"11v\", 2019, 48 pieces of wood with acrylic paint, sand with matte medium, 14\" x 25\" x 21\"."
    },
@@ -2132,7 +2132,7 @@ const INTERVIEWS = [
   "excerpt": "“Quarantine felt like entering a cave; while my eyes adjusted to sudden total darkness, my brain constructed its own lights, shapes, and colors to focus on in the absence of clear vision. What forms out of the dust on paper are contracts of interconnection.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568076250-2U23U8WTW8BQIOK98CUC/Chelsea+Wrightson_installation+shot.JPG",
+    "img": "/images/sq/1633568076250-2U23U8WTW8BQIOK98CUC-ChelseaWrightson_installationshot/l.webp",
     "ratio": "2558/2952",
     "caption": ""
    },
@@ -2149,7 +2149,7 @@ const INTERVIEWS = [
     "p": "When Covid began I was unable to work on these altars due to studio closures, so I took graphite and color pencils home to work on compositions. A sister series emerged: candlelit visions of geometry that chart the effects of the brain with limited sensory stimulus. Quarantine felt like entering a cave; while my eyes adjusted to sudden total darkness, my brain constructed its own lights, shapes, and colors to focus on in the absence of clear vision. What forms out of the dust on paper are contracts of interconnection."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568128466-7YPR4I437E83N6UUB2U1/Chelsea+Wrightson_Exhibition+shot.JPG",
+    "img": "/images/sq/1633568128466-7YPR4I437E83N6UUB2U1-ChelseaWrightson_Exhibitionshot/l.webp",
     "ratio": "2400/1600",
     "caption": ""
    },
@@ -2166,7 +2166,7 @@ const INTERVIEWS = [
     "q": "What are some references you draw upon in your work? Are there any themes in particular that you like to focus on when creating?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568155072-3HLJMQUBYP6O0Y2919VN/Chelsea+Wrightson_Quarantine+Vision+%2315.JPG",
+    "img": "/images/sq/1633568155072-3HLJMQUBYP6O0Y2919VN-ChelseaWrightson_QuarantineVision2315/l.webp",
     "ratio": "3715/3715",
     "caption": ""
    },
@@ -2186,7 +2186,7 @@ const INTERVIEWS = [
     "p": "My work is in connection to mystic artists Agnes Pelton, Hilma af Klint, Emma Kunz and the Transcendentalist Painting Group of the Southwest in the 1930s. I also love the color understandings and ethereal compositions of Miyoko Ito. I’m often reading several books at once and am currently reading Braiding Sweetgrass by Robin Wall Kimmerer, The Holographic Universe by Michael Talbot and The Tao of Symbols by James N. Powell. They each have a way of explaining the interconnectedness of the universe, whether it be through botany, quantum physics, or symbols. I am also inspired by Houston based artist Dario Robleto. His conceptual works slip so effortlessly between the scientific observable universe and the poetic, spiritual one."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633568196140-5P83820N4E7LTHBEUSQ1/Chelsea+Wrightson_detail+shot+of+altar.JPG",
+    "img": "/images/sq/1633568196140-5P83820N4E7LTHBEUSQ1-ChelseaWrightson_detailshotofaltar/l.webp",
     "ratio": "1440/1794",
     "caption": ""
    },
@@ -2213,7 +2213,7 @@ const INTERVIEWS = [
   "excerpt": "“What drives and inspires me is my experience of the world. I spent a lot of time outdoors growing up in Vermont and I still feel that same sense of wonder and mystery I felt as a little kid standing in the big woods and just feeling like, “I don’t know the half of what is really going on out there” and finding some calm in that.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633567684825-W3XYYH3UBDQYII4EUK23/NP_Interview_Photo_1.jpg",
+    "img": "/images/sq/1633567684825-W3XYYH3UBDQYII4EUK23-NP_Interview_Photo_1/l.webp",
     "ratio": "5011/3447",
     "caption": "Nola's Studio in Vermont."
    },
@@ -2227,7 +2227,7 @@ const INTERVIEWS = [
     "p": "I work from photographs so my process generally starts there. I’ve never really been a faithful sketchbook-keeper, so my ideas usually get worked out in my camera. I have an actual camera that I use when I can remember it but I'm getting more into just using my phone camera because it’s what I have on me all the time. I take photos of everything outside. When it comes to landscapes, I’m drawn to scenes or places that feel a certain way, or have an element that I’m excited or curious to paint. Before starting a larger work I usually do a small study or two on paper, usually in gouache. I’m doing some acrylic painting right now but gouache is probably my favorite medium. I’m trying to get more into working on multiple paintings at a time but my standard routine is to get completely absorbed in one painting and live inside it and the reference photographs for weeks until the situation becomes untenable and the work is done. I work in a small studio out of my home so I have learned to love working on paper because it doesn’t take up a lot of space."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633567898399-U35VFXDPU0B3LQ9T1228/NP_Interview_Photo_2.jpg",
+    "img": "/images/sq/1633567898399-U35VFXDPU0B3LQ9T1228-NP_Interview_Photo_2/l.webp",
     "ratio": "1200/760",
     "caption": "Old Growth, gouache on paper, 13 x 21\", 2021."
    },
@@ -2244,7 +2244,7 @@ const INTERVIEWS = [
     "p": "I’ve certainly been inspired by the great landscape painters: David Hockney, the Group of Seven, Georgia O’Keefe among so many others. I didn’t have any formal art education so I really haven’t seen as much art as I probably should have. What drives and inspires me is my experience of the world. I spent a lot of time outdoors growing up in Vermont and I still feel that same sense of wonder and mystery I felt as a little kid standing in the big woods and just feeling like, “I don’t know the half of what is really going on out there” and finding some calm in that. There is a Wendell Berry poem called “The Peace of Wild Things” that describes that feeling better than I ever could. Right now, I think something that I’m incorporating more into my work is a sense of environmental stewardship. I don’t know how I could paint the land without considering how myself as a human being fits into it. The work I’ve been doing the past few months has focused less on pictorial landscapes and more on capturing precise details of specific plants/places/times of day. These works feel almost memorial-like as I consider the idea that landscapes I have loved and lived in may cease to exist in my or my children’s lifetimes as the climate crisis intensifies."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1633567740989-D9MGJ1S47AX2OV472JXC/NP_Interview_Photo_3.jpg",
+    "img": "/images/sq/1633567740989-D9MGJ1S47AX2OV472JXC-NP_Interview_Photo_3/l.webp",
     "ratio": "3280/3344",
     "caption": "Rain-Wet: Hostas and Vinca, acrylic on panel, 30 x 30\", 2021."
    },
@@ -2282,7 +2282,7 @@ const INTERVIEWS = [
   "excerpt": "“I often have these lightning-bolt moments of images in my head, probably derived from something buried deep in my mind; a line of a poem that stuck to me, something that my ex said to me, etc. I try to stop whatever I’m doing when the image pops up in my head and grab whatever is nearest to me, a pen and a paper, or my phone, and just quickly sketch the image so I don’t forget about it. I use those rough sketches to stimulate my memory and jump right into painting. ”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632016381291-6ZQFLTVJ2395MKJ3RK1N/Screen+Shot+2021-09-18+at+9.52.41+PM.png",
+    "img": "/images/sq/1632016381291-6ZQFLTVJ2395MKJ3RK1N-ScreenShot2021-09-18at95241PM/l.webp",
     "ratio": "918/1130",
     "caption": "Kieren Jeane in front of her painting, Your Pain in the Palm of my Hand"
    },
@@ -2299,7 +2299,7 @@ const INTERVIEWS = [
     "q": "Your Pain in the Palm of my Hand combines a sweet sentiment with unsettling imagery. Would you tell us a bit about that contrast's role in your work?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632016685864-4ES3D33J3MZYCFG0XTKC/Kieren_Jeane_2021_Your+Pain+in+the+Palm+of+My+Hand_oil+on+canvas_%246%2C998+-+Kieren+Jeane.png",
+    "img": "/images/sq/1632016685864-4ES3D33J3MZYCFG0XTKC-Kieren_Jeane_2021_YourPaininthePalmofMyH/l.webp",
     "ratio": "2000/2000",
     "caption": "Kieren Jeane, Your Pain in the Palm of my Hand, 2021, oil on canvas, 60 x 60 inches"
    },
@@ -2310,7 +2310,7 @@ const INTERVIEWS = [
     "q": "What are some references you draw upon in your work? Are there any themes in particular that you like to focus on when creating?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632016564680-UJZ94BSPHIIQ5GB0YAUD/Screen+Shot+2021-09-18+at+9.53.53+PM.png",
+    "img": "/images/sq/1632016564680-UJZ94BSPHIIQ5GB0YAUD-ScreenShot2021-09-18at95353PM/l.webp",
     "ratio": "1120/1438",
     "caption": "(Kieren Jeane, I’ll Never Forget You As Long As I Live, 2021, oil on canvas, 18 x 14 inches"
    },
@@ -2327,7 +2327,7 @@ const INTERVIEWS = [
     "q": "Who are some of your favorite artists? Or who has been inspirational recently? Feel free to mention any artists from friends to blue chips or books about artists."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632016596513-M5TRDRT7X41BYUPLUWN0/Screen+Shot+2021-09-18+at+9.54.04+PM.png",
+    "img": "/images/sq/1632016596513-M5TRDRT7X41BYUPLUWN0-ScreenShot2021-09-18at95404PM/l.webp",
     "ratio": "1136/1400",
     "caption": "Kieren Jeane, You’ve Come A Long Way, 2021, oil on canvas, 30 x 24 inches"
    },
@@ -2356,7 +2356,7 @@ const INTERVIEWS = [
   "excerpt": "“Visions of objects come to the fore of my brain. I take the ones that linger to the studio and set out to build them physically. I have a background in dance and consider my art materials to be my dance partners. In the studio, we share who leads. We move about in an improvised choreography—a back-and-forth where one action influences the next. ”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632015496420-EXQHA7W357H3U8L59SYC/Mullis_Sidney_Headshot_Sarah+Huny+Young.jpg",
+    "img": "/images/sq/1632015496420-EXQHA7W357H3U8L59SYC-Mullis_Sidney_Headshot_SarahHunyYoung/l.webp",
     "ratio": "1695/2550",
     "caption": "Headshot by Sarah Huny Young (2020)"
    },
@@ -2379,7 +2379,7 @@ const INTERVIEWS = [
     "p": "By building this invented ceremonial landscape, I try to find where those childhood selves go in adulthood and if it is possible to remember, re-enliven, and retain their childlike attributes. Physically, this space is built of many parts that come together in sculptural installations. Their scenes appear mutable as if staged for performance, play or ritual."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632015636569-ICWGBFB9EXVBJ5NO8I2S/sidneymullis-662colorbalance+copyHEAVYEDIT.jpg",
+    "img": "/images/sq/1632015636569-ICWGBFB9EXVBJ5NO8I2S-sidneymullis-662colorbalancecopyHEAVYEDI/l.webp",
     "ratio": "5760/3840",
     "caption": "Shrine for my pocketed youth, 2020, sand, wax, air dry clay, rocks, marbles, chain, fishing lures, beads, bells, kid’s construction paper, wood, paint, plastic, resin, pleather, fake grapes, craft animal eyes, seashells and coins from my childhood collections, size varies (central tree is 86 x 36 x 36\")"
    },
@@ -2402,7 +2402,7 @@ const INTERVIEWS = [
     "p": "I’d say I’ve largely researched art spaces online before going to them in person, so internet presence has always been really valuable for me. From an access standpoint, it’s important that art spaces have a thoughtful, information-full, online presence. With online exhibitions becoming a mainstay due to the pandemic, I hope this consideration continues to develop allowing more people to engage with contemporary art, easily and freely."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632015771210-T5LB9YUKRORSGHQWI66Q/1.+The+Town+Between+My+Toes.jpg",
+    "img": "/images/sq/1632015771210-T5LB9YUKRORSGHQWI66Q-1TheTownBetweenMyToes/l.webp",
     "ratio": "5280/3990",
     "caption": "The Town Between My Toes, 2019, sand, wax, raw rigatoni and shell pasta, pleather, black food coloring, olives, carrots, olive pits, cotton string, resin, wire, wood, paint, rocks, teddy bears, size varies"
    },
@@ -2416,7 +2416,7 @@ const INTERVIEWS = [
     "q": "Do you have any shows coming up? Anything else you would like to share?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632015823584-PQI1SDSRWG4ZXH781ORW/Tree+Arch+copy.jpg",
+    "img": "/images/sq/1632015823584-PQI1SDSRWG4ZXH781ORW-TreeArchcopy/l.webp",
     "ratio": "4000/5700",
     "caption": "Tree Arch, 2021, black pleather, sand, felt, wax, string, wood, paint, 86 x 80 x 60\""
    },
@@ -2442,7 +2442,7 @@ const INTERVIEWS = [
   "excerpt": "“All of the references of my work are autobiographical in some way, in that they represent an interest of mine but that could range anywhere from cartoons, religion, history, or even pure math. As far as themes go I am aiming more for a feeling rather than someone understanding all of the references that may exist in a work.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632014804074-JS6FPKHDHE9W8NUHMO5A/flippa.JPG",
+    "img": "/images/sq/1632014804074-JS6FPKHDHE9W8NUHMO5A-flippa/l.webp",
     "ratio": "1440/1436",
     "caption": "Flippa in Studio Oil, Oil Stick, Acrylic, on Canvas over Panel, Artist Made Frame, 72 x 90 in, 2021"
    },
@@ -2462,7 +2462,7 @@ const INTERVIEWS = [
     "p": "Thank you! According to my mom, I would sneak out of my crib to turn on the tv and watch Ren and Stimpy. Growing up in the late ’90s and early 2000’s I as most people my generation were the first to grow up with 24-hour tv stations. I spent thousands of hours fully immersed in cartoon and video game worlds. These simulated cartoon worlds are just the latest iteration of storytelling that humans have been doing for millennia. I look at everything from Rocko’s modern life, to Charlamagne, and Abrahamic tales for inspiration. I find it fascinating how we use these imaginary worlds to help explain the strangeness of our own."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632014847290-EZ50M5JNINYPPSFB832K/Kynodesme.jpg",
+    "img": "/images/sq/1632014847290-EZ50M5JNINYPPSFB832K-Kynodesme/l.webp",
     "ratio": "1198/786",
     "caption": "Kynodesme, Mixed Media Installation, 2020"
    },
@@ -2479,7 +2479,7 @@ const INTERVIEWS = [
     "p": "Of course, I would have to say Project Gallery V! I certainly love the rise in digital platforms especially on Instagram who highlight the amazing up-and-coming emerging artists. Another one would be @itsnotgallery, and @rfcuratorial a couple of galleries who I adore and put on fresh shows are Skylab Gallery in Columbus Ohio, and Shag Space in Charlotte North Carolina."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632014879459-WVCBM37BW2WM2CCCGWUL/Install+Photos-2.jpg",
+    "img": "/images/sq/1632014879459-WVCBM37BW2WM2CCCGWUL-InstallPhotos-2/l.webp",
     "ratio": "4032/2668",
     "caption": "Death of a Gnome Child, Mixed Media Installation, 2021"
    },
@@ -2511,7 +2511,7 @@ const INTERVIEWS = [
   "excerpt": "“Photographs are the most direct method by which I can look at myself and my past. I am not the same person now that I was when I was photographed, but it is still me, so photographs are the best way I have of looking at myself objectively. I am looking at myself but also at the shape of something similar to me. Through this process, I can see and know myself a bit more.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632018259465-T9QAG4IC3K0ECDU6UJSQ/Jeong_Hur_Confession_Archival+Pigment+Print_30+x+20+inches_%242500+-+Jeong+Hur.jpg",
+    "img": "/images/sq/1632018259465-T9QAG4IC3K0ECDU6UJSQ-Jeong_Hur_Confession_ArchivalPigmentPrin/l.webp",
     "ratio": "800/1200",
     "caption": "Confession, 2021, Digital photography. photographed life-casted body parts, archival pigment prints"
    },
@@ -2534,7 +2534,7 @@ const INTERVIEWS = [
     "q": "Your work has many layers, such as the text, holes that hands come through, and opaque shapes. Can you talk about the importance of this depth in your work?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632018176617-G45ILMREOFUWBURGTMGF/Image_1_I+believe.jpg",
+    "img": "/images/sq/1632018176617-G45ILMREOFUWBURGTMGF-Image_1_Ibelieve/l.webp",
     "ratio": "2333/3500",
     "caption": "I believe, 2021, Digital photography. photographed life-casted body parts, archival pigment prints"
    },
@@ -2554,7 +2554,7 @@ const INTERVIEWS = [
     "p": "My biggest reference source is my dreams. They are affected by what I experience, and I dream a lot about my past, so there are many surreal images. Among dreams that are black-and-white or psychedelic, some scenes remain in my head for a long time. When I wake up, I write down notes to retain the details, then later on I reproduce the scenes and feelings in my work."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632018134464-SS0KGXAXLIC74MZD5Y10/Image_3_Bathroom+uproar.jpg",
+    "img": "/images/sq/1632018134464-SS0KGXAXLIC74MZD5Y10-Image_3_Bathroomuproar/l.webp",
     "ratio": "2333/3500",
     "caption": "Bathroom Uproar, 2021, Digital photography. photographed life-casted body parts, archival pigment prints"
    },
@@ -2568,7 +2568,7 @@ const INTERVIEWS = [
     "p": "I like to look through small galleries around the Lower East Side and Chinatown. The atmosphere they have and the feeling of the neighborhoods help create a more open and comfortable frame of mind in terms of art appreciation. And of course, there are so many interesting shows are going around there."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1632018315893-VMNOOM142UL7XDIJLFRU/Image_4_Prometheus-3.jpg",
+    "img": "/images/sq/1632018315893-VMNOOM142UL7XDIJLFRU-Image_4_Prometheus-3/l.webp",
     "ratio": "2333/3500",
     "caption": "Prometheus #3, 2021, Digital photography. photographed life-casted body parts, archival pigment prints"
    },
@@ -2603,7 +2603,7 @@ const INTERVIEWS = [
   "excerpt": "“As much as I like the perfection, I like the disorganization. Sometimes I start with a strict plan and specific location for each sticker and others are a collection of stickers placed without a plan. The shape is important and I precut them in various sizes. The circle references many different forms of light such as drones, orbs, stars and lite brite pegs.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974180607-IFRZGH5W94YSMW8FVTKV/1shot.jpg",
+    "img": "/images/sq/1628974180607-IFRZGH5W94YSMW8FVTKV-1shot/l.webp",
     "ratio": "240/320",
     "caption": ""
    },
@@ -2620,12 +2620,12 @@ const INTERVIEWS = [
     "p": "What are you working on at the moment?\nI’m working on a series of paintings and prints using landscape as a backdrop to play with liminal space and spectacle. The American Technological Sublime by David Nye has influenced the newer work as think about nostalgia, the every day and technology. (More below :)"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974223938-GB3UOTG4GHRLQLMNH11L/4.jpg",
+    "img": "/images/sq/1628974223938-GB3UOTG4GHRLQLMNH11L-4/l.webp",
     "ratio": "241/303",
     "caption": ""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974260483-M66FYGHA7OQ80ICYHHT1/3.jpg",
+    "img": "/images/sq/1628974260483-M66FYGHA7OQ80ICYHHT1-3/l.webp",
     "ratio": "227/320",
     "caption": ""
    },
@@ -2642,12 +2642,12 @@ const INTERVIEWS = [
     "p": "The new work is inspired by a combination of popular science, drone technology and nostalgic toys such as Lite Brite. I titled the series after the toy. The series was started during the height of the pandemic while under strict quarantine regulations. Influenced by liminal time and space, the paintings explore real and artificial reality. Platforms such Zoom, Zwift and Apple’s operating system are used to explore color, altered rituals and the everyday experience."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974284916-V984G31I7HHGA7NGS3ZB/5.jpg",
+    "img": "/images/sq/1628974284916-V984G31I7HHGA7NGS3ZB-5/l.webp",
     "ratio": "240/310",
     "caption": ""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974287522-SV6FDI0T87WIZNU31FQQ/2.jpg",
+    "img": "/images/sq/1628974287522-SV6FDI0T87WIZNU31FQQ-2/l.webp",
     "ratio": "241/319",
     "caption": ""
    },
@@ -2675,7 +2675,7 @@ const INTERVIEWS = [
   "excerpt": "“I am working freely on more complex paintings. I try not to judge them as much as I used to, embracing the process and their strangeness.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627917589010-64SLVV2WEC8XUM2KPJMR/Alina+Birkner+%C2%A9+Jane+B%C3%A4hren%2C.jpg",
+    "img": "/images/sq/1627917589010-64SLVV2WEC8XUM2KPJMR-AlinaBirknerC2A9JaneBC3A4hren2C/l.webp",
     "ratio": "2500/3775",
     "caption": "Portrait of Alina Birkner."
    },
@@ -2689,7 +2689,7 @@ const INTERVIEWS = [
     "q": "Can you tell us a bit about the process of making your work?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627917902878-ZXWYC2OF8B1LBBQ0SEK8/_Untitled+%28Tender+Cell%29_2021.jpg",
+    "img": "/images/sq/1627917902878-ZXWYC2OF8B1LBBQ0SEK8-_Untitled28TenderCell29_2021/l.webp",
     "ratio": "2500/3332",
     "caption": "Alina Birkner, 2021, Untitled (Tender Cell)."
    },
@@ -2706,7 +2706,7 @@ const INTERVIEWS = [
     "q": "Your gradients are beautiful! In a world where photoshop is prevalent, can you elaborate on the importance of your hand made gradients?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627917780865-T4RFPMVBJTMV2EDOZW98/IMG_8618.jpg",
+    "img": "/images/sq/1627917780865-T4RFPMVBJTMV2EDOZW98-IMG_8618/l.webp",
     "ratio": "4032/3024",
     "caption": "Alina’s studio."
    },
@@ -2741,7 +2741,7 @@ const INTERVIEWS = [
   "excerpt": "“I often make maquettes, which is one way of playing. Instead of “thinking” of the image I want to make, I can interact with the maquettes until I “find” the image. I just don’t see my conscious mind as being particularly good at determining the image from the start. The play allows for other parts of me (the unconscious, the lower levels of the self, etc.) to influence the work. Meaning and content feel much richer to me that way.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628972831272-R9J14QE90E4KIT5W0YXJ/dsc_7919b.JPG",
+    "img": "/images/sq/1628972831272-R9J14QE90E4KIT5W0YXJ-dsc_7919b/l.webp",
     "ratio": "2500/3775",
     "caption": ""
    },
@@ -2761,7 +2761,7 @@ const INTERVIEWS = [
     "p": "Forms are often the first thing, then color (there are some exceptions to this, like when I nearly eliminate form altogether and let layers of color interact). And I don’t generally work out the colors beforehand, instead starting with a general idea but really figuring it out as I go. Even though a lot of screenprinters proof colors beforehand, I don’t. I just start. If a particular print’s color doesn’t work, then it’s discarded."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628973083615-ILIIULZD6UCS9UJRGAE2/dell_may_19-20.JPG",
+    "img": "/images/sq/1628973083615-ILIIULZD6UCS9UJRGAE2-dell_may_19-20/l.webp",
     "ratio": "2076/3115",
     "caption": "Where Late and Sweet Birds Sang, 2019.\n34 x 23 in (86.36 x 58.42).\nScreenprint."
    },
@@ -2787,7 +2787,7 @@ const INTERVIEWS = [
     "q": "Printmaking always lends itself to its materials. Can you talk about your specific choice of working on transparent paper?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628973163752-SXB9ROQP1FQZDGRMAFRU/the+trouble+twister.JPG",
+    "img": "/images/sq/1628973163752-SXB9ROQP1FQZDGRMAFRU-thetroubletwister/l.webp",
     "ratio": "2500/3758",
     "caption": "Trouble Twister, 2019.\n34 x 23 in (86.36 x 58.42).\nScreenprint."
    },
@@ -2810,7 +2810,7 @@ const INTERVIEWS = [
     "q": "Where are some of your favorite spaces that support contemporary art or design? Now that the art has an online presence has that changed?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628973238525-XKKPL02U096B7NR78X3Q/dell_may_19-6.JPG",
+    "img": "/images/sq/1628973238525-XKKPL02U096B7NR78X3Q-dell_may_19-6/l.webp",
     "ratio": "2079/3119",
     "caption": "The End of All Songs (b), 2019.\n34 x 23 in (86.36 x 58.42).\nScreenprint."
    },
@@ -2839,7 +2839,7 @@ const INTERVIEWS = [
   "excerpt": "“I think almost everybody has a paper and a pencil at home so it's a very accessible thing to do. Which is also what I love about drawing. It is almost as writing. It's a really direct way of making an image and transferring your mind onto the paper. You only need like 3 euros to make it and also you don't need a studio or a lot of space. I can always draw whenever I want, may it be at a cafe or a day at the lake. It’s simple and easy and it’s one of the most joyful things I can think of.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974498359-WM0MH9KATE59ATRGOAPH/artistpic2.jpg",
+    "img": "/images/sq/1628974498359-WM0MH9KATE59ATRGOAPH-artistpic2/l.webp",
     "ratio": "2500/2093",
     "caption": ""
    },
@@ -2859,7 +2859,7 @@ const INTERVIEWS = [
     "q": "What are you working on at the moment?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974505086-0CTI89GFJSVNXVTQM6N6/witchfight2.jpg",
+    "img": "/images/sq/1628974505086-0CTI89GFJSVNXVTQM6N6-witchfight2/l.webp",
     "ratio": "2500/1761",
     "caption": ""
    },
@@ -2876,7 +2876,7 @@ const INTERVIEWS = [
     "p": "I made those graphite drawings because I just happened to have graphite and paper in my house. After I graduated from the Royal Academy of Fine Art I was very stuck in my work. I felt like it was not allowed to make the things that I wanted. Being intuitive or spiritual seemed to be forbidden at our academy, I never understood why. For that reason I stopped making art for a while and I started to study architecture instead since imagining spaces was a great hobby of mine. But during architecture study I discovered that I was more interested in depicting fictional spaces rather than actually learning how to build a house."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974604394-CTCSN9EB76APTNX5YB80/TheEschaton2021.jpg",
+    "img": "/images/sq/1628974604394-CTCSN9EB76APTNX5YB80-TheEschaton2021/l.webp",
     "ratio": "2500/1869",
     "caption": ""
    },
@@ -2893,12 +2893,12 @@ const INTERVIEWS = [
     "p": "Every morning after I wake up I meditate to get myself in tune. Then during drawing I listen to music. One of my favorite albums is Trilogie De La Mort by Eliane Radigue. This album helps to put my mind and hands into focus. But when I feel the drawing is becoming a bit dull I will put on some psychedelic rock or punk. I like when the drawing has this meditative feeling to it but jet a twitch of rebellion and freedom. I think its important to be focused and light but sometimes it's also good to put up your middle finger and joke about life."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974538073-278JZMRUJFZHRRRI7SP7/TheFabric2021.jpg",
+    "img": "/images/sq/1628974538073-278JZMRUJFZHRRRI7SP7-TheFabric2021/l.webp",
     "ratio": "1998/2587",
     "caption": ""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974574166-YQDIYUYBOGEGNC57AXA8/DesertFlower2021.jpg",
+    "img": "/images/sq/1628974574166-YQDIYUYBOGEGNC57AXA8-DesertFlower2021/l.webp",
     "ratio": "2258/2999",
     "caption": ""
    },
@@ -2933,7 +2933,7 @@ const INTERVIEWS = [
   "excerpt": "“When I draw characters in my own work, what comes out is usually whatever interests me and pleases me visually. They aren’t based on any existing narrative, although I think my drawings can sometimes suggest some kind of back story or universe.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628785934412-CINK7XT48FN1OZBJ0MR5/45790029.JPG",
+    "img": "/images/sq/1628785934412-CINK7XT48FN1OZBJ0MR5-45790029/l.webp",
     "ratio": "2500/1658",
     "caption": "Seo Kim in her studio."
    },
@@ -2950,7 +2950,7 @@ const INTERVIEWS = [
     "p": "In the case of the pastel drawings in the show, I'd say these were primarily an exercise in completing finished work in color. The “idea” for each one came from photographs I found and saved which had interesting lighting. I wanted to see if I could recreate and repurpose it as something of my own. The drawings and subject matter came second and were designed in service of the lighting and color schemes, which are kind of the essence of each piece. For something else, I might just as easily start with a concept for a drawing and figure out the colors second. I don’t have a consistent process at least at the moment. I think every project tends to have its own unique needs."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628786381737-GJX8J9X9B3XFUK58KDRN/IMG_0207.jpg",
+    "img": "/images/sq/1628786381737-GJX8J9X9B3XFUK58KDRN-IMG_0207/l.webp",
     "ratio": "2500/1875",
     "caption": "Finished works in Kim’s studio, including 2 works that are featured in “Illuminated.”"
    },
@@ -2970,12 +2970,12 @@ const INTERVIEWS = [
     "p": "Designing characters, especially animals and monsters, is very central to what I do. I’ve worked as a character designer and I love the challenge of coming up with designs that don’t quite look like anything else that already exists. When I draw characters in my own work, what comes out is usually whatever interests me and pleases me visually. They aren’t based on any existing narrative, although I think my drawings can sometimes suggest some kind of back story or universe. I’m interested in developing narratives based on certain characters, but I have trouble following through. I tend to be more interested in the way things look rather than telling a larger story."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628786431855-840XXN2JQ6M6T8U8OVPL/IMG_9158.JPG",
+    "img": "/images/sq/1628786431855-840XXN2JQ6M6T8U8OVPL-IMG_9158/l.webp",
     "ratio": "2500/2095",
     "caption": ""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628787415396-G6WJROZNNJEW5J8QBVD3/IMG_9708.JPG",
+    "img": "/images/sq/1628787415396-G6WJROZNNJEW5J8QBVD3-IMG_9708/l.webp",
     "ratio": "2500/1907",
     "caption": ""
    },
@@ -2989,7 +2989,7 @@ const INTERVIEWS = [
     "q": "Do you have any shows coming up? Anything else you would like to share?"
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628786389018-EL68KZ4880PSDC2JT2AK/IMG_0210.JPG",
+    "img": "/images/sq/1628786389018-EL68KZ4880PSDC2JT2AK-IMG_0210/l.webp",
     "ratio": "2500/2500",
     "caption": ""
    },
@@ -3013,7 +3013,7 @@ const INTERVIEWS = [
   "excerpt": "“I’m really drawn to the communication and collective memory of things, sites, and abstract forms. I question the hierarchy of different life forms.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628354931182-3YCA9QDNAX23S958QCGO/IMG_0291.JPG",
+    "img": "/images/sq/1628354931182-3YCA9QDNAX23S958QCGO-IMG_0291/l.webp",
     "ratio": "1824/1368",
     "caption": "Portrait of Jasmine Murrell"
    },
@@ -3024,7 +3024,7 @@ const INTERVIEWS = [
     "p": "Can you tell us a bit about the process of making your work?\nWork in a nonlinear art-making process that expands over several years. There are certain overlapping subjects that touch me. I orchestrate an interdisciplinary experience that reflect my artist inquiries."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628355205799-TX1G92WES6848QXXW936/4U8A2773.JPG",
+    "img": "/images/sq/1628355205799-TX1G92WES6848QXXW936-4U8A2773/l.webp",
     "ratio": "2500/1667",
     "caption": "Dirt sculpture by Jasmine Murrell. Part of an installation."
    },
@@ -3041,7 +3041,7 @@ const INTERVIEWS = [
     "p": "Each site where the installation of Immortal Uterus was created is never the same and consistently in collaborations with space, the community, and the present moment. The performer/viewer activates the space in various ways including through movement, sound, and light. One installation was activated by the viewer with the accompaniment of wearable sculptures that provided the light for the installation."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628355328235-13EMVQ7006A5CDZNAPOE/4U8A1781.JPG",
+    "img": "/images/sq/1628355328235-13EMVQ7006A5CDZNAPOE-4U8A1781/l.webp",
     "ratio": "2500/1667",
     "caption": ""
    },
@@ -3058,7 +3058,7 @@ const INTERVIEWS = [
     "p": "Honestly, I’ve been inspired anywhere but the Amazon is still my favorite place for inspiration for the past 20 plus years."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628355396794-B8QAKW936GBD7MK0FHST/4U8A2734.JPG",
+    "img": "/images/sq/1628355396794-B8QAKW936GBD7MK0FHST-4U8A2734/l.webp",
     "ratio": "2500/1667",
     "caption": "Detail of installation by Jasmine Murrell."
    },
@@ -3086,7 +3086,7 @@ const INTERVIEWS = [
   "excerpt": "“My floor installations are my interior landscape and home. These silk flowers have made it possible for my stubborn imagination to attempt iteration after iteration of a forever-ness.”",
   "blocks": [
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627956371899-0IQ1HBZ526MYMQ2SG048/01_Gyun_StudioPortrait.jpg",
+    "img": "/images/sq/1627956371899-0IQ1HBZ526MYMQ2SG048-01_Gyun_StudioPortrait/l.webp",
     "ratio": "1182/665",
     "caption": "Gyun in her studio located at Brooklyn Army Terminal, Sunset Park, Brooklyn, NY."
    },
@@ -3103,7 +3103,7 @@ const INTERVIEWS = [
     "p": "Art and life demand much of me in finding equilibrium, and that deeply impacts my making. Most of my works are generated from my life and the prompts that sites or spaces provide for me. For example, the most recent exhibition “So we can be near '' was a symbolic, formalistic translation of both my biography and the project’s site at Wave Hill. The intense examination of my life often yields images, writings, and references. I then go into making a few hand drawn sketches to prepare for each project. In recent years, writing has become a more prominent part of the making process."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627956481479-1UX8JVDMFBWJZKFV8YLV/02_Gyun_Sowecanbenear.jpg",
+    "img": "/images/sq/1627956481479-1UX8JVDMFBWJZKFV8YLV-02_Gyun_Sowecanbenear/l.webp",
     "ratio": "2500/1818",
     "caption": "Gyun Hur: So we can be near, 2021, hand-shredded silk flowers, vinyl print, mirror, hand-blown glass, and river water\nCourtesy of the artist and Wave Hill. Photo: Stefan Hagen"
    },
@@ -3117,12 +3117,12 @@ const INTERVIEWS = [
     "p": "For the past ten years, hand-shredded silk flowers have been my anchor and signature material as a way to process loss and melancholia. I once felt that I could do the rest of my life's work with that particular material, then river water and glass naturally came into my practice. It feels so nice to shift my imagination."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627956596940-31RUNRKFKNGCH2EEYL7Y/04_Gyun_Sowecanbenear_GlassDrop.jpg",
+    "img": "/images/sq/1627956596940-31RUNRKFKNGCH2EEYL7Y-04_Gyun_Sowecanbenear_GlassDrop/l.webp",
     "ratio": "2500/3750",
     "caption": ""
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627956606775-7RTS6D5H7TCLHP2RUXSX/03_Gyun_YellowGlassDrops.jpg",
+    "img": "/images/sq/1627956606775-7RTS6D5H7TCLHP2RUXSX-03_Gyun_YellowGlassDrops/l.webp",
     "ratio": "1000/1333",
     "caption": ""
    },
@@ -3148,7 +3148,7 @@ const INTERVIEWS = [
     "p": "I lean on my knowledge in art history as well as my bodily and emotional memories as references. Works by Martin, Mark Rothko, and Francisco Goya deeply influence my aesthetics. Felix Gonzalez-Torres, Ana Mendieta, and Theresa Hak Kyung Cha have shown me poetry that I did not know of. At the same time, I want to let go of all those things, this learned knowledge per se, and just look at nature to reflect its ungraspable beauty in my work, or is that even possible, I ask. Our human (in)capacity to hold ambiguity in our lives, in loss, beauty, and melancholia continues to give me reason to make."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627956664808-NTE0951KIO015VOLM0J4/05_Gyun_Iwoudln%27tknowanyotherway.jpg",
+    "img": "/images/sq/1627956664808-NTE0951KIO015VOLM0J4-05_Gyun_Iwoudln27tknowanyotherway/l.webp",
     "ratio": "1500/1000",
     "caption": "I wouldn’t know any other way, 2020, hand-shredded silk flowers, vinyl print, and mirror, 3 days public performance in the installation at BRIC. Courtesy of the artist. Photo: David Andrako."
    },
@@ -3168,7 +3168,7 @@ const INTERVIEWS = [
     "p": "I have an upcoming project with Art in Buildings. Title is to be determined, but I am thinking something like Composition of us and the river - “liken it to the dance.” I’m installing in a small window space at 523 Hudson Street in Greenwich Village, a few minutes walking distance from the Hudson River. Using this particular window as a mediator, I will cast glass to hold river water for about 8 weeks in the late winter this year. With this particular project, I’m thinking about how to remind ourselves of nature that we must care for. Honoring nature along with our human experiences is becoming more and more urgent to me."
    },
    {
-    "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627956796126-A6PWZUL8VOC6NZALGG62/06_Gyun_Sketch.jpg",
+    "img": "/images/sq/1627956796126-A6PWZUL8VOC6NZALGG62-06_Gyun_Sketch/l.webp",
     "ratio": "2500/2611",
     "caption": "Initial sketch for Composition of us and the river - “liken it to the dance,” pen on paper. Courtesy of the artist."
    },

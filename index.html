@@ -761,7 +761,6 @@ footer a:hover { color: var(--accent); }
     <div class="prose nf">
       <p>this page doesn't exist, or it moved when project gallery got its new home.</p>
       <p class="nf-links"><a href="/">home</a> <a href="/exhibitions">exhibitions</a> <a href="/artists">artists</a> <a href="/interviews">interviews</a> <a href="/contact">contact</a></p>
-      <p class="nf-old">looking for an older page? <a id="nf-archive" href="https://archive.project-gallery.com" target="_blank" rel="noopener">try the archive ↗</a></p>
     </div>
   </section>
 
@@ -958,7 +957,10 @@ function markOpened() {
 // "archive:/eternal-flame" -> the old site's address for that page
 function archiveLink(link) { return (link || "").replace(/^archive:/, SITE.archive.replace(/\/$/, "")); }
 // pictures still hosted on Squarespace can be asked for at a smaller size
-function sized(src, w) { return /images\.squarespace-cdn\.com/.test(src) ? src + "?format=" + w + "w" : src; }
+function sized(src, w) {
+  if (/^\/images\/sq\/.+\/l\.webp$/.test(src || "")) return src.replace(/l\.webp$/, w <= 400 ? "s.webp" : w <= 1000 ? "m.webp" : "l.webp");   // copies made from Squarespace: small, medium, large
+  return /images\.squarespace-cdn\.com/.test(src) ? src + "?format=" + w + "w" : src;
+}
 let openCardKey = "";
 function openShowCard(key) {
   const c = SHOW_CARDS[key]; if (!c) return;
@@ -2245,15 +2247,10 @@ window.addEventListener("popstate", show);
   if (spot) { history.replaceState(null, "", spot[1] && !/^(category|tag)$/.test(spot[1]) ? "/interviews/" + spot[1] : "/interviews"); return; }
   const renamed = { "artist-archive": "artists", "about-1": "about", "contact-1": "contact", "exhibitions-1": "exhibitions", "1exhibitions-void": "exhibitions", "splinters-in-the-ongoing-normal": "splinters" };
   if (renamed[path]) { history.replaceState(null, "", "/" + renamed[path]); return; }
-  const archive = SITE.archive.replace(/\/$/, "");
-  const oldPages = ["editions", "purchasing-artwork", "curators", "cart"];
-  const isOld = path.startsWith("s/") || oldPages.includes(path) || Object.values(SHOW_CARDS).some(c => c.link === "archive:/" + path);
-  // guard: if the archive sends people straight back here, stop instead of bouncing between the two
-  let recent = 0; try { recent = Number(sessionStorage.getItem("pg-bounce:" + path)) || 0; } catch (e) {}
-  if (isOld && new URL(archive).host !== location.host && Date.now() - recent > 15000) {
-    try { sessionStorage.setItem("pg-bounce:" + path, String(Date.now())); } catch (e) {}
-    location.replace(archive + "/" + path);
-  }
+  // old Squarespace file links (/s/press-release.pdf) now live under /files; leftover shop pages go to contact
+  if (path.startsWith("s/")) { location.replace("/files/" + decodeURIComponent(path.slice(2)).replace(/[^\w.\-]+/g, "-")); return; }
+  const gone = { "editions": "contact", "purchasing-artwork": "contact", "cart": "contact", "curators": "about" };
+  if (gone[path]) history.replaceState(null, "", "/" + gone[path]);
 })();
 
 function show() {
@@ -2271,7 +2268,6 @@ function show() {
   if (name === "artists") startPeek(); else clearInterval(peekTimer);
   if (name === "guestbook") renderGuestbook();
   if (name === "interviews") renderInterviews(h.split("/")[1] || "");
-  if (name === "notfound") document.getElementById("nf-archive").href = SITE.archive.replace(/\/$/, "") + location.pathname;
   if (name === "collection") receiveCollection();
   if (name === "guestbook-review") renderReview();
   if (name === "home" && lastView !== "home") typeLogo();
