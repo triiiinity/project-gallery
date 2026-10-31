@@ -1,0 +1,23 @@
+# Checks the 2020-2022 show pictures when the check script changes.
+name: check images
+on:
+  push:
+    branches: [main]
+    paths: ["scripts/check-images.mjs"]
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/check-images.mjs
+      - run: |
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add scripts/check-images.log
+          git commit -m "Picture check for the 2020-2022 shows" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
+          git push

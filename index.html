@@ -139,6 +139,9 @@ details .detail-body p { margin: 0 0 10px; }
 .work-caption { text-align: right; font-size: 13px; line-height: 1.5; }
 .work-caption em, .lb-caption em { font-style: italic; }
 .work-caption .place { color: var(--muted); }
+.work-links { margin-top: 6px; }
+.work-links a { color: inherit; text-decoration: underline; text-underline-offset: 2px; transition: color .6s ease; }
+.work-links a:hover { color: #0000ee; }
 .work-about { max-width: 360px; margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.55; text-align: justify; }
 .work.left .work-about { margin-left: auto; }
 .work-about p { margin: 0 0 8px; }
@@ -906,7 +909,7 @@ function markOpened() {
 // "archive:/eternal-flame" -> the old site's address for that page
 function archiveLink(link) { return (link || "").replace(/^archive:/, SITE.archive.replace(/\/$/, "")); }
 // pictures still hosted on Squarespace can be asked for at a smaller size
-function sized(src, w) { return /squarespace-cdn\.com/.test(src) ? src + "?format=" + w + "w" : src; }
+function sized(src, w) { return /images\.squarespace-cdn\.com/.test(src) ? src + "?format=" + w + "w" : src; }
 let openCardKey = "";
 function openShowCard(key) {
   const c = SHOW_CARDS[key]; if (!c) return;
@@ -1232,6 +1235,7 @@ function renderShow(key) {
         <p><em>${esc(w.title)}</em>${w.year ? ", " + esc(w.year) : ""}</p>
         <p>${esc(w.medium)}</p>
         <p>${esc(w.size)}</p>
+        ${w.video || w.interview ? `<p class="work-links">${w.video ? `<a href="${esc(w.video)}" target="_blank" rel="noopener">watch the video</a>` : ""}${w.video && w.interview ? " · " : ""}${w.interview ? `<a href="/interviews/${esc(w.interview)}">read the interview</a>` : ""}</p>` : ""}
         ${w.about ? `<div class="work-about">${String(w.about).split(/\n\s*\n/).map(x => `<p>${esc(x.trim())}</p>`).join("")}</div>` : ""}
         ${w.forSale ? `<a class="inquire" href="mailto:${SITE.email}?subject=${encodeURIComponent(subject)}">inquire</a>` : ""}<button class="save" data-save="${esc(key + ":" + i)}"></button>
       </div>`;
@@ -2174,7 +2178,7 @@ window.addEventListener("popstate", show);
   // old spotlights posts now live under /interviews
   const spot = /^spotlights(?:\/([^/?#]+))?/.exec(path);
   if (spot) { history.replaceState(null, "", spot[1] && !/^(category|tag)$/.test(spot[1]) ? "/interviews/" + spot[1] : "/interviews"); return; }
-  const renamed = { "artist-archive": "artists", "about-1": "about", "contact-1": "contact", "exhibitions-1": "exhibitions", "1exhibitions-void": "exhibitions" };
+  const renamed = { "artist-archive": "artists", "about-1": "about", "contact-1": "contact", "exhibitions-1": "exhibitions", "1exhibitions-void": "exhibitions", "splinters-in-the-ongoing-normal": "splinters" };
   if (renamed[path]) { history.replaceState(null, "", "/" + renamed[path]); return; }
   const archive = SITE.archive.replace(/\/$/, "");
   const oldPages = ["editions", "purchasing-artwork", "curators", "cart"];
