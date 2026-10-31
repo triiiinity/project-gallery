@@ -1,0 +1,22 @@
+name: kit form
+on:
+  push:
+    branches: [main]
+    paths: ["scripts/kit-form.mjs"]
+permissions:
+  contents: write
+jobs:
+  look:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/kit-form.mjs
+      - run: |
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add scripts/kit-form.log
+          git commit -m "Kit form lookup" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
+          git push
