@@ -47,7 +47,9 @@ nav a.plus:hover .px-x, nav a.plus:focus-visible .px-x { opacity: 1; }
 .ig:hover img { filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5)); }
 .ig .ig-text { font-size: 12px; }
 .burger { display: none; background: none; border: 0; padding: 4px 0; cursor: pointer; }
-.burger span { display: block; width: 24px; height: 1px; background: var(--ink); margin: 6px 0; }
+.burger span { display: block; width: 24px; height: 1px; background: var(--ink); margin: 6px 0; transition: transform .35s ease; }
+.fill:not(.f5) { display: none; }
+.m-label { display: none; }
 
 main { padding: 0 var(--gutter) 64px; flex: 1; }
 .view { display: none; }
@@ -427,9 +429,31 @@ footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; fl
 footer a:hover { color: var(--accent); }
 
 @media (max-width: 720px) {
-  .burger { display: block; }
-  nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--bg); flex-direction: column; align-items: flex-start; gap: 14px; padding: 8px var(--gutter) 24px; z-index: 4; }
-  header.menu-open nav { display: flex; }
+  /* phone menu: opens as its own block under the logo and pushes the page down, so nothing sits on top of anything */
+  header { flex-wrap: wrap; row-gap: 0; z-index: 3; }
+  .burger { display: block; padding: 8px 0 8px 16px; margin-right: -2px; }
+  header.menu-open .burger span:first-child { transform: translateY(3.5px) rotate(45deg); }
+  header.menu-open .burger span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+  #nav { display: none; flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 0; margin-top: 18px; border-top: 1px solid #dedede; }
+  header.menu-open #nav { display: flex; animation: menu-in .45s ease both; }
+  #nav > a, #nav > a.typed-link { display: block; font-size: 17px; line-height: 1.2; padding: 13px 0; border-bottom: 1px solid #eeeeee; width: auto !important; }
+  #nav a.plus { display: flex; align-items: center; gap: 10px; font-size: 17px; }
+  #nav a.plus span { grid-area: auto; }
+  #nav a.plus .px-x { display: none; }
+  #nav a.plus:hover .px-plus { opacity: 1; }
+  #nav a.plus .m-label { display: inline; font-size: 17px; }
+  #nav a.ig { display: flex; border-bottom: 0; }
+  #nav a[aria-current="page"], #nav a.active { color: var(--accent); }
+  @keyframes menu-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+  .fill:not(.f5) { display: block; }
+  .fill.f5:not(.f2) { display: none; }
+  .arch-year { padding: 0 var(--gutter); }
+  .arch-item { aspect-ratio: auto; min-height: 150px; width: 100%; }
+  #ex-archive .arch-year > span, .aa-year > span { border-right: 0; }
+  .arch-items, .aa-grid { border-left: 1px solid #dedede; border-right: 1px solid #dedede; }
+  .aa-peek { gap: 8px; margin-top: 40px; }
+  .aa-peek span { width: 56px; height: 56px; }
 
   .home-grid { grid-template-columns: 1fr; margin-top: 24px; }
   .card { grid-template-columns: 1fr; }
@@ -437,7 +461,7 @@ footer a:hover { color: var(--accent); }
   .home-image { order: -1; }
   .ex-intro { grid-template-columns: 1fr; grid-template-areas: "title" "text" "buttons"; row-gap: 16px; }
   .work { grid-template-columns: 1fr; gap: 20px; }
-  .ex-buttons { width: 100%; max-width: 260px; }
+  .ex-buttons { width: 100%; max-width: none; }
   .work-caption { text-align: left; }
   .work.center { width: 100%; }
   .work.left .work-image, .work.right .work-image, .pair .work-image { width: 100%; }
@@ -471,7 +495,7 @@ footer a:hover { color: var(--accent); }
     <a href="/about" data-view="about">about</a>
     <a href="/guestbook" data-view="guestbook">guest book</a>
     <a href="/contact" data-view="contact">contact</a>
-    <a href="/collection" class="plus" data-view="collection" aria-label="my collection" title="my collection"><span class="px-plus">+</span><span class="px-x" aria-hidden="true">×</span></a>
+    <a href="/collection" class="plus" data-view="collection" aria-label="my collection" title="my collection"><span class="px-plus">+</span><span class="px-x" aria-hidden="true">×</span><span class="m-label">my collection</span></a>
     <a class="ig" id="ig" href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener" aria-label="project gallery on Instagram"></a>
   </nav>
 </header>
@@ -758,7 +782,7 @@ function renderExhibitionsPage() {
   byYear.forEach(keys => keys.sort((a, b) => start(b).localeCompare(start(a))));
   document.getElementById("ex-archive").innerHTML = [...byYear].sort((a, b) => b[0] - a[0]).map(([y, keys]) =>
     `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${keys.map(k =>
-      `<button class="arch-item" data-card="${esc(k)}"><span class="a-title">${esc(SHOW_CARDS[k].title)}</span><span class="${SHOW_CARDS[k].soon ? "a-soon" : "a-dates"}">${esc(SHOW_CARDS[k].dates)}</span><span class="a-foot"><span class="a-note">${esc(SHOW_CARDS[k].note || "")}</span>${SHOW_CARDS[k].image ? `<img src="${esc(sized(SHOW_CARDS[k].image, 100))}" alt="" loading="lazy">` : ""}</span></button>`).join("")}${'<span class="a-fill"></span>'.repeat((5 - keys.length % 5) % 5)}</div></div>`).join("");
+      `<button class="arch-item" data-card="${esc(k)}"><span class="a-title">${esc(SHOW_CARDS[k].title)}</span><span class="${SHOW_CARDS[k].soon ? "a-soon" : "a-dates"}">${esc(SHOW_CARDS[k].dates)}</span><span class="a-foot"><span class="a-note">${esc(SHOW_CARDS[k].note || "")}</span>${SHOW_CARDS[k].image ? `<img src="${esc(sized(SHOW_CARDS[k].image, 100))}" alt="" loading="lazy">` : ""}</span></button>`).join("")}${fillers(keys.length, "span", "a-fill")}</div></div>`).join("");
   document.querySelectorAll("#ex-archive .arch-item").forEach(b => b.addEventListener("click", () => openShowCard(b.dataset.card)));
 }
 // "archive:/eternal-flame" -> the old site's address for that page
@@ -946,6 +970,12 @@ function awardToast(a) {
   setTimeout(() => t.classList.remove("in"), 5200);
   setTimeout(() => t.remove(), 6200);
 }
+// empty cells that finish a row: enough for 5 columns on desktop, and for 2 on phones
+function fillers(n, tag, cls) {
+  const d = (5 - n % 5) % 5, m = n % 2;
+  return Array.from({ length: Math.max(d, m) }, (_, i) =>
+    `<${tag} class="${cls} fill${i < d ? " f5" : ""}${i < m ? " f2" : ""}" aria-hidden="true"></${tag}>`).join("");
+}
 function renderArtists() {
   const el = document.getElementById("artist-archive");
   if (!ARTISTS.length) { el.innerHTML = UC; return; }
@@ -976,7 +1006,7 @@ function renderArtists() {
   const cell = (p, title) => `<div class="aa-cell">${title ? `<small>${esc(title)}</small>` : ""}${p.instagram
     ? `<a href="https://www.instagram.com/${encodeURIComponent(p.instagram)}/" target="_blank" rel="noopener" data-ig="${esc(p.instagram.toLowerCase())}"${seen.has(p.instagram.toLowerCase()) ? ' class="seen"' : ""}>${esc(p.artist)}</a>`
     : `<span class="nolink">${esc(p.artist)}</span>`}</div>`;
-  const pad = n => '<div aria-hidden="true"></div>'.repeat((5 - n % 5) % 5);
+  const pad = n => fillers(n, "div", "");
   el.innerHTML = [...byYear].map(([y, keys]) => {
     // solo and two-person shows: show title in small type above each name
     const solos = keys.filter(k => SHOW_CARDS[k].kind !== "group exhibition");
