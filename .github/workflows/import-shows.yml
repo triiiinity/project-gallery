@@ -1,0 +1,25 @@
+# Runs the older-shows import when its script changes, then saves what it found to scripts/shows-raw.json.
+name: import shows
+on:
+  push:
+    branches: [main]
+    paths: ["scripts/import-shows.mjs"]
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save linkedom@0.18
+      - run: node scripts/import-shows.mjs || echo "import failed" >> scripts/import-shows.log
+      - name: save the result
+        run: |
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add scripts/shows-raw.json scripts/import-shows.log || true
+          git commit -m "Import the older show pages (2020-2022) into scripts/shows-raw.json" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
+          git push
