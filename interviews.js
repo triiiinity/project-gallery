@@ -158,10 +158,10 @@ const INTERVIEWS = [
     "p": "Here’s a collection of artists I love and some additional gamers/videos that are essential:"
    },
    {
-    "p": "EVH.INKFeng MengboSimone Nicola FilippoJesse MorsbergerXx_hann_art_xxCdbunkerEmma SternElliot Earls"
+    "p": "EVH.INK\nFeng Mengbo\nSimone Nicola Filippo\nJesse Morsberger\nXx_hann_art_xx\nCdbunker\nEmma Stern\nElliot Earls"
    },
    {
-    "p": "Bonus:Mang0Official Evo Moment #37The entire Unreal Tournament soundtrackWalshy - 2nd Halo 2 Montage - AmazingIReapZzstreets 1:12"
+    "p": "Bonus:\nMang0\nOfficial Evo Moment #37\nThe entire Unreal Tournament soundtrack\nWalshy - 2nd Halo 2 Montage - Amazing\nIReapZz\nstreets 1:12"
    },
    {
     "p": "Ryker Woodward: Nostalgic Signifiers From Digital Realms is live on Project Gallery through September 15th. You can see more of his work on his Instagram @artist_ryker."
@@ -186,7 +186,7 @@ const INTERVIEWS = [
     "p": "ADRIENNE GREENBLATT (b. 1995, Reading, UK) is a multidisciplinary artist, curator and poet based in Brooklyn, NY. They hold a Bachelor in Theatre and Dance with a concentration in Costumes from the University of Texas at Austin in 2017 and recently completed specialized training in bead making, glass blowing, kiln casting, revzen-i menkus, and glass fusing at UrbanGlass in New York."
    },
    {
-    "p": "Adrienne Greenblatt has performed in spaces such as M. Leblanc in Chicago, KAJE in Brooklyn, as well as No Gallery and Printed Matter St. Marks in NYC. They have also organized and curated off-site projects and exhibitions at spaces such as No Gallery and GernEnRegalia in NYC, as well as the beach at Fort Tilden. Adrienne’s glass work has been on view at The Hole at Weatherproof in Chicago, IL; Espace Maurice in Montreal, Canada; and Blade Study in NYC.They are an active member of the disability collective, Sick In Quarters."
+    "p": "Adrienne Greenblatt has performed in spaces such as M. Leblanc in Chicago, KAJE in Brooklyn, as well as No Gallery and Printed Matter St. Marks in NYC. They have also organized and curated off-site projects and exhibitions at spaces such as No Gallery and GernEnRegalia in NYC, as well as the beach at Fort Tilden. Adrienne’s glass work has been on view at The Hole at Weatherproof in Chicago, IL; Espace Maurice in Montreal, Canada; and Blade Study in NYC.\nThey are an active member of the disability collective, Sick In Quarters."
    },
    {
     "q": "Artist’s Statement:"
@@ -319,7 +319,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/884a3c97-4a16-41d4-929e-f172ab7bc13d/_Clown+World_%2C+2023%2C+24+x+36in%2C+Oil+on+masonite.jpg",
     "ratio": "2283/1568",
-    "caption": "Clown World, 2023.Oil on masonite, 24 x 36 in (60.96 x 91.44 cm)."
+    "caption": "Clown World, 2023.\nOil on masonite, 24 x 36 in (60.96 x 91.44 cm)."
    },
    {
     "p": "\"Clown world\" is a euphemism that the alt-right throws around a lot online and, as usual, they're falling off track and drawing wrong conclusions. So while it's a pity that a phrase which so aptly describes our consensus reality (or lack thereof) was coined by hiterlian numerologists, I will persist in using it. The Clown World exists, but it is not a tragedy born of racial admixture nor immigration, queer liberation nor abortion access— it is the inevitable result of a hyper-connected world in which the material ramifications of economics have dismantled long-standing systems of meaning and value."
@@ -339,12 +339,12 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/eef2a3b4-f8bc-43e1-a166-b7957c5e24d8/_Hallway%2C_+2021%2C+26+x+30in%2C+Oil+on+canvas.jpg",
     "ratio": "3436/3436",
-    "caption": "Hallway, 2021.Oil on canvas, 26 x 30 in (66.04 x 76.2 cm)."
+    "caption": "Hallway, 2021.\nOil on canvas, 26 x 30 in (66.04 x 76.2 cm)."
    },
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/5902b874-6d62-46b7-9fab-4790f676f957/_BBC+%28Big+Black+Colt%29%2C_+2022%2C+16+x+20in%2C+Oil+on+masonite.jpg",
     "ratio": "2862/2862",
-    "caption": "BBC (Big Black Colt), 2022.Oil on masonite, 16 x 20 in (40.64 x 50.8 cm)."
+    "caption": "BBC (Big Black Colt), 2022.\nOil on masonite, 16 x 20 in (40.64 x 50.8 cm)."
    },
    {
     "p": "At once, I'm not literally painting the digital, merely applying what ‘the digital’ has taught me about organizing thought within visual space. I'm painting about lost cultural history, the sublime, the banality of daily life, the subsumption of the real by the digital, the threat of terror, and above all human preoccupation with death and apocalypse; there's a sense of tension lurking just outside of the frame, perhaps it's something grotesque, surely some revelation is at hand— and yet, I'm also painting about beauty, nostalgia, and artifacts that I will never truly Know in the way that their makers did; masks, statues, dolls on a shelf, open fields, all of my own mental miasma, because it is frankly distasteful to fake universality."
@@ -378,7 +378,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/41f9a689-68ee-47f0-8219-cc09b24f2dd0/_Meat+Mask_%2C+2023%2C+24+x+30in%2C+Oil+on+masonite.jpg",
     "ratio": "3397/3397",
-    "caption": "Meat Mask, 2023.Oil on masonite, 24 x 30 in (60.96 x 76.2 cm)."
+    "caption": "Meat Mask, 2023.\nOil on masonite, 24 x 30 in (60.96 x 76.2 cm)."
    },
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/29cd67f9-14ea-4048-bb97-1eaee557c2ca/me+and+meathead.jpg",
@@ -459,7 +459,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/74509c65-9537-4719-a82b-e6f5a628b434/Headshot+PGV.jpg",
     "ratio": "5814/4743",
-    "caption": "Farah MohammadImage credit: Yekaterina Gyadu: @yekaterrrina and @artsymposia"
+    "caption": "Farah Mohammad\nImage credit: Yekaterina Gyadu: @yekaterrrina and @artsymposia"
    },
    {
     "p": "Farah Mohammad received her BA from Bennington College and her MFA from Columbia University. Her exhibition highlights include Half Gallery, International Print Center New York (IPCNY), The Jewish Museum, The Wallach Art Gallery, Field Projects, LeRoy Neiman Gallery, Chashama Gallery (NYC), Local Project Art Space (LIC, NY), and the Moss Art Center, Blacksburg, VA. She was the recipient of the LES Keyholder Residency (2021), The Elizabeth Foundation for the Arts Robert Blackburn Printmaking Award (2021), and the Lucas T. Carlson Grant at Columbia University (2020). Her recent solo exhibition was at Nyama Fine Art in NYC in 2022, and her work has been acquired for the permanent collection by the Baltimore Museum of Art. She is currently the Artist in Residence at Cornerstone Studios."
@@ -473,7 +473,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/35668fe3-3877-4bc2-9faa-c4ffd11c1879/Screen+Shot+2022-11-14+at+8.45.19+PM.png",
     "ratio": "1362/1640",
-    "caption": "Included in Time Won’t TellShahzia SikanderEmbark/Disembark III, 2004.Offset lithograph and screenprint.18 x 15 in (45.72 x 38.1).SoldCourtesy of The LeRoy Neiman Center for Print Studies."
+    "caption": "Included in Time Won’t Tell\nShahzia Sikander\nEmbark/Disembark III, 2004.\nOffset lithograph and screenprint.\n18 x 15 in (45.72 x 38.1).\nSold\nCourtesy of The LeRoy Neiman Center for Print Studies."
    },
    {
     "p": "In my art I often work with commonly spoken phrases and idioms. They seem to be a reflection of how our communities think. It also amuses me that for most commonly used phrases or proverbs, there is a saying that counters it. Similarly, when I play with challenging deeply held beliefs I am able to gather evidence that supports what is contrary to my beliefs. What is truth then, what is right and wrong?"
@@ -493,7 +493,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/6438e3b2-246b-4093-aa5e-0bd227a025e2/w125+held.jpg",
     "ratio": "3024/4032",
-    "caption": "Farah MohammadW125th | 25.5” X 19.5”| 2021 gouache and pencil on frosted mylar"
+    "caption": "Farah Mohammad\nW125th | 25.5” X 19.5”| 2021 gouache and pencil on frosted mylar"
    },
    {
     "p": "As an artist myself I am always trying to strike the balance between looking at art and making art. Each is important and transitioning between them feels hard but is totally worth it. Sometimes I have to coach myself out of my comfort zone when I feel afraid to share new work because good studio visits bring new information into my research. Knowing how vulnerable visits can feel, I know the importance of being attentive and respectful while talking to artists about their practice."
@@ -522,7 +522,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/4bd738fe-40e3-4d5d-a90a-e0dcb76d0688/Screen+Shot+2022-11-14+at+8.47.59+PM.png",
     "ratio": "954/1360",
-    "caption": "Included in Time Won’t TellTakuji HamanakaFour standing lights, 2021.Collaged woodcut.14.5 x 10.5 in (36.83 x 26.67 cm)."
+    "caption": "Included in Time Won’t Tell\nTakuji Hamanaka\nFour standing lights, 2021.\nCollaged woodcut.\n14.5 x 10.5 in (36.83 x 26.67 cm)."
    },
    {
     "p": "Time Won’t Tell displayed the recognition necessary for restoration."
@@ -655,7 +655,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/a5b3d7d1-b942-48b9-a80d-6fe580bab640/Saloni+Shah_The+English+Asthetic+Movement+Close+Up.jpg",
     "ratio": "1800/1200",
-    "caption": "Saloni Shah”The English Asthetic Movement” Close Up"
+    "caption": "Saloni Shah\n”The English Asthetic Movement” Close Up"
    },
    {
     "q": "Tell us more about your work in the show."
@@ -672,7 +672,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/ca8fbb00-32d4-407b-911d-137b134e6a92/Saloni+Shah_Chintz+to+Chintzy+Close+Up.jpg",
     "ratio": "1600/2400",
-    "caption": "Saloni Shah”Chintz to Chintzy” Close Up"
+    "caption": "Saloni Shah\n”Chintz to Chintzy” Close Up"
    },
    {
     "q": "Where are some of your favorite spaces that support contemporary art or design? Now that the art has an online presence, has that changed?"
@@ -1404,7 +1404,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/8c3de8cd-05ca-4de2-92c4-47d39f22a84f/image.jpg",
     "ratio": "2822/3604",
-    "caption": "Vintage, 202032”x 25 1/2”Medium: cut and pasted monochrome woodblock printed paper, mounted on museum board."
+    "caption": "Vintage, 2020\n32”x 25 1/2”\nMedium: cut and pasted monochrome woodblock printed paper, mounted on museum board."
    },
    {
     "p": "Takuji Hamanaka’s mosaic-inspired works on paper, multiple sections of monochrome color interlock within dimensional, polychrome compositions. Adapting the ‘Bokashi’ technique of woodblock printing to a contemporary practice, Hamanaka prints multiple papers in single-color gradients and arranges them onto paper in organic designs that call to mind lattices, prisms, and slopes. Color and its absence draw attention to the paper’s opacity, as well as more theoretical ideas of windows and grids, and the tension between nature and pure abstraction. Hamanaka was born in Hokkaido, Japan and lives and works in Brooklyn, New York. His works are included in the collections of the Johnson Museum of Art, Cornell, University, and Sumitomo Corporation, among others."
@@ -1424,7 +1424,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/e5be4e16-b1fd-40c3-bdba-a43e3f5c6cb2/image%281%29.jpg",
     "ratio": "2857/3640",
-    "caption": "Atmospheric Phenomenon, 202032”x 25 1/2”Medium: cut and pasted monochrome woodblock printed paper, mounted on museum board."
+    "caption": "Atmospheric Phenomenon, 2020\n32”x 25 1/2”\nMedium: cut and pasted monochrome woodblock printed paper, mounted on museum board."
    },
    {
     "q": "What are some references you draw upon in your work? Are there any themes in particular that you like to focus on when creating?"
@@ -1441,7 +1441,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/9ce5b4cb-aca6-4716-b1ef-405f4cbf80c6/image%282%29.jpg",
     "ratio": "2889/3676",
-    "caption": "Lights in the Northern Land, 202032”x 25 1/2”Medium: cut and pasted monochrome woodblock printed paper, mounted on museum board."
+    "caption": "Lights in the Northern Land, 2020\n32”x 25 1/2”\nMedium: cut and pasted monochrome woodblock printed paper, mounted on museum board."
    },
    {
     "q": "Who are some of your favorite artists? Or who has been inspirational recently?"
@@ -1603,12 +1603,12 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/d728c02a-cce4-41e9-94ab-9f6ac1d38a56/Screen+Shot+2021-10-26+at+8.02.17+PM.png",
     "ratio": "984/1212",
-    "caption": "“Note That Day” Acrylic on Canvas 20 x 16”"
+    "caption": "“Note That Day”\nAcrylic on Canvas 20 x 16”"
    },
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/0a0570a2-799f-4609-9847-fac8f2086a0d/Screen+Shot+2021-10-26+at+8.02.29+PM.png",
     "ratio": "936/1180",
-    "caption": "“Note That Night” Acrylic on Canvas 20 x16”"
+    "caption": "“Note That Night”\nAcrylic on Canvas 20 x16”"
    },
    {
     "q": "What are some references you draw upon in your work? Are there any themes in particular that you like to focus on when creating?"
@@ -1802,7 +1802,7 @@ const INTERVIEWS = [
   ],
   "blocks": [
    {
-    "p": "Keli Safia Maksud is a Kenyan-Tanzanian-Canadian-Muslim-Christian visual artist and writer based in New York. Concerned with histories of colonial encounters and its effects on memory, Maksud’s interdisciplinary practice favors the space of in-between identities and its threshold, and works towards destabilizing received histories in order to expose fictions of the state. Maksud’s earned her BFA in Painting from the Ontario College of Art and Design University, a Diploma in Art and Curatorial Studies at the New Centre for Research and Practice and an MFA in Visual Arts at Columbia University. Her work has shown at the Huxley-Parlour, Miriam Gallery, Bamako Biennial, National Museum of Contemporary Art - Seoul, and the Biennial of Contemporary Art Sesc_Videobrasil."
+    "p": "Keli Safia Maksud is a Kenyan-Tanzanian-Canadian-Muslim-Christian visual artist and writer based in New York. Concerned with histories of colonial encounters and its effects on memory, Maksud’s interdisciplinary practice favors the space of in-between identities and its threshold, and works towards destabilizing received histories in order to expose fictions of the state.\nMaksud’s earned her BFA in Painting from the Ontario College of Art and Design University, a Diploma in Art and Curatorial Studies at the New Centre for Research and Practice and an MFA in Visual Arts at Columbia University. Her work has shown at the Huxley-Parlour, Miriam Gallery, Bamako Biennial, National Museum of Contemporary Art - Seoul, and the Biennial of Contemporary Art Sesc_Videobrasil."
    },
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/4bfaac06-ff95-4597-b148-f78002cfe04b/01KeliSafiaMaksudAnthems.jpg",
@@ -2582,7 +2582,7 @@ const INTERVIEWS = [
     "p": "It’s like paint by numbers meets a giant sticker book. Kidding however it really is that basic. This past year I started experimenting more with an air brush to further push the illusion of light and I’m really enjoying the process. It adds a nice middle ground for the holographic stickers."
    },
    {
-    "p": "What are you working on at the moment?I’m working on a series of paintings and prints using landscape as a backdrop to play with liminal space and spectacle. The American Technological Sublime by David Nye has influenced the newer work as think about nostalgia, the every day and technology. (More below :)"
+    "p": "What are you working on at the moment?\nI’m working on a series of paintings and prints using landscape as a backdrop to play with liminal space and spectacle. The American Technological Sublime by David Nye has influenced the newer work as think about nostalgia, the every day and technology. (More below :)"
    },
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628974223938-GB3UOTG4GHRLQLMNH11L/4.jpg",
@@ -2726,7 +2726,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628973083615-ILIIULZD6UCS9UJRGAE2/dell_may_19-20.JPG",
     "ratio": "2076/3115",
-    "caption": "Where Late and Sweet Birds Sang, 2019.34 x 23 in (86.36 x 58.42). Screenprint."
+    "caption": "Where Late and Sweet Birds Sang, 2019.\n34 x 23 in (86.36 x 58.42).\nScreenprint."
    },
    {
     "p": "Earthlight, included with this exhibition, started as a maquette. There were two reasons for this: one, for the play and the reasons described above; two, I needed to actually see how the shadows looked in order to get the trompe-l’oeil correct."
@@ -2752,7 +2752,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628973163752-SXB9ROQP1FQZDGRMAFRU/the+trouble+twister.JPG",
     "ratio": "2500/3758",
-    "caption": "Trouble Twister, 2019.34 x 23 in (86.36 x 58.42).Screenprint."
+    "caption": "Trouble Twister, 2019.\n34 x 23 in (86.36 x 58.42).\nScreenprint."
    },
    {
     "p": "The Yupo translucent I often print on is like a sort of pristine frosted mylar. It’s smooth but not slick. It’s frosted but translucent. It shows every detail (and flaw) of the printing process. The translucent Yupo allows me to create a slight color glow around forms, either by printing color directly onto the back of the print, or by having a second sheet of paper and color behind it. The effect can be very subtle or fairly strong (but it is almost always difficult to photograph). I like to use it subtly enough that a viewer might feel uncertain they are actually seeing it. I tend to think of people today as “post-Albers:” generally aware that the presence of one color can make us “see” a second. I hope there are moments people expect to see a particular color effect, but that the effect is countered (or exaggerated) by the actual glow around a form."
@@ -2775,7 +2775,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628973238525-XKKPL02U096B7NR78X3Q/dell_may_19-6.JPG",
     "ratio": "2079/3119",
-    "caption": "The End of All Songs (b), 2019.34 x 23 in (86.36 x 58.42).Screenprint."
+    "caption": "The End of All Songs (b), 2019.\n34 x 23 in (86.36 x 58.42).\nScreenprint."
    },
    {
     "p": "In spite of how much a rely on the internet to look at stuff, I’d like to mention some physical spaces close to where I live in Texas. Big Medium, in Austin, has pretty consistently brought great activity and artists. MASS Gallery, an artist-run cooperative and also in Austin, has done the same. There have been so many shows I’ve seen at these two spaces that have introduced me to artists from outside of Texas that I might not have learned about. In San Antonio, Artpace is a world-class residency program and exhibition space. So many times, I’ve gone to talks there and been floored by the quality of work and thinking."
@@ -2981,7 +2981,7 @@ const INTERVIEWS = [
     "p": "Jasmine Murrell is a Brooklyn-based visual artist that employs several different mediums to create sculptures, painting, photography, performance, installations, and films that blur the line between history and mythology. Her works have been exhibited nationally and internationally for the past decade, in venues such as the Museum of Contemporary Art and Bronx Museum, Museum Contemporary Art Chicago, Whitney Museum, African-American Museum of Art, and International Museum of Photography and untraditional institutions. Works have been included in book MFON: Women Photographers of the African Diaspora and New York Times, Time, Hyperallergic, The Detroit Times and several other publications."
    },
    {
-    "p": "Can you tell us a bit about the process of making your work?Work in a nonlinear art-making process that expands over several years. There are certain overlapping subjects that touch me. I orchestrate an interdisciplinary experience that reflect my artist inquiries."
+    "p": "Can you tell us a bit about the process of making your work?\nWork in a nonlinear art-making process that expands over several years. There are certain overlapping subjects that touch me. I orchestrate an interdisciplinary experience that reflect my artist inquiries."
    },
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1628355205799-TX1G92WES6848QXXW936/4U8A2773.JPG",
@@ -3009,7 +3009,7 @@ const INTERVIEWS = [
     "q": "What are some references you draw upon in your work? Are there any themes in particular that you like to focus on when creating?"
    },
    {
-    "p": "I’m really drawn to the communication and collective memory of things, sites, and abstract forms. I question the hierarchy of different life forms. I think the centering of the human species as the nucleus of life is problematic. For example, if machines have consciousness will that be life? And I ask, what is poison and what is medicine? Henrietta Lack cells came from cancerous tumors, most would think of as poison, yet those cells are living indefinitely helping to save lives. That is ironic, so what is life? And, who has authority to decide what life matters.Where are some of your favorite spaces that support contemporary art or design? Now that the art has an online presence has that changed?"
+    "p": "I’m really drawn to the communication and collective memory of things, sites, and abstract forms. I question the hierarchy of different life forms. I think the centering of the human species as the nucleus of life is problematic. For example, if machines have consciousness will that be life? And I ask, what is poison and what is medicine? Henrietta Lack cells came from cancerous tumors, most would think of as poison, yet those cells are living indefinitely helping to save lives. That is ironic, so what is life? And, who has authority to decide what life matters.\nWhere are some of your favorite spaces that support contemporary art or design? Now that the art has an online presence has that changed?"
    },
    {
     "p": "At the moment I am documenting some of my favorite spaces like The women who Heal, Theater to cure fear located in Guatemala. Indigenous women use theater to heal their community and critique the role of women in patriarchal communities. Dabls Mbad African Bead Museum in Detroit Michigan. Beads have always been a small but powerful symbolic treasure in African Diasporas."
@@ -3064,7 +3064,7 @@ const INTERVIEWS = [
    {
     "img": "https://images.squarespace-cdn.com/content/v1/5f6628bb10482f4a96fae8ae/1627956481479-1UX8JVDMFBWJZKFV8YLV/02_Gyun_Sowecanbenear.jpg",
     "ratio": "2500/1818",
-    "caption": "Gyun Hur: So we can be near, 2021, hand-shredded silk flowers, vinyl print, mirror, hand-blown glass, and river waterCourtesy of the artist and Wave Hill. Photo: Stefan Hagen"
+    "caption": "Gyun Hur: So we can be near, 2021, hand-shredded silk flowers, vinyl print, mirror, hand-blown glass, and river water\nCourtesy of the artist and Wave Hill. Photo: Stefan Hagen"
    },
    {
     "q": "What are you working on at the moment?"
