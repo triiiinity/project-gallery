@@ -459,6 +459,27 @@ body.grid-on #bg-grid { opacity: 1; }
 header, main, footer { position: relative; z-index: 1; }
 @media (max-width: 720px) { #bg-grid { background-size: calc(100vw / 2) 46px; } }
 
+/* interviews */
+.iv-intro { font-size: 13px; color: var(--muted); max-width: 520px; margin: -8px 0 40px; line-height: 1.6; text-align: justify; }
+.iv-preview-note { font-size: 11px; color: var(--accent); margin: 0 0 18px; }
+.iv-item .a-title { font-size: 15px; }
+.iv-read { max-width: 680px; }
+.iv-back { font-size: 12px; color: var(--muted); display: inline-block; margin-bottom: 26px; }
+.iv-back:hover { color: var(--accent); }
+.iv-read h1 { margin-bottom: 6px; }
+.iv-meta { font-size: 12px; color: var(--muted); margin: 0 0 30px; }
+.iv-meta a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #b8b8b8; }
+.iv-meta a:hover { color: var(--accent); }
+.iv-body p { white-space: pre-line; margin: 0 0 16px; line-height: 1.65; text-align: justify; text-justify: inter-word; }
+.iv-body p.q { color: var(--muted); margin-top: 30px; text-align: left; }
+.iv-body figure { margin: 34px 0; }
+.iv-body figure img { display: block; max-width: 100%; max-height: 78vh; width: auto; cursor: zoom-in; }
+.iv-body figcaption { white-space: pre-line; font-size: 11px; color: var(--muted); margin-top: 8px; }
+.iv-end { margin-top: 48px; padding-top: 18px; border-top: 1px solid #dedede; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; }
+.iv-end a:hover { color: var(--accent); }
+.construction.door { cursor: pointer; }
+.construction.door:hover { color: var(--accent); }
+
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
 footer a:hover { color: var(--accent); }
@@ -527,6 +548,7 @@ footer a:hover { color: var(--accent); }
     <a href="/" data-view="home">home</a>
     <a href="/exhibitions" data-view="exhibitions">exhibitions</a>
     <a href="/artists" data-view="artists">artists</a>
+    <a href="/interviews" data-view="interviews">interviews</a>
     <a href="/about" data-view="about">about</a>
     <a href="/guestbook" data-view="guestbook">guest book</a>
     <a href="/contact" data-view="contact">contact</a>
@@ -603,6 +625,11 @@ footer a:hover { color: var(--accent); }
     <h1 class="page-title" id="grant-title">artist grant</h1>
     <div class="prose" id="grant-intro"></div>
     <div id="grant-form" class="grant-form"></div>
+  </section>
+
+  <!-- INTERVIEWS (not public yet: "under construction" opens the preview) -->
+  <section class="view" id="view-interviews">
+    <div id="iv-root"></div>
   </section>
 
   <!-- ABOUT -->
@@ -1626,6 +1653,76 @@ function renderGrant() {
   document.body.appendChild(sc);
 }
 
+/* interviews: the old spotlights posts, kept as an archive. Not public yet: the page says
+   "under construction", and clicking those words opens the preview (remembered in this browser). */
+const IV_PREVIEW = "pg-interviews-preview";
+let ivLoading = null;
+function loadInterviews() {
+  if (window.INTERVIEWS || typeof INTERVIEWS !== "undefined") return Promise.resolve();
+  if (!ivLoading) ivLoading = new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = "/interviews.js"; sc.onload = res; sc.onerror = rej; document.head.appendChild(sc); });
+  return ivLoading;
+}
+function ivFirstImage(iv) { const b = iv.blocks.find(x => x.img); return b ? b.img : ""; }
+// the show an interview belongs to: by its tags, or by the artist's name in the artist archive
+function ivShow(iv) {
+  const norm = x => String(x).toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9]+/g, " ").trim();      // "Time Wont Tell" = "Time Won't Tell"
+  const tags = iv.tags.map(norm).filter(g => g.length > 3 && !/interview|grant|solo exhibition/.test(g));
+  let key = Object.keys(SHOW_CARDS).find(k => { const t = norm(SHOW_CARDS[k].title); return tags.some(g => t === g || t.includes(g) || g.includes(norm(SHOW_CARDS[k].title.split(":")[0]))); });
+  if (!key) {     // the artist's show nearest the interview's date
+    const name = iv.title.split(":")[0].trim().toLowerCase(), y = Number((iv.date || "").slice(0, 4));
+    const shows = ARTISTS.filter(r => r.artist.replace(/\s*\(.*\)$/, "").toLowerCase() === name).map(r => r.show).filter(k => SHOW_CARDS[k]);
+    shows.sort((a, b) => Math.abs(Number(SHOW_CARDS[a].year) - y) - Math.abs(Number(SHOW_CARDS[b].year) - y));
+    key = shows[0];
+  }
+  return key && SHOW_CARDS[key] ? key : "";
+}
+function ivDate(d) { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ""); return m ? `${m[2]}.${m[3]}.${m[1]}` : ""; }
+function renderInterviews(slug) {
+  const root = document.getElementById("iv-root");
+  let open = false; try { open = localStorage.getItem(IV_PREVIEW) === "1"; } catch (e) {}
+  if (!open) {
+    root.innerHTML = `<h1 class="page-title">interviews</h1><p class="construction door" id="iv-door" role="button" tabindex="0">under construction</p>`;
+    const door = document.getElementById("iv-door");
+    const unlock = () => { try { localStorage.setItem(IV_PREVIEW, "1"); } catch (e) {} renderInterviews(slug); };
+    door.addEventListener("click", unlock);
+    door.addEventListener("keydown", e => { if (e.key === "Enter") unlock(); });
+    return;
+  }
+  root.innerHTML = `<h1 class="page-title">interviews</h1><p class="iv-intro">loading…</p>`;
+  loadInterviews().then(() => slug ? ivReader(root, slug) : ivIndex(root)).catch(() => { root.innerHTML = `<h1 class="page-title">interviews</h1>` + UC; });
+}
+function ivIndex(root) {
+  const years = new Map();
+  INTERVIEWS.forEach(iv => { const y = (iv.date || "").slice(0, 4) || "undated"; if (!years.has(y)) years.set(y, []); years.get(y).push(iv); });
+  const ys = [...years.keys()];
+  root.innerHTML = `<p class="iv-preview-note">preview: only you can see this page. the public still sees "under construction".</p>
+    <h1 class="page-title">interviews</h1>
+    <p class="iv-intro">from the archive, ${ys[ys.length - 1]}–${ys[0]}. conversations, statements and features with the artists of project gallery's first years, kept as they were written.</p>
+    <div id="iv-list">${ys.map(y => `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${years.get(y).map(iv => {
+      const k = ivShow(iv), img = ivFirstImage(iv);
+      return `<a class="arch-item iv-item" href="/interviews/${esc(iv.slug)}"><span class="a-title">${esc(iv.title)}</span><span class="a-dates">${esc(ivDate(iv.date))}</span><span class="a-foot"><span class="a-note">${k ? esc(SHOW_CARDS[k].title) : ""}</span>${img ? `<img src="${esc(sized(img, 100))}" alt="" loading="lazy">` : ""}</span></a>`;
+    }).join("")}${fillers(years.get(y).length, "span", "a-fill")}</div></div>`).join("")}</div>`;
+}
+function ivReader(root, slug) {
+  const i = INTERVIEWS.findIndex(x => x.slug === slug);
+  if (i < 0) { ivIndex(root); return; }
+  const iv = INTERVIEWS[i], k = ivShow(iv), card = k && SHOW_CARDS[k];
+  const showLink = card ? (card.show ? `<a href="/${esc(card.show)}">${esc(card.title)}</a>` : `<a href="${esc(archiveLink(card.link))}" target="_blank" rel="noopener">${esc(card.title)}</a>`) : "";
+  const newer = INTERVIEWS[i - 1], older = INTERVIEWS[i + 1];
+  root.innerHTML = `<article class="iv-read">
+    <a class="iv-back" href="/interviews">← interviews</a>
+    <h1 class="page-title">${esc(iv.title)}</h1>
+    <p class="iv-meta">from the archive, ${esc(ivDate(iv.date))}${showLink ? ` · ${showLink}` : ""}</p>
+    <div class="iv-body">${iv.blocks.map((b, n) => b.img
+      ? `<figure><img src="${esc(sized(b.img, 1500))}" alt="" loading="lazy" data-n="${n}">${b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : ""}</figure>`
+      : b.q ? `<p class="q">${esc(b.q)}</p>` : `<p>${esc(b.p)}</p>`).join("")}</div>
+    <div class="iv-end"><span>${older ? `<a href="/interviews/${esc(older.slug)}">← ${esc(older.title)}</a>` : ""}</span><span>${newer ? `<a href="/interviews/${esc(newer.slug)}">${esc(newer.title)} →</a>` : ""}</span></div>
+  </article>`;
+  // pictures open in the zoom view
+  const pics = iv.blocks.filter(b => b.img).map(b => ({ image: b.img, title: b.caption || iv.title, artist: iv.title, year: "", medium: "", size: "" }));
+  root.querySelectorAll(".iv-body img").forEach((im, j) => im.addEventListener("click", () => { currentWorks = pics; openLightbox(j); }));
+}
+
 /* guest book (draft: stored in this browser until it is connected to the site's database) */
 const GB_STORE = "pg-guestbook-draft";
 const gbPad = document.getElementById("gb-pad"), gbCtx = gbPad.getContext("2d");
@@ -1926,7 +2023,7 @@ function gridCloud(x, y) {
 try { const n = Number(localStorage.getItem("pg-grid-clicks")) || 0; if (n >= 10 && n < 15) document.body.classList.add("grid-on"); } catch (err) {}
 
 /* routing */
-const VIEWS = ["home", "exhibitions", "artists", "grant", "about", "guestbook", "contact", "collection", "guestbook-review"];
+const VIEWS = ["home", "exhibitions", "artists", "interviews", "grant", "about", "guestbook", "contact", "collection", "guestbook-review"];
 const header = document.getElementById("top");
 const burger = document.getElementById("burger");
 
@@ -1937,6 +2034,7 @@ function routeName(href) {
   if (s === null) return null;
   s = s.split(/[?#]/)[0].replace(/\/$/, "");
   if (s === "") return "home";
+  if (/^interviews\/[\w-]+$/.test(s)) return s;            // one interview: /interviews/farah-mohammad
   return VIEWS.includes(s) || SHOWS[s] ? s : null;
 }
 function currentRoute() { return routeName(location.pathname) || "home"; }
@@ -1974,7 +2072,7 @@ window.addEventListener("popstate", show);
 
 function show() {
   const h = currentRoute();
-  let name = VIEWS.includes(h) ? h : "home";
+  let name = VIEWS.includes(h) ? h : h.startsWith("interviews/") ? "interviews" : "home";
   if (SHOWS[h]) { name = "show"; renderShow(h);
     if (pendingWork !== null) { const n = pendingWork; pendingWork = null; requestAnimationFrame(() => {
       const el = document.getElementById("work-" + n); if (!el) return;
@@ -1986,6 +2084,7 @@ function show() {
   if (name === "exhibitions") markOpened();
   if (name === "artists") startPeek(); else clearInterval(peekTimer);
   if (name === "guestbook") renderGuestbook();
+  if (name === "interviews") renderInterviews(h.split("/")[1] || "");
   if (name === "guestbook-review") renderReview();
   if (name === "home" && lastView !== "home") typeLogo();
   if (name === "home" && HOME_STYLE === "cloud") startCloud(); else stopCloud();
