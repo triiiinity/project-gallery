@@ -1620,6 +1620,78 @@ const SHOW_CARDS = {
   }
 };
 
+// AWARD COLORS: every award is a 3 x 3 grid of colors picked from works in the 2024–2026 shows.
+// Each line is [color, work title, show]. Change any color here and the award changes everywhere.
+// Colors are listed lightest first, filling the grid left to right, top to bottom.
+const AWARD_COLORS = {
+  closer: [   // a closer look: blues
+    ["#b6e7ef", "water mandala", "tao-lin"],
+    ["#aeb0ca", "blue mandala", "tao-lin"],
+    ["#93adcf", "mandala 66", "tao-lin"],
+    ["#92b0cc", "mandala 59", "tao-lin"],
+    ["#6ec7ed", "Your First View of The Outside World", "ryker-woodward"],
+    ["#5471ad", "Material test", "tdreade"],
+    ["#2d568a", "Soft suggestion", "tdreade"],
+    ["#344874", "Radar", "ryker-woodward"],
+    ["#2d4d96", "Halo 3 Game Lobby", "ryker-woodward"]
+  ],
+  collector: [   // the collector: pinks
+    ["#f5cfca", "To the moon", "gitte-maria-moller"],
+    ["#eecbd6", "Recess", "mike-nudelman"],
+    ["#efc9b4", "Ghost girls", "gitte-maria-moller"],
+    ["#fdaccf", "Apology", "gitte-maria-moller"],
+    ["#d3aed9", "The End", "gitte-maria-moller"],
+    ["#d19592", "Resting", "person-place-thing"],
+    ["#d96677", "Lost glove, Coney Island", "gitte-maria-moller"],
+    ["#cd6a77", "Vision of Forgiveness", "gitte-maria-moller"],
+    ["#b34975", "Heavy misfortunes", "tdreade"]
+  ],
+  grid: [   // behind the walls: wall greys
+    ["#d5d5d4", "Lonesome and Empty", "mike-nudelman"],
+    ["#b1b3b0", "Long Hot London", "person-place-thing"],
+    ["#b1acb1", "Chamber 0013", "gitte-maria-moller"],
+    ["#afb1ac", "disc mandala", "tao-lin"],
+    ["#b0b1b3", "Dusky Dolphin", "mike-nudelman"],
+    ["#9ca4ab", "Make Me a Moon 23", "mike-nudelman"],
+    ["#918f92", "Spit", "mike-nudelman"],
+    ["#8b9392", "Cavity", "person-place-thing"],
+    ["#787687", "Fall Portrait", "gitte-maria-moller"]
+  ],
+  gridexplorer: [   // grid explorer: greens
+    ["#cee7d7", "circle mandala", "tao-lin"],
+    ["#b8d0a8", "New York City Fairy Garden", "gitte-maria-moller"],
+    ["#acc98b", "School", "ryker-woodward"],
+    ["#95c48e", "untitled 7 (fireemblem0000)", "lumierebelge"],
+    ["#6ec8b8", "Molly", "person-place-thing"],
+    ["#75a772", "Zipped", "mike-nudelman"],
+    ["#709134", "Dust bunny", "gitte-maria-moller"],
+    ["#4c892d", "An Amorous Flight", "person-place-thing"],
+    ["#036b08", "New management", "tdreade"]
+  ],
+  doors: [   // opened every door: warm earth
+    ["#eac895", "Sacroilitis", "person-place-thing"],
+    ["#f4b48d", "Wounds without cause (work lunch)", "tdreade"],
+    ["#cdb48d", "Split Screen Capture The Flag", "ryker-woodward"],
+    ["#f5902e", "Spice Orange Gamecube Controller", "ryker-woodward"],
+    ["#d89269", "untitled 14 (2)", "lumierebelge"],
+    ["#d18b6f", "Running away forever", "gitte-maria-moller"],
+    ["#f85001", "The typical girl gets the typical boy", "tdreade"],
+    ["#ae714c", "Content crisis", "tdreade"],
+    ["#a9792b", "Neil at Sunset", "person-place-thing"]
+  ],
+  explorer: [   // the explorer: a little of everything
+    ["#eed8ad", "Goes the Other Way", "mike-nudelman"],
+    ["#e9c902", "The best way to appreciate your job is to imagine yourself without one", "tdreade"],
+    ["#ccb48c", "Tentful", "person-place-thing"],
+    ["#91adb0", "Clubhouse (you don’t love me)", "gitte-maria-moller"],
+    ["#ae372b", "Emulation windows - Vimm’s Lair / Dolphin", "ryker-woodward"],
+    ["#8e4d32", "Error12-Not Enough Memory", "person-place-thing"],
+    ["#930602", "Authority over creation", "tdreade"],
+    ["#04514e", "Pushy Passion", "gitte-maria-moller"],
+    ["#2f4c2c", "Blood Gulch", "ryker-woodward"]
+  ]
+};
+
 // THE TICKER: pictures sliding slowly across the exhibitions page.
 // card: which show card it opens (from SHOW_CARDS). Leave "" until the show has a card.
 const TICKER = [
