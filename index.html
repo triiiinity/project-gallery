@@ -461,7 +461,10 @@ header, main, footer { position: relative; z-index: 1; }
 
 /* interviews */
 .iv-intro { font-size: 13px; color: var(--muted); max-width: 520px; margin: -8px 0 40px; line-height: 1.6; text-align: justify; }
-#iv-list .arch-year > span { padding: 18px 0; border-right: 1px solid #dedede; }
+/* the year column on the left is mirrored by an empty column on the right, so the table sits evenly between two lines */
+#iv-list .arch-year { grid-template-columns: 110px minmax(0, 1fr) 110px; padding-right: var(--gutter); }
+#iv-list .arch-year::after { content: ""; border-left: 1px solid #dedede; }
+#iv-list .arch-year > span { padding: 18px 20px 0 0; border-right: 1px solid #dedede; }
 #iv-list .arch-items { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 #iv-list .iv-item, #iv-list .iv-fill { grid-column: span 2; }
 .iv-item { aspect-ratio: auto; min-height: 200px; flex-direction: row; align-items: flex-start; gap: 18px; padding: 20px 22px; text-decoration: none; }
@@ -521,7 +524,9 @@ footer a:hover { color: var(--accent); }
   #iv-list .arch-items { grid-template-columns: 1fr; }
   #iv-list .iv-item { grid-column: auto; }
   #iv-list .iv-fill { display: none; }
-  #iv-list .arch-year > span { border-right: 0; }
+  #iv-list .arch-year > span { border-right: 0; padding: 18px 0 0; }
+  #iv-list .arch-year { grid-template-columns: 1fr; padding-right: var(--gutter); }
+  #iv-list .arch-year::after { display: none; }
   #ex-archive .arch-year > span, .aa-year > span { border-right: 0; }
   .arch-items, .aa-grid { border-left: 1px solid #dedede; border-right: 1px solid #dedede; }
   .aa-peek { gap: 8px; margin-top: 40px; }
