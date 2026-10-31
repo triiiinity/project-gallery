@@ -226,6 +226,16 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .tag:hover { color: var(--tag, var(--accent)); }
 .tag.on { color: var(--tag, var(--accent)); }
 .collection-note { margin: 0 0 36px; font-size: 11px; }
+.take-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #b8b8b8; cursor: pointer; }
+.take-btn:hover { color: var(--accent); text-decoration-color: currentColor; }
+.collection-note:has(+ .take-box:not([hidden])) { margin-bottom: 14px; }
+.take-box { max-width: 520px; margin: 0 0 36px; padding: 16px 18px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); font-size: 12px; line-height: 1.55; display: grid; gap: 10px; }
+.take-box p { margin: 0; text-align: justify; }
+.take-box .take-row { display: flex; gap: 8px; align-items: center; }
+.take-box input { flex: 1; min-width: 0; font: inherit; font-size: 11px; color: var(--muted); border: 0; border-bottom: 1px solid #dedede; padding: 4px 0; background: transparent; }
+.take-box .enter { padding: 6px 14px; font-size: 12px; white-space: nowrap; }
+.take-box .take-no { background: none; border: 0; font: inherit; font-size: 12px; color: var(--muted); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.take-box .take-no:hover { color: var(--accent); }
 .collection { columns: 4 220px; column-gap: 28px; }
 .c-item { break-inside: avoid; margin: 0 0 36px; font-size: 12px; line-height: 1.5; }
 .c-item img { width: 100%; display: block; margin-bottom: 8px; cursor: zoom-in; }
@@ -495,6 +505,13 @@ header, main, footer { position: relative; z-index: 1; }
 .iv-end { margin-top: 48px; padding-top: 18px; border-top: 1px solid #dedede; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; }
 .iv-end a:hover { color: var(--accent); }
 
+/* page not found */
+.nf p { margin: 0 0 16px; }
+.nf-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 26px !important; }
+.nf-links a, .nf-old a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #b8b8b8; }
+.nf-links a:hover, .nf-old a:hover { color: var(--accent); text-decoration-color: currentColor; }
+.nf-old { font-size: 12px; color: var(--muted); margin-top: 30px !important; }
+
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
 footer a:hover { color: var(--accent); }
@@ -700,13 +717,24 @@ footer a:hover { color: var(--accent); }
     <div class="gr-list" id="gr-list"></div>
   </section>
 
+  <!-- PAGE NOT FOUND -->
+  <section class="view" id="view-notfound">
+    <h1 class="page-title">page not found</h1>
+    <div class="prose nf">
+      <p>this page doesn't exist, or it moved when project gallery got its new home.</p>
+      <p class="nf-links"><a href="/">home</a> <a href="/exhibitions">exhibitions</a> <a href="/artists">artists</a> <a href="/interviews">interviews</a> <a href="/contact">contact</a></p>
+      <p class="nf-old">looking for an older page? <a id="nf-archive" href="https://archive.project-gallery.com" target="_blank" rel="noopener">try the archive ↗</a></p>
+    </div>
+  </section>
+
   <!-- MY COLLECTION (saved in each visitor's own browser) -->
   <section class="view" id="view-collection">
     <div class="coll-head"><h1 class="page-title">my collection</h1></div>
     <div class="award-shelf" id="award-shelf" aria-label="your awards"></div>
     <div class="tags" id="collection-tags"></div>
     <div class="salon" id="salon" aria-label="your saved works, shown at their real relative sizes"></div>
-    <p class="construction collection-note">kept in this browser, on this device</p>
+    <p class="construction collection-note">kept in this browser, on this device · <button class="take-btn" id="take-btn" type="button">take my collection with me</button></p>
+    <div class="take-box" id="take-box" hidden></div>
     <div class="collection" id="collection"></div>
   </section>
 
@@ -1263,6 +1291,65 @@ function toggleSaved(w) {
   setSaved(list);
   refreshSaveButtons();
   if (list.length) giveAward("collector");
+}
+/* take my collection with me: a private link that carries your saved works, awards and opened shows
+   to another browser. Nothing is stored anywhere; everything is inside the link itself. */
+function packCollection() {
+  const c = {};
+  getSaved().forEach(x => { const [k, i] = String(x.id).split(":"); if (SHOWS[k] && i !== undefined) (c[k] = c[k] || []).push(Number(i)); });
+  let d = []; try { d = JSON.parse(localStorage.getItem(DOORS)) || []; } catch (e) {}
+  const data = { v: 1, c, a: Object.keys(getAwards()).filter(id => AWARD_LIST[id]), d };
+  const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return location.origin + "/collection#take=" + b64;
+}
+function unpackCollection(code) {
+  try { return JSON.parse(decodeURIComponent(escape(atob(code.replace(/-/g, "+").replace(/_/g, "/"))))); } catch (e) { return null; }
+}
+function takeBox(html) { const box = document.getElementById("take-box"); box.innerHTML = html; box.hidden = !html; return box; }
+document.getElementById("take-btn").addEventListener("click", () => {
+  const box = document.getElementById("take-box");
+  if (!box.hidden) { takeBox(""); return; }
+  const n = getSaved().length, a = Object.keys(getAwards()).length;
+  if (!n && !a) { takeBox(`<p>nothing to take yet. save a work with + on any show, or find an award, and it will be here.</p>`); return; }
+  const link = packCollection();
+  takeBox(`<p>this link carries your ${n} saved work${n === 1 ? "" : "s"} and ${a} award${a === 1 ? "" : "s"}. open it on another phone or computer and they'll appear there too. nothing is kept on our side, it's all inside the link, so anyone you send it to can add your collection as well.</p>
+    <div class="take-row"><input id="take-link" readonly value="${esc(link)}" aria-label="your collection link"><button class="enter" id="take-copy" type="button">copy link</button></div>`);
+  const input = document.getElementById("take-link");
+  input.addEventListener("focus", () => input.select());
+  document.getElementById("take-copy").addEventListener("click", e => {
+    const done = () => { e.target.textContent = "copied"; setTimeout(() => e.target.textContent = "copy link", 2000); };
+    if (navigator.clipboard) navigator.clipboard.writeText(link).then(done, () => { input.select(); document.execCommand("copy"); done(); });
+    else { input.select(); document.execCommand("copy"); done(); }
+  });
+});
+// arriving with a collection link: offer to add what it carries
+function receiveCollection() {
+  const m = /^#take=([\w-]+)/.exec(location.hash); if (!m) return;
+  const data = unpackCollection(m[1]);
+  history.replaceState(null, "", "/collection");
+  if (!data || !data.c) return;
+  const ids = Object.entries(data.c).flatMap(([k, list]) => SHOWS[k] ? list.filter(i => SHOWS[k].works[i]).map(i => k + ":" + i) : []);
+  const awards = (data.a || []).filter(id => AWARD_LIST[id]);
+  const have = new Set(getSaved().map(x => x.id)), got = getAwards();
+  const newWorks = ids.filter(id => !have.has(id)), newAwards = awards.filter(id => !got[id]);
+  if (!newWorks.length && !newAwards.length) { takeBox(`<p>everything in that link is already in your collection.</p>`); return; }
+  takeBox(`<p>this link brings ${newWorks.length} work${newWorks.length === 1 ? "" : "s"} and ${newAwards.length} award${newAwards.length === 1 ? "" : "s"} to this browser. add them to your collection?</p>
+    <div class="take-row"><button class="enter" id="take-yes" type="button">add them</button><button class="take-no" id="take-no" type="button">no thanks</button></div>`);
+  document.getElementById("take-no").addEventListener("click", () => takeBox(""));
+  document.getElementById("take-yes").addEventListener("click", () => {
+    const list = getSaved();
+    newWorks.forEach(id => {
+      const [k, i] = id.split(":"), sh = SHOWS[k], w = sh.works[Number(i)];
+      list.push({ id, image: w.image, title: w.title, year: w.year, medium: w.medium, size: w.size, artist: w.artist || sh.artist, showTitle: sh.title, link: "/" + k, ratio: w.ratio });
+    });
+    setSaved(list);
+    const g = getAwards(); newAwards.forEach(id => { g[id] = Date.now(); });
+    try { localStorage.setItem(AWARDS, JSON.stringify(g)); } catch (e) {}
+    let d = []; try { d = JSON.parse(localStorage.getItem(DOORS)) || []; } catch (e) {}
+    try { localStorage.setItem(DOORS, JSON.stringify([...new Set([...d, ...(data.d || [])])])); } catch (e) {}
+    takeBox(`<p>added. welcome back.</p>`); setTimeout(() => takeBox(""), 3000);
+    renderCollection(); refreshSaveButtons();
+  });
 }
 function refreshSaveButtons() {
   document.querySelectorAll(".save[data-save]").forEach(b => {
@@ -2047,7 +2134,7 @@ function gridCloud(x, y) {
 try { const n = Number(localStorage.getItem("pg-grid-clicks")) || 0; if (n >= 10 && n < 15) document.body.classList.add("grid-on"); } catch (err) {}
 
 /* routing */
-const VIEWS = ["home", "exhibitions", "artists", "interviews", "grant", "about", "guestbook", "contact", "collection", "guestbook-review"];
+const VIEWS = ["home", "exhibitions", "artists", "interviews", "notfound", "grant", "about", "guestbook", "contact", "collection", "guestbook-review"];
 const header = document.getElementById("top");
 const burger = document.getElementById("burger");
 
@@ -2061,7 +2148,7 @@ function routeName(href) {
   if (/^interviews\/[\w-]+$/.test(s)) return s;            // one interview: /interviews/farah-mohammad
   return VIEWS.includes(s) || SHOWS[s] ? s : null;
 }
-function currentRoute() { return routeName(location.pathname) || "home"; }
+function currentRoute() { const p = location.pathname.replace(/\/+$/, ""); return p === "" ? "home" : routeName(p) || "notfound"; }
 function go(name) {
   const path = name === "home" ? "/" : "/" + name;
   if (location.pathname !== path) history.pushState(null, "", path);
@@ -2084,8 +2171,14 @@ window.addEventListener("popstate", show);
   if (fromHash && location.pathname === "/") { history.replaceState(null, "", fromHash === "home" ? "/" : "/" + fromHash); return; }
   const path = location.pathname.replace(/^\/|\/$/g, "");
   if (!path || routeName("/" + path)) return;
+  // old spotlights posts now live under /interviews
+  const spot = /^spotlights(?:\/([^/?#]+))?/.exec(path);
+  if (spot) { history.replaceState(null, "", spot[1] && !/^(category|tag)$/.test(spot[1]) ? "/interviews/" + spot[1] : "/interviews"); return; }
+  const renamed = { "artist-archive": "artists", "about-1": "about", "contact-1": "contact", "exhibitions-1": "exhibitions", "1exhibitions-void": "exhibitions" };
+  if (renamed[path]) { history.replaceState(null, "", "/" + renamed[path]); return; }
   const archive = SITE.archive.replace(/\/$/, "");
-  const isOld = path.startsWith("s/") || Object.values(SHOW_CARDS).some(c => c.link === "archive:/" + path);
+  const oldPages = ["editions", "purchasing-artwork", "curators", "cart"];
+  const isOld = path.startsWith("s/") || oldPages.includes(path) || Object.values(SHOW_CARDS).some(c => c.link === "archive:/" + path);
   // guard: if the archive sends people straight back here, stop instead of bouncing between the two
   let recent = 0; try { recent = Number(sessionStorage.getItem("pg-bounce:" + path)) || 0; } catch (e) {}
   if (isOld && new URL(archive).host !== location.host && Date.now() - recent > 15000) {
@@ -2096,7 +2189,7 @@ window.addEventListener("popstate", show);
 
 function show() {
   const h = currentRoute();
-  let name = VIEWS.includes(h) ? h : h.startsWith("interviews/") ? "interviews" : "home";
+  let name = VIEWS.includes(h) ? h : h.startsWith("interviews/") ? "interviews" : "notfound";
   if (SHOWS[h]) { name = "show"; renderShow(h);
     if (pendingWork !== null) { const n = pendingWork; pendingWork = null; requestAnimationFrame(() => {
       const el = document.getElementById("work-" + n); if (!el) return;
@@ -2109,6 +2202,8 @@ function show() {
   if (name === "artists") startPeek(); else clearInterval(peekTimer);
   if (name === "guestbook") renderGuestbook();
   if (name === "interviews") renderInterviews(h.split("/")[1] || "");
+  if (name === "notfound") document.getElementById("nf-archive").href = SITE.archive.replace(/\/$/, "") + location.pathname;
+  if (name === "collection") receiveCollection();
   if (name === "guestbook-review") renderReview();
   if (name === "home" && lastView !== "home") typeLogo();
   if (name === "home" && HOME_STYLE === "cloud") startCloud(); else stopCloud();
