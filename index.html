@@ -124,6 +124,9 @@ details .detail-body p { margin: 0 0 10px; }
 .work-image:hover .bubble, .bubble:focus-visible { opacity: 1; transform: none; }
 .bubble:hover { box-shadow: 0 0 14px 2px rgba(0, 0, 0, 0.35); }
 @media (hover: none) { .bubble { opacity: 1; transform: none; } }
+.work-image.hinting .bubble { opacity: 1; transform: none; transition: opacity .9s ease, transform .9s ease, box-shadow .2s; }
+.work-image.hinting .bubble:nth-child(2) { transition-delay: .12s; } .work-image.hinting .bubble:nth-child(3) { transition-delay: .24s; }
+.work-image.hinting .bubble:nth-child(4) { transition-delay: .36s; } .work-image.hinting .bubble:nth-child(n+5) { transition-delay: .48s; }
 .work-image .placeholder { width: 100%; }
 /* shows with size: "large": every work fills its half of the page (at least ~40% of the screen) */
 .works.large .work.left .work-image, .works.large .work.right .work-image, .works.large .pair .work-image { width: 100%; }
@@ -326,14 +329,13 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .card.noimg .card-text { padding-top: 12px; }
 .card-icons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .card-icons:empty { display: none; }
-.card-icons { flex-wrap: wrap; gap: 4px; margin-top: 22px; max-width: calc(var(--per, 12) * 32px - 4px); position: relative; }
-.card-icons a { flex: 0 0 28px; display: block; }
-.card-icons img { width: 28px; height: 28px; object-fit: cover; display: block; transition: box-shadow .25s; }
+.card-icons { display: grid; grid-template-columns: repeat(var(--per, 12), minmax(0, 1fr)); gap: 5px; margin-top: 22px; position: relative; }
+.card-icons a { display: block; min-width: 0; }
+.card-icons img { width: 100%; aspect-ratio: 1; height: auto; object-fit: cover; display: block; transition: box-shadow .25s; }
 .card-icons a:hover img, .card-icons a:focus-visible img { box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
-.icon-peek { position: absolute; bottom: calc(100% + 10px); left: 0; z-index: 3; background: var(--bg); padding: 6px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.14); pointer-events: none; opacity: 0; transition: opacity .25s; }
+.icon-peek { position: absolute; bottom: calc(100% + 10px); left: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity .25s; }
 .icon-peek.on { opacity: 1; }
 .icon-peek img { display: block; width: auto; height: auto; max-width: 180px; max-height: 180px; }
-.icon-peek p { margin: 6px 0 0; font-size: 11px; max-width: 180px; }
 @media (hover: none) { .icon-peek { display: none; } }
 .card-artists { margin: 10px 0 0; font-size: 11px; color: var(--muted); text-align: justify; line-height: 1.5; }
 .card-artists:empty { display: none; }
@@ -1076,6 +1078,7 @@ function renderShow(key) {
     : "click any work to see it larger.";
   const paras = t => String(t).split(/\n\s*\n/).map(x => `<p>${esc(x.trim())}</p>`).join("");
   document.getElementById("show-bio-label").textContent = sh.bioLabel || "artist bio";
+  document.getElementById("show-bio-label").parentElement.hidden = !!sh.hideBio;
   document.getElementById("show-statement-label").textContent = sh.statementLabel || "artist statement";
   document.getElementById("show-bio").innerHTML = paras(sh.bio || "artist bio coming soon");
   document.getElementById("show-statement").innerHTML = paras(sh.statement || "artist statement coming soon");
@@ -1138,7 +1141,18 @@ function renderShow(key) {
     b.addEventListener("click", () => toggleSaved(w));
   });
   refreshSaveButtons();
+  // show each work's detail circles once as it scrolls into view, so people know to hover for close-ups
+  if (hintWatch) hintWatch.disconnect();
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    hintWatch = new IntersectionObserver(entries => entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const box = en.target; hintWatch.unobserve(box);
+      setTimeout(() => { box.classList.add("hinting"); setTimeout(() => box.classList.remove("hinting"), 2200); }, 350);
+    }), { threshold: 0.6 });
+    wrap.querySelectorAll(".work-image").forEach(b => { if (b.querySelector(".bubble")) hintWatch.observe(b); });
+  }
 }
+let hintWatch = null;
 
 /* my collection: saved in the visitor's own browser, no accounts, nothing public */
 const STORE = "pg-collection";
@@ -1412,7 +1426,7 @@ function openCard(c) {
   iconBox.style.setProperty("--per", icons.length > 12 ? Math.ceil(icons.length / 2) : 12);   // more than 12: two even rows
   iconBox.innerHTML = icons.map(x => x.href
     ? `<a href="${esc(x.href)}" data-work="${x.i}" data-full="${esc(sized(x.src, 500))}" data-title="${esc(x.title || "")}" aria-label="${esc(x.title || "")}"><img src="${esc(sized(x.src, 100))}" alt="" loading="lazy"></a>`
-    : `<a><img src="${esc(sized(x.src, 100))}" alt="" loading="lazy"></a>`).join("") + (icons.length ? `<div class="icon-peek" aria-hidden="true"><img alt=""><p></p></div>` : "");
+    : `<a><img src="${esc(sized(x.src, 100))}" alt="" loading="lazy"></a>`).join("") + (icons.length ? `<div class="icon-peek" aria-hidden="true"><img alt=""></div>` : "");
   document.getElementById("card-artists").textContent = (c.artists && c.artists.length) ? "including artists " + c.artists.join(", ") : "";
   document.getElementById("card-enter").textContent = /^https?:/.test(c.link || "") ? "enter exhibition ↗" : "enter exhibition";
   const enter = document.getElementById("card-enter");
@@ -1436,8 +1450,7 @@ let pendingWork = null;
   box.addEventListener("mouseover", e => {
     const a = e.target.closest("a[data-full]"), peek = box.querySelector(".icon-peek"); if (!a || !peek) return;
     peek.querySelector("img").src = a.dataset.full;
-    peek.querySelector("p").textContent = a.dataset.title;
-    peek.style.left = Math.max(0, Math.min(a.offsetLeft - 70, box.clientWidth - 192)) + "px";
+    peek.style.left = Math.max(0, Math.min(a.offsetLeft + a.offsetWidth / 2 - 90, box.clientWidth - 180)) + "px";
     peek.classList.add("on");
   });
   box.addEventListener("mouseleave", () => box.querySelector(".icon-peek")?.classList.remove("on"));
