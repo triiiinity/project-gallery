@@ -519,7 +519,7 @@ const SHOWS = {
     buttons: [
       { text: "press release", link: "https://archive.project-gallery.com/s/Grace-Nkem-PR-1.pdf" },
       { text: "price list", link: "https://archive.project-gallery.com/s/Grace-Nkem-Image-List.pdf" },
-      { text: "full statement", link: "https://archive.project-gallery.com/spotlights/grace-nkem" }
+      { text: "full statement", link: "/interviews/grace-nkem" }
     ],
     // pictures still come from the old Squarespace site; swap in files under images/ before Squarespace is cancelled
     works: [
