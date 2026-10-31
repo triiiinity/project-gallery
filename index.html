@@ -1252,13 +1252,13 @@ function inches(size) { const m = /([\d.]+)\s*x\s*([\d.]+)(?:\s*x\s*[\d.]+)?\s*i
 function shuffled(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
 function renderSalon(works) {
   const box = document.getElementById("salon");
-  const sized = works.map(w => ({ w, d: inches(w.size) })).filter(x => x.d);
-  if (!sized.length) { box.innerHTML = ""; return; }
-  const tallest = Math.max(...sized.map(x => x.d[0]));
+  const measured = works.map(w => ({ w, d: inches(w.size) })).filter(x => x.d);
+  if (!measured.length) { box.innerHTML = ""; return; }
+  const tallest = Math.max(...measured.map(x => x.d[0]));
   const px = Math.min(11, 300 / tallest);                    // pixels per inch, shared by every work
-  box.innerHTML = sized.map(({ w, d }) => `<img src="${esc(sized(w.image, 750))}" alt="${esc(w.artist + ", " + w.title)}" title="${esc(w.title + ", " + w.size)}" style="height:${Math.max(18, d[0] * px).toFixed(0)}px;width:auto" data-id="${esc(w.id)}">`).join("")
+  box.innerHTML = measured.map(({ w, d }) => `<img src="${esc(sized(w.image, 750))}" alt="${esc(w.artist + ", " + w.title)}" title="${esc(w.title + ", " + w.size)}" style="height:${Math.max(18, d[0] * px).toFixed(0)}px;width:auto" data-id="${esc(w.id)}">`).join("")
     ;
-  box.querySelectorAll("img").forEach((im, i) => im.addEventListener("click", () => { currentWorks = sized.map(x => x.w); openLightbox(i); }));
+  box.querySelectorAll("img").forEach((im, i) => im.addEventListener("click", () => { currentWorks = measured.map(x => x.w); openLightbox(i); }));
 }
 function renderCollection() {
   renderAwardShelf();
