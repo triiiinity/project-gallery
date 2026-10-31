@@ -11,6 +11,14 @@ const get = async path => {
   if (!r.ok) throw new Error(path + " → " + r.status);
   return parseHTML(await r.text()).document;
 };
+// text of an element, keeping its line breaks (<br> and separate paragraphs) as new lines
+const textOf = el => {
+  if (!el) return "";
+  const c = el.cloneNode(true);
+  c.querySelectorAll("br").forEach(b => b.replaceWith(c.ownerDocument.createTextNode("\n")));
+  const parts = c.querySelectorAll("p");
+  return parts.length > 1 ? [...parts].map(x => x.textContent).join("\n") : c.textContent;
+};
 const clean = s => String(s || "").replace(/ /g, " ").replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, "\n").trim();
 
 // 1. every post, following "older posts" until the end
@@ -47,19 +55,19 @@ for (const path of posts) {
         const src = (img.getAttribute("data-src") || img.getAttribute("src") || "").split("?")[0];
         if (!/squarespace-cdn/.test(src)) continue;
         if (blocks.some(b => b.img === src)) continue;
-        const cap = el.querySelector ? clean((el.querySelector(".image-caption, figcaption") || {}).textContent) : "";
+        const cap = el.querySelector ? clean(textOf(el.querySelector(".image-caption, figcaption"))) : "";
         const dim = img.getAttribute("data-image-dimensions") || "";
         blocks.push({ img: src, ratio: dim.replace("x", "/"), caption: cap });
         continue;
       }
       const tag = el.tagName.toLowerCase();
       if (tag === "ul" || tag === "ol") {
-        for (const li of el.querySelectorAll("li")) { const t = clean(li.textContent); if (t) blocks.push({ p: "• " + t }); }
+        for (const li of el.querySelectorAll("li")) { const t = clean(textOf(li)); if (t) blocks.push({ p: "• " + t }); }
         continue;
       }
-      const t = clean(el.textContent);
+      const t = clean(textOf(el));
       if (!t) continue;
-      const strongOnly = el.querySelector("strong, b") && clean([...el.querySelectorAll("strong, b")].map(s => s.textContent).join(" ")) === t;
+      const strongOnly = el.querySelector("strong, b") && clean([...el.querySelectorAll("strong, b")].map(s => s.textContent).join(" ")).replace(/\s+/g, " ") === t.replace(/\s+/g, " ");
       const isQ = /^h[2-6]$/.test(tag) || strongOnly || (t.length < 320 && /\?["”’)]?$/.test(t));
       blocks.push(isQ ? { q: t } : { p: t });
     }
