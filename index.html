@@ -461,8 +461,22 @@ header, main, footer { position: relative; z-index: 1; }
 
 /* interviews */
 .iv-intro { font-size: 13px; color: var(--muted); max-width: 520px; margin: -8px 0 40px; line-height: 1.6; text-align: justify; }
-.iv-preview-note { font-size: 11px; color: var(--accent); margin: 0 0 18px; }
+#iv-list .arch-year > span { padding: 18px 0; border-right: 1px solid #dedede; }
+#iv-list .arch-items { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+#iv-list .iv-item, #iv-list .iv-fill { grid-column: span 2; }
+.iv-item { aspect-ratio: auto; min-height: 200px; flex-direction: row; align-items: flex-start; gap: 18px; padding: 20px 22px; text-decoration: none; }
+.iv-dot { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; background: #eee; transition: box-shadow .25s; }
+.iv-item:hover .iv-dot { box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.25); }
+.iv-words { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; align-self: stretch; }
 .iv-item .a-title { font-size: 15px; }
+.iv-ex { font-size: 12px; line-height: 1.55; color: #444; margin-top: 10px; text-align: justify; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.iv-item .a-note { margin-top: auto; padding-top: 12px; }
+.iv-pick { display: inline-flex; align-items: center; gap: 12px; margin: 0 0 28px; font-size: 12px; color: var(--muted); }
+.iv-pick select { font-family: var(--font); font-size: 13px; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--ink); padding: 4px 22px 4px 0; border-radius: 0; cursor: pointer; appearance: none; -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: right 6px center, right 1px center; background-size: 5px 5px; background-repeat: no-repeat; }
+.iv-pick select:hover { color: var(--accent); }
+.iv-pick { max-width: 100%; }
+.iv-pick select { max-width: min(460px, calc(100vw - var(--gutter) * 2 - 50px)); text-overflow: ellipsis; }
 .iv-read { max-width: 680px; }
 .iv-back { font-size: 12px; color: var(--muted); display: inline-block; margin-bottom: 26px; }
 .iv-back:hover { color: var(--accent); }
@@ -477,8 +491,6 @@ header, main, footer { position: relative; z-index: 1; }
 .iv-body figcaption { white-space: pre-line; font-size: 11px; color: var(--muted); margin-top: 8px; }
 .iv-end { margin-top: 48px; padding-top: 18px; border-top: 1px solid #dedede; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; }
 .iv-end a:hover { color: var(--accent); }
-.construction.door { cursor: pointer; }
-.construction.door:hover { color: var(--accent); }
 
 /* footer */
 footer { padding: 56px var(--gutter) 28px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
@@ -506,6 +518,10 @@ footer a:hover { color: var(--accent); }
   .fill.f5:not(.f2) { display: none; }
   .arch-year { padding: 0 var(--gutter); }
   .arch-item { aspect-ratio: auto; min-height: 150px; width: 100%; }
+  #iv-list .arch-items { grid-template-columns: 1fr; }
+  #iv-list .iv-item { grid-column: auto; }
+  #iv-list .iv-fill { display: none; }
+  #iv-list .arch-year > span { border-right: 0; }
   #ex-archive .arch-year > span, .aa-year > span { border-right: 0; }
   .arch-items, .aa-grid { border-left: 1px solid #dedede; border-right: 1px solid #dedede; }
   .aa-peek { gap: 8px; margin-top: 40px; }
@@ -627,7 +643,7 @@ footer a:hover { color: var(--accent); }
     <div id="grant-form" class="grant-form"></div>
   </section>
 
-  <!-- INTERVIEWS (not public yet: "under construction" opens the preview) -->
+  <!-- INTERVIEWS -->
   <section class="view" id="view-interviews">
     <div id="iv-root"></div>
   </section>
@@ -1653,9 +1669,7 @@ function renderGrant() {
   document.body.appendChild(sc);
 }
 
-/* interviews: the old spotlights posts, kept as an archive. Not public yet: the page says
-   "under construction", and clicking those words opens the preview (remembered in this browser). */
-const IV_PREVIEW = "pg-interviews-preview";
+/* interviews: the old spotlights posts, kept as an archive (interviews.js, loaded only on this page) */
 let ivLoading = null;
 function loadInterviews() {
   if (window.INTERVIEWS || typeof INTERVIEWS !== "undefined") return Promise.resolve();
@@ -1679,29 +1693,34 @@ function ivShow(iv) {
 function ivDate(d) { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ""); return m ? `${m[2]}.${m[3]}.${m[1]}` : ""; }
 function renderInterviews(slug) {
   const root = document.getElementById("iv-root");
-  let open = false; try { open = localStorage.getItem(IV_PREVIEW) === "1"; } catch (e) {}
-  if (!open) {
-    root.innerHTML = `<h1 class="page-title">interviews</h1><p class="construction door" id="iv-door" role="button" tabindex="0">under construction</p>`;
-    const door = document.getElementById("iv-door");
-    const unlock = () => { try { localStorage.setItem(IV_PREVIEW, "1"); } catch (e) {} renderInterviews(slug); };
-    door.addEventListener("click", unlock);
-    door.addEventListener("keydown", e => { if (e.key === "Enter") unlock(); });
-    return;
-  }
-  root.innerHTML = `<h1 class="page-title">interviews</h1><p class="iv-intro">loading…</p>`;
+  if (!(typeof INTERVIEWS !== "undefined")) root.innerHTML = `<h1 class="page-title">interviews</h1><p class="iv-intro">loading…</p>`;
   loadInterviews().then(() => slug ? ivReader(root, slug) : ivIndex(root)).catch(() => { root.innerHTML = `<h1 class="page-title">interviews</h1>` + UC; });
 }
+let ivFilter = "all";
 function ivIndex(root) {
+  // shows that have interviews, newest first, for the dropdown
+  const byShow = new Map();
+  INTERVIEWS.forEach(iv => { const k = ivShow(iv) || "other"; if (!byShow.has(k)) byShow.set(k, 0); byShow.set(k, byShow.get(k) + 1); });
+  const shows = [...byShow.keys()].filter(k => k !== "other");
+  if (ivFilter !== "all" && !byShow.has(ivFilter)) ivFilter = "all";
+  const list = INTERVIEWS.filter(iv => ivFilter === "all" || (ivShow(iv) || "other") === ivFilter);
   const years = new Map();
-  INTERVIEWS.forEach(iv => { const y = (iv.date || "").slice(0, 4) || "undated"; if (!years.has(y)) years.set(y, []); years.get(y).push(iv); });
-  const ys = [...years.keys()];
-  root.innerHTML = `<p class="iv-preview-note">preview: only you can see this page. the public still sees "under construction".</p>
-    <h1 class="page-title">interviews</h1>
-    <p class="iv-intro">from the archive, ${ys[ys.length - 1]}–${ys[0]}. conversations, statements and features with the artists of project gallery's first years, kept as they were written.</p>
-    <div id="iv-list">${ys.map(y => `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${years.get(y).map(iv => {
-      const k = ivShow(iv), img = ivFirstImage(iv);
-      return `<a class="arch-item iv-item" href="/interviews/${esc(iv.slug)}"><span class="a-title">${esc(iv.title)}</span><span class="a-dates">${esc(ivDate(iv.date))}</span><span class="a-foot"><span class="a-note">${k ? esc(SHOW_CARDS[k].title) : ""}</span>${img ? `<img src="${esc(sized(img, 100))}" alt="" loading="lazy">` : ""}</span></a>`;
-    }).join("")}${fillers(years.get(y).length, "span", "a-fill")}</div></div>`).join("")}</div>`;
+  list.forEach(iv => { const y = (iv.date || "").slice(0, 4) || "undated"; if (!years.has(y)) years.set(y, []); years.get(y).push(iv); });
+  const allYears = [...new Set(INTERVIEWS.map(iv => (iv.date || "").slice(0, 4)))].filter(Boolean);
+  const card = iv => {
+    const k = ivShow(iv), img = ivFirstImage(iv);
+    const ex = iv.excerpt || ((iv.blocks.find(b => b.p && b.p.length > 80) || {}).p || "");
+    return `<a class="arch-item iv-item" href="/interviews/${esc(iv.slug)}">
+      ${img ? `<img class="iv-dot" src="${esc(sized(img, 300))}" alt="" loading="lazy">` : `<span class="iv-dot"></span>`}
+      <span class="iv-words"><span class="a-title">${esc(iv.title)}</span><span class="a-dates">${esc(ivDate(iv.date))}</span>
+      <span class="iv-ex">${esc(ex)}</span>
+      ${k ? `<span class="a-note">${esc(SHOW_CARDS[k].title)}</span>` : ""}</span></a>`;
+  };
+  root.innerHTML = `<h1 class="page-title">interviews</h1>
+    <p class="iv-intro">from the archive, ${allYears[allYears.length - 1]}–${allYears[0]}. conversations, statements and features with the artists of project gallery's first years, kept as they were written.</p>
+    <label class="iv-pick"><span>show</span><select id="iv-show"><option value="all">all shows (${INTERVIEWS.length})</option>${shows.map(k => `<option value="${esc(k)}"${k === ivFilter ? " selected" : ""}>${esc(SHOW_CARDS[k].title)} (${byShow.get(k)})</option>`).join("")}${byShow.has("other") ? `<option value="other"${ivFilter === "other" ? " selected" : ""}>other (${byShow.get("other")})</option>` : ""}</select></label>
+    <div id="iv-list">${[...years].map(([y, ivs]) => `<div class="arch-year"><span>${esc(y)}</span><div class="arch-items">${ivs.map(card).join("")}${ivs.length % 2 ? '<span class="a-fill iv-fill" aria-hidden="true"></span>' : ""}</div></div>`).join("")}</div>`;
+  document.getElementById("iv-show").addEventListener("change", e => { ivFilter = e.target.value; ivIndex(root); });
 }
 function ivReader(root, slug) {
   const i = INTERVIEWS.findIndex(x => x.slug === slug);
