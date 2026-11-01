@@ -232,6 +232,9 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .gwin-more ul { margin: 6px 0 0; padding: 0 0 0 14px; font-size: 12px; line-height: 1.6; color: #555; }
 @media (max-width: 720px) { .gwin, .gwin.big { left: 12px; right: 12px; bottom: 12px; width: auto; } }
 @media (prefers-reduced-motion: reduce) { .gwin { transition: none; } }
+/* grant page: two rows of small color tiles across the whole screen, all colors picked from art on the site (AWARD_COLORS) */
+.grant-tiles { width: 100vw; margin: 4px 0 28px calc(50% - 50vw); padding: 0 6px; display: grid; grid-template-columns: repeat(var(--cols, 40), minmax(0, 1fr)); gap: 5px; }
+.grant-tiles i { display: block; aspect-ratio: 1 / 1; }
 /* grant */
 .grant-form { max-width: 680px; margin-top: 24px; }
 .grant-form iframe { width: 100%; border: 0; min-height: 600px; display: block; }
@@ -698,6 +701,7 @@ footer a:hover { color: var(--accent); }
 
   <!-- GRANT -->
   <section class="view" id="view-grant">
+    <div class="grant-tiles" id="grant-tiles" aria-hidden="true"></div>
     <h1 class="page-title" id="grant-title">artist grant</h1>
     <div class="prose" id="grant-intro"></div>
     <div id="grant-form" class="grant-form"></div>
@@ -1809,7 +1813,27 @@ window.addEventListener("message", e => {
 });
 if (/[?&]applied\b/.test(location.search)) setTimeout(() => giveAward("applied"), 1200);
 /* grant page */
+/* the grant page's tile bar: two rows, as many small squares as fit across, colors shuffled from AWARD_COLORS */
+function grantTiles() {
+  const box = document.getElementById("grant-tiles");
+  const pool = typeof AWARD_COLORS === "undefined" ? [] : [...new Set(Object.values(AWARD_COLORS).flat().map(c => c[0]))];
+  if (!box || !pool.length) return;
+  const cols = Math.max(12, Math.round((document.documentElement.clientWidth - 12) / 31));
+  if (box.dataset.cols === String(cols)) return;
+  box.dataset.cols = cols; box.style.setProperty("--cols", cols);
+  const out = [];
+  let bag = [];
+  for (let i = 0; i < cols * 2; i++) {
+    if (!bag.length) bag = shuffled(pool);
+    let k = bag.findIndex(c => c !== out[i - 1] && c !== out[i - cols]);      // no color right next to or above itself
+    if (k < 0) k = 0;
+    out.push(bag.splice(k, 1)[0]);
+  }
+  box.innerHTML = out.map(c => `<i style="background:${c}"></i>`).join("");
+}
+window.addEventListener("resize", () => { clearTimeout(grantTiles.t); grantTiles.t = setTimeout(grantTiles, 150); });
 function renderGrant() {
+  grantTiles();
   document.getElementById("grant-title").textContent = GRANT.title || "artist grant";
   const intro = document.getElementById("grant-intro");
   intro.innerHTML = GRANT.intro ? `<p>${esc(GRANT.intro)}</p>` : "";
