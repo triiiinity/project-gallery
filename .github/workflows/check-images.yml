@@ -19,5 +19,5 @@ jobs:
           git config user.name "Claude"
           git config user.email "noreply@anthropic.com"
           git add scripts/check-images.log
-          git commit -m "Live check after moving off Squarespace" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
+          git commit -m "Live check before the grant announcement" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
           git pull -q --rebase && git push
