@@ -1143,9 +1143,9 @@ function pixelArt(rows) {
   return `<svg viewBox="0 0 ${rows[0].length} ${rows.length}" shape-rendering="crispEdges" aria-hidden="true">${cells}</svg>`;
 }
 // an award's picture: a calm 3 x 3 grid of the colors in AWARD_COLORS (content.js)
-function gridArt(colors) {     // nine squares touching edge to edge, so each color sits right against its neighbors
-  const cells = colors.slice(0, 9).map((c, i) => `<rect x="${(i % 3) * 10}" y="${Math.floor(i / 3) * 10}" width="10" height="10" fill="${c[0]}"/>`).join("");
-  return `<svg viewBox="0 0 30 30" shape-rendering="crispEdges" aria-hidden="true">${cells}</svg>`;
+function gridArt(colors) {
+  const cells = colors.slice(0, 9).map((c, i) => `<rect x="${(i % 3) * 10 + 1}" y="${Math.floor(i / 3) * 10 + 1}" width="9" height="9" fill="${c[0]}"/>`).join("");
+  return `<svg viewBox="0 0 31 31" shape-rendering="crispEdges" aria-hidden="true"><rect width="31" height="31" fill="#fff"/>${cells}<rect x=".25" y=".25" width="30.5" height="30.5" fill="none" stroke="#d6d6d6" stroke-width=".5"/></svg>`;
 }
 Object.keys(AWARD_LIST).forEach(id => {
   const cols = (typeof AWARD_COLORS !== "undefined" && AWARD_COLORS[id]) || null;
