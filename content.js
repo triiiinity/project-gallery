@@ -2861,6 +2861,50 @@ const AWARD_COLORS = {
     ["#930602", "Authority over creation", "tdreade"],
     ["#04514e", "Pushy Passion", "gitte-maria-moller"],
     ["#2f4c2c", "Blood Gulch", "ryker-woodward"]
+  ],
+  applied: [   // in the running: golds
+    ["#f1e2c2", "Split Screen Capture The Flag", "ryker-woodward"],
+    ["#eae5c9", "Ghost girls", "gitte-maria-moller"],
+    ["#dec9a7", "untitled 9 (61211234)", "lumierebelge"],
+    ["#edc88f", "Sacroilitis", "person-place-thing"],
+    ["#c4ba90", "Tentful", "person-place-thing"],
+    ["#c2bc71", "Nectar", "chaeri-kim"],
+    ["#c9a44b", "Tribe zine-Flat plan", "person-place-thing"],
+    ["#a1844c", "Mango vs Hax$ - The Big House 4", "ryker-woodward"],
+    ["#7e6a2f", "Dust bunny", "gitte-maria-moller"]
+  ],
+  firstdoor: [   // first door: reds
+    ["#ebc7c4", "14 - 02 – 2021", "gitte-maria-moller"],
+    ["#f5c2b5", "To the moon", "gitte-maria-moller"],
+    ["#eac2b6", "Ghost girls", "gitte-maria-moller"],
+    ["#dea4a1", "Resting", "person-place-thing"],
+    ["#b5483d", "Emulation windows - Vimm’s Lair / Dolphin", "ryker-woodward"],
+    ["#a14c3e", "untitled 14 (2)", "lumierebelge"],
+    ["#ae3a2c", "untitled 9 (61211234)", "lumierebelge"],
+    ["#8b2c2c", "untitled 10 (dosmujeres)", "lumierebelge"],
+    ["#82382e", "Door stuck", "ryker-woodward"]
+  ],
+  guestbook: [   // signed the book: violets
+    ["#e3c6e3", "Ice cream or the fake snow on Bond Street?", "person-place-thing"],
+    ["#efb1d0", "The End", "gitte-maria-moller"],
+    ["#a9849f", "mandala 66", "tao-lin"],
+    ["#a0839a", "mandala 59", "tao-lin"],
+    ["#a07698", "Tribe zine-Flat plan", "person-place-thing"],
+    ["#504f63", "Community Garden (Chinatown)", "gitte-maria-moller"],
+    ["#444051", "Tentful", "person-place-thing"],
+    ["#503f4f", "Molly", "person-place-thing"],
+    ["#373449", "time mandala", "tao-lin"]
+  ],
+  reader: [   // in their words: sea greens
+    ["#cde4f4", "Radar", "ryker-woodward"],
+    ["#cceff0", "water mandala", "tao-lin"],
+    ["#badbe9", "Fly me to the moon with your cooking", "person-place-thing"],
+    ["#b0edd6", "circle mandala", "tao-lin"],
+    ["#67c3e8", "Your First View of The Outside World", "ryker-woodward"],
+    ["#3097f2", "Ice cream or the fake snow on Bond Street?", "person-place-thing"],
+    ["#5dbbad", "Molly", "person-place-thing"],
+    ["#278a89", "Resting", "person-place-thing"],
+    ["#305170", "Clubhouse (you don’t love me)", "gitte-maria-moller"]
   ]
 };
 

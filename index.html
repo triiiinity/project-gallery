@@ -1042,6 +1042,11 @@ function updateProgress() {
 }
 /* awards: small pictures you earn by exploring the site, kept with your collection */
 const AWARD_LIST = {
+  // the easy ones (their pictures come from AWARD_COLORS in content.js)
+  firstdoor: { name: "first door", text: "you walked into your first exhibition. there are more than thirty more behind it.", art: "" },
+  reader: { name: "in their words", text: "you read an artist interview, the story behind the work.", art: "" },
+  guestbook: { name: "signed the book", text: "you left your mark in the guest book. thank you for stopping by.", art: "" },
+  applied: { name: "in the running", text: "you applied for the project grant. every application is read. thank you for sharing your work.", art: "" },
   closer: { name: "a closer look", text: "you zoomed in to see the brushstrokes, the pencil lines, the little things. that's how this work is meant to be seen.", art: pixelArt([
     "..kkkkk.....",
     ".kbbbbbk....",
@@ -1796,6 +1801,13 @@ document.querySelectorAll("nav > a[data-view]:not(.plus)").forEach(a => {
 });
 let lastView = null;
 
+/* grant award: Tally tells the page when the embedded form is sent. A Tally "redirect on completion" to /grant?applied works too */
+window.addEventListener("message", e => {
+  if (!/(^|\.)tally\.so$/.test((() => { try { return new URL(e.origin).hostname; } catch (x) { return ""; } })())) return;
+  let d = e.data; if (typeof d === "string") { try { d = JSON.parse(d); } catch (x) { return; } }
+  if (d && d.event === "Tally.FormSubmitted") giveAward("applied");
+});
+if (/[?&]applied\b/.test(location.search)) setTimeout(() => giveAward("applied"), 1200);
 /* grant page */
 function renderGrant() {
   document.getElementById("grant-title").textContent = GRANT.title || "artist grant";
@@ -2007,6 +2019,7 @@ gbForm.addEventListener("submit", async e => {
   e.target.reset(); gbClearPad();
   renderGuestbook();
   gbForm.hidden = true; gbOpen.setAttribute("aria-expanded", "false"); gbOpen.textContent = "sign the guest book";
+  giveAward("guestbook");
   openNewsletter();
 });
 
@@ -2256,7 +2269,7 @@ window.addEventListener("popstate", show);
 function show() {
   const h = currentRoute();
   let name = VIEWS.includes(h) ? h : h.startsWith("interviews/") ? "interviews" : "notfound";
-  if (SHOWS[h]) { name = "show"; renderShow(h);
+  if (SHOWS[h]) { name = "show"; renderShow(h); giveAward("firstdoor");
     if (pendingWork !== null) { const n = pendingWork; pendingWork = null; requestAnimationFrame(() => {
       const el = document.getElementById("work-" + n); if (!el) return;
       let top = 0; for (let e = el; e; e = e.offsetParent) top += e.offsetTop;      // ignores the arriving animation's scaling
@@ -2267,7 +2280,7 @@ function show() {
   if (name === "exhibitions") markOpened();
   if (name === "artists") startPeek(); else clearInterval(peekTimer);
   if (name === "guestbook") renderGuestbook();
-  if (name === "interviews") renderInterviews(h.split("/")[1] || "");
+  if (name === "interviews") { renderInterviews(h.split("/")[1] || ""); if (h.split("/")[1]) giveAward("reader"); }
   if (name === "collection") receiveCollection();
   if (name === "guestbook-review") renderReview();
   if (name === "home" && lastView !== "home") typeLogo();
