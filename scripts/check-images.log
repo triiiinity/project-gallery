@@ -1,2 +1,4 @@
-homepage has the grant window: true; still mentions squarespace-cdn: false
-2453 files checked on the live site, 0 missing
+homepage 200; grant page 200; content.js 200; font 200
+grant in menu: true; grant window: true; tile bar: true
+grant settings: tallyFormId: "5XbBrv"; until: "2026-12-15"; due: "open until december 15"; on: true
+tally form 200, embed 200; title: undefined; says closed: false; dates mentioned: December 15th, 2026; payment step present: true
