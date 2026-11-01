@@ -3002,9 +3002,9 @@ const GRANT = {
   // the small window on the homepage. on: false hides it; it also hides itself after "until".
   popup: {
     on: true,
-    until: "2026-12-01",
+    until: "2026-12-15",
     line: "a $500 micro-grant for an emerging artist with a specific project in mind.",
     details: ["18 or older, applying with your own work", "up to 3 artworks, a short statement, and your project idea", "juried by Trinity Lester, announced early 2027"],
-    due: "open until december 1"
+    due: "open until december 15"
   }
 };
