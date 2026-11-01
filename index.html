@@ -233,7 +233,7 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 @media (max-width: 720px) { .gwin, .gwin.big { left: 12px; right: 12px; bottom: 12px; width: auto; } }
 @media (prefers-reduced-motion: reduce) { .gwin { transition: none; } }
 /* grant page: two rows of small color tiles across the whole screen, all colors picked from art on the site (AWARD_COLORS) */
-.grant-tiles { width: 100vw; margin: 4px 0 28px calc(50% - 50vw); padding: 0 6px; display: grid; grid-template-columns: repeat(var(--cols, 40), minmax(0, 1fr)); gap: 5px; }
+.grant-tiles { width: 100vw; margin: 2px 0 24px calc(50% - 50vw); padding: 0 4px; display: grid; grid-template-columns: repeat(var(--cols, 60), minmax(0, 1fr)); gap: 3px; }
 .grant-tiles i { display: block; aspect-ratio: 1 / 1; }
 /* grant */
 .grant-form { max-width: 680px; margin-top: 24px; }
@@ -1818,7 +1818,7 @@ function grantTiles() {
   const box = document.getElementById("grant-tiles");
   const pool = typeof AWARD_COLORS === "undefined" ? [] : [...new Set(Object.values(AWARD_COLORS).flat().map(c => c[0]))];
   if (!box || !pool.length) return;
-  const cols = Math.max(12, Math.round((document.documentElement.clientWidth - 12) / 31));
+  const cols = Math.max(18, Math.round((document.documentElement.clientWidth - 8) / 19));
   if (box.dataset.cols === String(cols)) return;
   box.dataset.cols = cols; box.style.setProperty("--cols", cols);
   const out = [];
