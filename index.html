@@ -2143,7 +2143,7 @@ nlForm.addEventListener("submit", e => {
   const pv = document.getElementById("nav-preview"), pvImg = pv.querySelector("img");
   let t = null;
   document.querySelectorAll("nav > a[data-view]").forEach(a => {
-    const src = `images/previews/${a.dataset.view}.jpg`;
+    const src = `images/previews/${a.dataset.view}.jpg?v=2026-11-03`;   // the date makes browsers fetch freshly retaken pictures
     new Image().src = src;                                   // load ahead so it appears instantly
     a.addEventListener("mouseenter", () => {
       clearTimeout(t);
