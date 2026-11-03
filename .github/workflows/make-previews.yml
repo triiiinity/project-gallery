@@ -1,0 +1,26 @@
+# Retakes the menu's hover pictures from the live site (scripts/make-previews.mjs).
+name: make previews
+on:
+  push:
+    branches: [main]
+    paths: ["scripts/make-previews.mjs"]
+permissions:
+  contents: write
+jobs:
+  shoot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save playwright@1.48 sharp@0.33 && npx playwright install --with-deps chromium
+      - run: node scripts/make-previews.mjs
+      - run: |
+          for f in /tmp/*.png; do n=$(basename "$f" .png); node -e "require('sharp')('$f').resize(640,400).jpeg({quality:82}).toFile('images/previews/$n.jpg')"; done
+      - run: |
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add images/previews scripts/make-previews.log
+          git commit -q -m "Retake the menu hover pictures from the live site" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
+          git pull -q --rebase && git push
