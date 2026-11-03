@@ -414,6 +414,8 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 #nl-kit .formkit-guarantee { font-size: 11px !important; color: var(--muted) !important; margin: 10px 0 0 !important; }
 .nl-skip { background: none; border: 0; padding: 0; font: inherit; font-size: 12px; color: var(--muted); cursor: pointer; }
 .nl-skip:hover { color: var(--accent); }
+.nl-link { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #c9c9c9; }
+.nl-link:hover { color: var(--accent); }
 
 /* salon wall: saved works hung together at their real relative sizes */
 .salon { padding: 56px 0 40px; margin-bottom: 36px; border-bottom: 1px solid #dedede; }
@@ -794,6 +796,7 @@ footer a:hover { color: var(--accent); }
       <div class="prose">
         <p>email: <a href="mailto:trinity@project-gallery.com">trinity@project-gallery.com</a></p>
         <p>ig: <a href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener">@projectgallery</a></p>
+        <p>email list: <button type="button" class="nl-link" id="nl-contact">join for updates on project gallery</button></p>
       </div>
       <form class="cf" id="cf" novalidate>
         <p class="cf-head">write to us</p>
@@ -863,11 +866,11 @@ footer a:hover { color: var(--accent); }
 <div class="nl" id="nl" role="dialog" aria-modal="true" aria-labelledby="nl-title">
   <div class="nl-box">
     <p id="nl-title">thank you for signing the guest book.</p>
-    <p>would you like project gallery's newsletter? new shows, open calls and the artist grant, now and then.</p>
+    <p id="nl-line">would you like project gallery's newsletter? new shows, open calls and the artist grant, now and then.</p>
     <form id="nl-form" class="nl-own" novalidate>
       <label class="fine" for="nl-email">email</label>
       <input id="nl-email" type="email" autocomplete="email" placeholder="you@example.com">
-      <p class="fine">your email is never shown in the guest book.</p>
+      <p class="fine" id="nl-gb-fine">your email is never shown in the guest book.</p>
       <div class="nl-row"><span></span><button class="enter" type="submit">sign up</button></div>
       <p class="fine" id="nl-msg" role="status"></p>
     </form>
@@ -1817,9 +1820,15 @@ let lastView = null;
 window.addEventListener("message", e => {
   if (!/(^|\.)tally\.so$/.test((() => { try { return new URL(e.origin).hostname; } catch (x) { return ""; } })())) return;
   let d = e.data; if (typeof d === "string") { try { d = JSON.parse(d); } catch (x) { return; } }
-  if (d && d.event === "Tally.FormSubmitted") giveAward("applied");
+  if (d && d.event === "Tally.FormSubmitted") afterApplying();
 });
-if (/[?&]applied\b/.test(location.search)) setTimeout(() => giveAward("applied"), 1200);
+if (/[?&]applied\b/.test(location.search)) setTimeout(afterApplying, 1200);
+/* after applying: the award toast, then (a moment later) the email list offer */
+function afterApplying() {
+  giveAward("applied");
+  if (afterApplying.done) return; afterApplying.done = true;
+  setTimeout(() => openNewsletter("grant"), 2200);
+}
 /* grant page */
 /* the grant page's tile bar: two rows, as many small squares as fit across, colors shuffled from AWARD_COLORS */
 function grantTiles() {
@@ -2093,12 +2102,27 @@ function loadKit() {
   box.appendChild(sc);
   box.hidden = false; nlForm.hidden = true;
 }
-function openNewsletter() {
+/* the words in the box change with where it was opened from */
+const NL_COPY = {
+  guestbook: ["thank you for signing the guest book.", "would you like project gallery's newsletter? new shows, open calls and the artist grant, now and then."],
+  grant: ["your application is in. thank you.", "want to hear when the next grant opens? join the email list for new grants, open calls and shows, now and then."],
+  contact: ["join the email list", "updates on project gallery: new shows, open calls and the artist grant, now and then."]
+};
+function openNewsletter(from = "guestbook") {
+  if (from === "grant") { try { if (localStorage.getItem("pg-nl-joined")) return; } catch (e) {} }   // already on the list from this browser
+  const [title, line] = NL_COPY[from] || NL_COPY.guestbook;
+  document.getElementById("nl-title").textContent = title;
+  document.getElementById("nl-line").textContent = line;
+  document.getElementById("nl-skip").textContent = from === "contact" ? "close" : "no thanks";
+  document.getElementById("nl-gb-fine").hidden = from !== "guestbook";
   document.getElementById("nl-msg").textContent = ""; nlForm.reset(); loadKit(); nl.classList.add("open");
   const f = nlForm.hidden ? document.querySelector("#nl-kit input[type=email], #nl-kit input") : document.getElementById("nl-email");
   if (f) f.focus();
 }
 function closeNewsletter() { nl.classList.remove("open"); }
+document.getElementById("nl-contact").addEventListener("click", () => openNewsletter("contact"));
+/* remember a sign-up from this browser so the grant page doesn't ask again */
+document.getElementById("nl-kit").addEventListener("submit", () => { try { localStorage.setItem("pg-nl-joined", Date.now()); } catch (e) {} }, true);
 document.getElementById("nl-skip").addEventListener("click", closeNewsletter);
 nl.addEventListener("click", e => { if (e.target === nl) closeNewsletter(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && nl.classList.contains("open")) closeNewsletter(); });
@@ -2109,7 +2133,7 @@ nlForm.addEventListener("submit", e => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = "please check your email address"; return; }
   if (!NEWSLETTER.formAction) { msg.textContent = "the newsletter is launching soon. sign-ups open here when it does."; return; }
   fetch(NEWSLETTER.formAction, { method: "POST", body: new URLSearchParams({ email }), mode: "no-cors" })
-    .then(() => { msg.textContent = "you're on the list. thank you."; setTimeout(closeNewsletter, 1600); })
+    .then(() => { try { localStorage.setItem("pg-nl-joined", Date.now()); } catch (e) {} msg.textContent = "you're on the list. thank you."; setTimeout(closeNewsletter, 1600); })
     .catch(() => { msg.textContent = "that didn't go through. please try again."; });
 });
 

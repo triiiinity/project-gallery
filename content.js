@@ -2963,7 +2963,8 @@ const TICKER = [
 // THE ARCHIVE LIST under "exhibitions": card keys, newest first.
 const ARCHIVE_LIST = ["white-whale", "mike-nudelman", "tdreade", "ryker-woodward", "gitte-maria-moller", "lumierebelge", "tao-lin", "person-place-thing", "chaeri-kim", "grace-nkem", "nutsa-gogaladze", "artist-curator", "ara-hao", "inimitable", "filip-lav", "hearts-of-palm", "neurosis", "first-note", "betwixt-and-between", "unfolding-pattern", "new-light", "wet-dream", "syncretic", "splinters", "erika-shiba", "we-are-still-in-eden", "if-fluid-was-a-song", "time-wont-tell", "spliced-energy", "transcendental-states", "illuminated", "people-places-things", "the-alternative-states", "multitudes", "eternal-flame", "in-the-cool-of-the-evening"];
 
-// NEWSLETTER: offered after someone signs the guest book.
+// NEWSLETTER: offered after someone signs the guest book, after a grant application is sent,
+// and from the "email list" line on the contact page.
 // Paste the sign-up form address from your newsletter service here when you have one.
 const NEWSLETTER = {
   kitUid: "a8b9264c15",   // the Kit form (from its embed code); Kit keeps the list and sends the confirmation email
