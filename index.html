@@ -401,7 +401,7 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .nl-own { display: grid; gap: 14px; }
 /* Kit's signup form, dressed like the rest of the site */
 #nl-kit .formkit-form { max-width: none !important; background: none !important; border: 0 !important; box-shadow: none !important; font-family: var(--font) !important; }
-#nl-kit .formkit-form [data-style="clean"], #nl-kit .formkit-form .formkit-column { padding: 0 !important; }
+#nl-kit .formkit-form [data-style], #nl-kit .formkit-form .formkit-column, #nl-kit .formkit-background { padding: 0 !important; background: none !important; }
 #nl-kit .formkit-header, #nl-kit .formkit-subheader, #nl-kit .formkit-image, #nl-kit .formkit-powered-by-convertkit-container, #nl-kit .formkit-powered-by { display: none !important; }
 #nl-kit .formkit-fields { display: flex !important; flex-wrap: wrap; gap: 14px !important; margin: 0 !important; align-items: flex-end; }
 #nl-kit .formkit-field { flex: 1 1 200px !important; margin: 0 !important; }
@@ -411,7 +411,8 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 #nl-kit .formkit-submit:hover { box-shadow: 0 0 22px rgba(0, 0, 0, 0.4); }
 #nl-kit .formkit-submit > span { padding: 8px 18px !important; }
 #nl-kit .formkit-alert { font-size: 12px !important; border-radius: 0 !important; text-transform: lowercase; }
-#nl-kit .formkit-guarantee { font-size: 11px !important; color: var(--muted) !important; margin: 10px 0 0 !important; }
+#nl-kit .formkit-guarantee { font-size: 11px !important; color: var(--muted) !important; margin: 10px 0 0 !important; text-align: left !important; }
+#nl-kit .formkit-input::placeholder { text-transform: lowercase; color: var(--muted) !important; opacity: 1; }
 .nl-skip { background: none; border: 0; padding: 0; font: inherit; font-size: 12px; color: var(--muted); cursor: pointer; }
 .nl-skip:hover { color: var(--accent); }
 .nl-link { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #c9c9c9; }
