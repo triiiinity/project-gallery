@@ -2967,7 +2967,7 @@ const ARCHIVE_LIST = ["white-whale", "mike-nudelman", "tdreade", "ryker-woodward
 // and from the "email list" line on the contact page.
 // Paste the sign-up form address from your newsletter service here when you have one.
 const NEWSLETTER = {
-  kitUid: "a8b9264c15",   // the Kit form (from its embed code); Kit keeps the list and sends the confirmation email
+  kitUid: "cfb039acec",   // the Kit form (from its embed code); Kit keeps the list and sends the confirmation email
   formAction: ""         // optional instead: a plain form address to post to
 };
 
