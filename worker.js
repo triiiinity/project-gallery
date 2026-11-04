@@ -4,6 +4,8 @@
 //   POST /api/guestbook            sign (the note waits for approval)
 //   GET  /api/guestbook/pending    waiting notes      (needs the ADMIN_KEY password)
 //   POST /api/guestbook/review     approve or delete  (needs the ADMIN_KEY password)
+//   POST /api/subscribe            join the email list (saved here, and passed to Kit when KIT_FORM_ID is set)
+//   GET  /api/subscribers          the email list as a spreadsheet file (needs the ADMIN_KEY password)
 
 const BLOCKED = [
   "fuck", "shit", "bitch", "cunt", "asshole", "dick", "pussy", "whore", "slut", "bastard",
@@ -26,6 +28,9 @@ async function ready(env) {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL, place TEXT, note TEXT NOT NULL, mark TEXT, strokes TEXT,
     created INTEGER NOT NULL, approved INTEGER NOT NULL DEFAULT 0, who TEXT)`).run();
+  await env.DB.prepare(`CREATE TABLE IF NOT EXISTS subscribers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE, source TEXT, created INTEGER NOT NULL, who TEXT, kit TEXT)`).run();
 }
 
 async function hash(s) {
@@ -84,6 +89,35 @@ export default {
       else if (b.action === "delete") await env.DB.prepare("DELETE FROM notes WHERE id = ?").bind(id).run();
       else return json({ error: "approve or delete?" }, 400);
       return json({ ok: true });
+    }
+
+    if (url.pathname === "/api/subscribe" && req.method === "POST") {
+      const b = await req.json().catch(() => ({}));
+      const email = clean(b.email, 200).toLowerCase(), source = clean(b.source, 30);
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: "please check your email address" }, 400);
+      const who = await hash((req.headers.get("cf-connecting-ip") || "") + (env.ADMIN_KEY || "pg"));
+      const recent = await env.DB.prepare("SELECT COUNT(*) AS n FROM subscribers WHERE who = ? AND created > ?").bind(who, Date.now() - 60000).first();
+      if (recent && recent.n > 4) return json({ error: "please wait a minute and try again" }, 429);
+      // also hand it to Kit, if the Kit form's number is set (Kit then sends its confirmation email)
+      let kit = "";
+      if (env.KIT_FORM_ID) {
+        try {
+          const r = await fetch(`https://app.kit.com/forms/${env.KIT_FORM_ID}/subscriptions`, { method: "POST", body: new URLSearchParams({ email_address: email }) });
+          kit = r.ok ? "sent" : "kit " + r.status;
+        } catch (e) { kit = "kit unreachable"; }
+      }
+      await env.DB.prepare("INSERT INTO subscribers (email, source, created, who, kit) VALUES (?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING")
+        .bind(email, source, Date.now(), who, kit).run();
+      return json({ ok: true });
+    }
+
+    if (url.pathname === "/api/subscribers" && req.method === "GET") {
+      if (!isAdmin(req, env)) return json({ error: "wrong password" }, 401);
+      const { results } = await env.DB.prepare("SELECT email, source, created, kit FROM subscribers ORDER BY created ASC").all();
+      const csv = "email,signed up from,date,sent to kit\n" + results.map(r =>
+        [r.email, r.source || "", new Date(r.created).toISOString().slice(0, 10), r.kit || ""].map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+      return new Response(csv, { headers: { "content-type": "text/csv; charset=utf-8", "cache-control": "no-store",
+        "content-disposition": `attachment; filename="project-gallery-email-list.csv"` } });
     }
 
     return json({ error: "not found" }, 404);

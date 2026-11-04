@@ -500,6 +500,7 @@ a.secret { color: inherit; text-decoration: none; cursor: text; }
 .cf-head { font-size: 13px; color: var(--muted); margin: 0 0 4px; }
 
 /* guest book review */
+.gr-dl { margin-top: 40px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
 .gr-form { display: flex; align-items: flex-end; gap: 16px; margin: 0 0 18px; }
 .gr-form label { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
 .gr-form input { font-family: var(--font); font-size: 14px; border: 0; border-bottom: 1px solid #c9c9c9; padding: 6px 0; min-width: 240px; }
@@ -768,6 +769,7 @@ footer a:hover { color: var(--accent); }
     <form class="gr-form" id="gr-form"><label for="gr-key">password<input id="gr-key" type="password" autocomplete="current-password"></label><button class="enter" type="submit">open</button></form>
     <p class="construction" id="gr-msg" role="status"></p>
     <div class="gr-list" id="gr-list"></div>
+    <p class="gr-dl"><button type="button" class="enter" id="gr-subs">download the email list</button> <span class="construction" id="gr-subs-msg">sign-ups made through the site's own box (when Kit's box can't load). import the file into Kit.</span></p>
   </section>
 
   <!-- PAGE NOT FOUND -->
@@ -2082,6 +2084,15 @@ async function renderReview() {
     gbShared = null; renderReview();
   }));
 }
+document.getElementById("gr-subs").addEventListener("click", async () => {
+  let key = ""; try { key = sessionStorage.getItem("pg-admin") || ""; } catch (e) {}
+  const m = document.getElementById("gr-subs-msg");
+  if (!key) { m.textContent = "enter your password above first"; return; }
+  const r = await fetch("/api/subscribers", { headers: { "x-admin-key": key }, cache: "no-store" }).catch(() => null);
+  if (!r || !r.ok) { m.textContent = r && r.status === 401 ? "that password didn't work" : "couldn't reach the list"; return; }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(await r.blob()); a.download = "project-gallery-email-list.csv"; a.click();
+  m.textContent = "downloaded";
+});
 document.getElementById("gr-form").addEventListener("submit", e => {
   e.preventDefault();
   try { sessionStorage.setItem("pg-admin", document.getElementById("gr-key").value); } catch (err) {}
@@ -2089,19 +2100,21 @@ document.getElementById("gr-form").addEventListener("submit", e => {
   renderReview();
 });
 
-/* newsletter offer: Kit's own signup form (NEWSLETTER.kitUid), loaded the first time the box opens; or a plain post to NEWSLETTER.formAction */
+/* newsletter offer: Kit's own signup form (NEWSLETTER.kitUid) when it loads; otherwise the site's own form, saved by /api/subscribe */
 const nl = document.getElementById("nl"), nlForm = document.getElementById("nl-form");
-let kitLoaded = false;
+let kitLoaded = false, nlSource = "guestbook";
+// Kit's form takes over the box only once it has actually appeared with an email field. Until then (and if Kit is
+// blocked by a browser or never answers), the site's own form shows, and its sign-ups are kept by the site.
 function loadKit() {
   const box = document.getElementById("nl-kit");
-  if (kitLoaded || !NEWSLETTER.kitUid || NEWSLETTER.formAction) return;
+  if (kitLoaded || !NEWSLETTER.kitUid) return;
   kitLoaded = true;
+  const swap = () => { if (box.querySelector("input[type=email], input[name=email_address]")) { box.hidden = false; nlForm.hidden = true; return true; } return false; };
+  new MutationObserver((m, obs) => { if (swap()) obs.disconnect(); }).observe(box, { childList: true, subtree: true });
   const sc = document.createElement("script");
   sc.async = true; sc.dataset.uid = NEWSLETTER.kitUid;
   sc.src = `https://project-gallery.kit.com/${NEWSLETTER.kitUid}/index.js`;
-  sc.onerror = () => { kitLoaded = false; nlForm.hidden = false; box.hidden = true; };   // if Kit can't load, the box says sign-ups open soon
   box.appendChild(sc);
-  box.hidden = false; nlForm.hidden = true;
 }
 /* the words in the box change with where it was opened from */
 const NL_COPY = {
@@ -2116,6 +2129,7 @@ function openNewsletter(from = "guestbook") {
   document.getElementById("nl-line").textContent = line;
   document.getElementById("nl-skip").textContent = from === "contact" ? "close" : "no thanks";
   document.getElementById("nl-gb-fine").hidden = from !== "guestbook";
+  nlSource = from;
   document.getElementById("nl-msg").textContent = ""; nlForm.reset(); loadKit(); nl.classList.add("open");
   const f = nlForm.hidden ? document.querySelector("#nl-kit input[type=email], #nl-kit input") : document.getElementById("nl-email");
   if (f) f.focus();
@@ -2132,10 +2146,16 @@ nlForm.addEventListener("submit", e => {
   const email = document.getElementById("nl-email").value.trim();
   const msg = document.getElementById("nl-msg");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = "please check your email address"; return; }
-  if (!NEWSLETTER.formAction) { msg.textContent = "the newsletter is launching soon. sign-ups open here when it does."; return; }
-  fetch(NEWSLETTER.formAction, { method: "POST", body: new URLSearchParams({ email }), mode: "no-cors" })
-    .then(() => { try { localStorage.setItem("pg-nl-joined", Date.now()); } catch (e) {} msg.textContent = "you're on the list. thank you."; setTimeout(closeNewsletter, 1600); })
-    .catch(() => { msg.textContent = "that didn't go through. please try again."; });
+  const btn = nlForm.querySelector("button[type=submit]"); btn.disabled = true; msg.textContent = "…";
+  fetch("/api/subscribe", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email, source: nlSource }) })
+    .then(r => r.json().then(d => ({ ok: r.ok, d })))
+    .then(({ ok, d }) => {
+      if (!ok) { msg.textContent = d.error || "that didn't go through. please try again."; return; }
+      try { localStorage.setItem("pg-nl-joined", Date.now()); } catch (e) {}
+      msg.textContent = "you're on the list. thank you."; setTimeout(closeNewsletter, 1800);
+    })
+    .catch(() => { msg.textContent = "that didn't go through. please try again."; })
+    .finally(() => { btn.disabled = false; });
 });
 
 /* hovering a menu item shows a small picture of that page */
