@@ -20,5 +20,5 @@ jobs:
           git config user.name "Claude"
           git config user.email "noreply@anthropic.com"
           git add scripts/make-previews.log scripts/kit-check
-          git commit -q -m "Email list check on the live contact page" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
+          git commit -q -m "Email list live check, after the fix" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || echo "nothing to save"
           git pull -q --rebase && git push
