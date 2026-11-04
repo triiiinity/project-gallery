@@ -1,9 +1,38 @@
-home: done
-exhibitions: done
-artists: done
-interviews: done
-grant: done
-about: done
-guestbook: done
-contact: done
-collection: done
+  [chrome-desktop failed] https://project-gallery.kit.com/cfb039acec/index.js net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
+  [chrome-desktop console] Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
+  [chrome-desktop console] Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
+chrome-desktop after 1500ms: {"open":true,"ownFormShown":true,"kitBoxShown":false,"kitHTML":106,"kitInputs":"","kitButtons":"","kitForms":0,"bodyKit":0}
+  [chrome-desktop console] Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
+  [chrome-desktop console] [GroupMarkerNotSet(crbug.com/242999)!:A0601C002C260000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader flag to opt in to lower security guarantees 
+  [chrome-desktop console] [.WebGL-0xefc000cd500]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+  [chrome-desktop console] [GroupMarkerNotSet(crbug.com/242999)!:A0901C002C260000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader flag to opt in to lower security guarantees 
+  [chrome-desktop failed] https://0a6e1bb4529b.w.hcaptcha.com/logo.png net::ERR_ABORTED
+chrome-desktop after 6000ms: {"open":true,"ownFormShown":true,"kitBoxShown":false,"kitHTML":106,"kitInputs":"","kitButtons":"","kitForms":0,"bodyKit":0}
+  [safari-desktop console] Cancelled load to https://project-gallery.kit.com/cfb039acec/index.js because it violates the resource's Cross-Origin-Resource-Policy response header.
+  [safari-desktop failed] https://project-gallery.kit.com/cfb039acec/index.js Cancelled load to https://project-gallery.kit.com/cfb039acec/index.js because it violates the resource's Cross-Origin-Resource-Policy response header.
+  [safari-desktop console] Failed to load resource: Cancelled load to https://project-gallery.kit.com/cfb039acec/index.js because it violates the resource's Cross-Origin-Resource-Policy response header.
+  [safari-desktop console] Failed to preconnect to https://api.stripe.com/. Error: Unacceptable TLS certificate
+safari-desktop after 1500ms: {"open":true,"ownFormShown":true,"kitBoxShown":false,"kitHTML":106,"kitInputs":"","kitButtons":"","kitForms":0,"bodyKit":0}
+  [safari-desktop console] window.styleMedia is a deprecated draft version of window.matchMedia API, and it will be removed in the future.
+  [safari-desktop console] Failed to load resource: the server responded with a status of 401 (Unauthorized)
+  [safari-desktop console] Failed to load resource: the server responded with a status of 401 (Unauthorized)
+safari-desktop after 6000ms: {"open":true,"ownFormShown":true,"kitBoxShown":false,"kitHTML":106,"kitInputs":"","kitButtons":"","kitForms":0,"bodyKit":0}
+  [safari-desktop console] Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.
+  [safari-desktop console] Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.
+  [safari-desktop console] Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.
+  [safari-desktop console] Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.
+  [safari-desktop console] Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.
+  [safari-desktop console] [Report Only] Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.
+  [safari-desktop console] Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.
+  [chrome-phone failed] https://project-gallery.kit.com/cfb039acec/index.js net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
+  [chrome-phone console] Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
+  [chrome-phone console] Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
+  [chrome-phone console] Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
+  [chrome-phone console] Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
+chrome-phone after 1500ms: {"open":true,"ownFormShown":true,"kitBoxShown":false,"kitHTML":106,"kitInputs":"","kitButtons":"","kitForms":0,"bodyKit":0}
+  [chrome-phone console] [GroupMarkerNotSet(crbug.com/242999)!:A0601C00DC140000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader flag to opt in to lower security guarantees 
+  [chrome-phone console] [GroupMarkerNotSet(crbug.com/242999)!:A0901C00DC140000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader flag to opt in to lower security guarantees 
+  [chrome-phone console] [.WebGL-0x35403654000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+  [chrome-phone console] [GroupMarkerNotSet(crbug.com/242999)!:A040A806DC140000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader flag to opt in to lower security guarantees 
+  [chrome-phone failed] https://69d21874b4df.w.hcaptcha.com/logo.png net::ERR_ABORTED
+chrome-phone after 6000ms: {"open":true,"ownFormShown":true,"kitBoxShown":false,"kitHTML":106,"kitInputs":"","kitButtons":"","kitForms":0,"bodyKit":0}
