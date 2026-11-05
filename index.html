@@ -204,7 +204,7 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .lb-prev { left: 6px; } .lb-next { right: 6px; }
 
 /* page previews under the menu */
-/* top menu: the pages fold into the +. hovering the + slides them out to the left; clicking it keeps them out (it turns into ×) */
+/* top menu: the pages fold into the +. hovering or clicking the + slides them out to the left and they stay (it turns into ×) */
 @media (min-width: 721px) {
   nav { gap: 0; }
   nav > * { margin-left: 22px; }
@@ -1820,7 +1820,7 @@ function typeLogo() {
 let logoBusy = false;
 document.querySelector(".logo").addEventListener("mouseenter", typeLogo);
 
-/* the + in the menu: hover slides the pages out, click keeps them out (remembered between visits) */
+/* the + in the menu: hovering (or clicking) it slides the pages out and they stay out, remembered between visits; × folds them */
 (() => {
   const head = document.querySelector("header"), nav = document.getElementById("nav"), tog = document.getElementById("nav-toggle");
   const more = [...nav.querySelectorAll("a.nav-more")];
@@ -1830,11 +1830,12 @@ document.querySelector(".logo").addEventListener("mouseenter", typeLogo);
   const set = (out) => { stagger(out); head.classList.toggle("nav-out", out); tog.setAttribute("aria-expanded", String(out)); tog.setAttribute("aria-label", out ? "hide the menu" : "show the menu"); };
   const pin = (p) => { pinned = p; head.classList.toggle("nav-pinned", p); try { localStorage.setItem("pg-nav-pinned", p ? "1" : "0"); } catch (e) {} set(p); };
   if (pinned) { head.classList.add("nav-pinned"); more.forEach(a => a.style.transition = "none"); set(true); requestAnimationFrame(() => more.forEach(a => a.style.transition = "")); }
-  tog.addEventListener("mouseenter", () => { clearTimeout(t); if (!pinned) set(true); });
-  nav.addEventListener("mouseleave", () => { if (pinned) return; clearTimeout(t); t = setTimeout(() => set(false), 450); });
-  nav.addEventListener("mouseenter", () => clearTimeout(t));
-  tog.addEventListener("click", () => pin(!pinned));
-  more.forEach(a => a.addEventListener("focus", () => { if (!pinned) set(true); }));   // keyboard: tabbing into the menu opens it
+  // one hover is enough: the menu comes out and stays out (no need to keep the mouse on it). × folds it away again.
+  let justFolded = false;
+  tog.addEventListener("mouseenter", () => { if (!pinned && !justFolded) pin(true); });
+  tog.addEventListener("mouseleave", () => { justFolded = false; });
+  tog.addEventListener("click", () => { if (pinned) { pin(false); justFolded = true; } else pin(true); });
+  more.forEach(a => a.addEventListener("focus", () => { if (!pinned) pin(true); }));   // keyboard: tabbing into the menu opens it
 })();
 /* top menu words type themselves out on hover */
 document.querySelectorAll("nav > a[data-view]:not(.plus)").forEach(a => {
