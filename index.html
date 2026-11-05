@@ -628,6 +628,20 @@ footer a:hover { color: var(--accent); }
   .work.right .work-image, .work.right .work-caption { grid-column: auto; grid-row: auto; }
   .works { gap: 96px; }
 }
+/* phones: the bar is the logo, Instagram and a + (the + opens the menu and turns into ×) */
+.ig-m { display: none; }
+@media (max-width: 720px) {
+  .ig-m { display: inline-flex; margin-left: auto; padding: 8px 4px; }
+  header { flex-wrap: wrap; } .logo, .ig-m, .burger { flex-shrink: 0; }
+  @media (max-width: 340px) { .logo { font-size: 22px; } .burger { margin-left: 12px; } }
+  #nav a.ig { display: none !important; }
+  .burger { position: relative; width: 22px; height: 22px; padding: 0; margin: 0 0 0 18px; transition: transform .5s ease; }
+  .burger span { position: absolute; left: 4px; top: 10.25px; width: 14px; height: 1.5px; margin: 0; }
+  .burger span:last-child { transform: rotate(90deg); }
+  header.menu-open .burger { transform: rotate(45deg); }
+  header.menu-open .burger span:first-child { transform: none; }
+  header.menu-open .burger span:last-child { transform: rotate(90deg); }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -637,6 +651,7 @@ footer a:hover { color: var(--accent); }
 
 <header id="top">
   <a class="logo" href="/" aria-label="project gallery"><span id="logo-text" aria-hidden="true">project gallery</span></a>
+  <a class="ig ig-m" id="ig-m" href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener" aria-label="project gallery on Instagram"></a>
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   <nav id="nav">
     <a class="nav-more" href="/" data-view="home">home</a>
@@ -647,8 +662,8 @@ footer a:hover { color: var(--accent); }
     <a class="nav-more" href="/about" data-view="about">about</a>
     <a class="nav-more" href="/guestbook" data-view="guestbook">guest book</a>
     <a class="nav-more" href="/contact" data-view="contact">contact</a>
+    <a class="nav-more" href="/collection" data-view="collection">my collection</a>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="show the menu"><span class="px-plus">+</span><span class="px-x" aria-hidden="true">×</span></button>
-    <a href="/collection" class="nav-coll" data-view="collection">my collection</a>
     <a class="ig" id="ig" href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener" aria-label="project gallery on Instagram"></a>
   </nav>
 </header>
@@ -921,13 +936,15 @@ function renderCurrent() {
 function renderSite() {
   const fe = document.getElementById("footer-email");
   fe.textContent = SITE.email; fe.href = "mailto:" + SITE.email;
-  const ig = document.getElementById("ig");
-  const img = new Image();
-  img.alt = "";
-  img.onload = () => { ig.innerHTML = ""; ig.appendChild(img); };
-  img.onerror = () => { ig.innerHTML = '<span class="ig-text">ig</span>'; };
-  ig.innerHTML = '<span class="ig-text">ig</span>';
-  img.src = SITE.instagramIcon;
+  ["ig", "ig-m"].forEach(id => {
+    const ig = document.getElementById(id);
+    const img = new Image();
+    img.alt = "";
+    img.onload = () => { ig.innerHTML = ""; ig.appendChild(img); };
+    img.onerror = () => { ig.innerHTML = '<span class="ig-text">ig</span>'; };
+    ig.innerHTML = '<span class="ig-text">ig</span>';
+    img.src = SITE.instagramIcon;
+  });
 }
 
 function groupByYear(rows) {
