@@ -43,13 +43,7 @@ header { display: flex; align-items: center; justify-content: space-between; gap
 
 nav { display: flex; align-items: center; gap: 22px; }
 nav a { font-size: 15px; line-height: 1; transition: color .2s; }
-nav a.plus:hover { color: var(--accent); }
 nav > a.typed-link { display: inline-block; text-align: left; white-space: nowrap; }
-nav a.plus { font-size: 19px; font-weight: 300; display: inline-grid; }
-nav a.plus span { grid-area: 1 / 1; text-align: center; transition: opacity .15s; }
-nav a.plus .px-x { opacity: 0; }
-nav a.plus:hover .px-plus, nav a.plus:focus-visible .px-plus { opacity: 0; }
-nav a.plus:hover .px-x, nav a.plus:focus-visible .px-x { opacity: 1; }
 .ig { display: inline-flex; align-items: center; }
 .ig img { width: 16px; height: 16px; display: block; }
 .ig:hover img { filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5)); }
@@ -210,6 +204,21 @@ body.arriving #view-show { animation: arrive 1.4s cubic-bezier(.16, .8, .3, 1) b
 .lb-prev { left: 6px; } .lb-next { right: 6px; }
 
 /* page previews under the menu */
+/* top menu: the pages fold into the +. hovering the + slides them out to the left; clicking it keeps them out (it turns into ×) */
+@media (min-width: 721px) {
+  nav { gap: 0; }
+  nav > * { margin-left: 22px; }
+  nav > a.nav-more { max-width: 160px; overflow: hidden; white-space: nowrap; padding: 3px 0 4px; margin-top: -3px; margin-bottom: -4px;
+    transition: max-width .8s cubic-bezier(.2,.7,.2,1) var(--d, 0s), opacity .7s ease var(--d, 0s), margin-left .8s cubic-bezier(.2,.7,.2,1) var(--d, 0s); }
+  header:not(.nav-out) nav > a.nav-more { max-width: 0; opacity: 0; margin-left: 0; pointer-events: none; }
+  .nav-toggle { font: 300 19px/1 var(--font); color: var(--ink); background: none; border: 0; padding: 0 2px; cursor: pointer; display: inline-grid; transition: color .4s; }
+  .nav-toggle span { grid-area: 1 / 1; text-align: center; transition: opacity .3s, transform .5s ease; }
+  .nav-toggle .px-x { opacity: 0; }
+  header.nav-pinned .nav-toggle .px-plus { opacity: 0; transform: rotate(90deg); }
+  header.nav-pinned .nav-toggle .px-x { opacity: 1; }
+  .nav-toggle:hover { color: var(--accent); }
+}
+@media (max-width: 720px) { .nav-toggle { display: none; } }
 .nav-preview { position: fixed; z-index: 40; width: 260px; background: var(--bg); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14); pointer-events: none; opacity: 0; transform: translateY(-4px); transition: opacity .2s, transform .2s; }
 .nav-preview.on { opacity: 1; transform: none; }
 .nav-preview img { width: 100%; display: block; }
@@ -577,11 +586,6 @@ footer a:hover { color: var(--accent); }
   #nav { display: none; flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 0; margin-top: 18px; border-top: 1px solid #dedede; }
   header.menu-open #nav { display: flex; animation: menu-in .45s ease both; }
   #nav > a, #nav > a.typed-link { display: block; font-size: 17px; line-height: 1.2; padding: 13px 0; border-bottom: 1px solid #eeeeee; width: auto !important; }
-  #nav a.plus { display: flex; align-items: center; gap: 10px; font-size: 17px; }
-  #nav a.plus span { grid-area: auto; }
-  #nav a.plus .px-x { display: none; }
-  #nav a.plus:hover .px-plus { opacity: 1; }
-  #nav a.plus .m-label { display: inline; font-size: 17px; }
   #nav a.ig { display: flex; border-bottom: 0; }
   #nav a[aria-current="page"], #nav a.active { color: var(--accent); }
   @keyframes menu-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
@@ -635,15 +639,16 @@ footer a:hover { color: var(--accent); }
   <a class="logo" href="/" aria-label="project gallery"><span id="logo-text" aria-hidden="true">project gallery</span></a>
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   <nav id="nav">
-    <a href="/" data-view="home">home</a>
-    <a href="/exhibitions" data-view="exhibitions">exhibitions</a>
-    <a href="/artists" data-view="artists">artists</a>
-    <a href="/interviews" data-view="interviews">interviews</a>
-    <a href="/grant" data-view="grant">grant</a>
-    <a href="/about" data-view="about">about</a>
-    <a href="/guestbook" data-view="guestbook">guest book</a>
-    <a href="/contact" data-view="contact">contact</a>
-    <a href="/collection" class="plus" data-view="collection" aria-label="my collection" title="my collection"><span class="px-plus">+</span><span class="px-x" aria-hidden="true">×</span><span class="m-label">my collection</span></a>
+    <a class="nav-more" href="/" data-view="home">home</a>
+    <a class="nav-more" href="/exhibitions" data-view="exhibitions">exhibitions</a>
+    <a class="nav-more" href="/artists" data-view="artists">artists</a>
+    <a class="nav-more" href="/interviews" data-view="interviews">interviews</a>
+    <a class="nav-more" href="/grant" data-view="grant">grant</a>
+    <a class="nav-more" href="/about" data-view="about">about</a>
+    <a class="nav-more" href="/guestbook" data-view="guestbook">guest book</a>
+    <a class="nav-more" href="/contact" data-view="contact">contact</a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="show the menu"><span class="px-plus">+</span><span class="px-x" aria-hidden="true">×</span></button>
+    <a href="/collection" class="nav-coll" data-view="collection">my collection</a>
     <a class="ig" id="ig" href="https://www.instagram.com/projectgallery/" target="_blank" rel="noopener" aria-label="project gallery on Instagram"></a>
   </nav>
 </header>
@@ -1524,7 +1529,7 @@ function renderCollection() {
   const all = getSaved().map(workInfo);
   if (!all.length) {
     tagsEl.innerHTML = "";
-    box.innerHTML = '<p class="construction">nothing here yet. click the + under any work to add it to your collection.</p>';
+    box.innerHTML = '<p class="construction" style="grid-column: 1 / -1; column-span: all; max-width: 640px; text-align: left">nothing here yet. hit the + next to any artwork’s description and it will show up here.</p>';
     return;
   }
   // tags: types, years, for sale
@@ -1798,6 +1803,22 @@ function typeLogo() {
 let logoBusy = false;
 document.querySelector(".logo").addEventListener("mouseenter", typeLogo);
 
+/* the + in the menu: hover slides the pages out, click keeps them out (remembered between visits) */
+(() => {
+  const head = document.querySelector("header"), nav = document.getElementById("nav"), tog = document.getElementById("nav-toggle");
+  const more = [...nav.querySelectorAll("a.nav-more")];
+  let pinned = false; try { pinned = localStorage.getItem("pg-nav-pinned") === "1"; } catch (e) {}
+  let t = null;
+  const stagger = (opening) => more.forEach((a, i) => a.style.setProperty("--d", ((opening ? more.length - 1 - i : i) * 0.04) + "s"));   // the word nearest the + moves first
+  const set = (out) => { stagger(out); head.classList.toggle("nav-out", out); tog.setAttribute("aria-expanded", String(out)); tog.setAttribute("aria-label", out ? "hide the menu" : "show the menu"); };
+  const pin = (p) => { pinned = p; head.classList.toggle("nav-pinned", p); try { localStorage.setItem("pg-nav-pinned", p ? "1" : "0"); } catch (e) {} set(p); };
+  if (pinned) { head.classList.add("nav-pinned"); more.forEach(a => a.style.transition = "none"); set(true); requestAnimationFrame(() => more.forEach(a => a.style.transition = "")); }
+  tog.addEventListener("mouseenter", () => { clearTimeout(t); if (!pinned) set(true); });
+  nav.addEventListener("mouseleave", () => { if (pinned) return; clearTimeout(t); t = setTimeout(() => set(false), 450); });
+  nav.addEventListener("mouseenter", () => clearTimeout(t));
+  tog.addEventListener("click", () => pin(!pinned));
+  more.forEach(a => a.addEventListener("focus", () => { if (!pinned) set(true); }));   // keyboard: tabbing into the menu opens it
+})();
 /* top menu words type themselves out on hover */
 document.querySelectorAll("nav > a[data-view]:not(.plus)").forEach(a => {
   const word = a.textContent;
